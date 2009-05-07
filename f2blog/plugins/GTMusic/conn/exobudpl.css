@@ -1,0 +1,23 @@
+﻿BODY {
+	scrollbar-track-color:#000000;
+	SCROLLBAR-FACE-COLOR: #000000;
+	FONT-SIZE: 9pt;
+	SCROLLBAR-HIGHLIGHT-COLOR: #000000;
+	SCROLLBAR-SHADOW-COLOR: #000000;
+	SCROLLBAR-3DLIGHT-COLOR: #000000;
+	SCROLLBAR-ARROW-COLOR: #000000;
+	FONT-FAMILY: "Verdana";
+	SCROLLBAR-DARKSHADOW-COLOR: #000000;
+	background-attachment: fixed;
+	background-image: url(images/bg.jpg);
+	background-color:#ffffff;
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+A {COLOR: #6666CC; TEXT-DECORATION: none }
+A:visited {COLOR: #6666CC; TEXT-DECORATION: none}
+A:active {COLOR: #6666CC TEXT-DECORATION: none}
+A:hover {COLOR: #0000a0;border-bottom:1px dotted #6666CC; }
+td {FONT-SIZE: 9pt;  FONT-FAMILY: "Verdana"; color:#319AFF;letter-spacing : 1pt ;line-height :16pt}
+.font{
+FILTER: dropshadow(color=#F0F4B0, offx=2, offy=2, positive=2); FONT-FAMILY: "Verdana"; FONT-SIZE: 10pt; width:100%; COLOR: #0000a0}

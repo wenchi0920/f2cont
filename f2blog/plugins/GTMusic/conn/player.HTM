@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="utf-8">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="utf-8" />
+<meta name="robots" content="all" />
+<meta name="author" content="greenteacn[a]gmail.com,绿茶|joesenhong[a]yahoo.com.cn,骆驼" />
+<meta name="Copyright" content="F2Blog CopyRight 2006" />
+<meta name="keywords" content="f2blog,phpblog,blog,php,xhtml,css,design,w3c,w3cn,Joesen,天上的骆驼" />
+<meta name="description" content="My F2Blog - Free &amp; Freedom Blog" />
+<title>天上的骆驼-GTMusic 绿茶馆儿-火焠鳥-F2Blog专用版</title>
+<link rel="stylesheet" type="text/css" href="exobud.css">
+<script language="JavaScript" src="exobud.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+if ((top==self) && (top.location.href.charAt(0)=='h')) {top.location.href="music.php";}
+var blnAutoStart = true;
+var blnRndPlay = true;
+var blnStatusBar = false;
+var blnShowVolCtrl = true;
+var blnShowPlist = true;
+var blnLoopTrk = true;
+mkList("http://10.1.0.101/f2beta/2.mp3","隐形的翅膀","GT");
+mkList("http://10.1.0.101/f2beta/3.mp3","测试","GT");
+mkList("http://10.1.0.101/f2beta/1.mp3","美丽的神话","GT");
+//-->
+</script>
+<script language="JScript" for="Exobud" event="playStateChange(ns)">evtPSChg(ns);</script>
+<script language="JScript" for="Exobud" event="error()">evtWmpError();</script>
+<script language="JScript" for="Exobud" event="Buffering(bf)">evtWmpBuff(bf);</script>
+</head>
+<body onload="initExobud()">
+<object classid="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6" type="application/x-oleobject" width="12" height="12" id="Exobud">
+<param name="autoStart" value="true">
+<param name="balance" value="0">
+<param name="currentPosition" value="0">
+<param name="currentMarker" value="0">
+<param name="enableContextMenu" value="false">
+<param name="enableErrorDialogs" value="false">
+<param name="enabled" value="true">
+<param name="fullScreen" value="false">
+<param name="invokeURLs" value="false">
+<param name="mute" value="false">
+<param name="playCount" value="1">
+<param name="rate" value="1">
+<param name="uiMode" value="none">
+<param name="volume" value="99">
+</object>
+<span id="disp1" class="title"></span>
+<span id="disp2" class="time"></span>
+</body>
+</html>

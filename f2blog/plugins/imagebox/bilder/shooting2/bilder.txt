@@ -1,0 +1,1 @@
+&anz_bilder=5&fotos=bild6.jpg|bild7.jpg|bild8.jpg|bild9.jpg|bild10.jpg

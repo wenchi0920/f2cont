@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<birth>
+	<item>
+		<birthTitle>测试</birthTitle>
+		<birthDate>2001-10-20</birthDate>
+		<textColor>#CC3333</textColor>
+	</item>
+	<item>
+		<birthTitle>说明</birthTitle>
+		<birthDate>2002-10-20</birthDate>
+		<textColor>#CCCCCC</textColor>
+	</item>
+	<item>
+		<birthTitle>asdfasd</birthTitle>
+		<birthDate>2005-10-20</birthDate>
+		<textColor>#222222</textColor>
+	</item>
+</birth>
