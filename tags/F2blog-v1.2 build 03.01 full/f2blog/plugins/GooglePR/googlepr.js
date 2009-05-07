@@ -1,0 +1,3 @@
+phprpc_client.create('googlepr_rpc');googlepr_rpc.googlepr_callback=function(result){result=parseInt(result);var googlepr_container=document.getElementById('googlepr_container');var googlepr_bar=document.getElementById('googlepr_bar');var googlepr_rank=document.getElementById('googlepr_rank');googlepr_container.title=googlepr_bar.title="PageRank: "+(result==0?'unranked':result);googlepr_rank.style.width=(result<<2)+"px";}
+googlepr_rpc.use_service('http://www.coolcode.cn/wp-content/plugins/googlepr/rpc.php');function googlePR(){if(googlepr_rpc.ready){window.setTimeout("googlepr_rpc.googlepr(location.href);",100);}
+else{window.setTimeout("googlePR();",100);}}

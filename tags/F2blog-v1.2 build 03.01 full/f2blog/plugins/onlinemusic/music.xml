@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<music>
+  <counter>1</counter>
+  <item>
+	<name>轻音乐</name>
+	<path>music01.mid</path>
+  </item>
+  <item>
+	<name>心动</name>
+	<path>music02.mid</path>
+  </item>
+</music>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TimeCounter>
+	<item>
+		<CounterTitle>距农历春节还有</CounterTitle>
+		<TargetDate>2007-02-18</TargetDate>
+		<TargetTime>00:00:00</TargetTime>
+		<CounterStyle>border:1px solid black;margin:5px;padding:2px;width:123px</CounterStyle>
+	</item>
+	<item>
+		<CounterTitle>我的生日</CounterTitle>
+		<TargetDate>2007-03-10</TargetDate>
+		<TargetTime>00:00:00</TargetTime>
+		<CounterStyle>border:1px solid black;margin:5px;padding:2px;width:123px</CounterStyle>
+	</item>
+	<item>
+		<CounterTitle>asdfasd</CounterTitle>
+		<TargetDate>2007-3-20</TargetDate>
+		<TargetTime>00:00:00</TargetTime>
+		<CounterStyle>border:1px solid black;margin:5px;padding:2px;width:123px</CounterStyle>
+	</item>
+</TimeCounter>

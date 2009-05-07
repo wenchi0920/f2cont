@@ -1,0 +1,68 @@
+﻿Apache Rewrite 静态化使用说明：
+一、自动配置：
+１、在后台开启Apache Rewrite模式。
+２、把cache/.htaccess文件移到根目录覆盖默认文件就可以了。
+３、无需手工更改.htaccess文件而可以正常使用了。
+
+二、手工配置：
+１、如果您的F2blog是通过二级域名来访问的，则需要手工更改.htaccess，把RewriteBase /改成
+您相应的二级域名，如您的F2blog访问地址为http://www.myweb.com/f2blog，则这里的RewriteBase /
+需要改为RewriteBase /f2blog/，依次类推。建议以UTF8格式打开.htaccess文件来修改。
+２、如果您的F2blog已经是域名直接访问方式，就无需要手工更改.htaccess文件了。只要在后台开启
+Apache Rewrite模式就可以了。
+
+三、Apache Rewrite模块配置。
+１、打开httpd.conf文件，找到LoadModule rewrite_module modules/mod_rewrite.so，把前面的＃号
+去掉。
+２、找到大约位置
+<Directory />
+    Options FollowSymLinks
+    AllowOverride None
+</Directory>
+在其后面增加一段，增加如下代码D:/wwwphp根据您网站的绝对路径来做相应的修正，如果您只想让
+f2blog使用rewrite，则路径可以限制在f2blog目录下。
+<Directory "D:/wwwphp">
+  Options All
+  AllowOverride All
+</Directory>
+３、修改好后重启apache,如果正常的话，应该可以使用apache rewrite模式了。
+
+四、有关IIS下的Rewrite模块配置，需要你的空间支持IIS REWRITE，如果是自架服务器，可以请先到网站
+下载Rewrite.dll文件，然后在IIS服务器中配置为SAPI方式，具体的转向语法已经在目录中有了httpd.ini，
+需要把这个文件放在域名网站的根目录下面。然后在后台静态设为Apache/IIS Rewrite就可以了。
+
+
+
+============================================================================================
+Apache Rewrite 靜態化使用說明：
+一、自動配置：
+１、在後台開啟Apache Rewrite模式。
+２、把cache/.htaccess文件移到根目錄覆蓋默認文件就可以了。
+３、無需手工更改.htaccess文件而可以正常使用了。
+
+二、手工配置：
+１、如果您的F2blog是通過二級域名來訪問的，則需要手工更改.htaccess，把RewriteBase /改成
+您相應的二級域名，如您的F2blog訪問地址為http://www.myweb.com/f2blog，則這裡的RewriteBase /
+需要改為RewriteBase /f2blog/，依次類推。建議以UTF8格式打開.htaccess文件來修改。
+２、如果您的F2blog已經是域名直接訪問方式，就無需要手工更改.htaccess文件了。只要在後台開啟
+Apache Rewrite模式就可以了。
+
+三、Apache Rewrite模塊配置。
+１、打開httpd.conf文件，找到LoadModule rewrite_module modules/mod_rewrite.so，把前面的＃號
+去掉。
+２、找到大約位置
+<Directory />
+    Options FollowSymLinks
+    AllowOverride None
+</Directory>
+在其後面增加一段，增加如下代碼D:/wwwphp根據您網站的絕對路徑來做相應的修正，如果您只想讓
+f2blog使用rewrite，則路徑可以限制在f2blog目錄下。
+<Directory "D:/wwwphp">
+  Options All
+  AllowOverride All
+</Directory>
+３、修改好後重啟apache,如果正常的話，應該可以使用apache rewrite模式了。
+
+四、有關IIS下的Rewrite模塊配置，需要你的空間支持IIS REWRITE，如果是自架服務器，可以請先到網站
+下載Rewrite.dll文件，然後在IIS服務器中配置為SAPI方式，具體的轉向語法已經在目錄中有了httpd.ini，
+需要把這個文件放在域名網站的根目錄下面。然後在後台靜態設為Apache/IIS Rewrite就可以了。

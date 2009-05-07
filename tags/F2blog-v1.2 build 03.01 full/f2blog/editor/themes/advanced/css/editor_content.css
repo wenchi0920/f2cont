@@ -1,0 +1,114 @@
+/* This file contains the CSS data for the editable area(iframe) of TinyMCE */
+/* You can extend this CSS by adding your own CSS file with the the content_css option */
+
+body, td, pre {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+body {
+	background-color: #FFFFFF;
+}
+
+.mceVisualAid {
+	border: 1px dashed #BBBBBB !important;
+}
+
+div.mceVisualAid {
+	background-image:url('../images/spacer.gif');
+	visibility: visible !important;
+}
+
+.mceItemAnchor {
+	width: 12px;
+	line-height: 6px;
+	overflow: hidden;
+	padding-left: 12px;
+	background-image: url('../images/anchor_symbol.gif');
+	background-position: bottom;
+	background-repeat: no-repeat;
+}
+
+/* Important is needed in Gecko browsers inorder to style links */
+/*
+a {
+	color: green !important;
+}
+*/
+
+/* Style selection range colors in Gecko browsers */
+/*
+::-moz-selection {
+	background-color: red;
+	color: green;
+}
+*/
+
+/* MSIE specific */
+
+* html body {
+	scrollbar-3dlight-color: #F0F0EE;
+	scrollbar-arrow-color: #676662;
+	scrollbar-base-color: #F0F0EE;
+	scrollbar-darkshadow-color: #DDDDDD;
+	scrollbar-face-color: #E0E0DD;
+	scrollbar-highlight-color: #F0F0EE;
+	scrollbar-shadow-color: #F0F0EE;
+	scrollbar-track-color: #F5F5F5;
+}
+
+pre {
+	border-top: 1px solid #ddd;
+	border-left: 5px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	background-color: #eee;
+	padding: 2px;
+	margin: 0;
+	color: #000066;
+}
+
+.mceItemFile {
+	border: 1px dotted #cc0000;
+	background-image: url('../images/file.gif');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: #ffffcc;
+}
+
+.mceItemMFile {
+	border: 1px dotted #cc0000;
+	background-image: url('../images/mfile.gif');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: #ffffcc;
+}
+
+.mceItemGallery {
+	border: 1px dotted #cc0000;
+	background-image: url('../images/gallery.gif');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: #ffffcc;
+}
+.mceItemMoreLess {
+	line-height: 14px;
+	border: dotted 1px #cc0000;
+	background-color: #ffffcc;
+	padding:4px;
+	margin:10px;
+	height:30px;
+}
+
+.mce_plugin_f2blog_more { display:block; background-color: #ffffff; background-image: url(../images/more_bug.gif) !important; margin-top:15px; background-repeat: no-repeat; background-position: right top; border-style: dotted none none; border-width: 1px 0 0; border-top-color: #cccccc; }
+
+.mce_plugin_f2blog_page {
+	border: 0px;
+	border-top: 1px dotted #cccccc;
+	display:block;
+	background-color: #ffffff;
+	margin-top:15px;
+	background-image: url(../images/page_bug.gif);
+	background-repeat: no-repeat;
+	background-position: right top;
+}

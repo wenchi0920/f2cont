@@ -1,0 +1,10 @@
+    div.WIKI {
+		border: 1px dashed silver;
+		background-color: #FFFFCC;
+		text-indent: 5pt;
+		padding-left: 3pt;
+    }
+    .WIKIdesc {
+        font-size: 80%;
+		padding:0 2em 0 2em;
+    }
