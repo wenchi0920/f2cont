@@ -1,0 +1,30 @@
+/*-----------超链接样式---------------
+ 说明: 伪类:link :visited :hover分别代表超链接的通常、被访问后、和鼠标接触链接是的样式
+ a标签代表通用超链接样式
+ .menuA代表Blog导航条菜单的样式
+ .titleA代表日志标题的样式
+ .sideA代表侧栏的超链接样式
+ .CategoryA代表树形分类的链接样式
+ .more代表更多链接的样式
+------------------------------------*/
+ a:link,a:visited{text-decoration:none;color:#6C8C37;}
+ a:hover{color:#009193;}
+ .menuA:link,.menuA:visited{float:left;height:28px;text-align:center;padding:0 4px;text-decoration:none;color:white;line-height:210%;background-image: none;background-repeat: repeat;background-attachment: scroll;background-position: 0 0;}  
+ .menuA:hover{ color:orange; background-image: none; background-repeat: repeat; background-attachment: scroll; background-position: 0 -28px; } 
+ .titleA:link,.titleA:visited{ text-decoration:none; font-family:Tahoma,verdana; text-align:left; color:#666;}
+ .titleA:hover{color:orange;text-decoration:none;}
+ .sideA:link,.sideA:visited{text-decoration:none;padding-left:16px;background:no-repeat 2px 3px;height:20px;overflow:hidden;display:block;margin-bottom:2px;width:170px;background:url(arrow.gif) 2px 3px no-repeat;border-bottom-color:#F0F0F0;border-bottom-width: 1px;border-bottom-style: solid;}
+ .sideA:hover{text-decoration:none;padding-left:16px;background:no-repeat 2px -13px;height:20px;background:url(arrow.gif) 2px 3px no-repeat;}
+ .CategoryA:link,.CategoryA:visited{text-decoration:none;}
+ .CategoryA:hover{text-decoration:none;}
+ 
+ .more:link,.more:visited{padding:0px 12px 0px 15px;margin-top:10px;background:url('arrow_more.gif') 0px no-repeat}
+ .more:hover{background:url('arrow_more.gif') 3px no-repeat;}  
+ .blogsetA:link,.blogsetA:visited{padding:0 9px 4px 16px ; background:no-repeat;text-decoration:none;}
+ .mp3A:link,.mp3A:visited{padding:0 0 4px 16px; background:no-repeat;text-decoration:none;}
+ .collA:link,.collA:visited{padding:0 0 4px 16px; background:no-repeat;text-decoration:none;}
+ .aboutA:link,.aboutA:visited{padding:0 0 4px 16px; background:no-repeat;text-decoration:none;}
+ .normalA:link,.normalA:visited{padding:0 12px 4px 16px; background:no-repeat;text-decoration:none;}
+ .listA:link,.listA:visited{padding:0 0 4px 16px; background:no-repeat;text-decoration:none;}
+ .commentA:link,.commentA:visited{padding:0 0 4px 14px; background:no-repeat -2px 3px;text-decoration:none;}
+ /*---超链接样式定义结束---*/
