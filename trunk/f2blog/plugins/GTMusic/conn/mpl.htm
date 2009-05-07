@@ -1,0 +1,124 @@
+﻿﻿﻿﻿﻿﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>GTMusic V1.0 音乐列表 </title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Content-Language" content="UTF-8" />
+	<meta name="robots" content="all" />
+	<meta name="author" content="greenteacn[a]gmail.com,绿茶" />
+	<meta name="Copyright" content="PJBlog2 CopyRight 2005" />
+	<meta name="keywords" content="PuterJam,Blog,ASP,designing,with,web,standards,xhtml,css,graphic,design,layout,usability,accessibility,w3c,w3,w3cn" />
+	<meta name="description" content="绿茶馆儿~ - GreenTea Design WebDesign Flash  Action Dreamweaver Photoshop 绿茶设计" />
+<style type="text/css">
+<!--
+
+BODY {
+	FONT-SIZE: 12px;
+	FONT-FAMILY: "Verdana";
+	background-color:#E7E6E6;
+}
+A {COLOR: #535353; TEXT-DECORATION: none }
+A:visited {COLOR: #535353; TEXT-DECORATION: none}
+A:active {COLOR: #535353 TEXT-DECORATION: none}
+A:hover {COLOR: #539383;TEXT-DECORATION: underline}
+td {FONT-SIZE: 12px;  FONT-FAMILY: "Verdana"; color:#535353;line-height :180%}
+.font{
+FILTER: dropshadow(color=#F0F4B0, offx=2, offy=2, positive=2); FONT-FAMILY: "Verdana"; FONT-SIZE: 10pt; width:100%; COLOR: #0000a0}
+
+-->
+</style>
+<script language="JavaScript">
+<!--
+var via = opener;
+var write_via = "opener";
+var iLoc = self.location.href;
+function playSel(){via.wmpStop();via.startExobud();}
+function refreshPl(){self.location=iLoc;}
+function chkSel(){via.chkAllSel();refreshPl();}
+function chkDesel(){via.chkAllDesel();refreshPl();}
+function dspList(n){
+var elmABlock = 15; // 设定每页音乐数
+var totElm = via.intMmCnt;
+var totBlock = Math.floor((via.intMmCnt-1) / elmABlock)+1;
+var cblock;
+if(n==null){cblock=1;} else {cblock=n;}
+var seed;
+var limit;
+if(cblock < totBlock){
+seed=elmABlock*(cblock-1); limit=cblock*elmABlock-1;
+} else {
+seed=elmABlock*(cblock-1); limit=totElm-1;
+}
+if(via.intMmCnt > 0){
+var list_num=0;
+mmList.innerHTML="<p>";
+pageList.innerHTML=" &nbsp;跳页: ";
+for (var i=seed; i <= limit; i++){
+list_num = i + 1;
+if(via.objMmInfo[i].selMm=="t"){
+elm = "&nbsp;<input type=checkbox onClick=\"" + write_via + ".chkItemSel(" + i + ");\" checked";
+elm += " title='切换是否播放此音乐' style='cursor:hand'>";
+} else {
+elm = "&nbsp;<input type=checkbox onClick=\"" + write_via + ".chkItemSel(" + i + ");\"";
+elm += " title='切换是否播放此音乐' style='cursor:hand'>";
+}
+elm += "&nbsp;<span lang=ko>&#9836;</span>" + list_num + ". ";
+elm += "<a href=\"javascript:" + write_via + ".selPlPlay(" + i + ");\"";
+elm += " title='点击播放'>";
+if(via.objMmInfo[i].mmTit =="nAnT"){
+elm += "未指定媒体信息(等待自动取得媒体信息)";
+} else {
+elm += via.objMmInfo[i].mmTit;
+}
+elm += "</a><br>";
+mmList.innerHTML=mmList.innerHTML+elm;
+}
+for(var j=1; j<=totBlock; j++){
+page = "<a href=\"javascript:dspList(" + j + ")\">[" + j + "]<a> ";
+pageList.innerHTML=pageList.innerHTML+page;
+}
+pageInfo.innerHTML = "页次: " + cblock + " / " + totBlock;
+} else {
+mmList.innerHTML = "<br><div align=center style='color:white'>播放清单上没有添加任何音乐</div>";
+}
+}
+//-->
+</script>
+</head>
+<body onLoad="dspList()" onDragStart="return false" onSelectStart="return false"
+topmargin=0 leftmargin=0 marginwidth=0 marginheight=0>
+<table border=0 width=100% height=100% align=center cellspacing=0 cellpadding=0 class=border1>
+<tr>
+<td height=30 align=center>GTMusic V1.0 音乐列表 </td>
+</tr>
+<tr>
+<td height=40 ><div id="pageList"></div></td>
+</tr>
+<tr>
+<td valign=top height=100%><div id="mmList"></div></td>
+</tr>
+<tr>
+<td height=40><table width=100% cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td nowrap> <span id="pageInfo"></span> </td>
+<td align=right nowrap>
+
+<a href="#" onClick="chkSel()">全选</a>
+<a href="#" onClick="chkDesel()">取消</a> 
+<a href="#" onClick="playSel()">播放</a>
+<a href="#" onClick="window.close()">退出音乐列表</a>
+</td>
+</tr>
+</table></td>
+</tr>
+
+
+<tr><td>
+GTMusic list is loading...
+</td>
+</tr>
+</table>
+</body>
+</html>
+ 
+ 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitefocus>
+	<item>
+		<imgtext>图片1</imgtext>
+		<imgurl>plugins/SiteFocus/1.jpg</imgurl>
+		<imglink>http://10.1.0.101/f2beta/index.php?load=read&amp;id=520</imglink>
+	</item>
+	<item>
+		<imgtext>图片2</imgtext>
+		<imgurl>plugins/SiteFocus/2.jpg</imgurl>
+		<imglink>http://10.1.0.101/f2beta/index.php?load=read&amp;id=518</imglink>
+	</item>
+	<item>
+		<imgtext>图片3</imgtext>
+		<imgurl>plugins/SiteFocus/3.jpg</imgurl>
+		<imglink>http://10.1.0.101/f2beta/index.php?load=read&amp;id=515</imglink>
+	</item>
+</sitefocus>
