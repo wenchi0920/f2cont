@@ -1,0 +1,10 @@
+ body{   background:#EDE8E2;font-size:9pt; margin:18px 0 0; padding:0; text-align:center; font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif; background-repeat: no-repeat; background-position: center 0; }
+ p{
+ margin:3px;
+ }
+ select{
+ font-family: Tahoma, Verdana, Arial;
+ }
+ th{ background:#f3f3f3; border-bottom:1px solid #ccc; border-top-width: 1px; border-right-width: 1px; border-left-width: 1px;;
+ }
+ 
