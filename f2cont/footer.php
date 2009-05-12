@@ -10,9 +10,9 @@
 		<a href="archives/index.php" target="_blank">Archiver</a> | 
 		<a href="googlesitemap.php" target="_blank">Sitemap</a>
 	</p>
-    <p style="font-size:11px;">
-		程序維護 By <a href="http://blog.phptw.idv.tw" target="_blank"><strong>墮落程式</strong></a>
+    <p style="font-size:11px;">		
 		<a href="<?php echo $getDefaultSkinInfo['DesignerURL']?>" target="_blank"><strong><?php echo $getDefaultSkinInfo['SkinName']?></strong></a>
+		程序維護 By <a href="http://blog.phptw.idv.tw" target="_blank"><strong>墮落程式</strong></a>
 		Design by <a href="mailto:<?php echo $getDefaultSkinInfo['DesignerMail']?>"><?php echo $getDefaultSkinInfo['SkinDesigner']?></a> Skin from <?php echo $getDefaultSkinInfo['SkinSource']?>
 		<?php 
 		if ($settingInfo['about']!="") {
