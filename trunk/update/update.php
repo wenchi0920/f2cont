@@ -82,6 +82,12 @@ function update_data($echo,$DMC){
 	$modify_sql[]="ALTER TABLE `{$DBPrefix}trackbacks` ADD INDEX `isApp` (`isApp`)";
 	$modify_sql[]="ALTER TABLE `{$DBPrefix}logs` ADD `autoSplit` int(8) NOT NULL default '0'";
 	
+	//	強化驗證
+	$modify_sql[]="INSERT INTO `{$DBPrefix}filters` (`category`, `name`) VALUES (1, '=http')";
+	$modify_sql[]="INSERT INTO `{$DBPrefix}filters` (`category`, `name`) VALUES (1, '[url=')";
+	$modify_sql[]="INSERT INTO `{$DBPrefix}filters` (`category`, `name`) VALUES (1, '[href=')";
+	
+	
 	
 	//运行ＳＱＬ语句
 	foreach ($modify_sql as $key=>$value){
