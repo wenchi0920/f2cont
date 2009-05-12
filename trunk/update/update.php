@@ -87,8 +87,6 @@ function update_data($echo,$DMC){
 	$modify_sql[]="INSERT INTO `{$DBPrefix}filters` (`category`, `name`) VALUES (1, '[url=')";
 	$modify_sql[]="INSERT INTO `{$DBPrefix}filters` (`category`, `name`) VALUES (1, '[href=')";
 	
-	
-	
 	//运行ＳＱＬ语句
 	foreach ($modify_sql as $key=>$value){
 		$DMC->query($value,"T");
