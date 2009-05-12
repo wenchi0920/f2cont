@@ -7,9 +7,11 @@
 		CopyRight 2006 <?php echo (date("Y")!="2006" && date("Y")>2006)?" - ".date("Y"):""?>
 		<a href="http://validator.w3.org/check/referer" target="_blank">XHTML</a> |
 		<a href="http://jigsaw.w3.org/css-validator/validator-uri.html" target="_blank">CSS</a> |
-		<a href="archives/index.php" target="_blank">Archiver</a>
+		<a href="archives/index.php" target="_blank">Archiver</a> | 
+		<a href="googlesitemap.php" target="_blank">Sitemap</a>
 	</p>
     <p style="font-size:11px;">
+		程序維護 By <a href="http://blog.phptw.idv.tw" target="_blank"><strong>墮落程式</strong></a>
 		<a href="<?php echo $getDefaultSkinInfo['DesignerURL']?>" target="_blank"><strong><?php echo $getDefaultSkinInfo['SkinName']?></strong></a>
 		Design by <a href="mailto:<?php echo $getDefaultSkinInfo['DesignerMail']?>"><?php echo $getDefaultSkinInfo['SkinDesigner']?></a> Skin from <?php echo $getDefaultSkinInfo['SkinSource']?>
 		<?php 
@@ -36,7 +38,22 @@
   </div>
 </div>
 <?php  do_action("f2_footer"); ?>
+<link type="text/css" rel="stylesheet" href="SyntaxHighlighter/css/SyntaxHighlighter.css"></link>
+<script language="javascript" src="SyntaxHighlighter/js/shCore.js"></script>
+<script language="javascript" src="SyntaxHighlighter/js/shBrushCSharp.js"></script>
+<script language="javascript" src="SyntaxHighlighter/js/shBrushXml.js"></script>
+<script language="javascript">
+dp.SyntaxHighlighter.ClipboardSwf = 'SyntaxHighlighter/js/clipboard.swf';
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
 
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+try {
+_uacct = "UA-6325679-1";
+urchinTracker();
+} catch(err) {}</script>
 </body>
 </html>
 <?php 
