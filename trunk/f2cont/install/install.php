@@ -424,6 +424,11 @@ $nextAccess=1;
 								//增加默认类别  `id` int(3) NOT NULL auto_increment,
 								$DMC->query("INSERT INTO `".$table_prefix."categories` VALUES ('1', '0', '$strDefaultCategory', '1','$strDefaultCategory','','0','0','1')");
 
+								//	新增加強化 spam filter
+								$DMC->query("INSERT INTO `".$table_prefix."filters` (`category`, `name`) VALUES (1, '=http')");
+								$DMC->query("INSERT INTO `".$table_prefix."filters` (`category`, `name`) VALUES (1, '[url=')");
+								$DMC->query("INSERT INTO `".$table_prefix."filters` (`category`, `name`) VALUES (1, '[href=')");
+
 								$msg .= "$strImpModInfo <br />";
 							}
 

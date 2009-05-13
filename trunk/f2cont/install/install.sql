@@ -217,3 +217,17 @@ CREATE TABLE `f2blog_tbsession` (
   `logId` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM;
+
+
+ALTER TABLE `f2blog_attachments` ADD INDEX `name` (`name`);
+ALTER TABLE `f2blog_guestbook` ADD COLUMN `HTTP_REFERER` text NULL DEFAULT NULL AFTER `parent`;
+ALTER TABLE `f2blog_links` ADD INDEX `isApp` (`isApp`);
+ALTER TABLE `f2blog_logs` ADD COLUMN `isTopNews` tinyint(1) NOT NULL DEFAULT 0 AFTER `isTop`;
+ALTER TABLE `f2blog_logs` ADD INDEX `postTime` (`postTime`,`saveType`);
+ALTER TABLE `f2blog_logs` ADD INDEX `isComment` (`isComment`,`isTrackback`,`isTop`,`isTopNews`);
+ALTER TABLE `f2blog_members` ADD INDEX `password` (`password`);
+ALTER TABLE `f2blog_members` ADD INDEX `role` (`role`);
+ALTER TABLE `f2blog_setting` ADD INDEX `settName` (`settName`);
+ALTER TABLE `f2blog_trackbacks` ADD INDEX `isApp` (`isApp`);
+ALTER TABLE `f2blog_logs` ADD `autoSplit` int(8) NOT NULL default '0';
+
