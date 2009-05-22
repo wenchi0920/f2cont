@@ -54,10 +54,17 @@ if ($arr_result=$DMC->fetchArray($DMC->query("select count(id) as total from ".$
 				<td class="leftbox" width="2%">&nbsp;</td>
 				<td class="rightbox"><a href='linkapp.php'><?php echo $strLinksApp?></a> (<?php echo $apply_count." ".$strNoApply?>)</td>
 			   </tr>
+			   
+			   <tr>
+				 <td class="leftbox" width="2%">&nbsp;</td>
+				<td class="rightbox"><?php echo $strSpamTrash?>&nbsp;<a href="comments.php">(<?php echo $strCommentBrowse;?>)</a> &nbsp;<a href="guestbooks.php">(<?php echo $strGuestBookBrowse;?>)</a>  </td>
+			   </tr>
+			   
 			   <tr>
 				 <td class="leftbox" width="2%">&nbsp;</td>
 				<td class="rightbox"><a href='plugins.php'><?php echo $strPluginSetting?></a></td>
 			   </tr>
+			   
 			   <tr>
 				 <td class="leftbox" width="2%">&nbsp;</td>
 				<td class="rightbox"><a href='cache.php'><?php echo $strCache?></a></td>

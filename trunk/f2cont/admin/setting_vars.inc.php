@@ -129,8 +129,19 @@ $SectionOther[]=addSettingValue("r", $strSettingGenThumb, "genThumb", "0", "$str
 $SectionOther[]=addSettingValue("t", $strSettingThumbSize, "thumbSize", "200x200", "<br />".$strSettingThumbSizeInfo);
 $SectionOther[]=addSettingValue("r", $strLogsEditorZip, "fastEditor", "1", "$strTbOpen=>1|$strTbClose=>0| ({$strLogsEditorZipHelp})");
 
+//	"安全設定";
 $SectionOther[]=addSettingValue("sec", $strSettingOtherSecurity);
 $SectionOther[]=addSettingValue("r", $strSettingDownload, "downcode", "0", "$strTbOpen=>1|$strTbClose=>0");
+
+$style_list=array();
+$style_list[]="預設=>default";
+$style_list[]="不顯示留言=>close";
+$style_list[]="隱藏留言=>hidden";
+$SectionOther[]=addSettingValue("sel", $strSettingSpamFiler, "spamfilter", "default", @implode("|",$style_list));
+$style_list=array();
+
+//	$SectionOther[]=addSettingValue("sel", $strSettingAdminStyle, "adminstyle", "default",@implode("|",$style_list));
+
 $SectionOther[]=addSettingValue("tn", $strCommTimerout, "commTimerout", "30", $strSettingOnlineSecond);
 $SectionOther[]=addSettingValue("tn", $strCommLength, "commLength", "800", $strSettingUnitsWords);
 $SectionOther[]=addSettingValue("r", $strSettingComments, "allowComment", "1", "$strTbOpen=>0|$strTbClose=>1");
@@ -138,6 +149,7 @@ $SectionOther[]=addSettingValue("r", $strSettingTrackback, "allowTrackback", "1"
 $SectionOther[]=addSettingValue("r", $strIsTbApp, "isTbApp", "0", "$strTbOpen=>0|$strTbClose=>1");
 $SectionOther[]=addSettingValue("ta", $strTbSiteList, "tbSiteList", "", "<br />$strTbSiteListMemo");
 
+//	特效與優化
 $SectionOther[]=addSettingValue("sec", $strSettingOtherNews);
 $SectionOther[]=addSettingValue("c", $strAjaxStatus, "ajaxstatus", "", "$strAjaxLogsPassword=>P|$strAjaxCommentBook=>G|$strAjaxTrackBack=>T|$strAjaxCalendar=>C|$strAjaxMediaStatus=>M");
 $SectionOther[]=addSettingValue("r", $strSettingGzip, "gzipstatus", "0", "$strTbOpen=>1|$strTbClose=>0");
@@ -182,5 +194,7 @@ $SectionCalendar[]=addSettingValue("sec", $strSettingSideCalendarSet);
 $SectionCalendar[]=addSettingValue("r", $strSettingSideCalendar, "showcalendar", "1", "$strTbOpen=>1|$strTbClose=>0");
 $SectionCalendar[]=addSettingValue("ta", $strSettingSideGCalendar, "gcalendar", $strGholidayDefault,  "<br />$strSettingSideCalendarHelp");
 $SectionCalendar[]=addSettingValue("ta", $strSettingSideNCalendar, "ncalendar", $strNholidayDefault, "<br />$strSettingSideCalendarHelp");
+
+//var_dump($style_list);
 
 ?>

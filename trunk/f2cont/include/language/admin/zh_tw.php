@@ -1,4 +1,5 @@
-<?php
+<?php
+
 $strAboutBlog = "關於";
 $strArchives = "歸檔";
 $strCalendar = "日曆";
@@ -605,8 +606,10 @@ $strUserRegister = "用戶註冊";
 $strSearchTitle = "日誌標題";
 $strSearchContent = "日誌內容";
 $strSearchTitleContent = "標題與內容";
-$strNoInstallFile = "警告：安裝檔案install/install.php仍然在您的伺服器上，請立刻將其改名或刪除！";
-$strApplyLink = "申請連結";
+$strNoInstallFile = "警告：安裝檔案install/install.php仍然在您的伺服器上，請立刻將其改名或刪除！";
+
+
+$strApplyLink = "申請連結";
 $strApplyLinkShow="申請交換連結";
 $strGuestBookFaceStatus="留言板頭像狀態";
 $strSeachShowStatus="搜索類別與按鍵";
@@ -707,4 +710,8 @@ $strAttachmentChangeAlert="請輸入原來的名稱與要更新的名稱！";
 $strLogTopClose="置頂隱藏";
 $strLogTopOpen="置頂展開";
 $strAjaxMediaStatus="媒體播放器";
+
+$strSettingSpamFiler="SPAM 過濾器規則";
+$strSpamTrash="SPAM 廣告";
+
 ?>

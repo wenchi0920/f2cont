@@ -1,4 +1,5 @@
-<?php
+<?php
+
 $strAboutBlog = "关于";
 $strArchives = "归档";
 $strCalendar = "日历";
@@ -605,8 +606,10 @@ $strUserRegister = "用户注册";
 $strSearchTitle = "日志标题";
 $strSearchContent = "日志内容";
 $strSearchTitleContent = "标题与内容";
-$strNoInstallFile = "警告：安装文件install/install.php仍然在您的服务器上，请立刻将其改名或删除！";
-$strApplyLink = "申请链接";
+$strNoInstallFile = "警告：安装文件install/install.php仍然在您的服务器上，请立刻将其改名或删除！";
+
+
+$strApplyLink = "申请链接";
 $strApplyLinkShow="申请交换链接";
 $strGuestBookFaceStatus="留言板头像状态";
 $strSeachShowStatus="搜索类别与按钮";
@@ -707,4 +710,8 @@ $strAttachmentChangeAlert="请输入原来的名称与要更新的名称！";
 $strLogTopClose="置顶隐藏";
 $strLogTopOpen="置顶展开";
 $strAjaxMediaStatus="媒体播放器";
+
+$strSettingSpamFiler="SPAM 過濾器規則";
+$strSpamTrash="SPAM 廣告";
+
 ?>
