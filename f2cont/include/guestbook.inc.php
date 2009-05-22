@@ -39,12 +39,14 @@ if ($action=="save" && $allow_reply){
 		}else{
 			$_SESSION['backValidate'] = "";	//把验证码清除
 		}
+		
 		//过滤名称与IP
 		if ($check_info && ($filter_name=replace_filter($_POST['message']))!=""){
 			//$ActionMessage=$strGuestBookFilter;
 			$ActionMessage=$strGuestBookFilter.$filter_name;
 			$check_info=false;
 		}
+		
 		//检测是否在规定的时候内发言
 		if (!empty($_SESSION['replytime']) && $_SESSION['replytime']>time()-$settingInfo['commTimerout']){
 			$ActionMessage=$strUserCommentTime;

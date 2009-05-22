@@ -707,4 +707,7 @@ $strAttachmentChangeAlert="Please enter BOTH Old and New Filename!";
 $strLogTopClose="Hide Pinned Entries";
 $strLogTopOpen="Expand Pinned Entries";
 $strAjaxMediaStatus="Media Player";
+
+$strSettingSpamFiler="SPAM Rule";
+$strSpamTrash="SPAM ";
 ?>

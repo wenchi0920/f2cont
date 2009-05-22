@@ -32,16 +32,19 @@ if (empty($_SESSION['rights']) or $_SESSION['rights']=="member"){
 		$ActionMessage=$strGuestBookFilter.$filter_name;
 		$check_info=false;
 	}
+	
 	//字数是否超过了$settingInfo['commLength']
 	if ($check_info && strlen($_POST['message'])>$settingInfo['commLength']){
 		$ActionMessage=str_replace("1",$settingInfo['commLength'],$strCommentsLengthError);
 		$check_info=false;
 	}
+	
 	//检测是否在规定的时候内发言
 	if (!empty($_SESSION['replytime']) && $_SESSION['replytime']>time()-$settingInfo['commTimerout']){
 		$ActionMessage=$strUserCommentTime;
 		$check_info=false;
 	}
+	
 }
 
 if ($check_info && empty($_POST['message'])){
