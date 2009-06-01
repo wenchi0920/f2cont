@@ -135,6 +135,7 @@ $SectionOther[]=addSettingValue("r", $strSettingDownload, "downcode", "0", "$str
 
 $style_list=array();
 $style_list[]="預設=>default";
+$style_list[]="刪除留言=>delete";
 $style_list[]="不顯示留言=>close";
 $style_list[]="隱藏留言=>hidden";
 $SectionOther[]=addSettingValue("sel", $strSettingSpamFiler, "spamfilter", "default", @implode("|",$style_list));

@@ -175,6 +175,7 @@ if (!empty($_GET['action']) && $_GET['action']=="save"){
 			if ($check_info && ($filter_name=replace_filter($_POST['message']))!=""){
 				$ActionMessage=$strGuestBookFilter.$filter_name;
 				$check_info=false;
+				$isSpam=1;
 			}
 			/*/检测是否在规定的时候内发言
 			if ($_SESSION['replytime'] && $_SESSION['replytime']>time()-$settingInfo['commTimerout']){
@@ -187,13 +188,34 @@ if (!empty($_GET['action']) && $_GET['action']=="save"){
 			$ActionMessage="$strGuestBookBlankError";
 			$check_info=false;
 		}
+		
+		/*
+		$style_list[]="預設=>default";
+		$style_list[]="刪除留言=>delete";
+		$style_list[]="不顯示留言=>close";
+		$style_list[]="隱藏留言=>hidden";
+		$settingInfo['spamfilter']	//	預設
+		*/
+		/* spam 過濾器強化	*/	
+		switch (trim($settingInfo['spamfilter'])){
+			case "delete":
+				$intSpamFiler=0;
+			break;
+			case "close":
+			case "hidden":
+				$intIsSecret=1;
+			case "default":
+			default:
+				$intSpamFiler=1;
+			break;
+		}
 
-		if ($check_info){
+		if ($check_info || intval($intSpamFiler)==1){
 			$author=(!empty($_POST['username']))?$_POST['username']:$_SESSION['username'];
 			$replypassword=(!empty($_POST['replypassword']))?md5($_POST['replypassword']):$old_password;
 			$_POST['isSecret']=(isset($_POST['isSecret']))?intval($_POST['isSecret']):0;
 
-			$sql="update $op_table set password='$replypassword',ip='".getip()."',content='".encode($_POST['message'])."',isSecret='".encode($_POST['isSecret'])."'$op_update where id='".$postid."'";
+			$sql="update $op_table set password='$replypassword',ip='".getip()."',content='".encode($_POST['message'])."',isSecret='".max(intval($intIsSecret),intval($_POST['isSecret']))."'$op_update where id='".$postid."'";
 			//echo $sql;
 			$DMC->query($sql);
 			//exit;
