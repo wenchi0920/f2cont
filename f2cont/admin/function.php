@@ -80,6 +80,7 @@ function login_page(){
 	setcookie("rights","",time()+86400*365,$cookiepath,$cookiedomain);
 
 	header("Location: index.php");
+	exit;
 }
 
 /********** 后台头部信息 **********/
