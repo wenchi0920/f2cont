@@ -31,6 +31,7 @@ if (empty($_SESSION['rights']) or $_SESSION['rights']=="member"){
 		//$ActionMessage=$strGuestBookFilter;
 		$ActionMessage=$strGuestBookFilter.$filter_name;
 		$check_info=false;
+		$isSpam=1;
 	}
 	
 	//字数是否超过了$settingInfo['commLength']
@@ -75,7 +76,28 @@ if ($check_info && !empty($_POST['username'])) {
 	}
 }
 
-if ($check_info){
+/*
+$style_list[]="預設=>default";
+$style_list[]="刪除留言=>delete";
+$style_list[]="不顯示留言=>close";
+$style_list[]="隱藏留言=>hidden";
+$settingInfo['spamfilter']	//	預設
+*/
+/* spam 過濾器強化	*/	
+switch (trim($settingInfo['spamfilter'])){
+	case "delete":
+		$intSpamFiler=0;
+	break;
+	case "close":
+	case "hidden":
+		$intIsSecret=1;
+	case "default":
+	default:
+		$intSpamFiler=1;
+	break;
+}
+
+if ($check_info || intval($intSpamFiler)==1){
 	$parent=0;
 	$_POST['isSecret']=(!empty($_POST['isSecret']))?$_POST['isSecret']:0;
 	$author=(!empty($_POST['username']))?$_POST['username']:$_SESSION['username'];
@@ -93,7 +115,7 @@ if ($check_info){
 	$email=(!empty($_POST['email']))?$_POST['email']:"";
 	$_POST['bookface']=!empty($_POST['bookface'])?$_POST['bookface']:"face1";
 
-	$sql="insert into ".$DBPrefix."guestbook(author,password,homepage,email,ip,content,postTime,isSecret,parent,face) values('$author','$replypassword','".encode($homepage)."','".encode($email)."','".getip()."','".encode($_POST['message'])."','".time()."','".encode($_POST['isSecret'])."','$parent','".substr(encode($_POST['bookface']),4)."')";
+	$sql="insert into ".$DBPrefix."guestbook(author,password,homepage,email,ip,content,postTime,isSecret,parent,face) values('$author','$replypassword','".encode($homepage)."','".encode($email)."','".getip()."','".encode($_POST['message'])."','".time()."','".max(intval($intIsSecret),intval($_POST['isSecret']))."','$parent','".substr(encode($_POST['bookface']),4)."')";
 	//echo $sql;
 	$DMC->query($sql);
 			
