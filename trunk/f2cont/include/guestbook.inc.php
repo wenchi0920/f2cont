@@ -23,7 +23,10 @@ $openwin_height="450";
 
 //保存留言内容
 if ($action=="save" && $allow_reply){
+	
 	$check_info=true;
+	$isSpam=false;
+	
 	if (empty($_SESSION['rights']) or $_SESSION['rights']=="member"){
 		//检测昵称是否合法
 		if (empty($_SESSION['rights']) && check_nickname($_POST['username'])==0){
@@ -45,7 +48,7 @@ if ($action=="save" && $allow_reply){
 			//$ActionMessage=$strGuestBookFilter;
 			$ActionMessage=$strGuestBookFilter.$filter_name;
 			$check_info=false;
-			$isSpam=1;
+			$isSpam=true;
 		}
 		
 		//检测是否在规定的时候内发言
@@ -83,6 +86,7 @@ if ($action=="save" && $allow_reply){
 		}
 	}
 	
+	
 	/*
 	$style_list[]="預設=>default";
 	$style_list[]="刪除留言=>delete";
@@ -91,18 +95,44 @@ if ($action=="save" && $allow_reply){
 	$settingInfo['spamfilter']	//	預設
 	*/
 	/* spam 過濾器強化	*/	
+	//include(F2BLOG_ROOT."./include/guestbook.lib.php");
 	switch (trim($settingInfo['spamfilter'])){
+		//	不新增留言
 		case "delete":
-			$intSpamFiler=0;
+			//$intSpamFiler=0;
+			if ($check_info && !$isSpam) guestBookPost(0,0);
 		break;
+		
+		//	新增留言，但不顯示 加入 spam 記號
 		case "close":
+			if ($isSpam==1) {
+				guestBookPost(1,0);
+				$ActionMessage="";
+			}
+			elseif ($check_info){
+				guestBookPost(0,0);
+			}
+		break;
+		
+		//	新增留言，顯示為隱藏 加入 spam 記號
 		case "hidden":
-			$intIsSecret=1;
 		case "default":
 		default:
-			$intSpamFiler=1;
+			
+			if ($isSpam==1) {
+				guestBookPost(1,0);
+				$ActionMessage="";
+			}
+			elseif ($check_info){
+				guestBookPost(0,0);
+			}
+			
 		break;
 	}
+	
+	
+	
+/*	
 
 	if ($check_info || intval($intSpamFiler)==1){
 		$parent=0;
@@ -118,7 +148,7 @@ if ($action=="save" && $allow_reply){
 			$_POST['homepage']="";
 		}
 
-		$sql="insert into ".$DBPrefix."guestbook(author,password,homepage,email,ip,content,postTime,isSecret,parent,face) values('$author','$replypassword','".encode($_POST['homepage'])."','".encode($_POST['email'])."','".getip()."','".encode($_POST['message'])."','".time()."','".max(intval($intIsSecret),intval($_POST['isSecret']))."','$parent','".substr(encode($_POST['bookface']),4)."')";
+		$sql="insert into ".$DBPrefix."guestbook(author,password,homepage,email,ip,content,postTime,isSecret,parent,face,isSpam) values('$author','$replypassword','".encode($_POST['homepage'])."','".encode($_POST['email'])."','".getip()."','".encode($_POST['message'])."','".time()."','".max(intval($intIsSecret),intval($_POST['isSecret']))."','$parent','".substr(encode($_POST['bookface']),4)."','".$intSpamFiler."')";
 		//echo $sql;
 		$DMC->query($sql);
 
@@ -139,6 +169,9 @@ if ($action=="save" && $allow_reply){
 		//echo "<script language=\"javascript\">window.reload</script>";
 		header("location:".str_replace("&amp;","&",$gourl)."$settingInfo[stype]");
 	}
+	
+	*/
+	
 }
 
 //允许回复
@@ -378,8 +411,35 @@ if (!empty($ActionMessage)){
 if ($page<1){$page=1;}
 $start_record=($page-1)*$per_page;
 
-$sql="select distinct a.*,b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage from ".$DBPrefix."guestbook as a left join ".$DBPrefix."members as b on a.author=b.username where parent='0' order by postTime {$settingInfo['gbookOrder']}";
+
+/* spam 過濾器強化	*/
+switch (trim($settingInfo['spamfilter'])){
+	//	新增留言，但不顯示 加入 spam 記號
+	case "close":
+		$sql="select distinct a.id, a.author, a.password, a.homepage, a.email, a.face, a.ip, a.content, a.postTime, a.isSecret, a.parent, a.HTTP_REFERER";
+		$sql.=", a.isSpam ";
+		$sql.=",b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage from ".$DBPrefix."guestbook as a left join ".$DBPrefix."members as b on a.author=b.username where parent='0' and isSpam='0' order by postTime {$settingInfo['gbookOrder']}";
+		$nums_sql="select count(id) as numRows from ".$DBPrefix."guestbook where parent='0' and isSpam='0'";
+	break;
+	
+	//	新增留言，顯示為隱藏 加入 spam 記號
+	case "hidden":
+	case "default":
+	default:
+		$sql="select distinct a.id, a.author, a.password, a.homepage, a.email, a.face, a.ip, a.content, a.postTime";
+		$sql.=",IF(a.isSpam=1,1,a.isSecret) as isSecret";
+		$sql.=", a.parent, a.HTTP_REFERER";
+		$sql.=", a.isSpam ";
+		$sql.=",b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage from ".$DBPrefix."guestbook as a left join ".$DBPrefix."members as b on a.author=b.username where parent='0' order by postTime {$settingInfo['gbookOrder']}";
+		$nums_sql="select count(id) as numRows from ".$DBPrefix."guestbook where parent='0'";
+	break;
+}
+
+/*
+$sql="select distinct a.*,b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage, b.isSpam from ".$DBPrefix."guestbook as a left join ".$DBPrefix."members as b on a.author=b.username where parent='0' order by postTime {$settingInfo['gbookOrder']}";
 $nums_sql="select count(id) as numRows from ".$DBPrefix."guestbook where parent='0'";
+*/
+
 $total_num=getNumRows($nums_sql);
 
 $query_sql=$sql." Limit $start_record,$per_page";
@@ -449,7 +509,31 @@ $arr_parent = $DMC->fetchQueryAll($query_result);
 		</div>
 		<?php
 		//取得回复
-		$sub_sql="select distinct a.*,b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage from ".$DBPrefix."guestbook as a left join ".$DBPrefix."members as b on a.author=b.username where parent='".$value['id']."' order by postTime";
+		//$sub_sql="select distinct a.*,b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage from ".$DBPrefix."guestbook as a left join ".$DBPrefix."members as b on a.author=b.username where parent='".$value['id']."' order by postTime";
+		
+		/* spam 過濾器強化	*/
+		switch (trim($settingInfo['spamfilter'])){
+			//	新增留言，但不顯示 加入 spam 記號
+			case "close":
+				
+				$sub_sql=" select distinct a.id, a.author, a.password, a.homepage, a.email, a.face, a.ip, a.content, a.postTime, a.isSecret, a.parent, a.HTTP_REFERER  ,b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage from ".$DBPrefix."guestbook as a left join ".$DBPrefix."members as b on a.author=b.username where parent='".$value['id']."' and isSpam='0' order by postTime";
+				
+			break;
+			
+			//	新增留言，顯示為隱藏 加入 spam 記號
+			case "hidden":
+			case "default":
+			default:
+				
+				$sub_sql=" select distinct a.id, a.author, a.password, a.homepage, a.email, a.face, a.ip, a.content, a.postTime";
+				$sub_sql.=",IF(a.isSpam=1,1,a.isSecret) as isSecret";
+				$sub_sql.=", a.parent, a.HTTP_REFERER  ,b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage from ".$DBPrefix."guestbook as a left join ".$DBPrefix."members as b on a.author=b.username where parent='".$value['id']."' order by postTime";
+				
+			break;
+		}
+		
+		//$sub_sql=" select distinct a.id, a.author, a.password, a.homepage, a.email, a.face, a.ip, a.content, a.postTime, a.isSecret, a.parent, a.HTTP_REFERER  ,b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage from ".$DBPrefix."guestbook as a left join ".$DBPrefix."members as b on a.author=b.username where parent='".$value['id']."' order by postTime";
+		
 		$query_result=$DMC->query($sub_sql);
 		$arr_sub = $DMC->fetchQueryAll($query_result);
 
@@ -514,3 +598,47 @@ $arr_parent = $DMC->fetchQueryAll($query_result);
 	  </div>
 	</div>
 </div>
+
+
+<?php
+
+function guestBookPost($intSpamFiler,$intIsSecret){
+	
+	global $DMC,$DBPrefix,$arrSideModule;
+	
+	$parent=0;
+	$_POST['isSecret']=($_POST['isSecret'])?$_POST['isSecret']:0;
+	$author=($_POST['username'])?$_POST['username']:$_SESSION['username'];
+	$replypassword=($_POST['replypassword'])?md5($_POST['replypassword']):"";
+	$_POST['bookface']=!empty($_POST['bookface'])?$_POST['bookface']:"face1";
+	if (!empty($_POST['homepage'])) {
+		if (strpos(";".$_POST['homepage'],"http://")<1) {
+			$_POST['homepage']="http://".$_POST['homepage'];
+		}
+	} else {
+		$_POST['homepage']="";
+	}
+
+	$sql="insert into ".$DBPrefix."guestbook(author,password,homepage,email,ip,content,postTime,isSecret,parent,face,isSpam) values('$author','$replypassword','".encode($_POST['homepage'])."','".encode($_POST['email'])."','".getip()."','".encode($_POST['message'])."','".time()."','".max(intval($intIsSecret),intval($_POST['isSecret']))."','$parent','".substr(encode($_POST['bookface']),4)."','".$intSpamFiler."')";
+	//echo $sql;
+	$DMC->query($sql);
+
+	//更新cache
+	settings_recount("guestbook");
+	settings_recache();
+	recentGbooks_recache();
+	logs_sidebar_recache($arrSideModule);
+
+	//保存时间
+	$_SESSION['replytime']=time();
+
+	//清空内容
+	$_POST['message']="";
+
+	//echo "<script language=\"javascript\">window.location.href='$gourl';</script>";
+	//echo "<script language=\"javascript\">window.reload</script>";
+	header("location:".str_replace("&amp;","&",$gourl)."$settingInfo[stype]");
+	exit;
+}
+
+?>

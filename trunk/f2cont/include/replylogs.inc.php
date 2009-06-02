@@ -26,6 +26,7 @@ $posturl="index.php?load=$load&id=".$id;
 //保存留言内容
 if ($action=="save" && $allow_reply){
 	$check_info=true;
+	$isSpam=false;
 	if (empty($_SESSION['rights']) or $_SESSION['rights']=="member"){
 		//检测昵称是否合法
 		if (empty($_SESSION['rights']) && check_nickname($_POST['username'])==0){
@@ -45,7 +46,7 @@ if ($action=="save" && $allow_reply){
 			//$ActionMessage=$strGuestBookFilter;
 			$ActionMessage=$strGuestBookFilter.$filter_name;
 			$check_info=false;
-			$isSpam=1;
+			$isSpam=true;
 		}
 		//字数是否超过了$settingInfo['commLength']
 		if ($check_info && strlen($_POST['message'])>$settingInfo['commLength']){
@@ -95,19 +96,42 @@ if ($action=="save" && $allow_reply){
 	$settingInfo['spamfilter']	//	預設
 	*/
 	/* spam 過濾器強化	*/	
+	//include(F2BLOG_ROOT."./include/guestbook.lib.php");
 	switch (trim($settingInfo['spamfilter'])){
+		//	不新增留言
 		case "delete":
-			$intSpamFiler=0;
+			//$intSpamFiler=0;
+			if ($check_info && !$isSpam) guestBookPost(0,0);
 		break;
+		
+		//	新增留言，但不顯示 加入 spam 記號
 		case "close":
+			if ($isSpam==1) {
+				guestBookPost(1,0);
+				$ActionMessage="";
+			}
+			elseif ($check_info){
+				guestBookPost(0,0);
+			}
+		break;
+		
+		//	新增留言，顯示為隱藏 加入 spam 記號
 		case "hidden":
-			$intIsSecret=1;
 		case "default":
 		default:
-			$intSpamFiler=1;
+			
+			if ($isSpam==1) {
+				guestBookPost(1,0);
+				$ActionMessage="";
+			}
+			elseif ($check_info){
+				guestBookPost(0,0);
+			}
+			
 		break;
 	}
 
+/*	
 	if ($check_info || intval($intSpamFiler)==1){
 		$parent=0;
 		$_POST['isSecret']=($_POST['isSecret'])?$_POST['isSecret']:0;
@@ -149,6 +173,52 @@ if ($action=="save" && $allow_reply){
 		//echo "<script language=\"javascript\">window.location.href='$gourl';</script>";
 		//echo "<script language=\"javascript\">window.reload</script>";
 	}
+	*/
+	
+}
+
+function guestBookPost($intSpamFiler,$intIsSecret){
+	
+	global $DMC,$DBPrefix,$arrSideModule;
+	
+		$parent=0;
+		$_POST['isSecret']=($_POST['isSecret'])?$_POST['isSecret']:0;
+		$author=($_POST['username'])?$_POST['username']:$_SESSION['username'];
+		$replypassword=($_POST['replypassword'])?md5($_POST['replypassword']):"";
+		$_POST['bookface']=!empty($_POST['bookface'])?$_POST['bookface']:"face1";
+		if (isset($_POST['homepage'])) {
+			if (strpos(";".$_POST['homepage'],"http://")<1) {
+				$_POST['homepage']="http://".$_POST['homepage'];
+			}
+		} else {
+			$_POST['homepage']="";
+		}
+
+		$_POST['email']=(!empty($_POST['email']))?$_POST['email']:"";
+
+
+		$sql="insert into ".$DBPrefix."comments(author,password,logId,homepage,email,face,ip,content,postTime,isSecret,parent) values('$author','$replypassword','".$id."','".encode($_POST['homepage'])."','".encode($_POST['email'])."','".substr(encode($_POST['bookface']),4)."','".getip()."','".encode($_POST['message'])."','".time()."','".max(intval($intIsSecret),intval($_POST['isSecret']))."','$parent')";
+		//echo $sql;
+		$DMC->query($sql);
+
+		//更新LOGS评论数量
+		settings_recount("comments");
+		settings_recache();
+		$DMC->query("UPDATE ".$DBPrefix."logs SET commNums=commNums+1 WHERE id='$id'");
+
+		//更新cache
+		recentComments_recache();
+		logs_sidebar_recache($arrSideModule);
+
+		//保存时间
+		$_SESSION['replytime']=time();
+
+		//清空内容
+		$_POST['message']="";
+
+		header("location:".str_replace("&amp;","&",$gourl)."$settingInfo[stype]");
+		exit;
+	
 }
 
 //评论
