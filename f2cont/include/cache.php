@@ -684,7 +684,37 @@ function recentGbooks_recache() {
 
 	$i=0;
 	$maxlength=$settingInfo['sidegbooklength'];
-	$result = $DMC->query("select a.id,a.content,a.author,a.postTime,b.nickname,a.isSecret from {$DBPrefix}guestbook as a left join {$DBPrefix}members as b on a.author=b.username order by postTime desc Limit 0,$settingInfo[gbookPage]");
+	
+	
+	//$result = $DMC->query("select a.id,a.content,a.author,a.postTime,b.nickname,a.isSecret from {$DBPrefix}guestbook as a left join {$DBPrefix}members as b on a.author=b.username order by postTime desc Limit 0,$settingInfo[gbookPage]");
+	
+	/* spam 過濾器強化	*/
+	switch (trim($settingInfo['spamfilter'])){
+		//	新增留言，但不顯示 加入 spam 記號
+		case "close":
+				
+			$sql="select a.id,a.content,a.author,a.postTime,b.nickname,a.isSecret ";
+			$sql.=" from {$DBPrefix}guestbook as a left join {$DBPrefix}members as b on a.author=b.username";
+			$sql.=" where isSpam='0' order by postTime desc Limit 0,$settingInfo[gbookPage]";
+				
+		break;
+			
+		//	新增留言，顯示為隱藏 加入 spam 記號
+		case "hidden":
+		case "default":
+		default:
+				
+			$sql="select a.id,a.content,a.author,a.postTime,b.nickname";
+			$sql.=",IF(a.isSpam=1,1,a.isSecret) as isSecret";
+			$sql.=" from {$DBPrefix}guestbook as a left join {$DBPrefix}members as b on a.author=b.username";
+			$sql.=" order by postTime desc Limit 0,$settingInfo[gbookPage]";
+				
+		break;
+	}
+	
+	$result = $DMC->query($sql);
+	
+	
 	while ($my = $DMC->fetchArray($result)) {
 		$author=($my['nickname']!="")?$my['nickname']:$my['author'];
 		if ($my['isSecret']){

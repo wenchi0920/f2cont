@@ -30,6 +30,7 @@ $validate_image="include/image_firefox.inc.php";
 //保存留言内容
 if (!empty($_GET['action']) && $_GET['action']=="save"){
 	$check_info=true;
+	$isSpam=false;
 	if (empty($_SESSION['rights']) or $_SESSION['rights']=="member"){
 		if (empty($_SESSION['rights']) && empty($_POST['username'])) {
 			$ActionMessage="$strGuestBookBlankError";
@@ -98,20 +99,42 @@ if (!empty($_GET['action']) && $_GET['action']=="save"){
 	$settingInfo['spamfilter']	//	預設
 	*/
 	/* spam 過濾器強化	*/	
+	//include(F2BLOG_ROOT."./include/guestbook.lib.php");
 	switch (trim($settingInfo['spamfilter'])){
+		//	不新增留言
 		case "delete":
-			$intSpamFiler=0;
+			//$intSpamFiler=0;
+			if ($check_info && !$isSpam) guestBookPost(0,0);
 		break;
+		
+		//	新增留言，但不顯示 加入 spam 記號
 		case "close":
+			if ($isSpam==1) {
+				guestBookPost(1,0);
+				$ActionMessage="";
+			}
+			elseif ($check_info){
+				guestBookPost(0,0);
+			}
+		break;
+		
+		//	新增留言，顯示為隱藏 加入 spam 記號
 		case "hidden":
-			$intIsSecret=1;
 		case "default":
 		default:
-			$intSpamFiler=1;
+			
+			if ($isSpam==1) {
+				guestBookPost(1,0);
+				$ActionMessage="";
+			}
+			elseif ($check_info){
+				guestBookPost(0,0);
+			}
+			
 		break;
-	}	
-
-	if ($check_info || intval($intSpamFiler)==1){
+	}
+/*
+	if ($check_info){
 		$_POST['isSecret']=(isset($_POST['isSecret']))?$_POST['isSecret']:0;
 		$author=(isset($_POST['username']))?$_POST['username']:$_SESSION['username'];
 		$replypassword=(isset($_POST['replypassword']))?md5($_POST['replypassword']):"";
@@ -175,9 +198,87 @@ if (!empty($_GET['action']) && $_GET['action']=="save"){
 			}
 			echo " window.close();\n";
 			echo "</script> \n";
+			exit;
 		}
 	}
+	
+	*/
+	
+	
 }
+
+function guestBookPost($intSpamFiler,$intIsSecret){
+	
+	global $DMC,$DBPrefix,$arrSideModule,$settingInfo;
+
+	$_POST['isSecret']=(isset($_POST['isSecret']))?$_POST['isSecret']:0;
+	$author=(isset($_POST['username']))?$_POST['username']:$_SESSION['username'];
+	$replypassword=(isset($_POST['replypassword']))?md5($_POST['replypassword']):"";
+	//$_POST['homepage']=(isset($_POST['homepage']))?$_POST['homepage']:"";
+	if (!empty($_POST['homepage'])) {
+		if (strpos(";".$_POST['homepage'],"http://")<1) {
+			$_POST['homepage']="http://".$_POST['homepage'];
+		}
+	} else {
+		$_POST['homepage']="";
+	}
+
+	$_POST['email']=(isset($_POST['email']))?$_POST['email']:"";
+	$_POST['bookface']=!empty($_POST['bookface'])?$_POST['bookface']:"face1";
+
+	if ($_GET['load']=="read"){//评论
+		$sql="insert into ".$DBPrefix."comments(author,password,logId,homepage,email,face,ip,content,postTime,isSecret,parent) values('$author','$replypassword','".$id."','".encode($_POST['homepage'])."','".encode($_POST['email'])."','".substr(encode($_POST['bookface']),4)."','".getip()."','".encode($_POST['message'])."','".time()."','".max(intval($intIsSecret),intval($_POST['isSecret']))."','$postid')";
+	}else{
+		$sql="insert into ".$DBPrefix."guestbook(author,password,homepage,email,ip,content,postTime,isSecret,parent,face) values('$author','$replypassword','".encode($_POST['homepage'])."','".encode($_POST['email'])."','".getip()."','".encode($_POST['message'])."','".time()."','".max(intval($intIsSecret),intval($_POST['isSecret']))."','$postid','".substr(encode($_POST['bookface']),4)."')";
+	}
+	//echo $sql;
+	$DMC->query($sql);
+
+	//保存时间
+	$_SESSION['replytime']=time();
+
+	//更新cache
+	if ($_GET['load']=="read"){//评论
+		//更新LOGS评论数量
+		settings_recount("comments");
+		settings_recache();
+		$DMC->query("UPDATE ".$DBPrefix."logs SET commNums=commNums+1 WHERE id='$id'");
+
+		//更新cache
+		recentComments_recache();
+		logs_sidebar_recache($arrSideModule);
+	}else{
+		settings_recount("guestbook");
+		settings_recache();
+		recentGbooks_recache();
+		logs_sidebar_recache($arrSideModule);
+	}
+
+	//不使用Ajax技术
+	if (strpos(";$settingInfo[ajaxstatus];","G")<1){
+		$load=$_GET['load'];
+		$page=$_GET['page'];
+		echo "<script language=javascript> \n";
+		if ($_GET['load']=="read"){
+			if ($settingInfo['rewrite']==0) $gourl="index.php?load=$load&id=$id&page=$page";
+			if ($settingInfo['rewrite']==1) $gourl="rewrite.php/$load-$id-$page";
+			if ($settingInfo['rewrite']==2) $gourl="$load-$id-$page";
+			echo " opener.location.href='$gourl{$settingInfo['stype']}';\n";
+			echo " opener.reload;\n";
+		}else{
+			if ($settingInfo['rewrite']==0) $gourl="index.php?load=$load&page=$page";
+			if ($settingInfo['rewrite']==1) $gourl="rewrite.php/$load-$page";
+			if ($settingInfo['rewrite']==2) $gourl="$load-$page";
+			echo " opener.location.href='$gourl{$settingInfo['stype']}';\n";
+			echo " opener.reload;\n";
+		}
+		echo " window.close();\n";
+		echo "</script> \n";
+		exit;
+	}	
+	
+}
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="UTF-8">

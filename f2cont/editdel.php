@@ -153,6 +153,7 @@ if (!empty($_GET['action']) && ($_GET['action']=="next" || $_GET['action']=="sav
 if (!empty($_GET['action']) && $_GET['action']=="save"){
 	if ($_POST['chkaction']=="edit"){
 		$check_info=true;
+		$isSpam=false;
 		if (empty($_SESSION['rights']) or $_SESSION['rights']=="member"){
 			if (empty($_SESSION['rights']) && empty($_POST['username'])) {
 				$ActionMessage="$strGuestBookBlankError";
@@ -175,7 +176,7 @@ if (!empty($_GET['action']) && $_GET['action']=="save"){
 			if ($check_info && ($filter_name=replace_filter($_POST['message']))!=""){
 				$ActionMessage=$strGuestBookFilter.$filter_name;
 				$check_info=false;
-				$isSpam=1;
+				$isSpam=true;
 			}
 			/*/检测是否在规定的时候内发言
 			if ($_SESSION['replytime'] && $_SESSION['replytime']>time()-$settingInfo['commTimerout']){
@@ -197,20 +198,43 @@ if (!empty($_GET['action']) && $_GET['action']=="save"){
 		$settingInfo['spamfilter']	//	預設
 		*/
 		/* spam 過濾器強化	*/	
+		//include(F2BLOG_ROOT."./include/guestbook.lib.php");
 		switch (trim($settingInfo['spamfilter'])){
+			//	不新增留言
 			case "delete":
-				$intSpamFiler=0;
+				//$intSpamFiler=0;
+				if ($check_info && !$isSpam) guestBookPost(0,0);
 			break;
+			
+			//	新增留言，但不顯示 加入 spam 記號
 			case "close":
+				if ($isSpam==1) {
+					guestBookPost(1,0);
+					$ActionMessage="";
+				}
+				elseif ($check_info){
+					guestBookPost(0,0);
+				}
+			break;
+			
+			//	新增留言，顯示為隱藏 加入 spam 記號
 			case "hidden":
-				$intIsSecret=1;
 			case "default":
 			default:
-				$intSpamFiler=1;
+				
+				if ($isSpam==1) {
+					guestBookPost(1,0);
+					$ActionMessage="";
+				}
+				elseif ($check_info){
+					guestBookPost(0,0);
+				}
+				
 			break;
 		}
 
-		if ($check_info || intval($intSpamFiler)==1){
+		/*
+		if ($check_info){
 			$author=(!empty($_POST['username']))?$_POST['username']:$_SESSION['username'];
 			$replypassword=(!empty($_POST['replypassword']))?md5($_POST['replypassword']):$old_password;
 			$_POST['isSecret']=(isset($_POST['isSecret']))?intval($_POST['isSecret']):0;
@@ -251,8 +275,57 @@ if (!empty($_GET['action']) && $_GET['action']=="save"){
 				echo "</script> \n";
 			}
 		}
+		*/
 	}
 }
+
+
+function guestBookPost($intSpamFiler,$intIsSecret){
+	global $DMC,$DBPrefix,$arrSideModule,$settingInfo;
+	
+	$author=(!empty($_POST['username']))?$_POST['username']:$_SESSION['username'];
+	$replypassword=(!empty($_POST['replypassword']))?md5($_POST['replypassword']):$old_password;
+	$_POST['isSecret']=(isset($_POST['isSecret']))?intval($_POST['isSecret']):0;
+
+	$sql="update $op_table set password='$replypassword',ip='".getip()."',content='".encode($_POST['message'])."',isSecret='".max(intval($intIsSecret),intval($_POST['isSecret']))."'$op_update where id='".$postid."'";
+	//echo $sql;
+	$DMC->query($sql);
+	//exit;
+
+	//更新cache
+	if ($_GET['load']=="read"){//评论
+		recentComments_recache();
+		logs_sidebar_recache($arrSideModule);
+	}else{
+		recentGbooks_recache();
+		logs_sidebar_recache($arrSideModule);
+	}
+
+	//不使用Ajax技术
+	if (strpos(";$settingInfo[ajaxstatus];","G")<1){
+		$load=$_GET['load'];
+		$page=$_GET['page'];
+		echo "<script language=javascript> \n";
+		if ($_GET['load']=="read"){
+			if ($settingInfo['rewrite']==0) $gourl="index.php?load=$load&id=$id&page=$page";
+			if ($settingInfo['rewrite']==1) $gourl="rewrite.php/$load-$id-$page";
+			if ($settingInfo['rewrite']==2) $gourl="$load-$id-$page";
+			echo " opener.location.href='$gourl{$settingInfo['stype']}';\n";
+			echo " opener.reload;\n";
+		}else{
+			if ($settingInfo['rewrite']==0) $gourl="index.php?load=$load&page=$page";
+			if ($settingInfo['rewrite']==1) $gourl="rewrite.php/$load-$page";
+			if ($settingInfo['rewrite']==2) $gourl="$load-$page";
+			echo " opener.location.href='$gourl{$settingInfo['stype']}';\n";
+			echo " opener.reload;\n";
+		}
+		echo " window.close();\n";
+		echo "</script> \n";
+		exit;
+	}
+}
+
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="UTF-8">

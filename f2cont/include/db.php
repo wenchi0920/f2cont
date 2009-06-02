@@ -8,6 +8,8 @@
 
 class F2MysqlClass {
 	var $querycount = 0;
+	
+	var $_fp=false;
 
 	function F2MysqlClass($DBHost, $DBUser, $DBPswd, $DBName,$DBNewlink="false") {
 		if($DBNewlink=="true") {
@@ -31,6 +33,9 @@ class F2MysqlClass {
 		if($DBName) {
 			$this->selectDB($DBName);
 		}
+		
+		$this->_fp=fopen(F2BLOG_ROOT."./cache/".date("Ymd").".log","a");
+		
 	}
 
 	function fetchArray($query, $resultType = MYSQL_ASSOC) {
@@ -61,6 +66,8 @@ class F2MysqlClass {
 		if(!($query = $func($sql)) && $type != 'T') { //如果type=T，表示有错误也继续运行。
 			$this->halt('MySQL Query Error', $sql);
 		}
+		
+		fputs($this->_fp,date("Ymd H:i:s")." MySQL Query Log : ".$sql."\n");
 		$this->querycount++;
 		//echo "<font color=red>".$this->querycount."</font>$sql<br>";
 		return $query;
@@ -95,6 +102,7 @@ class F2MysqlClass {
 	}
 
 	function close() {
+		fclose($this->_fp);
 		return mysql_close();
 	}
 
