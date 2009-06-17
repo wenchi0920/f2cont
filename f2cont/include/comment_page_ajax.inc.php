@@ -30,6 +30,29 @@ $start_record=($page-1)*$per_page;
 
 $sql="select distinct a.*,b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage from ".$DBPrefix."comments as a left join ".$DBPrefix."members as b on a.author=b.username where a.logId='".$id."' and a.parent='0' order by postTime {$settingInfo['commentOrder']}";
 $nums_sql="select count(id) as numRows from ".$DBPrefix."comments where logId='".$id."' and parent='0'";
+
+/* spam 過濾器強化	*/
+switch (trim($settingInfo['spamfilter'])){
+	//	新增留言，但不顯示 加入 spam 記號
+	case "close":
+		
+		$sql="select distinct a.*,b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage from ".$DBPrefix."comments as a left join ".$DBPrefix."members as b on a.author=b.username where a.logId='".$id."' and a.parent='0' and a.isSpam='0' order by postTime {$settingInfo['commentOrder']}";
+		$nums_sql="select count(id) as numRows from ".$DBPrefix."comments where logId='".$id."' and parent='0' and isSpam='0'";
+		
+	break;
+	
+	//	新增留言，顯示為隱藏 加入 spam 記號
+	case "hidden":
+	case "default":
+	default:
+		
+		$sql="select distinct a.*,b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage from ".$DBPrefix."comments as a left join ".$DBPrefix."members as b on a.author=b.username where a.logId='".$id."' and a.parent='0' order by postTime {$settingInfo['commentOrder']}";
+		$nums_sql="select count(id) as numRows from ".$DBPrefix."comments where logId='".$id."' and parent='0'";		
+		
+	break;
+}
+
+
 $total_num=getNumRows($nums_sql);
 
 $query_sql=$sql." Limit $start_record,$per_page";
@@ -95,6 +118,27 @@ $arr_parent = $DMC->fetchQueryAll($query_result);
 		<?php 
 		//取得回复
 		$sub_sql="select distinct a.*,b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage from ".$DBPrefix."comments as a left join ".$DBPrefix."members as b on a.author=b.username where a.logId='".$id."' and a.parent='".$value['id']."' order by postTime";
+		
+		/* spam 過濾器強化	*/
+		switch (trim($settingInfo['spamfilter'])){
+			//	新增留言，但不顯示 加入 spam 記號
+			case "close":
+				
+				$sub_sql="select distinct a.*,b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage from ".$DBPrefix."comments as a left join ".$DBPrefix."members as b on a.author=b.username where a.logId='".$id."' and a.parent='".$value['id']."' and a.isSpam='0' order by postTime";
+				
+			break;
+			
+			//	新增留言，顯示為隱藏 加入 spam 記號
+			case "hidden":
+			case "default":
+			default:
+				
+				$sub_sql="select distinct a.*,b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage from ".$DBPrefix."comments as a left join ".$DBPrefix."members as b on a.author=b.username where a.logId='".$id."' and a.parent='".$value['id']."' order by postTime";
+				
+			break;
+		}		
+		
+		
 		$query_result=$DMC->query($sub_sql);
 		$arr_sub = $DMC->fetchQueryAll($query_result);
 

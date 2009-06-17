@@ -24,6 +24,8 @@ var TinyMCE_f2blogPlugin = {
 				return tinyMCE.getButtonHTML(control_name, 'lang_f2blog_quote_button', '{$pluginurl}/images/quote.gif', 'f2Quote');
 			case "f2_help":
 				return tinyMCE.getButtonHTML(control_name, 'lang_help_button_title', '{$pluginurl}/images/help.gif', 'f2Help');
+			case "f2_emule":
+				return tinyMCE.getButtonHTML(control_name, 'lang_f2blog_emule_button', '{$pluginurl}/images/emule.png', 'f2emule');
 		}
 		return '';
 	},
@@ -57,6 +59,16 @@ var TinyMCE_f2blogPlugin = {
 				//html = '<blockquote style="MARGIN-RIGHT: 0px">' + inst.selection.getSelectedHTML() + '</blockquote>'; 
 				// blockquote {border-left:3px solid #BEDCFF;margin:20px;padding-left:10px;}
 
+				tinyMCE.execInstanceCommand(editor_id, 'mceInsertContent', false, html);
+				tinyMCE.selectedInstance.repaint();
+				return true;
+				case "f2emule":
+				var flag = "";
+				var template = new Array();
+				var altMore = tinyMCE.getLang('lang_f2blog_emule_alt');
+
+				html = '[emule]' + inst.selection.getSelectedHTML() + '[/emule]';
+				
 				tinyMCE.execInstanceCommand(editor_id, 'mceInsertContent', false, html);
 				tinyMCE.selectedInstance.repaint();
 				return true;

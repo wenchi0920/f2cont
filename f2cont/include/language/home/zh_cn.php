@@ -1,4 +1,4 @@
-<?php
+<?php
 $strAboutBlog = "关于";
 $strArchives = "归档";
 $strCalendar = "日历";
@@ -222,8 +222,8 @@ $strSmall = "小";
 $strMiddle = "中";
 $strLarge = "大";
 $strQuoteAddress = "引用通告地址:";
-$strCopyLink = "点击复制到剪贴板";
-$strLogsCreateHtmlAlert1 = "正在处理";
+$strCopyLink = "点击复制到剪贴板";
+$strLogsCreateHtmlAlert1 = "正在处理";
 $strLogsCreateHtmlAlert2 = "行资料，请不要关闭浏览器！";
 $strLogsCreateHtmlAlert3 = "个静态文件已生成！";
 $strNickName = "用户昵称";

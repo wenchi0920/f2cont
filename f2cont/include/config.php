@@ -1,15 +1,15 @@
 <?php
 /********** 数据库主机名或IP **********/
-$DBHost = '';
+$DBHost = 'localhost';
 
 /********** 数据库用户名 **********/
-$DBUser = '';
+$DBUser = 'f2cont_blog';
 
 /********** 数据库密码 **********/
-$DBPass = '';
+$DBPass = 'js4zXRX8fGnHRH9K';
 
 /********** 数据库名 **********/
-$DBName = '';
+$DBName = 'f2cont_blog';
 
 /********** 数据表前缀 **********/
 $DBPrefix = 'f2cont_';
