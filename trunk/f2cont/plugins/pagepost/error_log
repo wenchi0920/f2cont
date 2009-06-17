@@ -1,0 +1,1 @@
+[04-Feb-2009 23:56:27] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2) in /home/xponesix/public_html/f2cont/include/db.php on line 18
