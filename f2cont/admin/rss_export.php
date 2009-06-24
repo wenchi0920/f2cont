@@ -83,7 +83,7 @@ function onclick_update(form) {
 			&nbsp;<input type=radio name='isgzip' value="1" <?php echo ($isgzip==1)?"checked":""?> <?php echo ($gzopen=="0")?"disabled":""?>>&nbsp;<?php echo $strBackupOption?>&nbsp;&nbsp;
 			<input type=radio name='isgzip' value="0" <?php echo ($isgzip==0)?"checked":""?>>&nbsp;<?php echo $strBackupOption2?>
 			&nbsp;&nbsp;&nbsp;
-			<?php echo $strRssExportOption1?>&nbsp;<input name="filesize" type="text" size="2" maxlength="3" value="80"> <?php echo $strRssExportOption2?>
+			<?php echo $strRssExportOption1?>&nbsp;<input name="recordNum" type="text" size="2" maxlength="3" value="80"> <?php echo $strRssExportOption2?>
 		  </td>
 		</tr>
 
