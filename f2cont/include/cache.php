@@ -23,9 +23,9 @@ function writetocache($cachename, $cachedata = '', $cachetype = 'php') {
 
 // 更新设置选项
 function settings_recache()	{
-	global $DMC,$DBPrefix;	
+	global $DMC,$DBPrefix;
 	$contents = "\$settingInfo = array(\r\n";
-	$setInfoResult = $DMC->query("SELECT * FROM ".$DBPrefix."setting order by settName");	
+	$setInfoResult = $DMC->query("SELECT * FROM ".$DBPrefix."setting order by settName");
 	while($arr_result=$DMC->fetchArray($setInfoResult)){
 		$arr_result['settValue']=($arr_result['settName']=="tbSiteList")?str_replace("<br />\n",";",$arr_result['settValue']):$arr_result['settValue'];
 		$contents .= "\t'".$arr_result['settName']."'=>'".$arr_result['settValue']."',\n";
@@ -39,13 +39,13 @@ function skinlist_recache()	{
 	global $settingInfo,$arrSideModule,$DMC,$DBPrefix;
 
 	//列出Skins目录
-	$handle=opendir(F2BLOG_ROOT."./skins/"); 
-	while (false !== ($file = readdir($handle))) {			
+	$handle=opendir(F2BLOG_ROOT."./skins/");
+	while (false !== ($file = readdir($handle))) {
 		if(is_dir(F2BLOG_ROOT."./skins/$file") && file_exists(F2BLOG_ROOT."./skins/$file/skin.xml")){
 			$arrSkinList[$file]=getSkinInfo($file);
-		}			
-	} 
-	closedir($handle); 
+		}
+	}
+	closedir($handle);
 
 	$contents = "\$skinlistcache = array(\r\n";
 	foreach($arrSkinList as $key=>$value){
@@ -77,14 +77,14 @@ function skinlist_recache()	{
 		}
 	}
 	$contents.= ");";
-	
+
 	writetocache('defaultskin',$contents);
 }
 
 // 重新计算类别的日志数量
 function categories_recount() {
 	global $DMC,$DBPrefix;
-	
+
 	//清空Categories的数量
 	$sql="update ".$DBPrefix."categories set cateCount=0";
 	$DMC->query($sql);
@@ -111,7 +111,7 @@ function categories_recount() {
 // 更新日历
 function calendar_recache() {
 	global $DMC,$DBPrefix,$strArrayMonth,$strArrayDay,$strYear,$strMonth,$arrWeek,$strDayLogs,$settingInfo,$arrSideModule,$strCalendar;
-	
+
 	$archives = $DMC->query("SELECT postTime FROM ".$DBPrefix."logs where saveType='1' ORDER BY postTime DESC");
 	$contents = "\$calendarcache = array(\r\n";
 	$articledb = array();
@@ -148,7 +148,7 @@ function calendar_recache() {
 // 更新链接
 function links_recache() {
 	global $DMC,$DBPrefix,$arrSideModule,$strApplyLink,$settingInfo;
-	
+
 	//取出连接分组类别
 	$sql="select * from ".$DBPrefix."linkgroup where isSidebar='1' order by orderNo";
 	$result=$DMC->query($sql);
@@ -162,8 +162,8 @@ function links_recache() {
 			$result = $DMC->query("select * from ".$DBPrefix."links where lnkGrpId='$value[id]' and isSidebar=1 and isApp=1 order by orderNo");
 			$out_contents.="<div id=\"linksgroup_{$value['id']}\">{$value['name']}</div> \n";
 			$numrows=$DMC->numRows($result);
-			if ($settingInfo['linkmarquee']>0 && $settingInfo['linkmarquee']<$numrows){//出现滚动连接				
-			    $out_contents.="<marquee direction=\"up\" scrollamount=\"2\" style=\"width:100%;height:150px\" onMouseOver=\"this.stop()\" onMouseOut=\"this.start()\"> \n";
+			if ($settingInfo['linkmarquee']>0 && $settingInfo['linkmarquee']<$numrows){//出现滚动连接
+				$out_contents.="<marquee direction=\"up\" scrollamount=\"2\" style=\"width:100%;height:150px\" onMouseOver=\"this.stop()\" onMouseOut=\"this.start()\"> \n";
 			}
 			while ($my = $DMC->fetchArray($result)) {
 				//$show_content=($my[blogLogo]!="")?"<img src=\"$my[blogLogo]\" width=\"88px\" height=\"31px\" alt=\"\"> $my[name]":$my[name];
@@ -183,7 +183,7 @@ function links_recache() {
 
 			$result = $DMC->query("select * from ".$DBPrefix."links where lnkGrpId='$value[id]' and isSidebar=1 and isApp=1 order by orderNo");
 			$numrows=$DMC->numRows($result);
-			if ($settingInfo['linkmarquee']>0 && $settingInfo['linkmarquee']<$numrows){//出现滚动连接				
+			if ($settingInfo['linkmarquee']>0 && $settingInfo['linkmarquee']<$numrows){//出现滚动连接
 				$out_contents.="<marquee direction=\"up\" scrollamount=\"2\" style=\"width:100%;height:150px\" onMouseOver=\"this.stop()\" onMouseOut=\"this.start()\"> \n";
 			}
 			while ($my = $DMC->fetchArray($result)) {
@@ -208,11 +208,11 @@ function links_recache() {
 // 更新关键字
 function keywords_recache() {
 	global $DMC,$DBPrefix;
-	
+
 	$i=0;
 	$result = $DMC->query("select * from ".$DBPrefix."keywords order by id");
 	$contents = "\$keywordscache = array(\r\n";
-	while ($my = $DMC->fetchArray($result)) {		
+	while ($my = $DMC->fetchArray($result)) {
 		$contents.="\t'".$i."' => array(\n\t\t'id' => '".$my['id']."',\n\t\t'keyword' => '".$my['keyword']."',\n\t\t'linkUrl' => '".$my['linkUrl']."',\n\t\t'linkImage' => '".$my['linkImage']."',\n\t\t),\n";
 		$i++;
 	}
@@ -223,7 +223,7 @@ function keywords_recache() {
 // 更新会员列表
 function members_recache() {
 	global $DMC,$DBPrefix;
-	
+
 	$i=0;
 	$result = $DMC->query("select username,nickname from ".$DBPrefix."members where role!='member'");
 	$contents = "\$memberscache = array(\r\n";
@@ -239,7 +239,7 @@ function members_recache() {
 // 更新过滤器
 function filters_recache() {
 	global $DMC,$DBPrefix;
-	
+
 	$i=0;
 	$result = $DMC->query("select category from ".$DBPrefix."filters group by category order by category");
 	$arr_category = $DMC->fetchQueryAll($result);
@@ -249,7 +249,7 @@ function filters_recache() {
 		$result = $DMC->query("select * from ".$DBPrefix."filters where category='".$arr_category[$i]['category']."' order by id");
 		$j=0;
 		$contents .= "\$filtercache".$arr_category[$i]['category']." = array(\r\n";
-		while ($my = $DMC->fetchArray($result)) {		
+		while ($my = $DMC->fetchArray($result)) {
 			$contents.="\t'$j' => '".$my['name']."',\n";
 			$j++;
 		}
@@ -275,7 +275,7 @@ function online_recache(){
 // 更新模块设定值
 function modulesSetting_recache() {
 	global $DMC,$DBPrefix;
-	
+
 	$result = $DMC->query("select modId,name from ".$DBPrefix."modsetting as a inner join ".$DBPrefix."modules as b on a.modId=b.id group by modId order by modId");
 	$arr_modId = $DMC->fetchQueryAll($result);
 	$contents="";
@@ -283,7 +283,7 @@ function modulesSetting_recache() {
 		$result = $DMC->query("select KeyName,KeyValue from ".$DBPrefix."modsetting where modId='".$arr_modId[$i]['modId']."' order by id");
 		$j=0;
 		$contents .= "\$plugins_".$arr_modId[$i]['name']." = array(\r\n";
-		while ($my = $DMC->fetchArray($result)) {		
+		while ($my = $DMC->fetchArray($result)) {
 			$contents.="\t'".$my['KeyName']."' => '".$my['KeyValue']."',\n";
 			$j++;
 		}
@@ -295,7 +295,7 @@ function modulesSetting_recache() {
 // 更新模块
 function modules_recache() {
 	global $DMC,$DBPrefix;
-	
+
 	$query_sql="select id,name,modTitle from ".$DBPrefix."modules where disType='0' and isHidden='0' order by orderNo";
 	$query_result=$DMC->query($query_sql);
 	$arr_parent = $DMC->fetchQueryAll($query_result);
@@ -305,28 +305,28 @@ function modules_recache() {
 		$sub_result=$DMC->query($sub_sql);
 		$arr_sub[$i] = $DMC->fetchQueryAll($sub_result);
 	}
-	
+
 	//保存菜单
 	$sub_contents="";
 	$plugin_array_name=array();
 	for ($i=0;$i<count($arr_parent);$i++){
 		switch($i) {
 			case 0://顶部栏
-				$out_fields=array("modTitle","installDate","pluginPath","indexOnly");	
-				$sub_contents.= "\$arrTopModule = array(\r\n";
-				break;
+			$out_fields=array("modTitle","installDate","pluginPath","indexOnly");
+			$sub_contents.= "\$arrTopModule = array(\r\n";
+			break;
 			case 1://侧边栏
-				$out_fields=array("modTitle","htmlCode","isInstall","installDate","indexOnly");	
-				$sub_contents.= "\$arrSideModule = array(\r\n";
-				break;
+			$out_fields=array("modTitle","htmlCode","isInstall","installDate","indexOnly");
+			$sub_contents.= "\$arrSideModule = array(\r\n";
+			break;
 			case 2://主体栏
-				$out_fields=array("modTitle","installDate","indexOnly","htmlCode");	
-				$sub_contents.= "\$arrMainModule = array(\r\n";
-				break;
+			$out_fields=array("modTitle","installDate","indexOnly","htmlCode");
+			$sub_contents.= "\$arrMainModule = array(\r\n";
+			break;
 			case 3://功能栏
-				$out_fields=array("modTitle","installDate");	
-				$sub_contents.= "\$arrFuncModule = array(\r\n";
-				break;
+			$out_fields=array("modTitle","installDate");
+			$sub_contents.= "\$arrFuncModule = array(\r\n";
+			break;
 		}
 
 		for ($j=0;$j<count($arr_sub[$i]);$j++){
@@ -381,10 +381,10 @@ function logs_header_recache($arrTopModule){
 		}else{
 			$gourl="index.php?load=$topname";
 		}
-	
+
 		if (strpos($pluginPath,".inc.php")>0 || strpos($pluginPath,".big.php")>0){
 			$output.="<li><a class=\"menuA\" id=\"$topname\" title=\"$toptitle\" href=\"{$gourl}\">$toptitle</a></li> \n";
-		}else{			
+		}else{
 			if ($installDate>0){//表示为插件
 				ob_start();
 				echo '<?php do_filter("'.$topname.'","'.$topname.'","',$toptitle.'");'."?>\n";
@@ -409,7 +409,7 @@ function logs_sidebar_recache($arrSideModule){
 
 	foreach($arrSideModule as $key=>$value){
 		$indexOnly=$value['indexOnly'];
-		
+
 		if ($indexOnly==0) {
 			$arrReadModule[$key]=$value;
 		}
@@ -420,7 +420,7 @@ function logs_sidebar_recache($arrSideModule){
 	writetocache('logs_sidebar',$contents,"html");
 
 	ob_start();
-	foreach($arrReadModule as $key=>$value){	
+	foreach($arrReadModule as $key=>$value){
 		echo createSideFunc($value,$key);
 	}
 	$contents=str_replace("\r\n","",ob_get_contents());
@@ -441,7 +441,7 @@ function createSideFunc($value,$key) {
 		$installDate=empty($value['installDate'])?"":$value['installDate'];
 		$pluginPath=empty($value['pluginPath'])?"":$value['pluginPath'];
 		$isInstall=$value['isInstall'];
-		
+
 
 		if (in_array($sidename,array("statistics","category","guestbook","hotTags","recentlogs","recentComments","archives","links"))){
 			echo readfromfile(F2BLOG_ROOT."cache/cache_$sidename.php");
@@ -525,11 +525,11 @@ function createSideFunc($value,$key) {
 						echo "</form> \n";
 						break;
 					default://自定HTML代码
-						echo create_sidebar_header($sidename,$sidetitle,$isInstall);
-						echo htmldecode($htmlcode);
-						break;
+					echo create_sidebar_header($sidename,$sidetitle,$isInstall);
+					echo htmldecode($htmlcode);
+					break;
 				}
-				echo create_sidebar_footer();				
+				echo create_sidebar_footer();
 			}
 		}
 
@@ -543,7 +543,7 @@ function createSideFunc($value,$key) {
 // 附件
 function attachments_recache() {
 	global $DMC, $DBPrefix;
-	
+
 	$contents = "\$cacheattachments = array(\r\n";
 	$result = $DMC->query("select * from ".$DBPrefix."attachments order by id desc");
 	while ($my = $DMC->fetchArray($result)) {
@@ -563,7 +563,7 @@ function attachments_recache() {
 // 附件下载次数
 function download_recache() {
 	global $DMC, $DBPrefix;
-	
+
 	$contents = "\$cachedownload = array(\r\n";
 	$result = $DMC->query("select id,downloads from ".$DBPrefix."attachments order by id desc");
 	while ($my = $DMC->fetchArray($result)) {
@@ -578,7 +578,7 @@ function download_recache() {
 // 更新日志标题
 function logsTitle_recache() {
 	global $DMC, $DBPrefix;
-	
+
 	$result = $DMC->query("select *,a.id as id from ".$DBPrefix."logs as a inner join ".$DBPrefix."categories as b on a.cateId=b.id where saveType='1' order by postTime desc");
 	$contents = "\$logsTitlecache = array(";
 	while ($my = $DMC->fetchArray($result)) {
@@ -594,14 +594,14 @@ function logsTitle_recache() {
 // 更新最新日志
 function recentLogs_recache() {
 	global $DMC, $DBPrefix, $settingInfo,$strRecentLogs,$arrSideModule,$strSideBarAnd,$strHomePagePost;
-	
+
 	$out_contents=create_sidebar_header("NewLogForPJBlog",$arrSideModule["recentlogs"]["modTitle"],$arrSideModule["recentlogs"]["isInstall"]);
 
 	if ($settingInfo['rewrite']==0) $gourl="index.php?load=read&amp;id=";
 	if ($settingInfo['rewrite']==1) $gourl="rewrite.php/read-";
 	if ($settingInfo['rewrite']==2) $gourl="read-";
-	
-	
+
+
 	$i=0;
 	$maxlength=$settingInfo['sidelogslength'];
 	$result = $DMC->query("select a.postTime,b.nickname,a.author,a.id,a.logTitle from {$DBPrefix}logs as a left join {$DBPrefix}members as b on a.author=b.username where a.saveType='1' order by a.postTime desc Limit 0,$settingInfo[sidelogsPage]");
@@ -633,13 +633,13 @@ function recentLogs_recache() {
 // 更新最新评论
 function recentComments_recache() {
 	global $DMC,$DBPrefix,$strGuestBookHidden,$settingInfo,$strCommentsTitle,$arrSideModule,$strSideBarAnd;
-	
+
 	$out_contents=create_sidebar_header("Comment",$arrSideModule["recentComments"]["modTitle"],$arrSideModule["recentComments"]["isInstall"]);
 
 	if ($settingInfo['rewrite']==0) $gourl="index.php?load=read&amp;id=";
 	if ($settingInfo['rewrite']==1) $gourl="rewrite.php/read-";
 	if ($settingInfo['rewrite']==2) $gourl="read-";
-	
+
 	$i=0;
 	$maxlength=$settingInfo['sidecommentlength'];
 	$result = $DMC->query("select a.*,a.author as author,a.id as id,c.nickname from ".$DBPrefix."comments as a inner join ".$DBPrefix."logs as b on a.logId=b.id left join {$DBPrefix}members as c on a.author=c.username where b.saveType=1 order by a.postTime desc Limit 0,$settingInfo[commPage]");
@@ -675,7 +675,7 @@ function recentComments_recache() {
 // 更新最新留言
 function recentGbooks_recache() {
 	global $DMC,$DBPrefix,$strGuestBookHidden,$settingInfo,$strSideBarAnd,$strSideBarGuestBook,$strRecentGBook,$arrSideModule;
-	
+
 	$out_contents=create_sidebar_header("GuestBookForPJBlogSubItem1",$arrSideModule["guestbook"]["modTitle"],$arrSideModule["guestbook"]["isInstall"]);
 
 	if ($settingInfo['rewrite']==0) $gourl="index.php?load=guestbook";
@@ -684,37 +684,37 @@ function recentGbooks_recache() {
 
 	$i=0;
 	$maxlength=$settingInfo['sidegbooklength'];
-	
-	
+
+
 	//$result = $DMC->query("select a.id,a.content,a.author,a.postTime,b.nickname,a.isSecret from {$DBPrefix}guestbook as a left join {$DBPrefix}members as b on a.author=b.username order by postTime desc Limit 0,$settingInfo[gbookPage]");
-	
+
 	/* spam 過濾器強化	*/
 	switch (trim($settingInfo['spamfilter'])){
 		//	新增留言，但不顯示 加入 spam 記號
 		case "close":
-				
+
 			$sql="select a.id,a.content,a.author,a.postTime,b.nickname,a.isSecret ";
 			$sql.=" from {$DBPrefix}guestbook as a left join {$DBPrefix}members as b on a.author=b.username";
 			$sql.=" where isSpam='0' order by postTime desc Limit 0,$settingInfo[gbookPage]";
-				
-		break;
-			
-		//	新增留言，顯示為隱藏 加入 spam 記號
+
+			break;
+
+			//	新增留言，顯示為隱藏 加入 spam 記號
 		case "hidden":
 		case "default":
 		default:
-				
+
 			$sql="select a.id,a.content,a.author,a.postTime,b.nickname";
 			$sql.=",IF(a.isSpam=1,1,a.isSecret) as isSecret";
 			$sql.=" from {$DBPrefix}guestbook as a left join {$DBPrefix}members as b on a.author=b.username";
 			$sql.=" order by postTime desc Limit 0,$settingInfo[gbookPage]";
-				
-		break;
+
+			break;
 	}
-	
+
 	$result = $DMC->query($sql);
-	
-	
+
+
 	while ($my = $DMC->fetchArray($result)) {
 		$author=($my['nickname']!="")?$my['nickname']:$my['author'];
 		if ($my['isSecret']){
@@ -748,7 +748,7 @@ function recentGbooks_recache() {
 // 更新归档
 function archives_recache() {
 	global $DMC,$DBPrefix,$settingInfo,$strYear,$strMonth,$strArchives,$arrSideModule;
-	
+
 	$archives = $DMC->query("SELECT postTime FROM ".$DBPrefix."logs where saveType='1' ORDER BY postTime DESC");
 	$articledb = array();
 	while ($article = $DMC->fetchArray($archives)) {
@@ -782,7 +782,7 @@ function archives_recache() {
 // 更新热门标签
 function hottags_recache() {
 	global $DMC,$DBPrefix,$settingInfo,$strTagsCount,$strHotTags,$arrSideModule;
-	
+
 	//取得标签数量
 	$arr_result=$DMC->fetchArray($DMC->query("select count(id) as count from ".$DBPrefix."tags"));
 	$tags_count=$arr_result['count'];
@@ -794,7 +794,7 @@ function hottags_recache() {
 		$limit=$tags_count;
 	}
 	if ($limit<1) $limit=50;
-	
+
 	//保存标签最大最小数
 	$arr_result=$DMC->fetchArray($DMC->query("select max(logNums) as max,min(logNums) as min from ".$DBPrefix."tags"));
 	if ($arr_result['max']=="") $arr_result['max']=0;
@@ -831,7 +831,7 @@ function statistics_recache(){
 	global $DMC,$DBPrefix,$settingInfo,$arrSideModule;
 	global $strStatisticsCategory,$strStatisticsLogs,$strStatisticsComments,$strStatisticsTags,$strStatisticsAttachments,$strStatisticsGuestbook;
 	global $strStatisticsQuote,$strStatisticsUser,$strStatisticsToday,$strStatisticsYesterday,$strStatisticsTotal,$strStatisticsOnline;
-	
+
 	$output=array();
 	if ($settingInfo['showtoday']==1)	$output[]="$strStatisticsToday: <?php echo \$cache_visits_today?>";
 	if ($settingInfo['showyester']==1) $output[]="$strStatisticsYesterday: <?php echo \$cache_visits_yesterday?>";
@@ -932,7 +932,7 @@ function create_sidebar_footer(){
 // 更新评论的数量到日志中
 function totalComments_recache() {
 	global $DMC,$DBPrefix;
-	
+
 	$result = $DMC->query("select count(id) as commNums,logId from ".$DBPrefix."comments group by logId order by logId");
 	$arr_result=$DMC->fetchQueryAll($result);
 	foreach ($arr_result as $key=>$value){
@@ -947,9 +947,9 @@ function totalComments_recache() {
 //更新数量
 function settings_recount($fields="") {
 	global $DMC,$DBPrefix;
-	
+
 	$arrTotal=array("logs"=>"where saveType='1'","comments"=>"","trackbacks"=>"","guestbook"=>"","members"=>"where role='member'","attachments"=>"","tags"=>"","categories"=>"where isHidden='0'");
-	
+
 	if ($fields!=""){ //更新某个字段
 		$sql="select count(id) as v_total from ".$DBPrefix.$fields." ".$arrTotal[$fields];
 		$arr_result=$DMC->fetchArray($DMC->query($sql));
@@ -971,7 +971,7 @@ function settings_recount($fields="") {
 function reAllCache() {
 	global $arrSideModule;
 	categories_recount();
-	categories_recache();	
+	categories_recache();
 	calendar_recache();
 	statistics_recache();
 	hottags_recache();

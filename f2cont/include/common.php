@@ -10,7 +10,7 @@ $starttime = $mtime[0] + $mtime[1];
 //网志常量
 define('IN_F2BLOG', TRUE);
 define('F2BLOG_ROOT', substr(dirname(__FILE__), 0, -7));
-define("blogVersion",".cont 1.0 build 11.30");
+define("blogVersion",".cont 1.0 build 060624");
 define("blogUpdateDate","2007-03-01");
 define("blogCopyright","CopyRight 2008 F2Blog.com|F2Cont.com All Rights Reserved.");
 define("blogKeywords","f2blog,f2cont");
