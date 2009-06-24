@@ -3,16 +3,16 @@
 $DBHost = 'localhost';
 
 /********** 数据库用户名 **********/
-$DBUser = 'f2cont_blog';
+$DBUser = '';
 
 /********** 数据库密码 **********/
-$DBPass = 'js4zXRX8fGnHRH9K';
+$DBPass = '';
 
 /********** 数据库名 **********/
-$DBName = 'f2cont_blog';
+$DBName = '';
 
 /********** 数据表前缀 **********/
-$DBPrefix = 'f2cont_';
+$DBPrefix = 'f2blog_';
 
 /********** 是否总是打开新的连接 **********/
 $DBNewlink = 'false';
