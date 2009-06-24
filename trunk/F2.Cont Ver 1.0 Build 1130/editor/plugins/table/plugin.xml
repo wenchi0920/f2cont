@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PluginSet>
+ <PluginName>table</PluginName>
+ <PluginVersion>1.38</PluginVersion>
+ <FunctionName>tablecontrols</FunctionName>
+ <FunctionImage>buttons.gif</FunctionImage>
+ <FunctionDesc>插入表格控件菜单组</FunctionDesc>
+ <PluginAuthor>Moxiecode</PluginAuthor>
+ <pubDate>2006-11-15</pubDate>
+ <AuthorURL>http://tinymce.moxiecode.com/tinymce/docs/plugin_table.html</AuthorURL>
+ <AuthorMail>joesenhong@yahoo.com.cn</AuthorMail>
+</PluginSet>
