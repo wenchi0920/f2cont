@@ -10,8 +10,9 @@ CREATE TABLE `f2blog_attachments` (
   `downloads` int(5) NOT NULL default '0',
   `postTime` int(10) NOT NULL default '0',
   PRIMARY KEY  (`id`),
-  KEY `logId` (`logId`)
-) ENGINE=MyISAM;
+  KEY `logId` (`logId`),
+  KEY `name` (`name`)
+) ;
 
 CREATE TABLE `f2blog_categories` (
   `id` int(3) NOT NULL auto_increment,
@@ -25,7 +26,7 @@ CREATE TABLE `f2blog_categories` (
   `cateIcons` tinyint(4) NOT NULL default '1',
   PRIMARY KEY  (`id`),
   KEY `parent` (`parent`,`name`,`cateTitle`)
-) ENGINE=MyISAM;
+) ;
 
 CREATE TABLE `f2blog_comments` (
   `id` int(9) NOT NULL auto_increment,
@@ -42,7 +43,7 @@ CREATE TABLE `f2blog_comments` (
   `isSecret` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `logId` (`logId`,`parent`)
-) ENGINE=MyISAM;
+) ;
 
 CREATE TABLE `f2blog_dailystatistics` (
   `id` int(8) NOT NULL auto_increment,
@@ -50,14 +51,14 @@ CREATE TABLE `f2blog_dailystatistics` (
   `visits` int(10) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `visitDate` (`visitDate`)
-) ENGINE=MyISAM;
+) ;
 
 CREATE TABLE `f2blog_filters` (
   `id` int(3) NOT NULL auto_increment,
   `category` tinyint(1) NOT NULL default '0',
   `name` varchar(50) NOT NULL default '',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM;
+) ;
 
 CREATE TABLE `f2blog_guestbook` (
   `id` int(8) NOT NULL auto_increment,
@@ -70,9 +71,11 @@ CREATE TABLE `f2blog_guestbook` (
   `content` mediumtext NOT NULL,
   `postTime` int(10) NOT NULL default '0',
   `isSecret` tinyint(1) NOT NULL default '0',
+  `isSpam` smallint(1) NOT NULL default '0',
   `parent` int(11) NOT NULL default '0',
+  `HTTP_REFERER` text,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM;
+) ;
 
 CREATE TABLE `f2blog_keywords` (
   `id` int(5) NOT NULL auto_increment,
@@ -81,7 +84,7 @@ CREATE TABLE `f2blog_keywords` (
   `linkImage` varchar(250) NOT NULL default '',
   PRIMARY KEY  (`id`),
   KEY `keyword` (`keyword`)
-) ENGINE=MyISAM;
+) ;
 
 CREATE TABLE `f2blog_linkgroup` (
   `id` int(3) NOT NULL auto_increment,
@@ -90,7 +93,7 @@ CREATE TABLE `f2blog_linkgroup` (
   `orderNo` int(5) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `name` (`name`)
-) ENGINE=MyISAM;
+) ;
 
 CREATE TABLE `f2blog_links` (
   `id` int(11) NOT NULL auto_increment,
@@ -101,8 +104,9 @@ CREATE TABLE `f2blog_links` (
   `orderNo` int(3) NOT NULL default '0',
   `isSidebar` tinyint(1) NOT NULL default '0',
   `isApp` tinyint(1) NOT NULL default '0',
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM;
+  PRIMARY KEY  (`id`),
+  KEY `isApp` (`isApp`)
+) ;
 
 CREATE TABLE `f2blog_logs` (
   `id` int(12) NOT NULL auto_increment,
@@ -117,7 +121,9 @@ CREATE TABLE `f2blog_logs` (
   `quoteNums` int(3) NOT NULL default '0',
   `isComment` tinyint(1) NOT NULL default '0',
   `isTrackback` tinyint(1) NOT NULL default '0',
+  `isSpam` tinyint(1) NOT NULL default '0',
   `isTop` tinyint(1) NOT NULL default '0',
+  `isTopNews` tinyint(1) NOT NULL default '0',
   `weather` varchar(10) NOT NULL default '',
   `saveType` tinyint(1) NOT NULL default '0',
   `markNums` int(8) NOT NULL default '0',
@@ -126,8 +132,10 @@ CREATE TABLE `f2blog_logs` (
   `logsediter` char(4) NOT NULL default 'tiny',
   `autoSplit` int(8) NOT NULL default '0',
   PRIMARY KEY  (`id`),
-  KEY `cateId` (`cateId`,`logTitle`,`tags`)
-) ENGINE=MyISAM;
+  KEY `cateId` (`cateId`,`logTitle`,`tags`),
+  KEY `postTime` (`postTime`,`saveType`),
+  KEY `isComment` (`isComment`,`isTrackback`,`isTop`,`isTopNews`)
+) ;
 
 CREATE TABLE `f2blog_members` (
   `id` int(5) NOT NULL auto_increment,
@@ -149,8 +157,10 @@ CREATE TABLE `f2blog_members` (
   `hashKey` varchar(50) NOT NULL default '',
   PRIMARY KEY  (`id`),
   KEY `username` (`username`),
-  KEY `nickname` (`nickname`)
-) ENGINE=MyISAM;
+  KEY `nickname` (`nickname`),
+  KEY `password` (`password`),
+  KEY `role` (`role`)
+) ;
 
 CREATE TABLE `f2blog_modsetting` (
   `id` int(8) NOT NULL auto_increment,
@@ -159,7 +169,7 @@ CREATE TABLE `f2blog_modsetting` (
   `keyValue` text NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `modId` (`modId`)
-) ENGINE=MyISAM;
+) ;
 
 CREATE TABLE `f2blog_modules` (
   `id` int(3) NOT NULL auto_increment,
@@ -180,13 +190,14 @@ CREATE TABLE `f2blog_modules` (
   `configPath` varchar(60) NOT NULL default '',
   PRIMARY KEY  (`id`),
   KEY `name` (`name`,`modTitle`,`disType`)
-) ENGINE=MyISAM;
+) ;
 
 CREATE TABLE `f2blog_setting` (
-  `settName` varchar(30) NOT NULL,
+  `settName` varchar(30) NOT NULL default '',
   `settValue` text NOT NULL,
-  `settAuto` tinyint(1) NOT NULL default '0'
-) ENGINE=MyISAM;
+  `settAuto` tinyint(1) NOT NULL default '0',
+  KEY `settName` (`settName`)
+) ;
 
 CREATE TABLE `f2blog_tags` (
   `id` int(3) NOT NULL auto_increment,
@@ -194,7 +205,16 @@ CREATE TABLE `f2blog_tags` (
   `logNums` int(8) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `name` (`name`)
-) ENGINE=MyISAM;
+) ;
+
+CREATE TABLE `f2blog_tbsession` (
+  `id` int(11) NOT NULL auto_increment,
+  `extra` varchar(50) NOT NULL default '',
+  `tbDate` int(11) NOT NULL default '0',
+  `logId` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ;
+
 
 CREATE TABLE `f2blog_trackbacks` (
   `id` int(8) NOT NULL auto_increment,
@@ -207,27 +227,6 @@ CREATE TABLE `f2blog_trackbacks` (
   `isApp` tinyint(4) NOT NULL default '0',
   `ip` varchar(30) NOT NULL default '',
   PRIMARY KEY  (`id`),
-  KEY `logId` (`logId`)
-) ENGINE=MyISAM;
-
-CREATE TABLE `f2blog_tbsession` (
-  `id` int(11) NOT NULL auto_increment,
-  `extra` varchar(50) NOT NULL default '',
-  `tbDate` int(11) NOT NULL default '0',
-  `logId` int(11) NOT NULL default '0',
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM;
-
-
-ALTER TABLE `f2blog_attachments` ADD INDEX `name` (`name`);
-ALTER TABLE `f2blog_guestbook` ADD COLUMN `HTTP_REFERER` text NULL DEFAULT NULL AFTER `parent`;
-ALTER TABLE `f2blog_links` ADD INDEX `isApp` (`isApp`);
-ALTER TABLE `f2blog_logs` ADD COLUMN `isTopNews` tinyint(1) NOT NULL DEFAULT 0 AFTER `isTop`;
-ALTER TABLE `f2blog_logs` ADD INDEX `postTime` (`postTime`,`saveType`);
-ALTER TABLE `f2blog_logs` ADD INDEX `isComment` (`isComment`,`isTrackback`,`isTop`,`isTopNews`);
-ALTER TABLE `f2blog_members` ADD INDEX `password` (`password`);
-ALTER TABLE `f2blog_members` ADD INDEX `role` (`role`);
-ALTER TABLE `f2blog_setting` ADD INDEX `settName` (`settName`);
-ALTER TABLE `f2blog_trackbacks` ADD INDEX `isApp` (`isApp`);
-ALTER TABLE `f2blog_logs` ADD `autoSplit` int(8) NOT NULL default '0';
-
+  KEY `logId` (`logId`),
+  KEY `isApp` (`isApp`)
+) ;

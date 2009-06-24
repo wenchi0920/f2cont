@@ -15,9 +15,9 @@
 		程序維護 By <a href="http://blog.phptw.idv.tw" target="_blank"><strong>墮落程式</strong></a>
 		Design by <a href="mailto:<?php echo $getDefaultSkinInfo['DesignerMail']?>"><?php echo $getDefaultSkinInfo['SkinDesigner']?></a> Skin from <?php echo $getDefaultSkinInfo['SkinSource']?>
 		<?php 
-		if ($settingInfo['about']!="") {
+		/*if ($settingInfo['about']!="") {
 			echo "<a href=\"http://www.miibeian.gov.cn\" target=\"_blank\">".$settingInfo['about']."</a>";
-		}
+		}*/
 
 		if ($settingInfo['footcode']!=""){
 			echo htmldecode($settingInfo['footcode']);
@@ -47,13 +47,6 @@ dp.SyntaxHighlighter.ClipboardSwf = 'SyntaxHighlighter/js/clipboard.swf';
 dp.SyntaxHighlighter.HighlightAll('code');
 </script>
 
-<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
-</script>
-<script type="text/javascript">
-try {
-_uacct = "UA-6325679-1";
-urchinTracker();
-} catch(err) {}</script>
 </body>
 </html>
 <?php 
