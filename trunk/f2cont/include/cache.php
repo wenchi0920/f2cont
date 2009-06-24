@@ -644,6 +644,18 @@ function recentComments_recache() {
 	$maxlength=$settingInfo['sidecommentlength'];
 	$result = $DMC->query("select a.*,a.author as author,a.id as id,c.nickname from ".$DBPrefix."comments as a inner join ".$DBPrefix."logs as b on a.logId=b.id left join {$DBPrefix}members as c on a.author=c.username where b.saveType=1 order by a.postTime desc Limit 0,$settingInfo[commPage]");
 	while ($my = $DMC->fetchArray($result)) {
+		$sql = "select s3.* from (select count(*),s1.logId,s1.id from (select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' order by postTime asc) s1,(select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' order by postTime asc) s2 where s1.id > s2.id group by s1.id) s3 where s3.id={$my['id']}";
+		$n = $DMC->fetchArray($DMC->query($sql));
+		if ($n['count(*)']==0){
+			$sql = "select logId,id from {$DBPrefix}comments where parent={$my['id']}";
+			$n = $DMC->fetchArray($DMC->query($sql));
+			$sql = "select s3.* from (select count(*),s1.logId,s1.id from (select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' order by postTime asc) s1,(select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' order by postTime asc) s2 where s1.id > s2.id group by s1.id) s3 where s3.id={$my['parent']}";
+			$n = $DMC->fetchArray($DMC->query($sql));
+		}
+		$page = ($n['count(*)']-$n['count(*)']%$settingInfo['logscomment'])/$settingInfo['logscomment']+1;
+
+		if ($settingInfo['rewrite']==0) $page=($page==1)?"":"&page=".$page;
+		if ($settingInfo['rewrite']==2 || $settingInfo['rewrite']==1) $page=($page==1)?"":"-".$page;
 		if ($my['isSecret']){
 			$content=$strGuestBookHidden;
 			$my['content']=$strGuestBookHidden;
@@ -664,7 +676,7 @@ function recentComments_recache() {
 		$show_content=str_replace("!##_#_###_###_##!","{",$show_content);
 		$show_content=str_replace("!##_###_###_##_#!","}",$show_content);
 
-		$out_contents.="	<a class=\"sideA\" id=\"comments_Link_".$my['id']."\" title=\"".$author." $strSideBarAnd ".format_time("L",$my['postTime'])." $strCommentsTitle \r\n".$my['content']."\"  href=\"$gourl".$my['logId']."{$settingInfo['stype']}#book".$my['id']."\">".$show_content."</a> \r\n";
+		$out_contents.="        <a class=\"sideA\" id=\"comments_Link_".$my['id']."\" title=\"".$author." $strSideBarAnd ".format_time("L",$my['postTime'])." $strCommentsTitle \r\n".$my['content']."\"  href=\"$gourl".$my['logId'].$page."{$settingInfo['stype']}#book".$my['id']."\">".$show_content."</a> \r\n";
 		$i++;
 	}
 	$out_contents.=create_sidebar_footer();
