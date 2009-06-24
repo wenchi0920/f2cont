@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<editor>
+	<EditorName>tiny</EditorName>
+	<EditorDecription>TinyEditor</EditorDecription>
+	<EditorPath>editor/editor.php</EditorPath>
+	<EditorCode>tiny</EditorCode>
+</editor>
