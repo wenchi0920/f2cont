@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PluginSet>
+ <PluginName>f2audio</PluginName>
+ <PluginVersion>1.1</PluginVersion>
+ <FunctionName>f2_audio</FunctionName>
+ <FunctionImage>audio.gif</FunctionImage>
+ <FunctionDesc>插入Mp3</FunctionDesc>
+ <PluginAuthor>Momo</PluginAuthor>
+ <pubDate>2006-8-26</pubDate>
+ <AuthorURL></AuthorURL>
+ <AuthorMail>gamecubegood@yahoo.com.tw</AuthorMail>
+</PluginSet>

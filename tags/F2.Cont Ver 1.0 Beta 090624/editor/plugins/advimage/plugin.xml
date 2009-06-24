@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PluginSet>
+ <PluginName>advimage</PluginName>
+ <PluginVersion>1.24</PluginVersion>
+ <FunctionName></FunctionName>
+ <FunctionImage></FunctionImage>
+ <FunctionDesc>插入图片且可进行高级设置</FunctionDesc>
+ <PluginAuthor>Moxiecode Systems</PluginAuthor>
+ <pubDate>2006-2-10</pubDate>
+ <AuthorURL>http://tinymce.moxiecode.com/tinymce/docs/plugin_flash.html</AuthorURL>
+ <AuthorMail>joesenhong@yahoo.com.cn</AuthorMail>
+</PluginSet>
