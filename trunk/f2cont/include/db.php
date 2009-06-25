@@ -10,8 +10,10 @@ class F2MysqlClass {
 	var $querycount = 0;
 	
 	var $_fp=false;
+	
+	var $_debug=false;
 
-	function F2MysqlClass($DBHost, $DBUser, $DBPswd, $DBName,$DBNewlink="false") {
+	function F2MysqlClass($DBHost, $DBUser, $DBPswd, $DBName,$DBNewlink="false",$debug) {
 		if($DBNewlink=="true") {
 			if(!mysql_pconnect($DBHost, $DBUser, $DBPswd)) {
 				$this->halt("Don't connect to database!");
@@ -34,7 +36,10 @@ class F2MysqlClass {
 			$this->selectDB($DBName);
 		}
 		
-		$this->_fp=fopen(F2BLOG_ROOT."./cache/".date("Ymd").".log","a");
+		if ($debug) {
+			$this->_debug=$debug;
+			$this->_fp=fopen(F2BLOG_ROOT."./cache/".date("Ymd").".log","a");
+		}
 		
 	}
 
@@ -67,7 +72,7 @@ class F2MysqlClass {
 			$this->halt('MySQL Query Error', $sql);
 		}
 		
-		//fputs($this->_fp,date("Ymd H:i:s")." MySQL Query Log : ".$sql."\n");
+		if ($this->_debug) fputs($this->_fp,date("Ymd H:i:s")." MySQL Query Log : ".$sql."\n");
 		$this->querycount++;
 		//echo "<font color=red>".$this->querycount."</font>$sql<br>";
 		return $query;
