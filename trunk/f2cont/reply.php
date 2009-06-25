@@ -104,17 +104,17 @@ if (!empty($_GET['action']) && $_GET['action']=="save"){
 		//	不新增留言
 		case "delete":
 			//$intSpamFiler=0;
-			if ($check_info && !$isSpam) guestBookPost(0,0);
+			if ($check_info && !$isSpam) guestBookPost($postid,$id,0,0,$gourl,$arrSideModule,$settingInfo);
 		break;
 		
 		//	新增留言，但不顯示 加入 spam 記號
 		case "close":
 			if ($isSpam==1) {
-				guestBookPost(1,0);
+				guestBookPost($postid,$id,1,0,$gourl,$arrSideModule,$settingInfo);
 				$ActionMessage="";
 			}
 			elseif ($check_info){
-				guestBookPost(0,0);
+				guestBookPost($postid,$id,0,0,$gourl,$arrSideModule,$settingInfo);
 			}
 		break;
 		
@@ -124,11 +124,11 @@ if (!empty($_GET['action']) && $_GET['action']=="save"){
 		default:
 			
 			if ($isSpam==1) {
-				guestBookPost(1,0);
+				guestBookPost($postid,$id,1,0,$gourl,$arrSideModule,$settingInfo);
 				$ActionMessage="";
 			}
 			elseif ($check_info){
-				guestBookPost(0,0);
+				guestBookPost($postid,$id,0,0,$gourl,$arrSideModule,$settingInfo);
 			}
 			
 		break;
@@ -207,9 +207,9 @@ if (!empty($_GET['action']) && $_GET['action']=="save"){
 	
 }
 
-function guestBookPost($intSpamFiler,$intIsSecret){
+function guestBookPost($postid,$id,$intSpamFiler,$intIsSecret,$gourl,$arrSideModule,$settingInfo){
 	
-	global $DMC,$DBPrefix,$arrSideModule,$settingInfo;
+	global $DMC,$DBPrefix;
 
 	$_POST['isSecret']=(isset($_POST['isSecret']))?$_POST['isSecret']:0;
 	$author=(isset($_POST['username']))?$_POST['username']:$_SESSION['username'];
