@@ -67,7 +67,7 @@ class F2MysqlClass {
 			$this->halt('MySQL Query Error', $sql);
 		}
 		
-		fputs($this->_fp,date("Ymd H:i:s")." MySQL Query Log : ".$sql."\n");
+		//fputs($this->_fp,date("Ymd H:i:s")." MySQL Query Log : ".$sql."\n");
 		$this->querycount++;
 		//echo "<font color=red>".$this->querycount."</font>$sql<br>";
 		return $query;
