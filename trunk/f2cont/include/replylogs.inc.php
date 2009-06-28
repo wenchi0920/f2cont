@@ -101,17 +101,17 @@ if ($action=="save" && $allow_reply){
 		//	不新增留言
 		case "delete":
 			//$intSpamFiler=0;
-			if ($check_info && !$isSpam) guestBookPost(0,0);
+			if ($check_info && !$isSpam) guestBookPost($id,0,0,$settingInfo,$gourl);
 		break;
 		
 		//	新增留言，但不顯示 加入 spam 記號
 		case "close":
 			if ($isSpam==1) {
-				guestBookPost(1,0);
+				guestBookPost($id,1,0,$settingInfo,$gourl);
 				$ActionMessage="";
 			}
 			elseif ($check_info){
-				guestBookPost(0,0);
+				guestBookPost($id,0,0,$settingInfo,$gourl);
 			}
 		break;
 		
@@ -121,11 +121,11 @@ if ($action=="save" && $allow_reply){
 		default:
 			
 			if ($isSpam==1) {
-				guestBookPost(1,0);
+				guestBookPost($id,1,0,$settingInfo,$gourl);
 				$ActionMessage="";
 			}
 			elseif ($check_info){
-				guestBookPost(0,0);
+				guestBookPost($id,0,0,$settingInfo,$gourl);
 			}
 			
 		break;
@@ -177,7 +177,8 @@ if ($action=="save" && $allow_reply){
 	
 }
 
-function guestBookPost($intSpamFiler,$intIsSecret){
+//	$gourl)."$settingInfo[stype]");
+function guestBookPost($id,$intSpamFiler,$intIsSecret,$settingInfo,$gourl){
 	
 	global $DMC,$DBPrefix,$arrSideModule;
 	
