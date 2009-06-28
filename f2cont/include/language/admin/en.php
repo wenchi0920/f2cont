@@ -710,4 +710,14 @@ $strAjaxMediaStatus="Media Player";
 
 $strSettingSpamFiler="SPAM Rule";
 $strSpamTrash="SPAM ";
+
+$strAboutF2Cont = "About F2Cont";
+$strF2ContZhao4 = "3. Promoter: Spread and popularize F2Cont";
+$strF2ContLinks = "F2Cont useful links";
+$strF2ContLinks = "F2Cont useful links";
+
+$strF2ContLinkDesc1 = "F2Cont official website";
+$strF2ContLinkDesc2 = "F2Cont official forum";
+
+
 ?>

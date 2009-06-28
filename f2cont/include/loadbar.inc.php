@@ -1,6 +1,6 @@
 <?php 
 //装载主体页面内容
-if (!defined('IN_F2BLOG')) die ('Access Denied.');
+if (!defined('IN_F2CONT')) die ('Access Denied.');
 
 $load=(empty($_GET['load']))?"":$_GET['load'];
 if (preg_match("/http|:|\.|\/| |\\\/i",$load)) {
@@ -59,10 +59,10 @@ switch ($load){
 }
 
 //留言本和评论时装载cache.php
-if ($load=="guestbook" || $load=="read") include_once(F2BLOG_ROOT."./include/cache.php");
+if ($load=="guestbook" || $load=="read") include_once(F2CONT_ROOT."./include/cache.php");
 
 //装载会员表
-if ($load=="" || $load=="read") include_once(F2BLOG_ROOT."./cache/cache_members.php");
+if ($load=="" || $load=="read") include_once(F2CONT_ROOT."./cache/cache_members.php");
 
 if (!isset($base_rewrite)) $base_rewrite="";
 ?>

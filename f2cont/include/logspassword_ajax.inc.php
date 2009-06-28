@@ -1,5 +1,5 @@
 <?php 
-if (!defined('IN_F2BLOG')) die ('Access Denied.');
+if (!defined('IN_F2CONT')) die ('Access Denied.');
 
 $logId=intval($_POST['logId']);
 
@@ -16,8 +16,8 @@ $sql="select id,password,logContent,logsediter from ".$DBPrefix."logs where save
 $fa=$DMC->fetchArray($DMC->query($sql));
 if ((strpos(";".$_SESSION['logpassword'],$fa['password'])>0)){
 	echo "logcontent_".$logId."+|*+|+*|+";
-	if ($settingInfo['isHtmlPage']==1 && file_exists(F2BLOG_ROOT."./cache/html/".$fa['id'].".html")) {
-		include(F2BLOG_ROOT."./cache/html/".$fa['id'].".html");
+	if ($settingInfo['isHtmlPage']==1 && file_exists(F2CONT_ROOT."./cache/html/".$fa['id'].".html")) {
+		include(F2CONT_ROOT."./cache/html/".$fa['id'].".html");
 	}else{
 		$content=formatBlogContent($fa['logContent'],1,$fa['id']);
 		if ($fa['logsediter']=="ubb") $content=nl2br($content);

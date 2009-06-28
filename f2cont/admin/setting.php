@@ -76,8 +76,8 @@ if (isset($_GET['update']) && $_GET['update']=="ok"){
 
 //删除图片
 if (isset($_GET['delete']) && $_GET['delete']!=""){
-	if (file_exists(F2BLOG_ROOT."attachments/{$_GET['delete']}")){
-		@unlink(F2BLOG_ROOT."attachments/{$_GET['delete']}");
+	if (file_exists(F2CONT_ROOT."attachments/{$_GET['delete']}")){
+		@unlink(F2CONT_ROOT."attachments/{$_GET['delete']}");
 	}
 	$DMC->query("update ".$DBPrefix."setting set settValue='' where settName='{$_GET['delete']}'") or die(mysql_error());
 	settings_recache();
@@ -168,7 +168,7 @@ if ($action=="save"){
 </IfModule>
 eot;
 
-			$fp = fopen(F2BLOG_ROOT."./cache/.htaccess", 'wbt');
+			$fp = fopen(F2CONT_ROOT."./cache/.htaccess", 'wbt');
 			fwrite($fp, $data);
 			fclose($fp);
 		}

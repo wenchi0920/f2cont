@@ -1,5 +1,5 @@
 <?php 
-if (!defined('IN_F2BLOG')) die ('Access Denied.');
+if (!defined('IN_F2CONT')) die ('Access Denied.');
 ?>
 <div id="menuhead">
 	<div id="logo">&nbsp;<img src="themes/<?php echo $settingInfo['adminstyle']?>/logo1.gif" alt=""></div>
@@ -16,8 +16,8 @@ if ($DMC->fetchArray($DMC->query("select * from ".$DBPrefix."links where isApp='
 }else{
 	$menulink=array("control.php","categories.php","logs.php","links.php","users.php","skins.php","filters.php","cache.php");
 }
-$submenuTitle[0]=array($strControlPanel,$strSettingBlogs,$strSettingSideBar,$strSettingContent,$strSettingSideCalendarSet,$strOtherSetting,$strServerInfo,$strCheckUpdate,$strForumData,$strAboutF2Blog);
-$submenuLink[0]=array("control.php","setting.php?set=1","setting.php?set=2","setting.php?set=3","setting.php?set=4","setting.php?set=5","sysinfo.php","checkupdate.php","myforum.php","about.php");
+$submenuTitle[0]=array($strControlPanel,$strSettingBlogs,$strSettingSideBar,$strSettingContent,$strSettingSideCalendarSet,$strOtherSetting,$strServerInfo,$strCheckUpdate,$strForumData,$strAboutF2Cont,$strAboutF2Blog);
+$submenuLink[0]=array("control.php","setting.php?set=1","setting.php?set=2","setting.php?set=3","setting.php?set=4","setting.php?set=5","sysinfo.php","checkupdate.php","myforum.php","about.php","f2blog.php");
 $submenuTitle[1]=array($strCategory,$strTag);
 $submenuLink[1]=array("categories.php","tags.php");
 $submenuTitle[2]=array($strLogBrowse,$strLogNew,$strCommentBrowse,$strTrackbackBrowse,$strGuestBookBrowse);
@@ -37,9 +37,9 @@ $submenuLink[7]=array("cache.php","attachments.php","db_backup.php","db_restore.
 $mainRoleAdmin=array("1","1","1","1","1","1","1","1");
 $mainRoleEditor=array("1","1","1","1","0","0","1","0");
 $mainRoleAuthor=array("1","0","1","0","0","0","0","0");
-$subRoleAdmin=array("1,1,1,1,1,1,1,1,1,1","1,1","1,1,1,1,1","1,1,1,1","1,1,1","1,1,1","1,1,1,1","1,1,1,1,1,1,1");
-$subRoleEditor=array("1,0,0,0,0,0,0,1,1,1","1,1","1,1,1,1,1","1,1,1,1","0,0,0","0,0,0","1,1,1,0","0,0,0,0,0,0,0");
-$subRoleAuthor=array("1,0,0,0,0,0,0,1,1,1","0,0","1,1,0,0,0","0,0,0,0","0,0,0","0,0,0","0,0,0,0","0,0,0,0,0,0,0");
+$subRoleAdmin=array("1,1,1,1,1,1,1,1,1,1,1","1,1","1,1,1,1,1","1,1,1,1","1,1,1","1,1,1","1,1,1,1","1,1,1,1,1,1,1");
+$subRoleEditor=array("1,0,0,0,0,0,0,1,1,1,1","1,1","1,1,1,1,1","1,1,1,1","0,0,0","0,0,0","1,1,1,0","0,0,0,0,0,0,0");
+$subRoleAuthor=array("1,0,0,0,0,0,0,1,1,1,1","0,0","1,1,0,0,0","0,0,0,0","0,0,0","0,0,0","0,0,0,0","0,0,0,0,0,0,0");
 
 
 if ($_SESSION['rights']=="admin") {

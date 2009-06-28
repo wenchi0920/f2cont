@@ -1,5 +1,5 @@
 <?php 
-if (!defined('IN_F2BLOG')) die ('Access Denied.');
+if (!defined('IN_F2CONT')) die ('Access Denied.');
 
 //输出头部信息
 dohead($title,"");
@@ -63,7 +63,7 @@ require('admin_menu.php');
 			if(strpos(",,".$actPlugins, ",$plugin,")>0) {
 				$active="unActive";
 				$class="subcontent-td2";
-				if (file_exists(F2BLOG_ROOT."./plugins/$plugin/setting.php")) include_once(F2BLOG_ROOT."./plugins/$plugin/setting.php");
+				if (file_exists(F2CONT_ROOT."./plugins/$plugin/setting.php")) include_once(F2CONT_ROOT."./plugins/$plugin/setting.php");
 			} else {
 				$active="active";
 				$class="subcontent-td";

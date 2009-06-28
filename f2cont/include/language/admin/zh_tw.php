@@ -714,4 +714,11 @@ $strAjaxMediaStatus="媒體播放器";
 $strSettingSpamFiler="SPAM 過濾器規則";
 $strSpamTrash="SPAM 廣告";
 
+
+$strAboutF2Cont = "關於F2Cont";
+$strF2ContZhao4 = "3. 推广员：有兴趣及愿为F2Cont作推广的朋友都可参予";
+$strF2ContLinks = "F2Cont連結";
+$strF2ContLinkDesc1 = "F2Cont官方網站";
+$strF2ContLinkDesc2 = "F2Cont官方論壇，有任何疑問，可以到此咨詢";
+
 ?>

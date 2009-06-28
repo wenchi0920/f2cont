@@ -8,7 +8,7 @@ if (function_exists("Imagepng")){
 	$type = 'gif';
 }
 
-define('F2BLOG_ROOT', substr(dirname(__FILE__), 0, -7));
+define('F2CONT_ROOT', substr(dirname(__FILE__), 0, -7));
 //require_once("common.php");
 include("global.inc.php");
 if ($sessionpath!="") session_save_path($sessionpath);

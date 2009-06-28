@@ -1,5 +1,5 @@
 <?php 
-if (!defined('IN_F2BLOG')) die ('Access Denied.');
+if (!defined('IN_F2CONT')) die ('Access Denied.');
 
 //$per_page=2;
 $per_page=$settingInfo['logscomment'];

@@ -79,34 +79,36 @@ if ($arr_result=$DMC->fetchArray($DMC->query("select count(id) as total from ".$
 		<td width="60%" valign="top">
 			<table cellpadding=2 cellspacing=1 width="100%">
 			   <tr>
-				<td colspan="2" class="rightbox"><strong><?php echo $strF2BlogLinks?></strong></td>
+				<td colspan="2" class="rightbox"><strong><?php echo $strF2ContLinks?></strong></td>
 			   </tr>
 			   <tr>
 				<td class="leftbox" width="2%">&nbsp;</td>
-				<td class="rightbox"><a href='http://www.f2blog.com/' target='_blank'>F2Blog.com</a> &nbsp;&nbsp;(<?php echo $strF2LinkDesc1?>)</td>
+				<td class="rightbox"><a href='http://www.f2cont.com/' target='_blank'>F2Cont.com</a> &nbsp;&nbsp;(<?php echo $strF2ContLinkDesc1?>)</td>
 			   </tr>
 			   <tr>
 				 <td class="leftbox">&nbsp;</td>
-				<td class="rightbox"><a href='http://forum.f2blog.com/' target='_blank'>F2Blog Forum</a> &nbsp;&nbsp;(<?php echo $strF2LinkDesc2?>)</td>
+				<td class="rightbox"><a href='http://bbs.f2cont.com/' target='_blank'>F2Cont Forum</a> &nbsp;&nbsp;(<?php echo $strF2ContLinkDesc2?>)</td>
+			   </tr>
+			   <!--
+			   <tr>
+				 <td class="leftbox">&nbsp;</td>
+				<td class="rightbox"><a href='http://www.f2cont.com/faqs.php' target='_blank'>F2Cont FAQ</a> &nbsp;&nbsp;(<?php echo $strF2LinkDesc3?>)</td>
 			   </tr>
 			   <tr>
 				 <td class="leftbox">&nbsp;</td>
-				<td class="rightbox"><a href='http://www.f2blog.com/faqs.php' target='_blank'>F2Blog FAQ</a> &nbsp;&nbsp;(<?php echo $strF2LinkDesc3?>)</td>
+				<td class="rightbox"><a href='http://www.f2cont.com/plugins.php' target='_blank'>F2Cont Plugins</a> &nbsp;&nbsp;(<?php echo $strF2LinkDesc4?>)</td>
 			   </tr>
 			   <tr>
 				 <td class="leftbox">&nbsp;</td>
-				<td class="rightbox"><a href='http://www.f2blog.com/plugins.php' target='_blank'>F2Blog Plugins</a> &nbsp;&nbsp;(<?php echo $strF2LinkDesc4?>)</td>
+				<td class="rightbox"><a href='http://www.f2cont.com/skins.php' target='_blank'>F2Cont Skins</a> &nbsp;&nbsp;(<?php echo $strF2LinkDesc5?>)</td>
 			   </tr>
 			   <tr>
 				 <td class="leftbox">&nbsp;</td>
-				<td class="rightbox"><a href='http://www.f2blog.com/skins.php' target='_blank'>F2Blog Skins</a> &nbsp;&nbsp;(<?php echo $strF2LinkDesc5?>)</td>
+				<td class="rightbox"><a href='http://rss.f2cont.com/' target='_blank'>F2Cont RSS</a></td>
 			   </tr>
+			   -->
 			   <tr>
-				 <td class="leftbox">&nbsp;</td>
-				<td class="rightbox"><a href='http://rss.f2blog.com/' target='_blank'>F2Blog RSS</a></td>
-			   </tr>
-			   <tr>
-				<td colspan="2" class="rightbox"><br /><a href="checkupdate.php"><strong><?php echo $strCheckUpdate?>F2BLOG</strong></a></td>
+				<td colspan="2" class="rightbox"><br /><a href="checkupdate.php"><strong><?php echo $strCheckUpdate?>F2Cont</strong></a></td>
 			   </tr>
 			</table>
 		</td>

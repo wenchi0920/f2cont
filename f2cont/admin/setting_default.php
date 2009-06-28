@@ -1,5 +1,5 @@
 <?php  
-if (!defined('IN_F2BLOG')) die ('Access Denied.');
+if (!defined('IN_F2CONT')) die ('Access Denied.');
 $arr_setting[]="('about','','0');";
 $arr_setting[]="('adminPageSize','15','0');";
 $arr_setting[]="('adminPerPage','25','0');";

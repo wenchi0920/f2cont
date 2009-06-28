@@ -28,7 +28,7 @@ if ($action=="save"){
 	$pfile=basename($_GET['pfile']);
 
 	if($operation=="active") {
-		include_once(F2BLOG_ROOT."plugins/$plugin/$pfile");
+		include_once(F2CONT_ROOT."plugins/$plugin/$pfile");
 		$ActionMessage=call_user_func($plugin."_install");
 		if($ActionMessage=="") {
 			$ActionMessage="$strf2Plugins <b>$plugin</b> $strActive$strSuccess!";
@@ -38,7 +38,7 @@ if ($action=="save"){
 			$ActionMessage="$strf2Plugins <b>$plugin: </b>".$ActionMessage;
 		}
 	} else {
-		include_once(F2BLOG_ROOT."plugins/$plugin/$pfile");
+		include_once(F2CONT_ROOT."plugins/$plugin/$pfile");
 		
 		$ActionMessage=call_user_func($plugin."_unstall");
 		if($ActionMessage=="") {
@@ -56,7 +56,7 @@ if ($action=="save"){
 if($action=="setSave") {
 	$plugin=basename($_GET['plugin']);
 	$title="$strf2Plugins <b>$plugin</b> $strPluginSetting";
-	include_once(F2BLOG_ROOT."plugins/$plugin/setting.php");
+	include_once(F2CONT_ROOT."plugins/$plugin/setting.php");
 	
 	$modId=getFieldValue($DBPrefix."modules","name='$plugin'","id");
 	$ActionMessage=call_user_func_array($plugin."_setSave",array($_POST,$modId));

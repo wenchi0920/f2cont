@@ -1,5 +1,5 @@
 <?php 
-if (!defined('IN_F2BLOG')) die ('Access Denied.');
+if (!defined('IN_F2CONT')) die ('Access Denied.');
 
 $logId=empty($_GET['logId'])?"":$_GET['logId'];
 
