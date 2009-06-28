@@ -1,0 +1,23 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteBase /
+	RewriteRule ^([0-9]+)-([0-9]+)\.html$ index.php\?page=$1&disType=$2
+	RewriteRule ^([0-9]+)\.html$ index.php\?page=$1
+	RewriteRule ^(tags|guestbook|links|read|archives|f2bababian)\.html$ index.php\?load=$1
+	RewriteRule ^read-([0-9]+)-([0-9]+)\.html$ index.php\?load=read&id=$1&page=$2
+	RewriteRule ^read-([0-9]+)\.html$ index.php\?load=read&id=$1
+	RewriteRule ^guestbook-([0-9]+)\.html$ index.php\?load=guestbook&page=$1
+	RewriteRule ^(searchTitle|searchContent|searchAll|category|calendar|archives|tags)-(.+)-([0-9]+)-([0-9]+)\.html$ index.php\?job=$1&seekname=$2&page=$3&disType=$4
+	RewriteRule ^(searchTitle|searchContent|searchAll|category|calendar|archives|tags)-(.+)-([0-9]+)\.html$ index.php\?job=$1&seekname=$2&page=$3
+	RewriteRule ^(searchTitle|searchContent|searchAll|category|calendar|archives|tags)-(.+)\.html$ index.php\?job=$1&seekname=$2
+	RewriteRule ^f2bababian.html$ index.php?load=f2bababian
+	RewriteRule ^f2bababian-([a-z]+).html$ index.php?load=f2bababian&bbbphoto=$1
+	RewriteRule ^f2bababian-([a-z]+)-([0-9]+).html$ index.php?load=f2bababian&bbbphoto=$1&page=$2
+	RewriteRule ^f2bababian-([a-z]+)-([0-9]+)-([0-9A-Za-z]+).html$ index.php?load=f2bababian&bbbphoto=$1&page=$2&did=$3
+	RewriteRule ^f2bababian-([a-z]+)-set-([0-9]+)-([0-9A-Za-z]+).html$ index.php?load=f2bababian&bbbphoto=$1&page=$2&setid=$3
+	RewriteRule ^f2bababian-([a-z]+)-set-([0-9A-Za-z]+)-([0-9]+).html$ index.php?load=f2bababian&bbbphoto=$1&page=$3&setid=$2
+	RewriteRule ^f2bababian-([a-z]+)-set-([0-9A-Za-z]+)-([0-9]+)-([0-9A-Za-z]+).html$ index.php?load=f2bababian&bbbphoto=$1&setid=$2&page=$3&did=$4
+	RewriteRule ^test-(.+)\.html$ testrewrite.php\?test=$1
+</IfModule>

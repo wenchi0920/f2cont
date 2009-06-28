@@ -1,0 +1,53 @@
+img { border:0px; max-width:; height:;}
+.rss {font-size:10px;}
+blockquote {border-left:3px solid #BEDCFF;margin:20px;padding-left:10px;}
+
+/****** Link ******/
+.linkover {
+	margin-bottom: 20px;
+	height: auto;
+	clear: both;
+}
+
+.linkgroupcontent{
+	height: auto;
+	clear: both;
+	margin-bottom:100px!important;margin-bottom:50px;
+}
+
+.linkbody {
+	margin-top: 5px;
+	width: 45%;
+	float: left;
+	margin-left: 20px!important;margin-left:10px;
+}
+.linkimg {
+/*	width: 35%;*/
+	float: left;
+	text-align: right;
+	margin-right: 4px;
+}
+.linktxt {
+	float: left;
+}
+.linktitle a {
+	font-weight: bold;
+}
+.linkgroup {
+	font-weight: bold;
+	font-size: 14px;
+	margin-bottom: 5px;
+	color: #3F67A5;
+}
+
+.archivesbody {
+	margin-top: 5px;
+	width: 29%;
+	float: left;
+	margin-left: 20px!important;margin-left:10px;
+}
+
+.CFace:link,.CFace:visited{padding:1px;padding-left:0px;padding-right:0px;border:1px solid #164283;background:#c9dbf5;border-bottom-width:3px;}
+.CFace:hover{padding:1px;padding-left:0px;padding-right:0px;border:1px solid #164283;background:#9bbbec;border-bottom-width:3px}
+.LFace:link,.LFace:visited{padding:1px;}
+.LFace:hover{padding-left:0px;padding-right:0px;border:1px solid #164283;background:#c9dbf5}
