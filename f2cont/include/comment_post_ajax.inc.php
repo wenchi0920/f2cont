@@ -96,17 +96,17 @@ switch (trim($settingInfo['spamfilter'])){
 	//	不新增留言
 	case "delete":
 		//$intSpamFiler=0;
-		if ($check_info && !$isSpam) guestBookPost(0,0);
+		if ($check_info && !$isSpam) guestBookPost($id,0,0);
 		break;
 
 		//	新增留言，但不顯示 加入 spam 記號
 	case "close":
 		if ($isSpam==1) {
-			guestBookPost(1,0);
+			guestBookPost($id,1,0);
 			$ActionMessage="";
 		}
 		elseif ($check_info){
-			guestBookPost(0,0);
+			guestBookPost($id,0,0);
 		}
 		break;
 
@@ -116,18 +116,18 @@ switch (trim($settingInfo['spamfilter'])){
 	default:
 
 		if ($isSpam==1) {
-			guestBookPost(1,0);
+			guestBookPost($id,1,0);
 			$ActionMessage="";
 		}
 		elseif ($check_info){
-			guestBookPost(0,0);
+			guestBookPost($id,0,0);
 		}
 
 		break;
 }
 
 
-function guestBookPost($intSpamFiler,$intIsSecret){
+function guestBookPost($id,$intSpamFiler,$intIsSecret){
 
 	global $DMC,$DBPrefix,$arrSideModule;
 	$parent=0;
