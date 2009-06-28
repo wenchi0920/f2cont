@@ -13,7 +13,7 @@ class F2MysqlClass {
 	
 	var $_debug=false;
 
-	function F2MysqlClass($DBHost, $DBUser, $DBPswd, $DBName,$DBNewlink="false",$debug) {
+	function F2MysqlClass($DBHost, $DBUser, $DBPswd, $DBName,$DBNewlink="false",$debug=false) {
 		if($DBNewlink=="true") {
 			if(!mysql_pconnect($DBHost, $DBUser, $DBPswd)) {
 				$this->halt("Don't connect to database!");
