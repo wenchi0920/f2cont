@@ -1,7 +1,7 @@
 <?php  
 header("Content-Type: text/html; charset=utf-8");
 include_once("include/function.php");
-include_once(F2CONT_ROOT."./cache/cache_members.php");
+include_once(F2BLOG_ROOT."./cache/cache_members.php");
 
 //下载文件
 if ($settingInfo['showPrint']==1){

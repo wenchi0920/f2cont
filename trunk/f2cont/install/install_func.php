@@ -105,14 +105,14 @@ function getSkinInfo($skindir){
 	global $settingInfo;
 
 	$arrSkin=array();
-	$xmlfile=F2CONT_ROOT."./skins/$skindir/skin.xml";
+	$xmlfile=F2BLOG_ROOT."./skins/$skindir/skin.xml";
 	
 	if (file_exists($xmlfile)){
 		$arrSkin['preview']=(file_exists($wdir."Preview.jpg"))?"../skins/$skindir/Preview.jpg":"../images/skin.jpg";
 		$defSkin=$settingInfo['defaultSkin'];
 		$arrSkin['defSkin']=($skindir==$defSkin)?"selectskin":"unselectskin";
 
-		include_once(F2CONT_ROOT."./include/xmlparse.inc.php");
+		include_once(F2BLOG_ROOT."./include/xmlparse.inc.php");
 		$arrSkinList=xmlArray($xmlfile);
 
 		//增加一个皮肤来源

@@ -198,7 +198,7 @@ if (!empty($_GET['action']) && $_GET['action']=="save"){
 		$settingInfo['spamfilter']	//	預設
 		*/
 		/* spam 過濾器強化	*/	
-		//include(F2CONT_ROOT."./include/guestbook.lib.php");
+		//include(F2BLOG_ROOT."./include/guestbook.lib.php");
 		switch (trim($settingInfo['spamfilter'])){
 			//	不新增留言
 			case "delete":
@@ -339,7 +339,7 @@ function guestBookPost($intSpamFiler,$intIsSecret){
 <link rel="stylesheet" rev="stylesheet" href="skins/<?php echo $blogSkins?>/typography.css" type="text/css" media="all" /><!--局部样式表-->
 <link rel="stylesheet" rev="stylesheet" href="skins/<?php echo $blogSkins?>/link.css" type="text/css" media="all" /><!--超链接样式表-->
 <?php
-if (file_exists(F2CONT_ROOT."/skins/".$blogSkins."/UBB")){
+if (file_exists(F2BLOG_ROOT."/skins/".$blogSkins."/UBB")){
 	$ubb_path="skins/".$blogSkins."/UBB";
 }else{
 	$ubb_path="editor/ubb";

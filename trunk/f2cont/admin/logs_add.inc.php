@@ -6,14 +6,14 @@ dohead($title,"");
 require('admin_menu.php');
 
 //读取编辑器
-include_once(F2CONT_ROOT."./include/xmlparse.inc.php");
+include_once(F2BLOG_ROOT."./include/xmlparse.inc.php");
 $handle=opendir("../editor/"); 
 $arr_editorName=array();
 $arr_editorPath=array();
 $editorpath="";
 while ($file = readdir($handle)){ 
 	if (preg_match("/editor_(.+)\.xml/is",$file)){
-		$arr_editor=xmlArray(F2CONT_ROOT."./editor/$file");
+		$arr_editor=xmlArray(F2BLOG_ROOT."./editor/$file");
 		$arr_editorName[]=$arr_editor['EditorName'];
 		$arr_editorRemark[$arr_editor['EditorName']]=$arr_editor['EditorDecription'];
 		$arr_editorPath[$arr_editor['EditorName']]=$arr_editor['EditorPath'];
@@ -21,7 +21,7 @@ while ($file = readdir($handle)){
 
 		//取得相对应的编辑器
 		if ($arr_editor['EditorName']==$logsediter){
-			$editorpath=F2CONT_ROOT."./".$arr_editor['EditorPath'];
+			$editorpath=F2BLOG_ROOT."./".$arr_editor['EditorPath'];
 			$editorcode=$arr_editor['EditorCode'];
 		}
 	}	
@@ -29,7 +29,7 @@ while ($file = readdir($handle)){
 //没有该编辑器，将取得默认编辑器。
 if (!file_exists($editorpath)){
 	$editorcode=$arr_editorCode[$settingInfo['defaultedits']];
-	$editorpath=F2CONT_ROOT."./".$arr_editorPath[$settingInfo['defaultedits']];
+	$editorpath=F2BLOG_ROOT."./".$arr_editorPath[$settingInfo['defaultedits']];
 }
 closedir($handle);
 ?>

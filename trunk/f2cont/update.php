@@ -17,14 +17,14 @@ if (strpos(";".$_SERVER['PHP_SELF'],"tools")>0){
 	exit;
 }
 
-if (!defined('F2CONT_ROOT')){
+if (!defined('F2BLOG_ROOT')){
 	define('IN_F2CONT', TRUE);
-	define('F2CONT_ROOT', dirname(__FILE__)."/");
+	define('F2BLOG_ROOT', dirname(__FILE__)."/");
 }
 
 //检测是否已更新
-if (file_exists(F2CONT_ROOT."./cache/cache_update_logs.php")){
-	include(F2CONT_ROOT."./cache/cache_update_logs.php");
+if (file_exists(F2BLOG_ROOT."./cache/cache_update_logs.php")){
+	include(F2BLOG_ROOT."./cache/cache_update_logs.php");
 	if (!@in_array($update_time,$update_logs) || count($update_logs)<1){
 		$check_update=true;
 	}else{
@@ -195,7 +195,7 @@ function update_data($echo,$DMC){
 
 	//清空缓存
 	if ($delete_setting==true){//0909升级需要重新建立setting文件。
-		if (!@unlink(F2CONT_ROOT."./cache/cache_setting.php")){
+		if (!@unlink(F2BLOG_ROOT."./cache/cache_setting.php")){
 			echo "<script language=Javascript> \n";
 			echo "alert('Please update cache!');\n";
 			echo "</script>\n";

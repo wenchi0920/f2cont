@@ -1,7 +1,7 @@
 <?php  
 if (!defined('IN_F2CONT')) die ('Access Denied.');
 
-include(F2CONT_ROOT."./cache/cache_arrcalendar.php");
+include(F2BLOG_ROOT."./cache/cache_arrcalendar.php");
 
 //当前时间
 $curTime=time()+$settingInfo['timezone']*3600;

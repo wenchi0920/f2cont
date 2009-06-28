@@ -100,12 +100,12 @@ $query_result=$DMC->query($query_sql);
 					<?php 
 					}else{
 						$html_path=format_time("Ym",$fa['postTime']);
-						if (empty($fa['password']) && $settingInfo['isHtmlPage']==1 && file_exists(F2CONT_ROOT."./cache/html/$html_path/".$fa['id'].".php")){
-							include(F2CONT_ROOT."./cache/cache_download.php");
-							if (file_exists(F2CONT_ROOT."./cache/html/$html_path/".$fa['id']."_index.php")) {
-								include(F2CONT_ROOT."./cache/html/$html_path/".$fa['id']."_index.php");
+						if (empty($fa['password']) && $settingInfo['isHtmlPage']==1 && file_exists(F2BLOG_ROOT."./cache/html/$html_path/".$fa['id'].".php")){
+							include(F2BLOG_ROOT."./cache/cache_download.php");
+							if (file_exists(F2BLOG_ROOT."./cache/html/$html_path/".$fa['id']."_index.php")) {
+								include(F2BLOG_ROOT."./cache/html/$html_path/".$fa['id']."_index.php");
 							}else{
-								include(F2CONT_ROOT."./cache/html/$html_path/".$fa['id'].".php");
+								include(F2BLOG_ROOT."./cache/html/$html_path/".$fa['id'].".php");
 							}
 						}else{
 							$content=$fa['logContent'];							

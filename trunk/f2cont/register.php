@@ -9,7 +9,7 @@ if (!empty($_GET['action']) && $_GET['action']=="save" && $_POST['client_session
 
 include_once("header.php");
 
-include_once(F2CONT_ROOT."./include/cache.php");
+include_once(F2BLOG_ROOT."./include/cache.php");
 
 if ($settingInfo['isRegister']==1 && empty($_SESSION['username'])){//为１时表示关闭注册
 ?>

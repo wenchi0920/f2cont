@@ -44,9 +44,9 @@ if($action=="operation" and $_POST['operation']=="savebutton") {
 
 //ÁÐ³öeditor pluginsÄ¿Â¼
 if ($action=="") {
-    $handle=opendir(F2CONT_ROOT."./editor/plugins/"); 
+    $handle=opendir(F2BLOG_ROOT."./editor/plugins/"); 
     while ($file = readdir($handle)){ 
-		if(is_dir(F2CONT_ROOT."./editor/plugins/$file") && file_exists(F2CONT_ROOT."./editor/plugins/$file/plugin.xml")){
+		if(is_dir(F2BLOG_ROOT."./editor/plugins/$file") && file_exists(F2BLOG_ROOT."./editor/plugins/$file/plugin.xml")){
 			$dirlist[] = $file;
 		}	
 	} 

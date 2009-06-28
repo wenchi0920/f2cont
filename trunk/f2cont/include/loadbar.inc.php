@@ -59,10 +59,10 @@ switch ($load){
 }
 
 //留言本和评论时装载cache.php
-if ($load=="guestbook" || $load=="read") include_once(F2CONT_ROOT."./include/cache.php");
+if ($load=="guestbook" || $load=="read") include_once(F2BLOG_ROOT."./include/cache.php");
 
 //装载会员表
-if ($load=="" || $load=="read") include_once(F2CONT_ROOT."./cache/cache_members.php");
+if ($load=="" || $load=="read") include_once(F2BLOG_ROOT."./cache/cache_members.php");
 
 if (!isset($base_rewrite)) $base_rewrite="";
 ?>

@@ -3,7 +3,7 @@ if (!defined('IN_F2CONT')) die ('Access Denied.');
 
 // 写入缓存文件
 function writetocache($cachename, $cachedata = '', $cachetype = 'php') {
-	$cachedir=F2CONT_ROOT."./cache/";
+	$cachedir=F2BLOG_ROOT."./cache/";
 	if(!is_dir($cachedir)) {
 		mkdir($cachedir, 0777);
 	}
@@ -39,9 +39,9 @@ function skinlist_recache()	{
 	global $settingInfo,$arrSideModule,$DMC,$DBPrefix;
 
 	//列出Skins目录
-	$handle=opendir(F2CONT_ROOT."./skins/");
+	$handle=opendir(F2BLOG_ROOT."./skins/");
 	while (false !== ($file = readdir($handle))) {
-		if(is_dir(F2CONT_ROOT."./skins/$file") && file_exists(F2CONT_ROOT."./skins/$file/skin.xml")){
+		if(is_dir(F2BLOG_ROOT."./skins/$file") && file_exists(F2BLOG_ROOT."./skins/$file/skin.xml")){
 			$arrSkinList[$file]=getSkinInfo($file);
 		}
 	}
@@ -61,7 +61,7 @@ function skinlist_recache()	{
 	writetocache('skinlist',$contents);
 
 	//保存当前skin信息
-	if (file_exists(F2CONT_ROOT."./skins/".$settingInfo['defaultSkin']."/skin.xml")){
+	if (file_exists(F2BLOG_ROOT."./skins/".$settingInfo['defaultSkin']."/skin.xml")){
 		$arrDefaultSkinInfo=getSkinInfo($settingInfo['defaultSkin']);
 	}else{
 		//如果默认skin不存在，则选择上述列表中的第一个皮肤做为默认皮肤。
@@ -134,9 +134,9 @@ function calendar_recache() {
 	ob_start();
 	$calendarcache=$archivedb;
 	if ($settingInfo['showcalendar']==1){
-		include(F2CONT_ROOT."./include/ncalendar.inc.php");
+		include(F2BLOG_ROOT."./include/ncalendar.inc.php");
 	}else{
-		include(F2CONT_ROOT."./include/calendar.inc.php");
+		include(F2BLOG_ROOT."./include/calendar.inc.php");
 	}
 	//$out_contents=create_sidebar_header("Calendar",$strCalendar,$arrSideModule["calendar"]["isInstall"]);
 	$out_contents.=ob_get_contents();
@@ -260,7 +260,7 @@ function filters_recache() {
 
 //在线更新
 function online_recache(){
-	if (!file_exists(F2CONT_ROOT."./cache_online.php")){
+	if (!file_exists(F2BLOG_ROOT."./cache_online.php")){
 		$contents = "\$onlinecache = array(\r\n";
 		$contents.="\t'ip' => array(''),\n";
 		$contents.="\t'times' => array('')\n";
@@ -444,7 +444,7 @@ function createSideFunc($value,$key) {
 
 
 		if (in_array($sidename,array("statistics","category","guestbook","hotTags","recentlogs","recentComments","archives","links"))){
-			echo readfromfile(F2CONT_ROOT."cache/cache_$sidename.php");
+			echo readfromfile(F2BLOG_ROOT."cache/cache_$sidename.php");
 		}else{
 			if ($installDate>0){//表示为插件
 				echo '<?php do_filter("'.$sidename.'","'.$sidename.'","',$sidetitle.'","',$htmlcode.'","'.$isInstall.'");'."?>\n";
@@ -460,7 +460,7 @@ function createSideFunc($value,$key) {
 						echo "		include(\"include/calendar.inc.php\");\n";
 						echo "	}\n";
 						echo "}else{\n";
-						echo "	echo readfromfile(F2CONT_ROOT.\"./cache/cache_calendar.php\");\n";
+						echo "	echo readfromfile(F2BLOG_ROOT.\"./cache/cache_calendar.php\");\n";
 						echo "}?>\n";
 						break;
 					case "skinSwitch":
@@ -898,9 +898,9 @@ function categories_recache() {
 
 	ob_start();
 	if (strpos($settingInfo['categoryImgPath'],"tree")>0){
-		include(F2CONT_ROOT."./include/treemenu.inc.php");
+		include(F2BLOG_ROOT."./include/treemenu.inc.php");
 	}else{
-		include(F2CONT_ROOT."./include/ulmenu.inc.php");
+		include(F2BLOG_ROOT."./include/ulmenu.inc.php");
 	}
 
 	$out_contents=create_sidebar_header("Category",$strCategory,$arrSideModule["category"]["isInstall"]);
