@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PluginSet>
+ <PluginName>flash</PluginName>
+ <PluginVersion>1.34</PluginVersion>
+ <FunctionName>flash</FunctionName>
+ <FunctionImage>flash.gif</FunctionImage>
+ <FunctionDesc>插入Flash</FunctionDesc>
+ <PluginAuthor>Moxiecode Systems</PluginAuthor>
+ <pubDate>2006-2-10</pubDate>
+ <AuthorURL>http://tinymce.moxiecode.com/tinymce/docs/plugin_flash.html</AuthorURL>
+ <AuthorMail>joesenhong@yahoo.com.cn</AuthorMail>
+</PluginSet>

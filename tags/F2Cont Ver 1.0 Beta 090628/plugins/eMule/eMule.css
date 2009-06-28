@@ -1,0 +1,54 @@
+.emuletop {
+    clear: both;
+	color: #000;
+	font-weight: bold;
+	padding: 3px;
+	background: url(/plugins/eMule/ed2k.gif) no-repeat right #e4eaf2;
+	border-left: 4px solid #8394b2;
+	border-top: 1px dotted #000;
+	border-right: 1px dotted #000;
+    width: auto;
+}
+
+.emulemain {
+	border-left: 4px solid #8394B2;
+	border-right: 1px dotted #000;
+	border-bottom: 1px dotted #000;
+	padding: 4px;
+	margin: 0px auto 8px auto;
+}
+
+.emulemain table {
+    background: #F5F9FD;
+}
+
+.post2,
+.bg3{
+	background: #EEF2F7;
+}
+
+.button{
+	background: #FFF;
+	border: 1px solid #4C77B6;
+	color: #000;
+	font-family: Verdana, Helvetica, Sans-Serif;
+	font-size: 12px;
+	padding: 2px;
+	vertical-align: middle;
+}
+
+.button{
+	background: #DFE6EF;
+}
+
+
+input{
+	background: #FFF;
+	border: 1px solid #4C77B6;
+	color: #000;
+	font-family: verdana, helvetica, sans-serif;
+	font-size: 12px;
+	margin: 5px;
+	padding: 2px;
+	vertical-align: middle;
+}
