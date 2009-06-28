@@ -1,5 +1,5 @@
 <?php 
-if (!defined('IN_F2BLOG')) die ('Access Denied.');
+if (!defined('IN_F2CONT')) die ('Access Denied.');
 
 if ($settingInfo['rewrite']==0){
 	$gourl="index.php?job=category&amp;seekname=";

@@ -32,7 +32,7 @@ if (count($array_logid)>0){
 		$html_path=format_time("Ym",$fa['postTime']);
 
 		//如果有首页文件，则删除
-		if (file_exists(F2BLOG_ROOT."./cache/html/$html_path/".$fa['id']."_index.php")) @unlink(F2BLOG_ROOT."./cache/html/$html_path/".$fa['id']."_index.php");
+		if (file_exists(F2CONT_ROOT."./cache/html/$html_path/".$fa['id']."_index.php")) @unlink(F2CONT_ROOT."./cache/html/$html_path/".$fa['id']."_index.php");
 
 		$content=$fa['logContent'];			
 		$content_index="";

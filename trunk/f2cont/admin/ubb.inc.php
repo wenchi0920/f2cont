@@ -1,6 +1,6 @@
 <?php 
 # 禁止直接访问该页面
-if (!defined('IN_F2BLOG')) die ('Access Denied.');
+if (!defined('IN_F2CONT')) die ('Access Denied.');
 
 if ($settingInfo['language']=="zh_cn"){
 	$editor_language_font="字体";

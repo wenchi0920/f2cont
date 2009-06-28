@@ -472,11 +472,11 @@ if($action=="delete"){
 	logs_sidebar_recache($arrSideModule);
 
 	//删除静态文件
-	if (file_exists(F2BLOG_ROOT."./cache/html/{$mark_id}.html")){
-		@unlink(F2BLOG_ROOT."./cache/html/{$mark_id}.html");
+	if (file_exists(F2CONT_ROOT."./cache/html/{$mark_id}.html")){
+		@unlink(F2CONT_ROOT."./cache/html/{$mark_id}.html");
 	}
-	if (file_exists(F2BLOG_ROOT."./cache/html/{$mark_id}_index.html")){
-		@unlink(F2BLOG_ROOT."./cache/html/{$mark_id}_index.html");
+	if (file_exists(F2CONT_ROOT."./cache/html/{$mark_id}_index.html")){
+		@unlink(F2CONT_ROOT."./cache/html/{$mark_id}_index.html");
 	}
 
 	header("Location:../index.php"); 
@@ -727,11 +727,11 @@ if ($action=="operation"){
 			$DMC->query($sql);
 
 			//删除静态文件
-			if (file_exists(F2BLOG_ROOT."./cache/html/{$mark_id}.php")){
-				@unlink(F2BLOG_ROOT."./cache/html/{$mark_id}.php");
+			if (file_exists(F2CONT_ROOT."./cache/html/{$mark_id}.php")){
+				@unlink(F2CONT_ROOT."./cache/html/{$mark_id}.php");
 			}
-			if (file_exists(F2BLOG_ROOT."./cache/html/{$mark_id}_index.php")){
-				@unlink(F2BLOG_ROOT."./cache/html/{$mark_id}_index.php");
+			if (file_exists(F2CONT_ROOT."./cache/html/{$mark_id}_index.php")){
+				@unlink(F2CONT_ROOT."./cache/html/{$mark_id}_index.php");
 			}
 		}
 

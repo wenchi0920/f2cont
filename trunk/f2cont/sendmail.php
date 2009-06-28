@@ -2,7 +2,7 @@
 include_once("include/function.php");
 include_once("header.php");
 
-include_once(F2BLOG_ROOT."./cache/cache_members.php");
+include_once(F2CONT_ROOT."./cache/cache_members.php");
 
 if ($settingInfo['showMail']==0){
 ?>

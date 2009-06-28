@@ -6,12 +6,12 @@ include_once(substr(dirname(__FILE__), 0, -7)."./include/common.php");
 
 //读取语言包
 if ($settingInfo['language']=="") $settingInfo['language']="zh_cn";
-include_once(F2BLOG_ROOT."./include/language/home/".basename($settingInfo['language']).".php");
+include_once(F2CONT_ROOT."./include/language/home/".basename($settingInfo['language']).".php");
 
 //读取皮肤设置
 //检测是否开启了skin switch
 if ($settingInfo['skinSwitch']==0){//0表示开启了skin switch
-	include_once(F2BLOG_ROOT."./cache/cache_skinlist.php");
+	include_once(F2CONT_ROOT."./cache/cache_skinlist.php");
 
 	if (!empty($_POST['skinSelect'])){
 		$blogSkins=$_POST['skinSelect'];
@@ -23,13 +23,13 @@ if ($settingInfo['skinSwitch']==0){//0表示开启了skin switch
 		setcookie("blogSkins",$blogSkins,time()+86400*365,$cookiepath,$cookiedomain);
 	}
 
-	if (!file_exists(F2BLOG_ROOT."./skins/$blogSkins/global.css")) $blogSkins=$settingInfo['defaultSkin'];
+	if (!file_exists(F2CONT_ROOT."./skins/$blogSkins/global.css")) $blogSkins=$settingInfo['defaultSkin'];
 
 	//取得皮肤的信息
 	$getDefaultSkinInfo=$skinlistcache[$blogSkins];
 }else{
 	//取得默认皮肤信息
-	include_once(F2BLOG_ROOT."./cache/cache_defaultskin.php");
+	include_once(F2CONT_ROOT."./cache/cache_defaultskin.php");
 	$blogSkins=$settingInfo['defaultSkin'];
 	$getDefaultSkinInfo=$defaultskincache;
 }
@@ -419,7 +419,7 @@ function pageBar($gourl){
 }
 
 function replace_filter($content){
-	include(F2BLOG_ROOT."./cache/cache_filters.php");
+	include(F2CONT_ROOT."./cache/cache_filters.php");
 	if (!empty($filtercache1) && is_array($filtercache1)){
 		foreach($filtercache1 as $value){
 			if (strpos(";$content",$value)>0){
@@ -438,7 +438,7 @@ function replace_filter($content){
 }
 
 function filter_ip($ip){
-	include(F2BLOG_ROOT."./cache/cache_filters.php");
+	include(F2CONT_ROOT."./cache/cache_filters.php");
 	if (!empty($filtercache3) && is_array($filtercache3)){
 		foreach($filtercache3 as $value){
 			$value=str_replace(".","\.",$value);
@@ -451,8 +451,8 @@ function filter_ip($ip){
 }
 
 function filter_url($url){
-	if (file_exists(F2BLOG_ROOT."./cache/cache_filters.php")){
-		include(F2BLOG_ROOT."./cache/cache_filters.php");
+	if (file_exists(F2CONT_ROOT."./cache/cache_filters.php")){
+		include(F2CONT_ROOT."./cache/cache_filters.php");
 		if (isset($filtercache4) && in_array($url, $filtercache4)){
 			return false;
 		}else{

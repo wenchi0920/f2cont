@@ -1,5 +1,5 @@
 <?php  
-if (!defined('IN_F2BLOG')) die ('Access Denied.');
+if (!defined('IN_F2CONT')) die ('Access Denied.');
 
 //博客设定
 //@params:第一个为控件类型：sec表示每个分区的标题，t表示文本框(输入内容无限制)，r表示单选框，f表示文件框，ta表示文本区域，tn表示限输入数字的文本框sel表示选择框，c表示复选框。（必须）
@@ -158,13 +158,13 @@ $SectionOther[]=addSettingValue("r", $strSettingRewrite, "rewrite", "0", "$strTb
 $SectionOther[]=addSettingValue("r", $strSettingIsHtmlPage, "isHtmlPage", "0", "$strTbOpen=>1|$strTbClose=>0");
 
 //读取编辑器
-include_once(F2BLOG_ROOT."./include/xmlparse.inc.php");
+include_once(F2CONT_ROOT."./include/xmlparse.inc.php");
 $handle=opendir("../editor/"); 
 $arr_editorName=array();
 $arr_editorPath=array();
 while ($file = readdir($handle)){ 
 	if (preg_match("/editor_(.+)\.xml/is",$file)){
-		$arr_editor=xmlArray(F2BLOG_ROOT."./editor/$file");
+		$arr_editor=xmlArray(F2CONT_ROOT."./editor/$file");
 		$arr_editorName[]=$arr_editor['EditorDecription']."=>".$arr_editor['EditorName'];
 	}	
 } 

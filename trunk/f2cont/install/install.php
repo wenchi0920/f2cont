@@ -555,8 +555,8 @@ $nextAccess=1;
 								if (substr($blog_url,strlen($blog_url)-1,1)!="/"){$blog_url=$blog_url."/";}
 
 								//加载数据
-								define('IN_F2BLOG', TRUE);
-								define('F2BLOG_ROOT', substr(dirname(__FILE__), 0, -7));
+								define('IN_F2CONT', TRUE);
+								define('F2CONT_ROOT', substr(dirname(__FILE__), 0, -7));
 
 								include('../include/config.php');
 								include('../include/db.php');
@@ -566,17 +566,17 @@ $nextAccess=1;
 								$DMC->query("TRUNCATE TABLE `".$DBPrefix."members`"); 
 								$DMC->query("INSERT INTO `".$DBPrefix."members` (username,password,nickname,email,isHiddenEmail,homePage,lastVisitTime,lastVisitIP,regIp,hashKey,role) VALUES ('$admin',md5('$admin_pw'),'$admin_master','$admin_email','1','','".time()."','','','','admin')");
 																						
-								include(F2BLOG_ROOT."./admin/setting_default.php");
+								include(F2CONT_ROOT."./admin/setting_default.php");
 								foreach($arr_setting as $key=>$value){
 									$update="insert into ".$DBPrefix."setting values".$value;
 									$DMC->query($update);
 								}
 
 								settings_recache();	
-								include_once(F2BLOG_ROOT."./cache/cache_setting.php");
-								include_once(F2BLOG_ROOT."./include/language/home/{$settingInfo['language']}.php");								
+								include_once(F2CONT_ROOT."./cache/cache_setting.php");
+								include_once(F2CONT_ROOT."./include/language/home/{$settingInfo['language']}.php");								
 								modules_recache();
-								include_once(F2BLOG_ROOT."./cache/cache_modules.php");	
+								include_once(F2CONT_ROOT."./cache/cache_modules.php");	
 								reAllCache();
 
 								$str.="<table border='0' cellpadding='0' cellspacing='0' width='100%'>\n";

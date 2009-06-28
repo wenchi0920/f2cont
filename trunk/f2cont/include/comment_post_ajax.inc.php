@@ -1,5 +1,5 @@
 <?php 
-if (!defined('IN_F2BLOG')) die ('Access Denied.');
+if (!defined('IN_F2CONT')) die ('Access Denied.');
 
 $id=intval($_POST['id']);
 if ($id==""){
@@ -91,7 +91,7 @@ $style_list[]="隱藏留言=>hidden";
 $settingInfo['spamfilter']	//	預設
 */
 /* spam 過濾器強化	*/
-//include(F2BLOG_ROOT."./include/guestbook.lib.php");
+//include(F2CONT_ROOT."./include/guestbook.lib.php");
 switch (trim($settingInfo['spamfilter'])){
 	//	不新增留言
 	case "delete":

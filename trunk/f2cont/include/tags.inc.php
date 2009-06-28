@@ -1,4 +1,4 @@
-<?php if (!defined('IN_F2BLOG')) die ('Access Denied.');?>
+<?php if (!defined('IN_F2CONT')) die ('Access Denied.');?>
 
 <div id="Content_ContentList" class="content-width">
 	<div class="Content">
