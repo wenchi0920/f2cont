@@ -1,6 +1,6 @@
 <?php 
 //关闭blog显示页面
-if (!defined('IN_F2CONT')) die ('Access Denied.');
+if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
 header("Content-Type: text/html; charset=utf-8");
 echo "<table width=\"70%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" align=\"center\" height=\"100px\"><tr><td>\n";

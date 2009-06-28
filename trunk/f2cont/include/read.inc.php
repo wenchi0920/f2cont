@@ -1,5 +1,5 @@
 <?php 
-if (!defined('IN_F2CONT')) die ('Access Denied.');
+if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
 //阅读加密日志
 if (!empty($_POST['logpassword'])){

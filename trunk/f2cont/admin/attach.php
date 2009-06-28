@@ -470,7 +470,7 @@ echo "<body topmargin=\"0\" leftmargin=\"3\">\n";
 		if (editorcode=="tiny") {
 			var code ='<img src="' + (parent.tinyMCE.getParam("theme_href") + "/images/spacer.gif") + '" ';
 				code += ' width="100%" height="10px" ';
-				code += 'class="mce_plugIN_F2CONT_more" name="mce_plugIN_F2CONT_more" />';
+				code += 'class="mce_plugIN_F2BLOG_more" name="mce_plugIN_F2BLOG_more" />';
 		} else { //UBB Editor
 			var code='[more]';
 		}
@@ -485,7 +485,7 @@ echo "<body topmargin=\"0\" leftmargin=\"3\">\n";
 		if (editorcode=="tiny") {
 			var code = '<img src="' + (parent.tinyMCE.getParam("theme_href") + "/images/spacer.gif") + '" ';
 				code += ' width="100%" height="10px" ';
-				code += 'class="mce_plugIN_F2CONT_page" name="mce_plugIN_F2CONT_page" />';
+				code += 'class="mce_plugIN_F2BLOG_page" name="mce_plugIN_F2BLOG_page" />';
 		} else { //UBB Editor
 			var code='[nextpage]';
 		}

@@ -1,4 +1,4 @@
-<?php if (!defined('IN_F2CONT')) die ('Access Denied.');?>
+<?php if (!defined('IN_F2BLOG')) die ('Access Denied.');?>
   <!--底部-->
   <div id="foot">
     <p>

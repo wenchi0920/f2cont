@@ -555,7 +555,7 @@ $nextAccess=1;
 								if (substr($blog_url,strlen($blog_url)-1,1)!="/"){$blog_url=$blog_url."/";}
 
 								//加载数据
-								define('IN_F2CONT', TRUE);
+								define('IN_F2BLOG', TRUE);
 								define('F2BLOG_ROOT', substr(dirname(__FILE__), 0, -7));
 
 								include('../include/config.php');

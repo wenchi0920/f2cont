@@ -1,6 +1,6 @@
 <?php 
 @set_time_limit(0);
-if (!defined('IN_F2CONT')) die ('Access Denied.');
+if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
 //输出头部信息
 dohead($title,"");

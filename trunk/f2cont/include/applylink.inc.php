@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_F2CONT')) die ('Access Denied.');
+if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
 //必须在本站操作
 $server_session_id=md5("applink".session_id());

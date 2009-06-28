@@ -1,4 +1,4 @@
-<?php if (!defined('IN_F2CONT')) die ('Access Denied.');?>
+<?php if (!defined('IN_F2BLOG')) die ('Access Denied.');?>
 <script language="javascript" type="text/javascript" src="editor/ubb/UBBCode.js"></script>
 <script language="javascript" type="text/javascript" src="editor/ubb/UBBCode_help_<?php echo $settingInfo['language']?>.js"></script>
 <?php 

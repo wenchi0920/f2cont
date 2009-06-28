@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_F2CONT')) die ('Access Denied.');
+if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
 // 写入缓存文件
 function writetocache($cachename, $cachedata = '', $cachetype = 'php') {

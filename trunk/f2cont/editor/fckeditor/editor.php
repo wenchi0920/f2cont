@@ -1,6 +1,6 @@
 <?php
 # 禁止直接访问该页面
-if (!defined('IN_F2CONT')) die ('Access Denied.');
+if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
 //转换UBB标签
 if (strpos(";".$logContent,"<!--hideBegin-->")>0) $logContent=preg_replace("/<!--hideBegin-->(.+?)<!--hideEnd-->/is","[hideBegin]\\1[hideEnd]",$logContent);

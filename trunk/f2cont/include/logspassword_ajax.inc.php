@@ -1,5 +1,5 @@
 <?php 
-if (!defined('IN_F2CONT')) die ('Access Denied.');
+if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
 $logId=intval($_POST['logId']);
 

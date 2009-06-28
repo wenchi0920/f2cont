@@ -18,7 +18,7 @@ if (strpos(";".$_SERVER['PHP_SELF'],"tools")>0){
 }
 
 if (!defined('F2BLOG_ROOT')){
-	define('IN_F2CONT', TRUE);
+	define('IN_F2BLOG', TRUE);
 	define('F2BLOG_ROOT', dirname(__FILE__)."/");
 }
 

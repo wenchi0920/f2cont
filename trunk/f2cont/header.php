@@ -1,5 +1,5 @@
 <?php 
-if (!defined('IN_F2CONT')) die ('Access Denied.');
+if (!defined('IN_F2BLOG')) die ('Access Denied.');
 //UBB插件
 if (file_exists("./skins/".$blogSkins."/UBB")){
 	$ubb_path="./skins/".$blogSkins."/UBB";
