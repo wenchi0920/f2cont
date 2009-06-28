@@ -9,7 +9,7 @@ $starttime = $mtime[0] + $mtime[1];
 
 //网志常量
 define('IN_F2CONT', TRUE);
-define('F2CONT_ROOT', substr(dirname(__FILE__), 0, -7));
+define('F2BLOG_ROOT', substr(dirname(__FILE__), 0, -7));
 define("blogVersion",".cont 1.0 Beta 090628");
 define("blogUpdateDate","2007-03-01");
 define("blogCopyright","CopyRight 2008 F2Blog.com|F2Cont.com All Rights Reserved.");
@@ -44,9 +44,9 @@ $_SERVER=safe_convert($_SERVER);
 $_SERVER['PHP_SELF'] = $_SERVER['PHP_SELF'] ? $_SERVER['PHP_SELF'] : $_SERVER['SCRIPT_NAME'];
 $PHP_SELF=$_SERVER['PHP_SELF'];
 
-include_once(F2CONT_ROOT."./include/global.inc.php");
-include_once(F2CONT_ROOT."./include/config.php");
-include_once(F2CONT_ROOT."./include/db.php");
+include_once(F2BLOG_ROOT."./include/global.inc.php");
+include_once(F2BLOG_ROOT."./include/config.php");
+include_once(F2BLOG_ROOT."./include/db.php");
 
 //开始Session
 if ($sessionpath!="") session_save_path($sessionpath);
@@ -55,7 +55,7 @@ session_start();
 
 //如果没有设定config.php文件，则安装。
 if ($DBUser=="" || $DBPass=="" || $DBName==""){	
-	if (file_exists(F2CONT_ROOT."./install/install.php")) {
+	if (file_exists(F2BLOG_ROOT."./install/install.php")) {
 		if (strpos($_SERVER['PHP_SELF'],"/admin/")>0){
 			header("Location: ../install/install.php");
 		}else{
@@ -71,11 +71,11 @@ if ($DBUser=="" || $DBPass=="" || $DBName==""){
 $DMC = new F2MysqlClass($DBHost, $DBUser, $DBPass, $DBName,$DBNewlink);
 
 //寻找update.php文件，如果找到就自动更新，更新完后删除该文件。
-if (file_exists(F2CONT_ROOT."./update.php")){
-	include(F2CONT_ROOT."./update.php");
+if (file_exists(F2BLOG_ROOT."./update.php")){
+	include(F2BLOG_ROOT."./update.php");
 	
 	//删除update.php，不能删除将提示管理员删除。
-	if (!@unlink(F2CONT_ROOT."./update.php")){
+	if (!@unlink(F2BLOG_ROOT."./update.php")){
 		if ($_SESSION[rights]=="admin"){
 			$ActionMessage="please delete update.php";
 		}
@@ -83,18 +83,18 @@ if (file_exists(F2CONT_ROOT."./update.php")){
 }
 
 //调用配置文件，如果不存在，则建立它。
-if (file_exists(F2CONT_ROOT."./cache/cache_setting.php")){
-	include_once(F2CONT_ROOT."./cache/cache_setting.php");
-	include_once(F2CONT_ROOT."./cache/cache_modules.php");
+if (file_exists(F2BLOG_ROOT."./cache/cache_setting.php")){
+	include_once(F2BLOG_ROOT."./cache/cache_setting.php");
+	include_once(F2BLOG_ROOT."./cache/cache_modules.php");
 }else{//重新建立Cache
-	include_once(F2CONT_ROOT."./include/cache.php");
+	include_once(F2BLOG_ROOT."./include/cache.php");
 	settings_recount();
 	settings_recache();	
-	include_once(F2CONT_ROOT."./cache/cache_setting.php");
-	include_once(F2CONT_ROOT."./include/language/home/".basename($settingInfo['language']).".php");
+	include_once(F2BLOG_ROOT."./cache/cache_setting.php");
+	include_once(F2BLOG_ROOT."./include/language/home/".basename($settingInfo['language']).".php");
 	$settingInfo['stype'] = ($settingInfo['rewrite']>0) ? ".html" : "";
 	modules_recache();
-	include_once(F2CONT_ROOT."./cache/cache_modules.php");	
+	include_once(F2BLOG_ROOT."./cache/cache_modules.php");	
 
 	reAllCache();
 
@@ -102,7 +102,7 @@ if (file_exists(F2CONT_ROOT."./cache/cache_setting.php")){
 }
 
 //如果安装文件存在，则不能使用blog
-if (file_exists(F2CONT_ROOT."./install/install.php")) {
+if (file_exists(F2BLOG_ROOT."./install/install.php")) {
 	header("Content-Type: text/html; charset=utf-8");
 	die("WARN: Please DELETE or RENAME the installation file, install/install.php!");
 }
@@ -111,7 +111,7 @@ if (file_exists(F2CONT_ROOT."./install/install.php")) {
 $f2_filter="";
 foreach($arrPluginName as $key=>$value){
 	$value=basename($value);
-	$plugins_include=F2CONT_ROOT."./plugins/$value/$value.php";
+	$plugins_include=F2BLOG_ROOT."./plugins/$value/$value.php";
 	if (file_exists($plugins_include)){
 		include_once($plugins_include);
 	}else{
@@ -119,7 +119,7 @@ foreach($arrPluginName as $key=>$value){
 		if ($arr_result=$DMC->fetchArray($DMC->query("select id from ".$DBPrefix."modules where name='$value' and installDate>0"))){
 			$DMC->query("delete from ".$DBPrefix."modsetting where modId='".$arr_result['id']."'");	
 			$DMC->query("delete from ".$DBPrefix."modules where name='$value' and installDate>0");
-			include_once(F2CONT_ROOT."./include/cache.php");
+			include_once(F2BLOG_ROOT."./include/cache.php");
 			modules_recache();
 			modulesSetting_recache();
 		}
@@ -495,7 +495,7 @@ function getSkinInfo($skindir){
 	global $settingInfo;
 
 	$arrSkin="";
-	$wdir=F2CONT_ROOT."./skins/$skindir/";
+	$wdir=F2BLOG_ROOT."./skins/$skindir/";
 	$xmlfile=$wdir."skin.xml";
 	
 	if (file_exists($xmlfile)){
@@ -831,7 +831,7 @@ function daddslashes($string, $force = 0) {
 // 生成静态页面
 function writetohtml($htmlname, $htmldata = '') {
 	list($path,$name)=explode("/",$htmlname);
-	$htmldir=F2CONT_ROOT."./cache/html/$path/";
+	$htmldir=F2BLOG_ROOT."./cache/html/$path/";
 	if(!is_dir($htmldir)) {
 		mkdir($htmldir, 0777);
 	}

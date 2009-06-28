@@ -141,9 +141,9 @@ if ($borwseTitle==$strErrorNoExistsLog) {
 		<?php 
 		}else{
 			$html_path=format_time("Ym",$fa['postTime']);
-			if (empty($fa['password']) && $settingInfo['isHtmlPage']==1 && file_exists(F2CONT_ROOT."./cache/html/$html_path/".$fa['id'].".php")) {
-				include(F2CONT_ROOT."./cache/cache_download.php");
-				include(F2CONT_ROOT."./cache/html/$html_path/".$fa['id'].".php");
+			if (empty($fa['password']) && $settingInfo['isHtmlPage']==1 && file_exists(F2BLOG_ROOT."./cache/html/$html_path/".$fa['id'].".php")) {
+				include(F2BLOG_ROOT."./cache/cache_download.php");
+				include(F2BLOG_ROOT."./cache/html/$html_path/".$fa['id'].".php");
 			}else{
 				$content=formatBlogContent($fa['logContent'],1,$fa['id']);
 				if ($fa['logsediter']=="ubb" && strpos(";$content","<textarea name=\"code\"")<1) $content=nl2br($content);

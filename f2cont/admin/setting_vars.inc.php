@@ -158,13 +158,13 @@ $SectionOther[]=addSettingValue("r", $strSettingRewrite, "rewrite", "0", "$strTb
 $SectionOther[]=addSettingValue("r", $strSettingIsHtmlPage, "isHtmlPage", "0", "$strTbOpen=>1|$strTbClose=>0");
 
 //读取编辑器
-include_once(F2CONT_ROOT."./include/xmlparse.inc.php");
+include_once(F2BLOG_ROOT."./include/xmlparse.inc.php");
 $handle=opendir("../editor/"); 
 $arr_editorName=array();
 $arr_editorPath=array();
 while ($file = readdir($handle)){ 
 	if (preg_match("/editor_(.+)\.xml/is",$file)){
-		$arr_editor=xmlArray(F2CONT_ROOT."./editor/$file");
+		$arr_editor=xmlArray(F2BLOG_ROOT."./editor/$file");
 		$arr_editorName[]=$arr_editor['EditorDecription']."=>".$arr_editor['EditorName'];
 	}	
 } 

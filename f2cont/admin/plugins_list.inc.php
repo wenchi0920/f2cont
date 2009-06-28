@@ -63,7 +63,7 @@ require('admin_menu.php');
 			if(strpos(",,".$actPlugins, ",$plugin,")>0) {
 				$active="unActive";
 				$class="subcontent-td2";
-				if (file_exists(F2CONT_ROOT."./plugins/$plugin/setting.php")) include_once(F2CONT_ROOT."./plugins/$plugin/setting.php");
+				if (file_exists(F2BLOG_ROOT."./plugins/$plugin/setting.php")) include_once(F2BLOG_ROOT."./plugins/$plugin/setting.php");
 			} else {
 				$active="active";
 				$class="subcontent-td";

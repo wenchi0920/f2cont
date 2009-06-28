@@ -10,8 +10,8 @@ header('Content-type: text/xml; charset=utf-8', true);
 
 //读取语言包
 if ($settingInfo['language']=="") $settingInfo['language']="zh_cn";
-include_once(F2CONT_ROOT."./include/language/admin/".basename($settingInfo['language']).".php");
-include_once(F2CONT_ROOT."./include/cache.php");
+include_once(F2BLOG_ROOT."./include/language/admin/".basename($settingInfo['language']).".php");
+include_once(F2BLOG_ROOT."./include/cache.php");
 
 $settingInfo['blogUrl']="http://".$_SERVER['HTTP_HOST'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],"xmlrpc.php"));
 

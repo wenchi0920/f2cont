@@ -2,7 +2,7 @@
 <script language="javascript" type="text/javascript" src="editor/ubb/UBBCode.js"></script>
 <script language="javascript" type="text/javascript" src="editor/ubb/UBBCode_help_<?php echo $settingInfo['language']?>.js"></script>
 <?php 
-include(F2CONT_ROOT."/cache/cache_modulesSetting.php");
+include(F2BLOG_ROOT."/cache/cache_modulesSetting.php");
 if (!empty($plugins_smilies) && is_array($plugins_smilies)){
 ?>
 <!--UBB编辑器代码-->

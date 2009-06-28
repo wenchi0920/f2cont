@@ -38,7 +38,7 @@ class F2MysqlClass {
 		
 		if ($debug) {
 			$this->_debug=$debug;
-			$this->_fp=fopen(F2CONT_ROOT."./cache/".date("Ymd").".log","a");
+			$this->_fp=fopen(F2BLOG_ROOT."./cache/".date("Ymd").".log","a");
 		}
 		
 	}

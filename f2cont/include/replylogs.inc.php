@@ -96,7 +96,7 @@ if ($action=="save" && $allow_reply){
 	$settingInfo['spamfilter']	//	預設
 	*/
 	/* spam 過濾器強化	*/	
-	//include(F2CONT_ROOT."./include/guestbook.lib.php");
+	//include(F2BLOG_ROOT."./include/guestbook.lib.php");
 	switch (trim($settingInfo['spamfilter'])){
 		//	不新增留言
 		case "delete":

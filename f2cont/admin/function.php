@@ -17,15 +17,15 @@ $_GET['showmethod']=isset($_GET['showmethod'])?$_GET['showmethod']:"";
 
 //读取语言包
 if ($settingInfo['language']=="") $settingInfo['language']="zh_cn";
-include_once(F2CONT_ROOT."./include/language/admin/".basename($settingInfo['language']).".php");
-include_once(F2CONT_ROOT."./include/cache.php");
+include_once(F2BLOG_ROOT."./include/language/admin/".basename($settingInfo['language']).".php");
+include_once(F2BLOG_ROOT."./include/cache.php");
 
 $home_url="http://".$_SERVER['HTTP_HOST'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],"admin"));
 
 /********** 检查插件設置文件（图片水印有使用） **********/
 $f2_filter="";
 foreach($arrPluginName as $key=>$value){
-	$plugins_include=F2CONT_ROOT."./plugins/".basename($value)."/setting.php";
+	$plugins_include=F2BLOG_ROOT."./plugins/".basename($value)."/setting.php";
 	if (file_exists($plugins_include)){
 		include_once($plugins_include);
 	}
@@ -728,7 +728,7 @@ function getEditorPluginInfo($plugindir,$basedir){
 	$xmlfile=$wdir."plugin.xml";
 	
 	if (file_exists($xmlfile)){
-		include_once(F2CONT_ROOT."./include/xmlparse.inc.php");
+		include_once(F2BLOG_ROOT."./include/xmlparse.inc.php");
 		$arrPluginList=xmlArray($xmlfile);
 
 		$arrPlugin['PluginName']=$arrPluginList['PluginName'];

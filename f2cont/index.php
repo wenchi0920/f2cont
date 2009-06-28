@@ -12,7 +12,7 @@ include_once("header.php");
 
 //如果*.big.php文件，不装载默认侧边栏
 if (strpos($load_file,".big.php")>0){
-	include_once(F2CONT_ROOT."./$load_file");
+	include_once(F2BLOG_ROOT."./$load_file");
 }else{
 ?>
   <!--内容-->
@@ -23,7 +23,7 @@ if (strpos($load_file,".big.php")>0){
         <div id="mainContent-topimg"></div>
           <?php include_once("include/read_main.php")?>
           <!--主体部分-->
-          <?php include_once(F2CONT_ROOT."./$load_file")?>
+          <?php include_once(F2BLOG_ROOT."./$load_file")?>
 		  <?php include_once("include/read_main_foot.php")?>
         <div id="mainContent-bottomimg"></div>
       </div>

@@ -45,7 +45,7 @@ if (file_exists("./skins/".$blogSkins."/UBB")){
 
 <?php 
 //装载在线人员
-include_once(F2CONT_ROOT."./cache/cache_online.php");
+include_once(F2BLOG_ROOT."./cache/cache_online.php");
 
 // 增加访问量
 $curDate=gmdate('Y-m-d', time()+3600*$settingInfo['timezone']);
@@ -111,14 +111,14 @@ if (!preg_match("/http/i",$userBrowse) && $realip!="") {
 	$onlines .= "\$cache_visits_total = $cache_visits_total;\r\n\r\n";
 
 	if ($onlineCheck=="" || $offline_count>0){
-		include_once(F2CONT_ROOT."./include/cache.php");
+		include_once(F2BLOG_ROOT."./include/cache.php");
 		writetocache('online',$onlines);
 	}
 }
 
 //读取flash skin
 if (!empty($getDefaultSkinInfo['UseFlash'])){
-	if (file_exists(F2CONT_ROOT."skins/$blogSkins/".$getDefaultSkinInfo['FlashPath'])){
+	if (file_exists(F2BLOG_ROOT."skins/$blogSkins/".$getDefaultSkinInfo['FlashPath'])){
 		echo "<div id=\"FlashHead\" style=\"text-align:".$getDefaultSkinInfo['FlashAlign'].";top:".$getDefaultSkinInfo['FlashTop']."px;\"></div> \n";
 		if ($getDefaultSkinInfo['FlashTransparent']!="0"){
 			echo "<script type=\"text/javascript\">WriteHeadFlash('skins/$blogSkins/".$getDefaultSkinInfo['FlashPath']."','".$getDefaultSkinInfo['FlashWidth']."','".$getDefaultSkinInfo['FlashHeight']."',true)</script> \n";

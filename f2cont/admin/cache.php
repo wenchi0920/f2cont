@@ -135,7 +135,7 @@ if ($action=="") {
 
 	$cachedb = array();
 	foreach ($cacheArr AS $name => $desc)	{
-		$filepath = F2CONT_ROOT."cache/cache_".$name.'.php';
+		$filepath = F2BLOG_ROOT."cache/cache_".$name.'.php';
 		if(is_file($filepath)) {
 			$cachefile['name'] = $name;
 			$cachefile['desc'] = $desc;
