@@ -8,7 +8,7 @@ header("Content-Type: text/html; charset=utf-8");
 升级方法：
 1. 把此文件移到上一层目录就可以了。
 */
-$update_time="20090625";
+$update_time="20090628";
 
 //禁止此文件在tools目录下运行
 if (strpos(";".$_SERVER['PHP_SELF'],"tools")>0){
@@ -152,6 +152,8 @@ function update_data($echo,$DMC){
 		$arr_setting['spamfilter']='close';
 		
 	}	
+	
+	
 	
 	//	update 20090625
 	if (!in_array($update_logs,"20090625")){
