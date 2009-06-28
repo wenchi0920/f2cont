@@ -1,6 +1,6 @@
 <?php 
 //装载主体页面内容
-if (!defined('IN_F2CONT')) die ('Access Denied.');
+if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
 $load=(empty($_GET['load']))?"":$_GET['load'];
 if (preg_match("/http|:|\.|\/| |\\\/i",$load)) {

@@ -1,6 +1,6 @@
 <?php
 # 禁止直接访问该页面
-if (!defined('IN_F2CONT')) die ('Access Denied.');
+if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
 $logContent=str_replace("&","&amp;",$logContent);
 ?>

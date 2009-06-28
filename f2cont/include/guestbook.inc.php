@@ -1,5 +1,5 @@
 <?php
-if (!defined('IN_F2CONT')) die ('Access Denied.');
+if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
 $per_page=$settingInfo['logsgbook'];
 $page=empty($_GET['page'])?"1":$_GET['page'];

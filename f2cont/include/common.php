@@ -8,7 +8,7 @@ $mtime = explode(' ', microtime());
 $starttime = $mtime[0] + $mtime[1];
 
 //网志常量
-define('IN_F2CONT', TRUE);
+define('IN_F2BLOG', TRUE);
 define('F2BLOG_ROOT', substr(dirname(__FILE__), 0, -7));
 define("blogVersion",".cont 1.0 Beta 090628");
 define("blogUpdateDate","2007-03-01");
@@ -837,7 +837,7 @@ function writetohtml($htmlname, $htmldata = '') {
 	}
 	$htmlfile = $htmldir.$name.'.php';
 	if($fp = fopen($htmlfile, 'wbt')) {
-		fwrite($fp, "<?php if (!defined('IN_F2CONT')) die ('Access Denied.');?>\r\n".$htmldata);
+		fwrite($fp, "<?php if (!defined('IN_F2BLOG')) die ('Access Denied.');?>\r\n".$htmldata);
 		fclose($fp);
 	} else {
 		echo "Can not write to html files, please check directory $htmldir.";

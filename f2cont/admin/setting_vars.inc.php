@@ -1,5 +1,5 @@
 <?php  
-if (!defined('IN_F2CONT')) die ('Access Denied.');
+if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
 //博客设定
 //@params:第一个为控件类型：sec表示每个分区的标题，t表示文本框(输入内容无限制)，r表示单选框，f表示文件框，ta表示文本区域，tn表示限输入数字的文本框sel表示选择框，c表示复选框。（必须）
