@@ -1,0 +1,7 @@
+.mceItemFlv {
+	border: 1px dotted #cc0000;
+	background-image: url('../images/flv.gif');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: #ffffcc;
+}

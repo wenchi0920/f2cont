@@ -1,0 +1,14 @@
+#
+# robots.txt for F2blog By www.99way.com
+# Version F2blog v1.0 build 08.01
+#
+
+User-agent: *
+Disallow: /admin
+Disallow: /attachments
+Disallow: /backup
+Disallow: /cache
+Disallow: /images
+Disallow: /include
+Disallow: /plugins
+Disallow: /skins

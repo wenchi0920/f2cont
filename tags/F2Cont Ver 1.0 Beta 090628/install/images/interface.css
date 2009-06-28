@@ -1,0 +1,175 @@
+BODY {
+	BACKGROUND-POSITION: left top; MARGIN: 0px; BACKGROUND-REPEAT: repeat-y
+}
+BODY {
+	FONT-SIZE: 9pt; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+TABLE {
+	FONT-SIZE: 9pt; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+TD {
+	FONT-SIZE: 9pt; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+SELECT {
+	FONT-SIZE: 9pt; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+TEXTAREA {
+	FONT-SIZE: 9pt; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+INPUT {
+	FONT-SIZE: 9pt; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+A {
+	COLOR: #003399; TEXT-DECORATION: none
+}
+A:hover {
+	TEXT-DECORATION: underline
+}
+.tab-s {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; TEXT-DECORATION: none
+}
+.tab-u {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; TEXT-DECORATION: none
+}
+.tab-g {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; TEXT-DECORATION: none
+}
+.tab-r {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; TEXT-DECORATION: none
+}
+.tab-s:hover {
+	TEXT-DECORATION: underline
+}
+.tab-u:hover {
+	TEXT-DECORATION: underline
+}
+.tab-g:hover {
+	TEXT-DECORATION: underline
+}
+.tab-r:hover {
+	TEXT-DECORATION: underline
+}
+.tab-s {
+	COLOR: #0066cc
+}
+.tab-u {
+	COLOR: #ffffff
+}
+.tab-g {
+	COLOR: #666666
+}
+.tab-r {
+	COLOR: #cc0000
+}
+.tab-n {
+	FONT-WEIGHT: bold; FONT-SIZE: 9pt; COLOR: #ffffff; TEXT-DECORATION: none
+}
+.tab-n:hover {
+	TEXT-DECORATION: underline
+}
+DIV.errormessage {
+	BORDER-RIGHT: #cfcfcf 1px dashed; PADDING-RIGHT: 6px; BORDER-TOP: #cfcfcf 1px dashed; MARGIN-TOP: 8px; PADDING-LEFT: 32px; MARGIN-BOTTOM: 16px; PADDING-BOTTOM: 6px; BORDER-LEFT: #cfcfcf 1px dashed; LINE-HEIGHT: 18px; PADDING-TOP: 6px; BORDER-BOTTOM: #cfcfcf 1px dashed; BACKGROUND-COLOR: #ffffe1
+}
+DIV.errormessage TD {
+	LINE-HEIGHT: 18px
+}
+IMG.errormessage {
+	MARGIN-LEFT: -24px
+}
+DIV#helpLayer {
+	PADDING-RIGHT: 8px; BORDER-TOP: #cfcfcf 1px dashed; PADDING-LEFT: 28px; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; BACKGROUND-COLOR: #ffffe1
+}
+IMG#helpIcon {
+	MARGIN-LEFT: -20px
+}
+SELECT.flat {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid
+}
+TEXTAREA.flat {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid
+}
+INPUT.flat {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid
+}
+SELECT.error {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid
+}
+TEXTAREA.error {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid
+}
+INPUT.error {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid
+}
+TEXTAREA.code {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid
+}
+SELECT.flat {
+	BORDER-LEFT-COLOR: #888888; BORDER-BOTTOM-COLOR: #888888; BORDER-TOP-COLOR: #888888; BORDER-RIGHT-COLOR: #888888
+}
+TEXTAREA.flat {
+	BORDER-LEFT-COLOR: #888888; BORDER-BOTTOM-COLOR: #888888; BORDER-TOP-COLOR: #888888; BORDER-RIGHT-COLOR: #888888
+}
+INPUT.flat {
+	BORDER-LEFT-COLOR: #888888; BORDER-BOTTOM-COLOR: #888888; BORDER-TOP-COLOR: #888888; BORDER-RIGHT-COLOR: #888888
+}
+TEXTAREA.code {
+	BORDER-LEFT-COLOR: #888888; BORDER-BOTTOM-COLOR: #888888; BORDER-TOP-COLOR: #888888; BORDER-RIGHT-COLOR: #888888
+}
+SELECT.error {
+	BORDER-LEFT-COLOR: #990000; BORDER-BOTTOM-COLOR: #990000; BORDER-TOP-COLOR: #990000; BORDER-RIGHT-COLOR: #990000
+}
+TEXTAREA.error {
+	BORDER-LEFT-COLOR: #990000; BORDER-BOTTOM-COLOR: #990000; BORDER-TOP-COLOR: #990000; BORDER-RIGHT-COLOR: #990000
+}
+INPUT.error {
+	BORDER-LEFT-COLOR: #990000; BORDER-BOTTOM-COLOR: #990000; BORDER-TOP-COLOR: #990000; BORDER-RIGHT-COLOR: #990000
+}
+TEXTAREA.code {
+	FONT-SIZE: 12px; LINE-HEIGHT: 15px; FONT-FAMILY: "Lucida Console", "Courier New", Courier, monospace
+}
+TEXTAREA.code-gray {
+	FONT-SIZE: 12px; LINE-HEIGHT: 15px; FONT-FAMILY: "Lucida Console", "Courier New", Courier, monospace
+}
+TEXTAREA.code-gray {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; BORDER-LEFT: 0px solid; COLOR: #808080; BORDER-BOTTOM: 0px solid
+}
+DIV.box {
+	BORDER-RIGHT: #7f9db9 1px solid; BORDER-TOP: #7f9db9 1px solid; MARGIN-TOP: 1px; OVERFLOW-Y: scroll; OVERFLOW-X: hidden; MARGIN-BOTTOM: 1px; OVERFLOW: auto; BORDER-LEFT: #7f9db9 1px solid; WIDTH: 275px; BORDER-BOTTOM: #7f9db9 1px solid; HEIGHT: 100px; BACKGROUND-COLOR: #ffffff
+}
+TEXTAREA.box {
+	MARGIN-TOP: -1px; WIDTH: 275px; HEIGHT: 100px
+}
+DIV.boxtitle {
+	FONT-WEIGHT: bold; PADDING-BOTTOM: 5px; PADDING-TOP: 6px; BORDER-BOTTOM: #dddddd 1px solid
+}
+DIV.boxrow {
+	PADDING-BOTTOM: 2px; CURSOR: hand; PADDING-TOP: 2px; BORDER-BOTTOM: #dddddd 1px solid
+}
+DIV.boxrow IMG {
+	VERTICAL-ALIGN: middle
+}
+DIV.boxrow INPUT {
+	VERTICAL-ALIGN: middle
+}
+.f2blog {
+	FONT-WEIGHT: bold; FONT-SIZE: 24px; COLOR: #003399; FONT-FAMILY: ËÎÌו_GB2312, Arial, Helvetica, sans-serif
+}
+.err {
+	COLOR: red; LINE-HEIGHT: 18px
+}
+.nav {
+	COLOR: #003399
+}
+.nav1 {
+	COLOR: #666666
+}
+
+.install {
+	COLOR: #000066; LINE-HEIGHT: 18px
+}
+TD.cellenabled {
+	COLOR: #000000
+}
+TD.celldisabled {
+	COLOR: #888888
+}
