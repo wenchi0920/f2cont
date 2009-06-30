@@ -18,17 +18,21 @@ if ($action=="logout"){
 	unset($_SESSION);
 	session_destroy();
 	header("Location: ../index.php");
+	exit;
 }
 
 if (!empty($_SESSION['rights'])){
 	if (in_array($_SESSION['rights'],array("admin","editor","author")) && !empty($_SESSION['username']) && !empty($_SESSION['password'])) {
 			if (strpos(";{$_SESSION['prelink']}","index.php")<1 && strpos(";{$_SESSION['prelink']}",$home_url)>0 && $_SESSION['prelink']!=""){
 				header("Location: ".$_SESSION['prelink']."");
+				exit;
 			}else{
 				header("Location: control.php");
+				exit;
 			}
 	}else{
 		header("Location: ../index.php");
+		exit;
 	}
 }
 

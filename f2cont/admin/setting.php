@@ -56,6 +56,7 @@ if ($action=="restore"){
 	settings_recount();
 	settings_recache();
 	header("location: setting.php?set={$_GET[set]}&update=ok");
+	exit;
 }
 
 //更改配置文件后，重新生成cache文件。
@@ -82,6 +83,7 @@ if (isset($_GET['delete']) && $_GET['delete']!=""){
 	$DMC->query("update ".$DBPrefix."setting set settValue='' where settName='{$_GET['delete']}'") or die(mysql_error());
 	settings_recache();
 	header("location: setting.php");
+	exit;
 }
 
 //保存
@@ -198,6 +200,7 @@ eot;
 		if ($update_sql!=""){
 			settings_recache();
 			header("location: setting.php?set={$_GET['set']}&update=ok");
+			exit;
 		}
 
 		$ActionMessage=$strSaveSuccess;

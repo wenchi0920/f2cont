@@ -76,8 +76,10 @@ if ($check_info==1){
 		$last_id=$DMC->insertId();
 	}
 	header("location: ../index.php?load=read&id=$last_id");
+	exit;
 } else {
 	header("Content-Type: text/html; charset=utf-8");
 	echo $ActionMessage;
+	exit;
 }
 ?>

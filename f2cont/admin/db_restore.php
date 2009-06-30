@@ -314,6 +314,7 @@ if ($action=="save"){
 		modules_recache();
 
 		header("Location: db_restore.php?update=ok&msg=".urlencode($ActionMessage));
+		exit;
 	}
 }
 
