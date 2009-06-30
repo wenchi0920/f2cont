@@ -162,11 +162,13 @@ if ($action=="manage"){
 	if($manage!="edit" && $manage!="delete" && $manage!="draft"){
 		if ($manage=="notop" or $manage=="topopen" or $manage=="topclose") {
 			header("Location: ../index.php"); 
+			exit;
 		} else {
 			if ($settingInfo['rewrite']==0) $gourl="../index.php?load=read&id=$mark_id";
 			if ($settingInfo['rewrite']==1) $gourl="../rewrite.php/read-$mark_id";
 			if ($settingInfo['rewrite']==2) $gourl="../read-$mark_id";
 			header("Location: $gourl".$settingInfo['stype']); 
+			exit;
 		}
 	}
 
@@ -413,6 +415,7 @@ if ($action=="save"){
 					if ($settingInfo['rewrite']==1) $gourl="../rewrite.php/read-$mark_id";
 					if ($settingInfo['rewrite']==2) $gourl="../read-$mark_id";
 					header("Location: $gourl".$settingInfo['stype']); 
+					exit;
 				}
 			}
 		}

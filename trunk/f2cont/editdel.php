@@ -203,17 +203,17 @@ if (!empty($_GET['action']) && $_GET['action']=="save"){
 			//	不新增留言
 			case "delete":
 				//$intSpamFiler=0;
-				if ($check_info && !$isSpam) guestBookPost(0,0);
+				if ($check_info && !$isSpam) guestBookPost(0,0,$arrSideModule,$settingInfo,$op_table,$op_update,$postid,$gourl,$id);
 			break;
 			
 			//	新增留言，但不顯示 加入 spam 記號
 			case "close":
 				if ($isSpam==1) {
-					guestBookPost(1,0);
+					guestBookPost(1,0,$arrSideModule,$settingInfo,$op_table,$op_update,$postid,$gourl,$id);
 					$ActionMessage="";
 				}
 				elseif ($check_info){
-					guestBookPost(0,0);
+					guestBookPost(0,0,$arrSideModule,$settingInfo,$op_table,$op_update,$postid,$gourl,$id);
 				}
 			break;
 			
@@ -223,11 +223,11 @@ if (!empty($_GET['action']) && $_GET['action']=="save"){
 			default:
 				
 				if ($isSpam==1) {
-					guestBookPost(1,0);
+					guestBookPost(1,0,$arrSideModule,$settingInfo,$op_table,$op_update,$postid,$gourl,$id);
 					$ActionMessage="";
 				}
 				elseif ($check_info){
-					guestBookPost(0,0);
+					guestBookPost(0,0,$arrSideModule,$settingInfo,$op_table,$op_update,$postid,$gourl,$id);
 				}
 				
 			break;
@@ -280,8 +280,8 @@ if (!empty($_GET['action']) && $_GET['action']=="save"){
 }
 
 
-function guestBookPost($intSpamFiler,$intIsSecret){
-	global $DMC,$DBPrefix,$arrSideModule,$settingInfo;
+function guestBookPost($intSpamFiler,$intIsSecret,$arrSideModule,$settingInfo,$op_table,$op_update,$postid,$gourl,$id){
+	global $DMC,$DBPrefix;
 	
 	$author=(!empty($_POST['username']))?$_POST['username']:$_SESSION['username'];
 	$replypassword=(!empty($_POST['replypassword']))?md5($_POST['replypassword']):$old_password;

@@ -29,6 +29,7 @@ if ($action=="deltb"){
 	settings_recache();
 
 	header("Location:../index.php?load=read&id=$logId"); 
+	exit;
 }
 
 //其它操作行为：编辑、删除等

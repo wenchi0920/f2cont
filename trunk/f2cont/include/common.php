@@ -58,8 +58,10 @@ if ($DBUser=="" || $DBPass=="" || $DBName==""){
 	if (file_exists(F2BLOG_ROOT."./install/install.php")) {
 		if (strpos($_SERVER['PHP_SELF'],"/admin/")>0){
 			header("Location: ../install/install.php");
+			exit;
 		}else{
 			header("Location: ./install/install.php");
+
 		}
 	}else{
 		header("Content-Type: text/html; charset=utf-8");
@@ -99,6 +101,7 @@ if (file_exists(F2BLOG_ROOT."./cache/cache_setting.php")){
 	reAllCache();
 
 	header("Location:".$_SERVER['PHP_SELF']);
+	exit;
 }
 
 //如果安装文件存在，则不能使用blog

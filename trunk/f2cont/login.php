@@ -56,6 +56,7 @@ if ($action=="logout"){
 	unset($_SESSION);
 	session_destroy();
 	header("Location: index.php");
+	exit;
 }
 
 if ($_GET['action']=="login"){
@@ -106,6 +107,7 @@ if ($_GET['action']=="login"){
 				$DMC->query("update ".$DBPrefix."members set hashKey='' where username='$username'");
 			}
 			header("Location: index.php");
+			exit;
 		} else {
 			$ActionMessage=$strLoginErrUserPWD;
 		}
