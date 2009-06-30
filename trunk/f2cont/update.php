@@ -163,6 +163,19 @@ function update_data($echo,$DMC){
 
 	}
 
+	//	update 20090630
+	if (!in_array($update_logs,"20090625")){
+
+		//	This site baclofen is about baclofen remedy.
+
+		$SQL="select count(`name`) from `{$DBPrefix}filters` where `category`='1' and `name`='This site'";
+		list($intNums)=$DMC->fetchArray($DMC->query($SQL),MYSQL_NUM);
+		if ($intNums==0) {
+			$modify_sql[]="INSERT INTO `{$DBPrefix}filters` (`category`, `name`) VALUES (1, 'This site')";
+		}
+
+	}
+
 	if (is_array($arr_setting)){
 		foreach($arr_setting as $key=>$value){
 			if (!$DMC->fetchArray($DMC->query("select * from ".$DBPrefix."setting where settName='$key'"))){
