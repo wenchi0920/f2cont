@@ -79,8 +79,12 @@ if (file_exists(F2BLOG_ROOT."./update.php")){
 	
 	header( 'refresh: 5; url=./update.php' );
 	echo " 請先執行 update.php <br/>";
-	echo " 系統將會於 5 秒後自動 執行 update.php";
-	echo " 如果無法自動執行 <a href=\"update.php\" target=\"_self\">請按這裡</a>";
+	echo " 系統將會於 5 秒後自動 執行 update.php <br/>";
+	echo " 如果無法自動執行 <a href=\"update.php\" target=\"_self\">請按這裡 <br/> <br/> <br/>";
+
+	echo " Please run update.php <br/>";
+	echo " The system will be in 5 seconds after the self-executing update.php <br/>";
+	echo " If you can not self-executing <a href=\"update.php\" target=\"_self\">Click here</a> <br/>";
 
 	exit;
 
