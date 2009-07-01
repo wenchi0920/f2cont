@@ -72,13 +72,23 @@ if ($check_update){
 		//运行更新文件,参数true显示更新内容。false不显示更新内容。
 		include_once("include/cache.php");
 		update_data(true,$DMC);
-		@unlink(dirname(__FILE__)."/update.php");
+	
+		//删除update.php，不能删除将提示管理员删除。
+		if (!@unlink(F2BLOG_ROOT."./update.php")){
+			echo "please delete update.php";
+			exit;
+		}
 	}
 }else{
 	if (preg_match("/update.php/",$_SERVER['PHP_SELF'])){
 		echo "F2Cont have already updated to $update_time, please delete this update.php <hr>";
 		echo "<a href=index.php>Return Homepage</a>";
-		@unlink(dirname(__FILE__)."/update.php");
+	
+		//删除update.php，不能删除将提示管理员删除。
+		if (!@unlink(F2BLOG_ROOT."./update.php")){
+			echo "please delete update.php";
+			exit;
+		}
 	}
 }
 
