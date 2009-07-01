@@ -75,6 +75,11 @@ $DMC = new F2MysqlClass($DBHost, $DBUser, $DBPass, $DBName,$DBNewlink);
 
 //寻找update.php文件，如果找到就自动更新，更新完后删除该文件。
 if (file_exists(F2BLOG_ROOT."./update.php")){
+
+
+	die("file update.php is exists, please run it , or delete it.");
+	exit;
+
 	include(F2BLOG_ROOT."./update.php");
 	
 	//删除update.php，不能删除将提示管理员删除。
