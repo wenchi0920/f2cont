@@ -61,6 +61,7 @@ if ($DBUser=="" || $DBPass=="" || $DBName==""){
 			exit;
 		}else{
 			header("Location: ./install/install.php");
+			exit;
 
 		}
 	}else{
