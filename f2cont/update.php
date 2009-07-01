@@ -71,12 +71,14 @@ if ($check_update){
 	}else{ //是在common.php中检测运行
 		//运行更新文件,参数true显示更新内容。false不显示更新内容。
 		include_once("include/cache.php");
-		update_data(false,$DMC);
+		update_data(true,$DMC);
+		@unlink(dirname(__FILE__)."/update.php");
 	}
 }else{
 	if (preg_match("/update.php/",$_SERVER['PHP_SELF'])){
 		echo "F2Cont have already updated to $update_time, please delete this update.php <hr>";
 		echo "<a href=index.php>Return Homepage</a>";
+		@unlink(dirname(__FILE__)."/update.php");
 	}
 }
 
@@ -167,7 +169,6 @@ function update_data($echo,$DMC){
 	if (!in_array($update_logs,"20090625")){
 
 		//	This site baclofen is about baclofen remedy.
-
 		$SQL="select count(`name`) from `{$DBPrefix}filters` where `category`='1' and `name`='This site'";
 		list($intNums)=$DMC->fetchArray($DMC->query($SQL),MYSQL_NUM);
 		if ($intNums==0) {
@@ -207,6 +208,18 @@ function update_data($echo,$DMC){
 	writetocache('update_logs',$contents);
 
 	//清空缓存
+	if (!@unlink(F2BLOG_ROOT."./cache/cache_setting.php")){
+		echo "<script language=Javascript> \n";
+		echo "alert('Please update cache!');\n";
+		echo "</script>\n";
+	}
+	//更新缓存
+	settings_recache();
+	links_recache();
+
+
+/*
+	//清空缓存
 	if ($delete_setting==true){//0909升级需要重新建立setting文件。
 		if (!@unlink(F2BLOG_ROOT."./cache/cache_setting.php")){
 			echo "<script language=Javascript> \n";
@@ -218,6 +231,7 @@ function update_data($echo,$DMC){
 		settings_recache();
 		links_recache();
 	}
+*/
 
 	return false;
 
