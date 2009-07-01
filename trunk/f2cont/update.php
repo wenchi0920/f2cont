@@ -49,7 +49,7 @@ if ($check_update){
 		$SQL="select `settValue` from `{$DBPrefix}setting` where `settName`='closeReason' limit 0,1";
 		list($strCloseReason)=$DMC->fetchArray($DMC->query($SQL),MYSQL_NUM);
 		
-		$SQL="update `{$DBPrefix}setting` set `settValue`='blog is update system now,plesase wait' where `settName`='closeReason' ";
+		$SQL="update `{$DBPrefix}setting` set `settValue`='blog is update system now,plesase wait..' where `settName`='closeReason' ";
 		$DMC->query($SQL);
 		
 		$SQL="update `{$DBPrefix}setting` set `settValue`='1' where `settName`='status' ";
