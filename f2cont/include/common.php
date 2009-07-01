@@ -76,9 +76,16 @@ $DMC = new F2MysqlClass($DBHost, $DBUser, $DBPass, $DBName,$DBNewlink);
 //寻找update.php文件，如果找到就自动更新，更新完后删除该文件。
 if (file_exists(F2BLOG_ROOT."./update.php")){
 
+	
+	header( 'refresh: 5; url=./update.php' );
+	echo " 請先執行 update.php <br/>";
+	echo " 系統將會於 5 秒後自動 執行 update.php";
+	echo " 如果無法自動執行 <a href=\"update.php\" target=\"_self\">請按這裡</a>";
 
-	die("file update.php is exists, please run it , or delete it.");
 	exit;
+
+	//	<meta http-equiv="refresh" content="2;url=http://webdesign.about.com">
+	//	header( 'refresh: 0; url=http://www.example.net' );
 
 	include(F2BLOG_ROOT."./update.php");
 	
