@@ -7,6 +7,10 @@ if ($settingInfo['status']) include_once("include/closelogs.inc.php");
 //装载主体项目
 include_once("include/loadbar.inc.php");
 
+
+
+exit;
+
 //装载头部文件
 include_once("header.php");
 
