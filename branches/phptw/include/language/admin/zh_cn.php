@@ -711,8 +711,8 @@ $strLogTopClose="置顶隐藏";
 $strLogTopOpen="置顶展开";
 $strAjaxMediaStatus="媒体播放器";
 
-$strSettingSpamFiler="SPAM 過濾器規則";
-$strSpamTrash="SPAM 廣告";
+$strSettingSpamFiler="SPAM 过滤器规则";
+$strSpamTrash="SPAM 广告";
 
 
 $strAboutF2Cont = "关于F2Cont";
@@ -720,5 +720,13 @@ $strF2ContZhao4 = "3. 推广员：有兴趣及愿为F2Cont作推广的朋友都�
 $strF2ContLinks = "F2Cont链接";
 $strF2ContLinkDesc1 = "F2Cont官方网站";
 $strF2ContLinkDesc2 = "F2Cont官方论坛，有任何疑问，可以到此咨询";
+
+
+$strTopNews="跑马灯消息";  
+$strTopNewsDisable="跑马灯状态";  
+$strTopNewsAllow="启用";  
+$strTopNewsDeny="停用";
+$strTopNewsTitle="跑马灯";  
+$strTopNewsLog="跑马灯"; 
 
 ?>
