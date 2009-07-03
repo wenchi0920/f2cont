@@ -34,13 +34,13 @@ $edittype=empty($_REQUEST['edittype'])?"":$_REQUEST['edittype'];
 //前台管理行为
 if ($action=="manage"){
 	$manage=empty($_GET['manage'])?"":$_GET['manage'];
-	
+
 	//编辑
 	if($manage=="edit" && $mark_id!=""){
 		$edittype="front";
 		$action="edit";
 	}
-	
+
 	//删除
 	if($manage=="delete" && $mark_id!=""){
 		$action="delete";
@@ -70,7 +70,7 @@ if ($action=="manage"){
 			}
 			$name=($name=="")?"":substr($name,4);
 		}
-		
+
 		if (($dataInfo['saveType']==1 && $value!=1) || ($dataInfo['saveType']!=1 && $value==1)){
 			update_cateCount($cateId,$type,1);
 		}
@@ -157,17 +157,17 @@ if ($action=="manage"){
 		settings_recount("trackbacks");
 		settings_recache();
 	}
-	
+
 	//页面转向
 	if($manage!="edit" && $manage!="delete" && $manage!="draft"){
 		if ($manage=="notop" or $manage=="topopen" or $manage=="topclose") {
-			header("Location: ../index.php"); 
+			header("Location: ../index.php");
 			exit;
 		} else {
 			if ($settingInfo['rewrite']==0) $gourl="../index.php?load=read&id=$mark_id";
 			if ($settingInfo['rewrite']==1) $gourl="../rewrite.php/read-$mark_id";
 			if ($settingInfo['rewrite']==2) $gourl="../read-$mark_id";
-			header("Location: $gourl".$settingInfo['stype']); 
+			header("Location: $gourl".$settingInfo['stype']);
 			exit;
 		}
 	}
@@ -178,7 +178,7 @@ if ($action=="manage"){
 //保存数据
 if ($action=="save"){
 	$check_info=1;
-	
+
 	//取得Form的Value
 	$cateId=trim($_POST['cateId']);
 	$oldCateId=trim($_POST['oldCateId']);
@@ -202,7 +202,7 @@ if ($action=="save"){
 	}else{
 		$addpassword=encode($_POST['addpassword']);
 	}
-	
+
 	//检测输入内容为空
 	if (empty($logTitle) or empty($logContent) or empty($cateId)){
 		$ActionMessage=$strErrNull;
@@ -214,7 +214,7 @@ if ($action=="save"){
 			$cateId=encode($cateId);
 			$rsexits=getFieldValue($DBPrefix."categories","name='".$cateId."' and parent='0'","id");
 			if ($rsexits!=""){
-				$cateId=$rsexits;				
+				$cateId=$rsexits;
 			}else{
 				$sql="INSERT INTO ".$DBPrefix."categories(parent,name,orderNo,cateTitle,outLinkUrl,cateCount,isHidden,cateIcons) VALUES ('0','".$cateId."','0','".$cateId."','','0','0','1')";
 				$DMC->query($sql);
@@ -228,7 +228,7 @@ if ($action=="save"){
 
 		//已存在的Tags
 		$exist_tags=tag_list("A");
-		
+
 		$logs_tags=array();
 		$oldlogs_tags=array();
 
@@ -236,14 +236,14 @@ if ($action=="save"){
 			$tags_array=explode(';', $tags);
 			$tags_array_all=array_unique($tags_array);
 			$tags="";
-			
+
 			foreach($tags_array_all as $value){
 				if ($value!=""){
 					$tags.=($tags=="")?encode(stripslashes($value)):";".encode(stripslashes($value));
 					$logs_tags[]=encode(stripslashes($value));
 				}
 			}
-			
+
 			//处理旧标签
 			$oldTags_array=explode(';', $oldTags);
 			$oldTags_array_all=array_unique($oldTags_array);
@@ -259,7 +259,7 @@ if ($action=="save"){
 		//如果是ubb编辑器
 		if ($logsediter=="ubb"){
 			if (empty($_POST['allowhtml'])){
-				$logContent=ubblogencode($logContent);				
+				$logContent=ubblogencode($logContent);
 			}else{
 				$logContent=str_replace("\r","",$logContent);
 				$logContent=str_replace("\n","",$logContent);
@@ -273,9 +273,9 @@ if ($action=="save"){
 
 		//转换UBB标签
 		if (strpos(";".$logContent,"[hideBegin]")>0) $logContent=preg_replace("/\[hideBegin\](.+?)\[hideEnd\]/is","<!--hideBegin-->\\1<!--hideEnd-->",$logContent);
-		if (strpos(";".$logContent,"[fileBegin]")>0) $logContent=preg_replace("/\[fileBegin\](.+?)\[fileEnd\]/is","<!--fileBegin-->\\1<!--fileEnd-->",$logContent);		
-		if (strpos(";".$logContent,"[flvBegin]")>0) $logContent=preg_replace("/\[flvBegin\](.+?)\[flvEnd\]/is","<!--flvBegin-->\\1<!--flvEnd-->",$logContent);		
-		if (strpos(";".$logContent,"[musicBegin]")>0) $logContent=preg_replace("/\[musicBegin\](.+?)\[musicEnd\]/is","<!--musicBegin-->\\1<!--musicEnd-->",$logContent);	
+		if (strpos(";".$logContent,"[fileBegin]")>0) $logContent=preg_replace("/\[fileBegin\](.+?)\[fileEnd\]/is","<!--fileBegin-->\\1<!--fileEnd-->",$logContent);
+		if (strpos(";".$logContent,"[flvBegin]")>0) $logContent=preg_replace("/\[flvBegin\](.+?)\[flvEnd\]/is","<!--flvBegin-->\\1<!--flvEnd-->",$logContent);
+		if (strpos(";".$logContent,"[musicBegin]")>0) $logContent=preg_replace("/\[musicBegin\](.+?)\[musicEnd\]/is","<!--musicBegin-->\\1<!--musicEnd-->",$logContent);
 		if (strpos(";".$logContent,"[mfileBegin]")>0) $logContent=preg_replace("/\[mfileBegin\](.+?)\[mfileEnd\]/is","<!--mfileBegin-->\\1<!--mfileEnd-->",$logContent);
 		if (strpos(";".$logContent,"[galleryBegin]")>0) $logContent=preg_replace("/\[galleryBegin\](.+?)\[galleryEnd\]/is","<!--galleryBegin-->\\1<!--galleryEnd-->",$logContent);
 		if (strpos($logContent,"[more]")>0) $logContent=str_replace("[more]","<!--more-->",$logContent);
@@ -296,7 +296,10 @@ if ($action=="save"){
 				$action="add";
 			}else{
 				$edit_sql=($pubTimeType=="now")?"":",postTime='$postTime'";
-				$sql="update ".$DBPrefix."logs set cateId='$cateId',logTitle='$logTitle',logContent='$logContent',isComment='$isComment',isTrackback='$isTrackback',isTop='$isTop',weather='$weather',saveType='$saveType',tags='$tags',logsediter='$logsediter',password='$addpassword',autoSplit='$autoSplit'$edit_sql where id='$mark_id'";
+				$sql="update ".$DBPrefix."logs set cateId='$cateId',logTitle='$logTitle',logContent='$logContent',isComment='$isComment',isTrackback='$isTrackback',isTop='$isTop'                       ,weather='$weather',saveType='$saveType',tags='$tags',logsediter='$logsediter',password='$addpassword',autoSplit='$autoSplit'$edit_sql where id='$mark_id'";
+
+				$sql="update ".$DBPrefix."logs set cateId='$cateId',logTitle='$logTitle',logContent='$logContent',isComment='$isComment',isTrackback='$isTrackback',isTop='$isTop',isTopNews='$isTopNews',weather='$weather',saveType='$saveType',tags='$tags',logsediter='$logsediter',password='$addpassword',autoSplit='$autoSplit'$edit_sql where id='$mark_id'";
+
 				$DMC->query($sql);
 
 				$ActionMessage=$strSaveSuccess;
@@ -311,7 +314,9 @@ if ($action=="save"){
 			}else{
 				$author=$_SESSION['username'];
 
-				$sql="INSERT INTO ".$DBPrefix."logs(cateId,logTitle,logContent,author,quoteUrl,postTime,isComment,isTrackback,isTop,weather,saveType,tags,password,logsediter,autoSplit) VALUES ('$cateId','$logTitle','$logContent','$author','$quoteUrl','$postTime','$isComment','$isTrackback','$isTop','$weather','$saveType','$tags','$addpassword','$logsediter','$autoSplit')";
+				$sql="INSERT INTO ".$DBPrefix."logs(cateId,logTitle,logContent,author,quoteUrl,postTime,isComment,isTrackback,isTop          ,weather,saveType,tags,password,logsediter,autoSplit) VALUES ('$cateId','$logTitle','$logContent','$author','$quoteUrl','$postTime','$isComment','$isTrackback','$isTop'             ,'$weather','$saveType','$tags','$addpassword','$logsediter','$autoSplit')";
+				$sql="INSERT INTO ".$DBPrefix."logs(cateId,logTitle,logContent,author,quoteUrl,postTime,isComment,isTrackback,isTop,isTopNews,weather,saveType,tags,password,logsediter,autoSplit) VALUES ('$cateId','$logTitle','$logContent','$author','$quoteUrl','$postTime','$isComment','$isTrackback','$isTop','$isTopNews','$weather','$saveType','$tags','$addpassword','$logsediter','$autoSplit')";
+
 				$DMC->query($sql);
 				$last_id=$DMC->insertId();
 				$mark_id=$last_id;
@@ -330,12 +335,12 @@ if ($action=="save"){
 				$action="";
 			}
 		}
-		
+
 		//增加，编辑成功，Tags
 		if ($tags!=$oldTags) {
 			if (count($exist_tags)>0 && $exist_tags[0]!=""){
 				$newtags=array_diff($logs_tags, $exist_tags);
-				$newtags=array_values($newtags); 
+				$newtags=array_values($newtags);
 				$addtags=array_diff($logs_tags, $oldlogs_tags);
 
 				if (count($addtags)>0){
@@ -351,14 +356,14 @@ if ($action=="save"){
 				}
 			}else{
 				$newtags=$logs_tags;
-			}			
+			}
 
 			for ($m=0; $m<count($newtags); $m++) {
 				if ($newtags[$m]!="") {
 					$itags=$newtags[$m];
 					if (check_record($DBPrefix."tags"," name='$itags'")) {
 						$add_sql="INSERT INTO ".$DBPrefix."tags (name,logNums) VALUES ('".$itags."',1)";
-						$DMC->query($add_sql);						
+						$DMC->query($add_sql);
 					}
 				}
 			}
@@ -376,7 +381,7 @@ if ($action=="save"){
 					update_cateCount($cateId,"adding",1);//增加新类别数量
 				}
 			}
-	
+
 			//更新未链接的附件
 			if (!empty($_COOKIE['f2_attachments'])){
 				$arr_attachid=explode("|",$_COOKIE['f2_attachments']);
@@ -403,18 +408,18 @@ if ($action=="save"){
 			if (file_exists("../cache/cache_autosave.php")){
 				@unlink("../cache/cache_autosave.php");
 			}
-			
+
 			//生成静态页面
 			if ($settingInfo['isHtmlPage']==1){
-				echo "<script language='javascript'>"; 
-				echo "window.location='create_html.inc.php?edittype=$edittype&arrayhtmlid=$last_id';"; 
+				echo "<script language='javascript'>";
+				echo "window.location='create_html.inc.php?edittype=$edittype&arrayhtmlid=$last_id';";
 				echo "</script>";
 			}else{
 				if ($edittype=="front") {
 					if ($settingInfo['rewrite']==0) $gourl="../index.php?load=read&id=$mark_id";
 					if ($settingInfo['rewrite']==1) $gourl="../rewrite.php/read-$mark_id";
 					if ($settingInfo['rewrite']==2) $gourl="../read-$mark_id";
-					header("Location: $gourl".$settingInfo['stype']); 
+					header("Location: $gourl".$settingInfo['stype']);
 					exit;
 				}
 			}
@@ -444,22 +449,22 @@ if($action=="delete"){
 
 	$sql="delete from ".$DBPrefix."logs where id='$mark_id'";
 	$DMC->query($sql);
-	
+
 	//删除关联的评论和引用
 	$sql="delete from ".$DBPrefix."comments where logId='$mark_id'";
 	$DMC->query($sql);
 	$sql="delete from ".$DBPrefix."trackbacks where logId='$mark_id'";
 	$DMC->query($sql);
-	
+
 	//删除关联的附件
 	/*$sql="select * from ".$DBPrefix."attachments where logId='$mark_id'";
 	$result=$DMC->query($sql);
 	while($my=$DMC->fetchArray($result)) {
-		@unlink("../attachments/".$my['name']);
+	@unlink("../attachments/".$my['name']);
 	}*/
 	$sql="delete from ".$DBPrefix."attachments where logId='$mark_id'";
 	$DMC->query($sql);
-	
+
 	settings_recount("logs");
 
 	//更新Cache
@@ -482,7 +487,7 @@ if($action=="delete"){
 		@unlink(F2BLOG_ROOT."./cache/html/{$mark_id}_index.html");
 	}
 
-	header("Location:../index.php"); 
+	header("Location:../index.php");
 }
 
 //其它操作行为：隐藏／显示、删除等
@@ -501,8 +506,8 @@ if ($action=="operation"){
 	//静态页面
 	if($_POST['operation']=="create_html"){
 		$array_html_id=implode(",",$_POST['itemlist']);
-		echo "<script language='javascript'>"; 
-		echo "window.location='create_html.inc.php?arrayhtmlid=$array_html_id';"; 
+		echo "<script language='javascript'>";
+		echo "window.location='create_html.inc.php?arrayhtmlid=$array_html_id';";
 		echo "</script>";
 	}
 
@@ -531,7 +536,7 @@ if ($action=="operation"){
 				}
 				$name=($name=="")?"":substr($name,4);
 			}
-			
+
 			if (($dataInfo['saveType']==1 && $value!=1) || ($dataInfo['saveType']!=1 && $value==1)){
 				update_cateCount($cateId,$type,1);
 			}
@@ -603,10 +608,22 @@ if ($action=="operation"){
 	}
 
 	//禁止引用
+	/*	if($_POST['operation']=="tbhidden" and $stritem!=""){
+	$sql="update ".$DBPrefix."logs set isTrackback='0' where $stritem";
+	$DMC->query($sql);
+	}*/
+	//禁止引用
 	if($_POST['operation']=="tbhidden" and $stritem!=""){
 		$sql="update ".$DBPrefix."logs set isTrackback='0' where $stritem";
 		$DMC->query($sql);
 	}
+
+	//    START ADD from WenChi  @plugins BlogNews
+	if($_POST['operation']=="setTopNews" and $stritem!=""){
+		$sql="update ".$DBPrefix."logs set isTopNews='".intval($_POST['isTopNews'])."' where $stritem";
+		$DMC->query($sql);
+	}
+	//    END ADD from WenChi  @plugins BlogNews
 
 	//加密日志
 	if($_POST['operation']=="addpassword" and $stritem!=""){
@@ -656,11 +673,11 @@ if ($action=="operation"){
 				$cateId=$dataInfo['cateId'];
 
 				update_cateCount($cateId,"minus",1);
-								
+
 			}
 			$sql="update ".$DBPrefix."logs set cateId='".$_POST['move_category']."' where $stritem";
 			$DMC->query($sql);
-			
+
 			update_cateCount($_POST['move_category'],"adding",count($itemlist));
 		}
 
@@ -694,12 +711,12 @@ if ($action=="operation"){
 		//生成静态页面
 		if ($settingInfo['isHtmlPage']==1){
 			$array_html_id=implode(",",$_POST['itemlist']);
-			echo "<script language='javascript'>"; 
-			echo "window.location='create_html.inc.php?arrayhtmlid=$array_html_id';"; 
+			echo "<script language='javascript'>";
+			echo "window.location='create_html.inc.php?arrayhtmlid=$array_html_id';";
 			echo "</script>";
 		}
 	}
-	
+
 	//删除
 	if($_POST['operation']=="delete" and $stritem!=""){
 		for ($i=0;$i<count($itemlist);$i++){
@@ -776,7 +793,7 @@ if ($action=="sendtb"){
 		$result=send_trackback($durl, $dataInfo['logTitle'], $dataInfo['logContent'],$logurl);
 		//echo $ActionMessage.=$durl." : ".$result."\n";
 	}
-	
+
 	if ($result=="ok") {
 		$quoteUrl=($dataInfo['quoteUrl']=="")?$quoteUrl:$dataInfo['quoteUrl'].";".$quoteUrl;
 		$modify_sql="UPDATE ".$DBPrefix."logs set quoteUrl='$quoteUrl' WHERE id='$mark_id'";
@@ -812,8 +829,8 @@ if (($action=="add" || $action=="edit") && $settingInfo['autoSave']=="1"){
 		include("../cache/cache_autosave.php");
 		if ($autosavecontent['logContent']!="" || $autosavecontent['logTitle']!="") {
 			$draftid=$autosavecontent['idforsave'];
-			if ($_GET['load']=="save"){				
-				if (($draftid!="" && $mark_id==$draftid) || ($action=="add" && $draftid=="")) {			
+			if ($_GET['load']=="save"){
+				if (($draftid!="" && $mark_id==$draftid) || ($action=="add" && $draftid=="")) {
 					$logTitle=$autosavecontent['logTitle'];
 					//$logContent=str_replace("&","&amp;",$autosavecontent['logContent']);
 					$logContent=$autosavecontent['logContent'];
@@ -828,16 +845,16 @@ if (($action=="add" || $action=="edit") && $settingInfo['autoSave']=="1"){
 				header("Content-Type: text/html; charset=utf-8");
 			?>
 				<script language="Javascript">
-					choise=confirm("<?php echo $strLogLoadAutoSave?>");
-					if (choise==true) {
-						<?php if ($draftid==""){?>						
-						window.location.href="<?php echo "$edit_url&action=add&mark_id=$draftid&load=save"?>";
-						<?php }else{?>
-						window.location.href="<?php echo "$edit_url&action=edit&mark_id=$draftid&load=save"?>";
-						<?php }?>
-					}else{
-						window.location.href="<?php echo "$edit_url&action=$action&mark_id=$mark_id&load=clear"?>";
-					}
+				choise=confirm("<?php echo $strLogLoadAutoSave?>");
+				if (choise==true) {
+					<?php if ($draftid==""){?>
+					window.location.href="<?php echo "$edit_url&action=add&mark_id=$draftid&load=save"?>";
+					<?php }else{?>
+					window.location.href="<?php echo "$edit_url&action=edit&mark_id=$draftid&load=save"?>";
+					<?php }?>
+				}else{
+					window.location.href="<?php echo "$edit_url&action=$action&mark_id=$mark_id&load=clear"?>";
+				}
 				</script>		
 			<?php 
 			}
@@ -893,6 +910,11 @@ if ($action=="add"){
 		$oldTags=$dataInfo['tags'];
 		$addpassword=$dataInfo['password'];
 		$autoSplit=$dataInfo['autoSplit'];
+
+		//    SATRT ADD From WenChi
+		$isTopNews=$dataInfo['isTopNews'];
+		//    END ADD From WenChi
+
 		if (empty($_POST['logsediter']) && empty($logsediter)) $logsediter=$dataInfo['logsediter'];
 
 		$pubTimeType=!isset($pubTimeType)?"now":$pubTimeType;
@@ -908,7 +930,7 @@ if ($action=="add"){
 
 	$arr_parent = $DMC->fetchQueryAll($DMC->query("select * from ".$DBPrefix."logs where id='$mark_id'"));
 	if ($arr_parent) {
-		include("logs_tb.inc.php");	
+		include("logs_tb.inc.php");
 	}else{
 		$error_message=$strCategoryExchangeNoData;
 		include("error_web.php");
@@ -925,7 +947,7 @@ if ($action=="add"){
 	if ($seektags!=""){$find.=" and (a.tags like '%$seektags%')";}
 	if ($seektype!=""){$find.=" and (a.saveType='$seektype')";}
 	if ($_SESSION['rights']=="author") {$find.=" and (a.author='{$_SESSION['username']}')";}
-	
+
 	if ($seekcate!=""){
 		$find_sql="select id from ".$DBPrefix."categories where parent='$seekcate' or id='$seekcate'";
 		$find_result=$DMC->query($find_sql);

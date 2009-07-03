@@ -1,7 +1,7 @@
 <?php 
 if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
-//Êä³öÍ·²¿ÐÅÏ¢
+//ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½Ï¢
 dohead($title,$page_url);
 require('admin_menu.php');
 ?>
@@ -109,6 +109,16 @@ require('admin_menu.php');
 			if ($order=="a.saveType"){echo "<img src=\"themes/{$settingInfo['adminstyle']}/down.gif\" border=\"0\">";}
 			?>
 		  </td>
+		  
+		<!-- START ADD From WenChi -->  
+		<td width="5%" align="center" nowrap class="whitefont">  
+		  <?php   
+		  echo "<a class=\"columntitle\" href=\"",$order_url,"&page=",$page,"&order=a.isTopNews\">",$strTopNewsTitle,"</a>";
+		  if ($order=="a.isTopNews"){echo "<img src=\"themes/{",$settingInfo['adminstyle'],"}/down.gif\" border=\"0\">";}
+		  ?>  
+		</td>  
+		<!-- END ADD From WenChi -->  		  
+		  
 		  <td width="5%" align="center" nowrap class="whitefont">
 			<?php 
 			echo "<a class=\"columntitle\" href=\"$order_url&page=$page&order=a.isTop\">$strTopTitle</a>";
@@ -142,24 +152,33 @@ require('admin_menu.php');
 		$query_sql=$sql." Limit $start_record,{$settingInfo['adminPageSize']}";
 		$query_result=$DMC->query($query_sql);
 		while($fa = $DMC->fetchArray($query_result)){
-		$index++;
-		if ($fa['saveType']==0){
-			$imgHidden="<img src='themes/{$settingInfo['adminstyle']}/draft.gif' alt='$strDraftLog' title='$strDraftLog'>";
-		}elseif($fa['saveType']==3){
-			$imgHidden="<img src='themes/{$settingInfo['adminstyle']}/lock.gif' alt='$strHiddenLog' title='$strHiddenLog'>";
-		}else{
-			$imgHidden="&nbsp;";
-		}
-		if ($fa['isTop']==1){
-			$imgIndexOnly="<img src='themes/{$settingInfo['adminstyle']}/add_top.gif' alt='$strTopView' title='$strTopView'>";
-		}elseif($fa['isTop']==2){
-			$imgIndexOnly="<img src='themes/{$settingInfo['adminstyle']}/hidden_top.gif' alt='$strLogTopClose' title='$strLogTopClose'>";
-		}else{
-			$imgIndexOnly="&nbsp;";
-		}
-		$imgComments=($fa['isComment']==0)?"<img src='themes/{$settingInfo['adminstyle']}/tool_post.gif' alt='$strLogCommentsHelp' title='$strLogCommentsHelp'>":"&nbsp;";
-		$imgTrackback=($fa['isTrackback']==0)?"<img src='themes/{$settingInfo['adminstyle']}/tool_trackback.gif' alt='$strLogTrackbackHelp' title='$strLogTrackbackHelp'>":"&nbsp;";
-		$imgPassword=($fa['password']!="")?"<img src='themes/{$settingInfo['adminstyle']}/tool_password.gif' alt='$strLogPasswordHelp' title='$strLogPasswordHelp'>":"&nbsp;";
+			$index++;
+			if ($fa['saveType']==0){
+				$imgHidden="<img src='themes/{$settingInfo['adminstyle']}/draft.gif' alt='$strDraftLog' title='$strDraftLog'>";
+			}elseif($fa['saveType']==3){
+				$imgHidden="<img src='themes/{$settingInfo['adminstyle']}/lock.gif' alt='$strHiddenLog' title='$strHiddenLog'>";
+			}else{
+				$imgHidden="&nbsp;";
+			}
+
+			//    START ADD From WenChi
+			if ($fa['isTopNews']==1){
+				$imgTopNews="<img src='themes/{$settingInfo['adminstyle']}/add_top.gif' alt='$strTopNewsLog' title='$strTopNewsLog'>";
+			}else{
+				$imgTopNews=" ";
+			}
+			//    END ADD From WenChi
+
+			if ($fa['isTop']==1){
+				$imgIndexOnly="<img src='themes/{$settingInfo['adminstyle']}/add_top.gif' alt='$strTopView' title='$strTopView'>";
+			}elseif($fa['isTop']==2){
+				$imgIndexOnly="<img src='themes/{$settingInfo['adminstyle']}/hidden_top.gif' alt='$strLogTopClose' title='$strLogTopClose'>";
+			}else{
+				$imgIndexOnly="&nbsp;";
+			}
+			$imgComments=($fa['isComment']==0)?"<img src='themes/{$settingInfo['adminstyle']}/tool_post.gif' alt='$strLogCommentsHelp' title='$strLogCommentsHelp'>":"&nbsp;";
+			$imgTrackback=($fa['isTrackback']==0)?"<img src='themes/{$settingInfo['adminstyle']}/tool_trackback.gif' alt='$strLogTrackbackHelp' title='$strLogTrackbackHelp'>":"&nbsp;";
+			$imgPassword=($fa['password']!="")?"<img src='themes/{$settingInfo['adminstyle']}/tool_password.gif' alt='$strLogPasswordHelp' title='$strLogPasswordHelp'>":"&nbsp;";
 		?>
 		<tr class="subcontent-input" onMouseOver="this.style.backgroundColor='<?php echo $settingInfo['mouseovercolor']?>'" onMouseOut="this.style.backgroundColor=''">
 		  <td nowrap class="subcontent-td">
@@ -186,6 +205,13 @@ require('admin_menu.php');
 		  <td nowrap align="center" class="subcontent-td">
 			<?php echo $imgHidden?>
 		  </td>
+		  
+		<!-- START ADD From WenChi -->  
+		<td nowrap align="center" class="subcontent-td">  
+		  <?php echo $imgTopNews?>  
+		</td>  
+		<!-- END ADD From WenChi --> 		  
+		  
 		  <td nowrap align="center" class="subcontent-td">
 			<?php echo $imgIndexOnly?>
 		  </td>
@@ -256,6 +282,20 @@ require('admin_menu.php');
 	  <?php echo $strLogsCreateHtmlFoot?>
 	  |
 	  <?php }?>
+	  
+		<!-- SATRT ADD From WenChi @plugins BlogNews -->  
+		<br>  
+		<?echo $strTopNews;?>  
+		<input type="radio" name="operation" value="setTopNews" onclick="Javascript:this.form.opmethod.value=1">  
+		<select name="isTopNews" onchange="seekform.elements['operation'][17].checked=true;"">  
+		<option value=""selected><?echo $strTopNewsDisable;?></option>  
+		<option value="1"><?echo $strTopNewsAllow;?></option>  
+		<option value="0"><?echo $strTopNewsDeny;?></option>  
+		</select>  
+		|  
+		<!-- END ADD Frm WenChi @plugins BlogNews -->  	  
+	  
+	  
 	  <input name="opselect" type="hidden" value="">
 	  <input name="opmethod" type="hidden" value="1">
 	  <input name="op" class="btn" type="button" value="<?php echo $strConfirm?>" onclick="ConfirmOperation('<?php echo "$edit_url&action=operation"?>','<?php echo $strConfirmInfo?>')">
