@@ -59,13 +59,13 @@ function searchSQL($job,$seekname) {
 				}
 				$searchSql=($key>0)?" and ($cateSql)":" and $cateSql";
 			}
-		break;
+			break;
 		case "private":
 			$searchSql=" and saveType=3";
-		break;
+			break;
 		case "tags":
 			$searchSql=" and concat(';',a.tags,';') like '%;$seekname;%'";
-		break;
+			break;
 		case "calendar"://与archives查找代一样。
 		case "archives":
 			$curYear=substr($seekname,0,4);
@@ -84,19 +84,19 @@ function searchSQL($job,$seekname) {
 			}
 
 			$searchSql=" and a.postTime>='$start' and a.postTime<='$end'";
-		break;
+			break;
 		case "searchTitle":
 			$searchSql=" and (a.logTitle like '%$seekname%')";
-		break;
+			break;
 		case "searchContent":
 			$searchSql=" and (a.logContent like '%$seekname%')";
-		break;
+			break;
 		case "searchAll":
 			$searchSql=" and (a.logTitle like '%$seekname%' or a.logContent like '%$seekname%')";
-		break;
+			break;
 		default:
 			$searchSql="";
-		break;
+			break;
 	}
 	//echo $searchSql;
 	return $searchSql;
@@ -125,8 +125,8 @@ function formatBlogContent ($content,$attr,$logId,$statichtml=0) {
 	$content=str_replace("../attachments","attachments",$content);
 	$content=str_replace("../editor","editor",$content);
 	$content=preg_replace("/alt=\"open_img\(&#39;(.+?)&#39;\)\"/is","style=\"cursor:pointer;\" onclick=\"open_img(&#39;\\1&#39;)\" alt=\"\\1\"",$content);
-	$content=preg_replace("/alt=\"open_img\(&amp;#39(.+?)&amp;#39\)\"/is","style=\"cursor:pointer;\" onclick=\"open_img(&#39;\\1&#39;)\" alt=\"\\1\"",$content);		
-	$content=preg_replace("/alt=\"open_img\('(.+?)'\)\"/is","style=\"cursor:pointer;\" onclick=\"open_img(&#39;\\1&#39;)\" alt=\"\\1\"",$content);		
+	$content=preg_replace("/alt=\"open_img\(&amp;#39(.+?)&amp;#39\)\"/is","style=\"cursor:pointer;\" onclick=\"open_img(&#39;\\1&#39;)\" alt=\"\\1\"",$content);
+	$content=preg_replace("/alt=\"open_img\('(.+?)'\)\"/is","style=\"cursor:pointer;\" onclick=\"open_img(&#39;\\1&#39;)\" alt=\"\\1\"",$content);
 
 	if ($attr==0){//展开与隐藏，首页才隐藏，阅读的时候全展开。
 		$content=preg_replace("/<!--hideBegin-->(.+?)<!--hideEnd-->/ie", "makeMoreLess('\\1')", $content);
@@ -138,27 +138,27 @@ function formatBlogContent ($content,$attr,$logId,$statichtml=0) {
 
 	if (preg_match ("/<!--(.*?)Begin-->(.+?)<!--(.*?)End-->/i",$content)){
 		$reg_search = array(
-			"/<!--musicBegin-->(.+?)<!--musicEnd-->/ie",
-			"/<!--galleryBegin-->(.+?)<!--galleryEnd-->/ie",
-			"/<!--mfileBegin-->(.+?)<!--mfileEnd-->/ie",
-			"/<!--fileBegin-->(.+?)<!--fileEnd-->/ie",
-			"/<!--fileBegin-->(.+?)<!--fileEnd-->/ie"
+		"/<!--musicBegin-->(.+?)<!--musicEnd-->/ie",
+		"/<!--galleryBegin-->(.+?)<!--galleryEnd-->/ie",
+		"/<!--mfileBegin-->(.+?)<!--mfileEnd-->/ie",
+		"/<!--fileBegin-->(.+?)<!--fileEnd-->/ie",
+		"/<!--fileBegin-->(.+?)<!--fileEnd-->/ie"
 		);
 		$reg_replace =  array(
-			"makemusic('\\1')",
-			"makegallery('\\1')",
-			"makemfile('\\1',$statichtml)",
-			"makefile('\\1',$statichtml)"
+		"makemusic('\\1')",
+		"makegallery('\\1')",
+		"makemfile('\\1',$statichtml)",
+		"makefile('\\1',$statichtml)"
 		);
 		$content=preg_replace($reg_search, $reg_replace, $content);
 	}
 
 	//插件
 	$content=do_filter("f2_content",$content,$logId);
-	
+
 	//自动转换连接，非常耗时
 	if ($settingInfo['autoUrl']==1){
-		$content=preg_replace("/([^\/\"\'\=\>&#39;&quot;])(mms|http|ftp|telnet)\:\/\/(.[^ \r\n\<\"\'\)]+)/is","\\1<a href=\"\\2://\\3\" target=\"_blank\">\\2://\\3</a>", $content);		
+		$content=preg_replace("/([^\/\"\'\=\>&#39;&quot;])(mms|http|ftp|telnet)\:\/\/(.[^ \r\n\<\"\'\)]+)/is","\\1<a href=\"\\2://\\3\" target=\"_blank\">\\2://\\3</a>", $content);
 	}
 
 	//显示关键字，非常耗时
@@ -177,7 +177,7 @@ function formatBlogContent ($content,$attr,$logId,$statichtml=0) {
 //替換關鍵字
 function repKeyword($content){
 	global $DMC, $DBPrefix,$strTagsCount;
-	
+
 	//默认替换F2Blog
 	$patterns[] = "~(?!((<.*?)|(<a.*?)|(://.*?)))(f2blog)(?!(([^<>]*?)>)|([^>]*?</a>))~si";
 	$replacements[] = "<a href=\"http://www.f2blog.com\" target=\"_blank\" title=\"http://www.f2blog.com\" class=\"KeyWordStyle\">\\5<img src=\"images/f2.gif\" border=\"0\" alt=\"\"/></a>";
@@ -187,7 +187,7 @@ function repKeyword($content){
 		$linkUrl=$dataInfo['linkUrl'];
 		$keyword=$dataInfo['keyword'];
 		$linkImage=$dataInfo['linkImage'];
-		
+
 		$f2=($linkImage=="")?"images/keyword.gif":"attachments/".$linkImage;
 
 		$patterns[] = "~(?!((<.*?)|(<a.*?)|(://.*?)))(".$keyword.")(?!(([^<>]*?)>)|([^>]*?</a>))~si";
@@ -215,7 +215,7 @@ function makeMoreLess($more){
 //图片翻页
 function makegallery($strid) {
 	global $DMC,$DBPrefix,$settingInfo;
-	
+
 	$gid="Gallery".validCode(4);
 	$str="<div id=\"$gid\">&nbsp;</div><script type=\"text/javascript\">var $gid = new F2Gallery(\"$gid\",\"".$settingInfo['language']."\");";
 
@@ -236,7 +236,7 @@ function makegallery($strid) {
 	foreach($attachments as $value){
 		$cacheattachments[$value['id']]=$value;
 	}
-	
+
 	//查找数据
 	foreach($arrId as $value){
 		if (!empty($cacheattachments[$value])){
@@ -244,7 +244,7 @@ function makegallery($strid) {
 			if (count($attInfo)>0){
 				$arrTitle=explode(".", $attInfo['attTitle']);
 				$attTitle=$arrTitle[0];
-				if ($attInfo['fileWidth']>$settingInfo['img_width']){				
+				if ($attInfo['fileWidth']>$settingInfo['img_width']){
 					$attInfo['fileHeight']=$attInfo['fileHeight']*$settingInfo['img_width']/$attInfo['fileWidth'];
 					$attInfo['fileWidth']=$settingInfo['img_width'];
 				}
@@ -271,7 +271,7 @@ function makefile($fileid,$statichtml=0) {
 
 		if(in_array($fileType, array('wma','mp3','rm','ra','qt','wmv','swf','flv','mpg','avi','divx','asf','rmvb'))) {
 			$fid="media".validCode(4);
-		
+
 			if (strpos($dataInfo['name'],"://")<1) $dataInfo['name']="attachments/".$dataInfo['name'];
 
 			if (strpos(";$settingInfo[ajaxstatus];","M")<1){
@@ -331,7 +331,7 @@ function makemfile($fileid,$statichtml=0) {
 
 function makemusic($fileid) {
 	global $strPlayMusic,$strOnlinePlay,$strOnlineStop,$strDownload,$strRightBtnSave;
-	$kkstr="";		
+	$kkstr="";
 	$arrId=explode("|", $fileid);
 	$arrType=explode(".", $arrId[0]);
 	$max=count($arrType)-1;
@@ -356,7 +356,7 @@ function makemusic($fileid) {
 // 输出分$strPage信息
 function pageBar($gourl){
 	global $per_page,$page,$strPrevPage,$strNextPage,$strFirstPage,$strLastPage,$total_num,$settingInfo;
-	
+
 	if ($page<1 or $page==""){$page=1;}
 	if (!isset($per_screen)) $per_screen=$settingInfo['logspage'];//每页显示的$strPage数
 	$pages_num=ceil($total_num/$per_page);
@@ -366,7 +366,7 @@ function pageBar($gourl){
 	$end_record=$page*$per_page;
 	if ($end_record>$total_num){$end_record=$total_num;}
 
-	$mid = ceil(($per_screen+1)/2); 
+	$mid = ceil(($per_screen+1)/2);
 	$nav = '';
 	if($page<=$mid ) {
 		$begin = 1;
@@ -400,12 +400,12 @@ function pageBar($gourl){
 	if($page>1){
 		$nav.= "<a href=\"{$page_url}".($page-1)."{$settingInfo['stype']}{$comm_top}\" title=\"$strPrevPage\" style=\"text-decoration:none\"><</a>&nbsp;";
 	}
-		
+
 	$end = ($begin+$per_screen>$pages_num)?$pages_num+1:$begin+$per_screen;
 	for($i=$begin; $i<$end; $i++) {
 		$nav.=($page!=$i)?"<a href=\"{$page_url}$i{$settingInfo['stype']}$comm_top\">$i</a>&nbsp;":"<strong>$i</strong>&nbsp;";
 	}
-		
+
 	if($page<$pages_num){
 		$nav.= "<a href=\"{$page_url}".($page+1)."{$settingInfo['stype']}$comm_top\" title=\"$strNextPage\">></a>&nbsp;";
 	}
@@ -413,7 +413,7 @@ function pageBar($gourl){
 	if($page<$pages_num){
 		$nav.= "<a href=\"{$page_url}{$pages_num}{$settingInfo['stype']}{$comm_top}\" title=\"$strLastPage\">>|</a>&nbsp;";
 	}
-		
+
 	$nav.="</li></ul>";
 	echo $nav;
 }
@@ -464,12 +464,12 @@ function filter_url($url){
 }
 
 function tb_extra($length) {
-    $str = ''; 
-    for ($i = 0; $i < $length; $i++){ 
-        $rand = rand(1,35); 
-        if ($rand < 10) $str .= $rand; 
-        else $str .= chr($rand + 87); 
-    } 
+	$str = '';
+	for ($i = 0; $i < $length; $i++){
+		$rand = rand(1,35);
+		if ($rand < 10) $str .= $rand;
+		else $str .= chr($rand + 87);
+	}
 	return $str;
 }
 
@@ -525,7 +525,7 @@ function printMessage($ActionMessage){
 		$out.="<fieldset style=\"width:60%;\"> \n";
 		$out.="<legend> \n";
 		$out.="提示信息 \n";
-		$out.="</legend> \n";		
+		$out.="</legend> \n";
 		$out.="<table border=\"0\" cellpadding=\"2\" cellspacing=\"1\"> \n";
 		$out.="<tr><td><font color=\"#FF0000\">$ActionMessage</font></td></tr> \n";
 		$out.="</table> \n";

@@ -38,11 +38,11 @@ if (strpos($load_file,".big.php")>0){
         <div id="sidebar-topimg"><!--工具条顶部图象--></div>
 		<!--侧边栏显示内容-->
         <?php 
-			if ($load=="") {
-				include_once("cache/cache_logs_sidebar.php");
-			} else { 
-				include_once("cache/cache_logs_readsidebar.php");
-			}
+        if ($load=="") {
+        	include_once("cache/cache_logs_sidebar.php");
+        } else {
+        	include_once("cache/cache_logs_readsidebar.php");
+        }
 		?>
         <div id="sidebar-bottomimg"></div>
       </div>
