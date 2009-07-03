@@ -7,11 +7,11 @@ require('admin_menu.php');
 
 //读取编辑器
 include_once(F2BLOG_ROOT."./include/xmlparse.inc.php");
-$handle=opendir("../editor/"); 
+$handle=opendir("../editor/");
 $arr_editorName=array();
 $arr_editorPath=array();
 $editorpath="";
-while ($file = readdir($handle)){ 
+while ($file = readdir($handle)){
 	if (preg_match("/editor_(.+)\.xml/is",$file)){
 		$arr_editor=xmlArray(F2BLOG_ROOT."./editor/$file");
 		$arr_editorName[]=$arr_editor['EditorName'];
@@ -168,6 +168,21 @@ closedir($handle);
 			<INPUT TYPE="text" NAME="autoSplit" class="textbox" size="5" onKeyPress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false; " value="<?php echo ($autoSplit=="")?$settingInfo['autoSplit']:$autoSplit?>"> <?php echo $strSettingUnitsWords?>
 		  </td>
 		</tr>
+		
+  
+		<!-- SATRT ADD From WenChi @plugins BlogNews -->  
+		  <td nowrap>  
+		    <?php echo $strTopNews?>  
+		  </td>  
+		  <td colspan="3">  
+		    <input type="radio" name="isTopNews" value="1" <?php echo ($isTopNews==1)?"checked="checked"":""?>>  <?php echo $strTopNewsAllow?>  
+		    <input type="radio" name="isTopNews" value="0" <?php echo ($isTopNews==0)?"checked="checked"":""?>>  <?php echo $strTopNewsDeny?>              
+		            
+		  </td>  
+		</tr>  
+		<!-- END ADD Frm WenChi @plugins BlogNews -->  		
+		
+		
 		<tr>
 		  <td nowrap>
 			<?php echo $strGuestAccess?>
