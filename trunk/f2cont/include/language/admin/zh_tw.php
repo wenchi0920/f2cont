@@ -721,4 +721,13 @@ $strF2ContLinks = "F2Cont連結";
 $strF2ContLinkDesc1 = "F2Cont官方網站";
 $strF2ContLinkDesc2 = "F2Cont官方論壇，有任何疑問，可以到此咨詢";
 
+
+//    START ADD from WenChi  @plugins BlogNews  
+$strTopNews="跑馬燈消息";  
+$strTopNewsDisable="跑馬燈狀態";  
+$strTopNewsAllow="啟用";  
+$strTopNewsDeny="停用";
+$strTopNewsTitle="跑馬燈";  
+$strTopNewsLog="跑馬燈";  
+
 ?>

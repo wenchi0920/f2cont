@@ -719,5 +719,12 @@ $strF2ContLinks = "F2Cont useful links";
 $strF2ContLinkDesc1 = "F2Cont official website";
 $strF2ContLinkDesc2 = "F2Cont official forum";
 
+$strTopNews = "Marquee news"; 
+$strTopNewsDisable = "Marquee status"; 
+$strTopNewsAllow = "enable"; 
+$strTopNewsDeny = "disabled"; 
+$strTopNewsTitle = "Marquee"; 
+$strTopNewsLog = "Marquee";
+
 
 ?>
