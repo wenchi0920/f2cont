@@ -120,9 +120,9 @@ function docopyrights(){
 	}
 	$end_date=(date("Y")=="2006")?"":"- ".date("Y");
 	if (strpos($_SERVER['PHP_SELF'],"index.php")>0){
-		echo "<div class=\"indexfooter\">\n";	
+		echo "<div class=\"indexfooter\">\n";
 	}else{
-		echo "<div class=\"footer\">\n";	
+		echo "<div class=\"footer\">\n";
 	}
 	echo "CopyRight &copy; 2006 $end_date <a href='http://www.f2cont.com' target='_blank'>F2Blog</a> All Rights Reserved. Version".blogVersion."<br />";
 	echo $debug;
@@ -173,7 +173,7 @@ function view_page($gourl){
 	$end_record=$page*$settingInfo['adminPageSize'];
 	if ($end_record>$total_num){$end_record=$total_num;}
 
-	$mid = ceil(($per_screen+1)/2); 
+	$mid = ceil(($per_screen+1)/2);
 	$nav = '';
 	if($page<=$mid ) {
 		$begin = 1;
@@ -193,12 +193,12 @@ function view_page($gourl){
 	if($page>1){
 		$nav.= "<a href=\"$gourl&page=".($page-1)."\" title=\"$strPrev\" style=\"text-decoration:none\"><</a>&nbsp;";
 	}
-	
+
 	$end = ($begin+$per_screen>$pages_num)?$pages_num+1:$begin+$per_screen;
 	for($i=$begin; $i<$end; $i++) {
 		$nav.=($page!=$i)?"<a href=\"$gourl&page=$i\">$i</a>&nbsp;":"<strong>$i</strong>&nbsp;";
 	}
-	
+
 	if($page<$pages_num){
 		$nav.= "<a href=\"$gourl&page=".($page+1)."\" title=\"$strNext\">></a>&nbsp;";
 	}
@@ -206,7 +206,7 @@ function view_page($gourl){
 	if($page<$pages_num){
 		$nav.= "<a href=\"$gourl&page=$pages_num\" title=\"$strLast\">>|</a>&nbsp;";
 	}
-	
+
 	//$nav.="</li></ul>";
 
 	echo $nav;
@@ -251,7 +251,7 @@ function checkFileType($file_name) {
 
 /********** 检查上传目录存不存在，不存在新建目录 **********/
 function check_dir($path) {
-	if (!is_dir($path)) mkdir($path);	
+	if (!is_dir($path)) mkdir($path);
 	if (is_writable($path)) {
 		return true;
 	}elseif(chmod($path,0777)){
@@ -266,14 +266,14 @@ function upload_file($temp_file,$file_name,$dir,$tmp_name="") {
 	if (empty($tmp_name)) $tmp_name=validCode(10);
 
 	$return="";
-	
+
 	if ($temp_file!="") {
 		if (check_dir($dir)) {
 			$type=getFileType($file_name);
 			if (checkFileType($file_name)) {
-				$file_path="$dir/$tmp_name.$type";					
+				$file_path="$dir/$tmp_name.$type";
 				//$copy_result=copy($temp_file,"$file_path");
-				
+
 				if(@copy($temp_file, $file_path) || (function_exists('move_uploaded_file') && @move_uploaded_file($temp_file, $file_path))) {
 					@unlink($temp_file);
 					$check_info = true;
@@ -413,7 +413,7 @@ function tag_list($type){
 	$arr=array();
 	$i=0;
 	$tag_result = $DMC->query("select * from ".$DBPrefix."tags order by logNums desc");
-	while ($tagsInfo = $DMC->fetchArray($tag_result)) {		
+	while ($tagsInfo = $DMC->fetchArray($tag_result)) {
 		if ($type=="S") {
 			$tags_name=str_replace("&amp;","&",$tagsInfo['name']);
 			$tags_value=str_replace("&#39;","\&#39;",$tags_name);
@@ -446,6 +446,9 @@ function send_trackback ($url, $title, $excerpt,$blog_url) {
 	$blog_name=$settingInfo['name'];
 	$trackback_url=parse_url($url);
 
+	$excerpt = strip_tags($excerpt);
+	$excerpt = substr($excerpt, 0, 252) . "...";
+
 	$out="POST {$trackback_url['path']}".($trackback_url['query'] ? '?'.$trackback_url['query'] : '')." HTTP/1.0\r\n";
 	$out.="Host: {$trackback_url['host']}\r\n";
 	$out.="Content-Type: application/x-www-form-urlencoded; charset=utf-8\r\n";
@@ -460,7 +463,7 @@ function send_trackback ($url, $title, $excerpt,$blog_url) {
 
 	$fs=fsockopen($trackback_url['host'], $trackback_url['port'], $errno, $errstr, 30);
 	if (!$fs) {
-		return "$errno: unable to connect to http://".$trackback_url['host'].":".$trackback_url['port'];	
+		return "$errno: unable to connect to http://".$trackback_url['host'].":".$trackback_url['port'];
 		//return false;
 	}
 	fputs($fs, $out);
@@ -480,7 +483,7 @@ function send_trackback ($url, $title, $excerpt,$blog_url) {
 /********** 更新Category的数量 **********/
 function update_cateCount($cateId,$type,$value) {
 	global $DMC,$DBPrefix;
-	
+
 	$types=($type=="adding")?"+":"-";
 	$parent=getFieldValue($DBPrefix."categories","id='".$cateId."'","parent");
 	$where=($parent==0)?" id='$cateId'":" (id='$cateId' or id='$parent')";
@@ -491,7 +494,7 @@ function update_cateCount($cateId,$type,$value) {
 /********** 增减一些统计的数量 **********/
 function update_num($table,$field,$where,$type,$num) {
 	global $DMC,$DBPrefix;
-	
+
 	$types=($type=="adding")?"+":"-";
 	$modify_sql="UPDATE $table set $field=$field$types$num WHERE $where";
 	$DMC->query($modify_sql);
@@ -500,7 +503,7 @@ function update_num($table,$field,$where,$type,$num) {
 /********** 检查记录存不存在 **********/
 function check_record($table,$where) {
 	global $DMC,$DBPrefix;
-	
+
 	$modify_sql="select * from $table where $where";
 	$result=$DMC->query($modify_sql);
 	$numRows=$DMC->numRows($result);
@@ -519,17 +522,17 @@ function get_plugins($basedir) {
 	$plugins = array ();
 	$plugin_files = array();
 
-    $handle=opendir($basedir); 
-    while ($file = readdir($handle)){ 
+	$handle=opendir($basedir);
+	while ($file = readdir($handle)){
 		if (is_dir($basedir.$file) && $file!="." && $file!=".." && file_exists("$basedir$file/$file.php")){
 			$plugin_files[]="$file/$file.php";
 		}
-    } 
-    closedir($handle); 
+	}
+	closedir($handle);
 	sort($plugin_files);
 	foreach ($plugin_files as $plugin_file) {
 		if ( !is_readable("$basedir/$plugin_file"))
-			continue;
+		continue;
 
 		$plugin_data = get_plugin_data("$basedir$plugin_file");
 
@@ -552,9 +555,9 @@ function get_plugin_data($plugin_file) {
 	preg_match("|Author:(.*)|i", $plugin_data, $author_name);
 	preg_match("|Author URI:(.*)|i", $plugin_data, $author_uri);
 	if (preg_match("|Version:(.*)|i", $plugin_data, $version))
-		$version = $version[1];
+	$version = $version[1];
 	else
-		$version = '';
+	$version = '';
 
 	$description = $description[1];
 
@@ -571,7 +574,7 @@ function get_plugin_data($plugin_file) {
 	} else {
 		$author = '<a href="'.$author_uri[1].'" title="'.$strVisitPluginHomepage.'">'.$author_name[1].'</a>';
 	}
-	
+
 	$arr=explode("/",$plugin_file);
 	$plugin_root=$arr[0]."/".$arr[1]."/".$arr[2];
 	$pfile=$arr[3];
@@ -581,7 +584,7 @@ function get_plugin_data($plugin_file) {
 	} else {
 		$setting="";
 	}
-	
+
 	if (file_exists($plugin_root.'/advanced.php')) {
 		$advanced="advanced.php";
 	} else {
@@ -599,7 +602,7 @@ function plugin_basename($file) {
 
 function install_plugins($arr) {
 	global $DMC, $DBPrefix,$strDataExists;
-	
+
 	$category=isset($arr['Type'])?encode(trim($arr['Type'])):"";
 	$name=isset($arr['Desc'])?encode(trim($arr['Desc'])):"";
 	$plugin=isset($arr['Name'])?encode(trim($arr['Name'])):"";
@@ -636,7 +639,7 @@ function install_plugins($arr) {
 		}else{
 			$orderno++;
 		}
-		
+
 		$postTime=time();
 		$sql="INSERT INTO ".$DBPrefix."modules(name,modTitle,disType,htmlCode,pluginPath,orderNo,installDate,isInstall,indexOnly,isHidden) VALUES ('$plugin','$name','$disType','$htmlcode','$pluginpath','$orderno','$postTime','$isInstall','$indexOnly','0')";
 		$DMC->query($sql);
@@ -644,7 +647,7 @@ function install_plugins($arr) {
 		if ($error=="") {
 			//Set Default value
 			$modId=$DMC->insertId();
-			
+
 			if (is_array($DefaultField)){
 				for($i=0,$max=count($DefaultField);$i<$max;$i++) {
 					setPlugSet($modId,encode($DefaultField[$i]),encode($DefaultValue[$i]));
@@ -656,13 +659,13 @@ function install_plugins($arr) {
 			$ActionMessage=$error;
 		}
 	}
-			
+
 	return $ActionMessage;
 }
 
 function unstall_plugins($plugin) {
 	global $DMC, $DBPrefix;
-	
+
 	$modId=getFieldValue($DBPrefix."modules","name='".encode($plugin)."' and installDate!=0","id");
 
 	$sql="delete from ".$DBPrefix."modsetting where modId='$modId'";
@@ -684,7 +687,7 @@ function unstall_plugins($plugin) {
 function getModSet($plugin) {
 	global $DMC, $DBPrefix;
 	$modId=getFieldValue($DBPrefix."modules","name='".encode($plugin)."'","id");
-	
+
 	$arr="";
 	$sql="select * from ".$DBPrefix."modsetting where modId='$modId' order by id";
 	$result=$DMC->query($sql);
@@ -701,11 +704,11 @@ function getModSet($plugin) {
 
 function setPlugSet($modId,$keyName,$keyValue) {
 	global $DMC, $DBPrefix;
-	
+
 	$sql="select * from ".$DBPrefix."modsetting where modId='$modId' and keyName='".encode($keyName)."'";
 	$result=$DMC->query($sql);
 	$rows=$DMC->numRows($result);
-	
+
 	if($rows<=0 && trim($keyValue)!="") {
 		$sql="INSERT INTO ".$DBPrefix."modsetting(modId,keyName,keyValue) VALUES ('$modId','".encode($keyName)."','".encode($keyValue)."')";
 	} else {
@@ -726,7 +729,7 @@ function getEditorPluginInfo($plugindir,$basedir){
 	$arrPlugin=array();
 	$wdir="$basedir/editor/plugins/".$plugindir."/";
 	$xmlfile=$wdir."plugin.xml";
-	
+
 	if (file_exists($xmlfile)){
 		include_once(F2BLOG_ROOT."./include/xmlparse.inc.php");
 		$arrPluginList=xmlArray($xmlfile);
@@ -750,14 +753,14 @@ function write_file($sql,$filename) {
 
 	if (is_dir("../backup/")){
 		if (!$fp = fopen($filename, 'ab')) {
-			$ActionMessage="$strDataBackupBad";	
+			$ActionMessage="$strDataBackupBad";
 		} else {
 			fwrite($fp,$sql);
 			fclose($fp);
 			$ActionMessage="";
 		}
 	}else{
-		$ActionMessage="$strDataBackupBad";	
+		$ActionMessage="$strDataBackupBad";
 	}
 
 	return $ActionMessage;
@@ -768,7 +771,7 @@ function updateLogsTags($stags,$ttags) {
 	$sql="select id,tags from ".$DBPrefix."logs where concat(';',tags,';') like '%;$stags;%' order by id";
 	$result=$DMC->query($sql);
 	$fa = $DMC->fetchQueryAll($result);
-    for ($i=0;$i<count($fa);$i++){
+	for ($i=0;$i<count($fa);$i++){
 		$id=$fa[$i][id];
 		$tags=$fa[$i][tags];
 
@@ -815,13 +818,13 @@ function addSettingValue($setType,$setName,$setField="",$setValue="",$setOption=
 	//echo $setType."==".$setName."==".$setField."==".$setOption."<br />";
 	switch ($setType) {
 		case 't': //text input
-			if ($setField=="linklogo") {
-				$changecode="onchange=\"if ((/^http:\/\//i.test(this.value))){document.getElementById('linklogoimg').src=this.value}else{document.getElementById('linklogoimg').src='{$setInfoResult['blogUrl']}'+this.value}\"";
-			}else{
-				$changecode="";
-			}
+		if ($setField=="linklogo") {
+			$changecode="onchange=\"if ((/^http:\/\//i.test(this.value))){document.getElementById('linklogoimg').src=this.value}else{document.getElementById('linklogoimg').src='{$setInfoResult['blogUrl']}'+this.value}\"";
+		}else{
+			$changecode="";
+		}
 
-			$output=<<<HTMLCODE
+		$output=<<<HTMLCODE
             <tr>
               <td width="25%" align="right" valign="middle" class="input-titleblue">$setName</td>
               <td width="4" align="left" valign="middle">&nbsp;</td>
@@ -830,10 +833,10 @@ function addSettingValue($setType,$setName,$setField="",$setValue="",$setOption=
               </td>
             </tr>
 HTMLCODE;
-			break;
-		case 'ta': //textarea
-			$setInfoResult[$setField]=str_replace("<br />","",dencode($setInfoResult[$setField]));
-			$output=<<<HTMLCODE
+		break;
+case 'ta': //textarea
+$setInfoResult[$setField]=str_replace("<br />","",dencode($setInfoResult[$setField]));
+$output=<<<HTMLCODE
             <tr>
               <td width="25%" align="right" valign="top" class="input-titleblue">$setName</td>
               <td width="4" align="left" valign="top">&nbsp;</td>
@@ -842,9 +845,9 @@ HTMLCODE;
               </td>
             </tr>
 HTMLCODE;
-			break;
-		case 'tn': //text input
-			$output=<<<HTMLCODE
+break;
+case 'tn': //text input
+$output=<<<HTMLCODE
             <tr>
               <td width="25%" align="right" valign="middle" class="input-titleblue">$setName</td>
               <td width="4" align="left" valign="middle">&nbsp;</td>
@@ -853,15 +856,15 @@ HTMLCODE;
               </td>
             </tr>
 HTMLCODE;
-			break;
-		case 'f': //file input
-			if ($setInfoResult[$setField]!="") {
-				$show_images = "&nbsp;&nbsp;<a href='../attachments/$setInfoResult[$setField]' target='_blank'>$strShow</a>";
-				$show_images .= "&nbsp;&nbsp;<a href='setting.php?delete=$setField'>$strDelete</a>";
-			}else{
-				$show_images="";
-			}
-			$output=<<<HTMLCODE
+break;
+case 'f': //file input
+if ($setInfoResult[$setField]!="") {
+	$show_images = "&nbsp;&nbsp;<a href='../attachments/$setInfoResult[$setField]' target='_blank'>$strShow</a>";
+	$show_images .= "&nbsp;&nbsp;<a href='setting.php?delete=$setField'>$strDelete</a>";
+}else{
+	$show_images="";
+}
+$output=<<<HTMLCODE
             <tr>
               <td width="25%" align="right" valign="middle" class="input-titleblue">$setName</td>
               <td width="4" align="left" valign="middle">&nbsp;</td>
@@ -871,69 +874,69 @@ HTMLCODE;
               </td>
             </tr>
 HTMLCODE;
-			break;
-		case 'r': //radio button
-			$arr_radio="";
-			$arrOption=explode("|",$setOption);
-			for($i=0;$i<count($arrOption);$i++){
-				if (strpos($arrOption[$i],"=>")){
-					list($r_name,$r_value)=explode("=>",$arrOption[$i]);
-					$checked=($setInfoResult[$setField]==$r_value)?" checked=\"checked\"":"";
-					$arr_radio.="<input type=\"radio\" name=\"$setField\" value=\"$r_value\"$checked> $r_name \n";
-				}else{
-					$arr_radio.=$arrOption[$i];
-				}
-			}
-			$output=<<<HTMLCODE
+break;
+case 'r': //radio button
+$arr_radio="";
+$arrOption=explode("|",$setOption);
+for($i=0;$i<count($arrOption);$i++){
+	if (strpos($arrOption[$i],"=>")){
+		list($r_name,$r_value)=explode("=>",$arrOption[$i]);
+		$checked=($setInfoResult[$setField]==$r_value)?" checked=\"checked\"":"";
+		$arr_radio.="<input type=\"radio\" name=\"$setField\" value=\"$r_value\"$checked> $r_name \n";
+	}else{
+		$arr_radio.=$arrOption[$i];
+	}
+}
+$output=<<<HTMLCODE
             <tr>
               <td width="25%" align="right" valign="middle" class="input-titleblue">$setName</td>
               <td width="4" align="left" valign="middle">&nbsp;</td>
               <td width="75%" align="left" valign="middle" style="padding-top:7px">$arr_radio</td>
             </tr>
 HTMLCODE;
-			break;
-		case 'c': //check button
-			$arr_check="";
-			$arrOption=explode("|",$setOption);
-			for($i=0;$i<count($arrOption);$i++){
-				if (strpos($arrOption[$i],"=>")){
-					list($r_name,$r_value)=explode("=>",$arrOption[$i]);
-					$checked=(strpos(";$setInfoResult[$setField];",$r_value)>0)?" checked=\"checked\"":"";
-					$arr_check.="<input type=\"checkbox\" name=\"{$setField}[]\" value=\"$r_value\"$checked> $r_name \n";
-				}else{
-					$arr_radio.=$arrOption[$i];
-				}
-			}
-			$output=<<<HTMLCODE
+break;
+case 'c': //check button
+$arr_check="";
+$arrOption=explode("|",$setOption);
+for($i=0;$i<count($arrOption);$i++){
+	if (strpos($arrOption[$i],"=>")){
+		list($r_name,$r_value)=explode("=>",$arrOption[$i]);
+		$checked=(strpos(";$setInfoResult[$setField];",$r_value)>0)?" checked=\"checked\"":"";
+		$arr_check.="<input type=\"checkbox\" name=\"{$setField}[]\" value=\"$r_value\"$checked> $r_name \n";
+	}else{
+		$arr_radio.=$arrOption[$i];
+	}
+}
+$output=<<<HTMLCODE
             <tr>
               <td width="25%" align="right" valign="middle" class="input-titleblue">$setName</td>
               <td width="4" align="left" valign="middle">&nbsp;</td>
               <td width="75%" align="left" valign="middle" style="padding-top:7px">$arr_check</td>
             </tr>
 HTMLCODE;
-			break;
-		case 'sel': //check button
-			$arr_select="";
-			$arrOption=explode("|",$setOption);
-			for($i=0;$i<count($arrOption);$i++){
-				if (strpos($arrOption[$i],"=>")){
-					list($r_name,$r_value)=explode("=>",$arrOption[$i]);
-					if (strpos($r_name,",")>0){
-						$arr_name=explode(",",$r_name);
-						$arr_value=explode(",",$r_value);
-						for($j=0;$j<count($arr_name);$j++){
-							$selected=($setInfoResult[$setField]==$arr_value[$j])?" selected":"";
-							$arr_select.="<option value='{$arr_value[$j]}' $selected>{$arr_name[$j]}</option> \n";
-						}
-					}else{
-						$selected=($setInfoResult[$setField]==$r_value)?" selected":"";
-						$arr_select.="<option value='$r_value' $selected>$r_name</option> \n";
-					}
-				}else{
-					$arr_select.=$arrOption[$i];
-				}
+break;
+case 'sel': //check button
+$arr_select="";
+$arrOption=explode("|",$setOption);
+for($i=0;$i<count($arrOption);$i++){
+	if (strpos($arrOption[$i],"=>")){
+		list($r_name,$r_value)=explode("=>",$arrOption[$i]);
+		if (strpos($r_name,",")>0){
+			$arr_name=explode(",",$r_name);
+			$arr_value=explode(",",$r_value);
+			for($j=0;$j<count($arr_name);$j++){
+				$selected=($setInfoResult[$setField]==$arr_value[$j])?" selected":"";
+				$arr_select.="<option value='{$arr_value[$j]}' $selected>{$arr_name[$j]}</option> \n";
 			}
-			$output=<<<HTMLCODE
+		}else{
+			$selected=($setInfoResult[$setField]==$r_value)?" selected":"";
+			$arr_select.="<option value='$r_value' $selected>$r_name</option> \n";
+		}
+	}else{
+		$arr_select.=$arrOption[$i];
+	}
+}
+$output=<<<HTMLCODE
             <tr>
               <td width="25%" align="right" valign="middle" class="input-titleblue">$setName</td>
               <td width="4" align="left" valign="middle">&nbsp;</td>
@@ -944,16 +947,16 @@ HTMLCODE;
 			  </td>
             </tr>
 HTMLCODE;
-			break;
-		case 'sec': //A separator
-			$output=<<<HTMLCODE
+break;
+case 'sec': //A separator
+$output=<<<HTMLCODE
             <tr>
               <td width="100%" colspan="3">
 				<div class="settitle"> $setName </div>	
 			  </td>
             </tr>
 HTMLCODE;
-			break;
+break;
 	}
 	return $output;
 }
@@ -969,17 +972,17 @@ function generate_thumbnail($attach_thumb=array()) {
 
 	if ( $attach_thumb['thumbswidth'] && $attach_thumb['thumbsheight'] ) {
 		$filesize = GetImageSize( $thumb_file );
-		
-		if ( $filesize[0] > $attach_thumb['thumbswidth'] || $filesize[1] > $attach_thumb['thumbsheight'] ) { 
+
+		if ( $filesize[0] > $attach_thumb['thumbswidth'] || $filesize[1] > $attach_thumb['thumbsheight'] ) {
 			$im = scale_image( array(
-				"max_width"  => $attach_thumb['thumbswidth'],
-				"max_height" => $attach_thumb['thumbsheight'],
-				"cur_width"  => $filesize[0],
-				"cur_height" => $filesize[1]
+			"max_width"  => $attach_thumb['thumbswidth'],
+			"max_height" => $attach_thumb['thumbsheight'],
+			"cur_width"  => $filesize[0],
+			"cur_height" => $filesize[1]
 			));
 			$return['thumbwidth']   = $im['img_width'];
 			$return['thumbheight']  = $im['img_height'];
-			
+
 			if ( $remap[ $filesize[2] ] == 'gif' ) {
 				if (function_exists( 'imagecreatefromgif')) {
 					$image = imagecreatefromgif( $thumb_file );
@@ -991,7 +994,7 @@ function generate_thumbnail($attach_thumb=array()) {
 					$type = 'png';
 				}
 			} else if ($remap[ $filesize[2] ] == 'jpg') {
-				if (function_exists( 'imagecreatefromjpeg')) { 
+				if (function_exists( 'imagecreatefromjpeg')) {
 					$image = imagecreatefromjpeg( $thumb_file );
 					$type = 'jpg';
 				}
@@ -1026,7 +1029,7 @@ function generate_thumbnail($attach_thumb=array()) {
 				$return['thumbfilepath'] = $attach_thumb['filepath'];
 				return $return;
 			}
-		} else { 
+		} else {
 			$return['thumbwidth']    = $filesize[0];
 			$return['thumbheight']   = $filesize[1];
 			$return['thumbfilepath'] = $attach_thumb['filepath'];
