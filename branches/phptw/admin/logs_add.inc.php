@@ -24,8 +24,8 @@ while ($file = readdir($handle)){
 			$editorpath=F2BLOG_ROOT."./".$arr_editor['EditorPath'];
 			$editorcode=$arr_editor['EditorCode'];
 		}
-	}	
-} 
+	}
+}
 //没有该编辑器，将取得默认编辑器。
 if (!file_exists($editorpath)){
 	$editorcode=$arr_editorCode[$settingInfo['defaultedits']];
@@ -96,7 +96,7 @@ closedir($handle);
 				foreach($arr_editorName as $key=>$value){
 					$selected=($logsediter==$value)?"selected":"";
 					echo "<option value=\"$value\" $selected>".$arr_editorRemark[$value]."</option>\n";
-			    }
+				}
 				?>
 			</select>
 		  </td>
