@@ -1,7 +1,7 @@
 <?php 
 if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
-//Êä³öÍ·²¿ÐÅÏ¢
+//ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½Ï¢
 dohead($title,$page_url);
 require('admin_menu.php');
 ?>

@@ -34,13 +34,13 @@ $edittype=empty($_REQUEST['edittype'])?"":$_REQUEST['edittype'];
 //前台管理行为
 if ($action=="manage"){
 	$manage=empty($_GET['manage'])?"":$_GET['manage'];
-	
+
 	//编辑
 	if($manage=="edit" && $mark_id!=""){
 		$edittype="front";
 		$action="edit";
 	}
-	
+
 	//删除
 	if($manage=="delete" && $mark_id!=""){
 		$action="delete";
@@ -70,7 +70,7 @@ if ($action=="manage"){
 			}
 			$name=($name=="")?"":substr($name,4);
 		}
-		
+
 		if (($dataInfo['saveType']==1 && $value!=1) || ($dataInfo['saveType']!=1 && $value==1)){
 			update_cateCount($cateId,$type,1);
 		}
@@ -157,7 +157,7 @@ if ($action=="manage"){
 		settings_recount("trackbacks");
 		settings_recache();
 	}
-	
+
 	//页面转向
 	if($manage!="edit" && $manage!="delete" && $manage!="draft"){
 		if ($manage=="notop" or $manage=="topopen" or $manage=="topclose") {
@@ -178,7 +178,7 @@ if ($action=="manage"){
 //保存数据
 if ($action=="save"){
 	$check_info=1;
-	
+
 	//取得Form的Value
 	$cateId=trim($_POST['cateId']);
 	$oldCateId=trim($_POST['oldCateId']);
@@ -202,7 +202,7 @@ if ($action=="save"){
 	}else{
 		$addpassword=encode($_POST['addpassword']);
 	}
-	
+
 	//检测输入内容为空
 	if (empty($logTitle) or empty($logContent) or empty($cateId)){
 		$ActionMessage=$strErrNull;
@@ -214,7 +214,7 @@ if ($action=="save"){
 			$cateId=encode($cateId);
 			$rsexits=getFieldValue($DBPrefix."categories","name='".$cateId."' and parent='0'","id");
 			if ($rsexits!=""){
-				$cateId=$rsexits;				
+				$cateId=$rsexits;
 			}else{
 				$sql="INSERT INTO ".$DBPrefix."categories(parent,name,orderNo,cateTitle,outLinkUrl,cateCount,isHidden,cateIcons) VALUES ('0','".$cateId."','0','".$cateId."','','0','0','1')";
 				$DMC->query($sql);
@@ -228,7 +228,7 @@ if ($action=="save"){
 
 		//已存在的Tags
 		$exist_tags=tag_list("A");
-		
+
 		$logs_tags=array();
 		$oldlogs_tags=array();
 
@@ -236,14 +236,14 @@ if ($action=="save"){
 			$tags_array=explode(';', $tags);
 			$tags_array_all=array_unique($tags_array);
 			$tags="";
-			
+
 			foreach($tags_array_all as $value){
 				if ($value!=""){
 					$tags.=($tags=="")?encode(stripslashes($value)):";".encode(stripslashes($value));
 					$logs_tags[]=encode(stripslashes($value));
 				}
 			}
-			
+
 			//处理旧标签
 			$oldTags_array=explode(';', $oldTags);
 			$oldTags_array_all=array_unique($oldTags_array);
@@ -259,7 +259,7 @@ if ($action=="save"){
 		//如果是ubb编辑器
 		if ($logsediter=="ubb"){
 			if (empty($_POST['allowhtml'])){
-				$logContent=ubblogencode($logContent);				
+				$logContent=ubblogencode($logContent);
 			}else{
 				$logContent=str_replace("\r","",$logContent);
 				$logContent=str_replace("\n","",$logContent);
@@ -335,12 +335,12 @@ if ($action=="save"){
 				$action="";
 			}
 		}
-		
+
 		//增加，编辑成功，Tags
 		if ($tags!=$oldTags) {
 			if (count($exist_tags)>0 && $exist_tags[0]!=""){
 				$newtags=array_diff($logs_tags, $exist_tags);
-				$newtags=array_values($newtags); 
+				$newtags=array_values($newtags);
 				$addtags=array_diff($logs_tags, $oldlogs_tags);
 
 				if (count($addtags)>0){
@@ -356,14 +356,14 @@ if ($action=="save"){
 				}
 			}else{
 				$newtags=$logs_tags;
-			}			
+			}
 
 			for ($m=0; $m<count($newtags); $m++) {
 				if ($newtags[$m]!="") {
 					$itags=$newtags[$m];
 					if (check_record($DBPrefix."tags"," name='$itags'")) {
 						$add_sql="INSERT INTO ".$DBPrefix."tags (name,logNums) VALUES ('".$itags."',1)";
-						$DMC->query($add_sql);						
+						$DMC->query($add_sql);
 					}
 				}
 			}
@@ -381,7 +381,7 @@ if ($action=="save"){
 					update_cateCount($cateId,"adding",1);//增加新类别数量
 				}
 			}
-	
+
 			//更新未链接的附件
 			if (!empty($_COOKIE['f2_attachments'])){
 				$arr_attachid=explode("|",$_COOKIE['f2_attachments']);
@@ -408,7 +408,7 @@ if ($action=="save"){
 			if (file_exists("../cache/cache_autosave.php")){
 				@unlink("../cache/cache_autosave.php");
 			}
-			
+
 			//生成静态页面
 			if ($settingInfo['isHtmlPage']==1){
 				echo "<script language='javascript'>";
@@ -449,13 +449,13 @@ if($action=="delete"){
 
 	$sql="delete from ".$DBPrefix."logs where id='$mark_id'";
 	$DMC->query($sql);
-	
+
 	//删除关联的评论和引用
 	$sql="delete from ".$DBPrefix."comments where logId='$mark_id'";
 	$DMC->query($sql);
 	$sql="delete from ".$DBPrefix."trackbacks where logId='$mark_id'";
 	$DMC->query($sql);
-	
+
 	//删除关联的附件
 	/*$sql="select * from ".$DBPrefix."attachments where logId='$mark_id'";
 	$result=$DMC->query($sql);
@@ -464,7 +464,7 @@ if($action=="delete"){
 	}*/
 	$sql="delete from ".$DBPrefix."attachments where logId='$mark_id'";
 	$DMC->query($sql);
-	
+
 	settings_recount("logs");
 
 	//更新Cache
@@ -716,7 +716,7 @@ if ($action=="operation"){
 			echo "</script>";
 		}
 	}
-	
+
 	//删除
 	if($_POST['operation']=="delete" and $stritem!=""){
 		for ($i=0;$i<count($itemlist);$i++){
@@ -793,7 +793,7 @@ if ($action=="sendtb"){
 		$result=send_trackback($durl, $dataInfo['logTitle'], $dataInfo['logContent'],$logurl);
 		//echo $ActionMessage.=$durl." : ".$result."\n";
 	}
-	
+
 	if ($result=="ok") {
 		$quoteUrl=($dataInfo['quoteUrl']=="")?$quoteUrl:$dataInfo['quoteUrl'].";".$quoteUrl;
 		$modify_sql="UPDATE ".$DBPrefix."logs set quoteUrl='$quoteUrl' WHERE id='$mark_id'";
@@ -930,7 +930,7 @@ if ($action=="add"){
 
 	$arr_parent = $DMC->fetchQueryAll($DMC->query("select * from ".$DBPrefix."logs where id='$mark_id'"));
 	if ($arr_parent) {
-		include("logs_tb.inc.php");	
+		include("logs_tb.inc.php");
 	}else{
 		$error_message=$strCategoryExchangeNoData;
 		include("error_web.php");
@@ -947,7 +947,7 @@ if ($action=="add"){
 	if ($seektags!=""){$find.=" and (a.tags like '%$seektags%')";}
 	if ($seektype!=""){$find.=" and (a.saveType='$seektype')";}
 	if ($_SESSION['rights']=="author") {$find.=" and (a.author='{$_SESSION['username']}')";}
-	
+
 	if ($seekcate!=""){
 		$find_sql="select id from ".$DBPrefix."categories where parent='$seekcate' or id='$seekcate'";
 		$find_result=$DMC->query($find_sql);
