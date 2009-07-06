@@ -25,6 +25,10 @@ function updatecache($cachename = '') {
 		'usergroups'	=> array('usergroups'),
 		'request'	=> array('request'),
 		'medals'	=> array('medals'),
+		'newtopic'	=> array('newtopic'),
+		'newreply'	=> array('newreply'),
+		'todaynewmems'	=> array('todaynewmems'),
+		'todayvisit'	=> array('todayvisit'),
 		'magics'	=> array('magics'),
 		'topicadmin'	=> array('modreasons'),
 		'archiver'      => array('advs_archiver'),
@@ -439,6 +443,28 @@ function getcachearray($cachename, $script = '') {
 			$table = 'medals';
 			$cols = 'medalid, name, image';
 			$conditions = "WHERE available='1'";
+			break;
+		case 'newtopic':
+			$table = 'threads t, '.$tablepre.'forums f';
+			$cols = "t.tid, t.subject, t.author, t.dateline, t.views, t.replies, t.lastpost, t.lastposter, t.highlight, f.name";
+			$conditions = "WHERE t.fid<>'$fid' AND f.fid=t.fid AND f.fid ORDER BY t.dateline DESC LIMIT 0, 11";
+			break;
+		case 'newreply':
+			$table = 'threads t, '.$tablepre.'forums f';
+			$cols = "t.tid, t.subject, t.author, t.dateline, t.views, t.replies, t.lastpost, t.lastposter, t.highlight, f.name";
+			$conditions = "WHERE t.fid<>'$fid' AND f.fid=t.fid AND f.fid AND t.replies !=0 ORDER BY t.lastpost DESC LIMIT 0, 11";
+			break;
+		case 'todaynewmems':
+			$table = 'members';
+			$cols = 'COUNT(*)';
+			$datecut = time() - (3600 * 24);
+			$conditions = "WHERE regdate>='$datecut'";
+			break;
+		case 'todayvisit':
+			$table = 'members';
+			$cols = "COUNT(*)";
+			$datecut = time() - (3600 * 24);
+			$conditions = "WHERE lastactivity>='$datecut' ORDER BY lastvisit DESC";
 			break;
 		case 'magics':
 			$table = 'magics';
@@ -1420,6 +1446,60 @@ function getcachearray($cachename, $script = '') {
 				$data[$magic['magicid']]['description'] = $magic['description'];
 				$data[$magic['magicid']]['weight'] = $magic['weight'];
 				$data[$magic['magicid']]['price'] = $magic['price'];
+			}
+			break;
+		case 'newreply':
+			$hack_cut_str = 26;
+			$new_reply_threadlist = array();
+			$rthread = array();
+			$colorarray = array('', '#EE1B2E', '#EE5023', '#996600', '#3C9D40', '#2897C5', '#2B65B7', '#8F2A90', '#EC1282');
+			while($rthread = $db->fetch_array($query)){
+				$rthread['forumname'] = $rthread['name'];
+				$rthread['view_subject'] = cutstr($rthread['subject'],$hack_cut_str);
+				$rthread['subject'] = cutstr($rthread['subject'],46);
+				$rthread['date']= gmdate('Y-n-j G:i', $rthread['dateline'] + 8 * 3600);
+				$rthread['lastreplytime']= gmdate('Y-n-j G:i', $rthread['lastpost'] + 8 * 3600);
+				if($rthread['highlight']) {
+					$string = sprintf('%02d', $rthread['highlight']);
+					$stylestr = sprintf('%03b', $string[0]);
+					$rthread['highlight'] = 'style="';
+					$rthread['highlight'] .= $stylestr[0] ? 'font-weight: bold;' : '';
+					$rthread['highlight'] .= $stylestr[1] ? 'font-style: italic;' : '';
+					$rthread['highlight'] .= $stylestr[2] ? 'text-decoration: underline;' : '';
+					$rthread['highlight'] .= $string[1] ? 'color: '.$colorarray[$string[1]] : '';
+					$rthread['highlight'] .= '"';
+				} else {
+					$rthread['highlight'] = '';
+				}
+				$new_reply_threadlist = "<a href=\"redirect.php?tid=$rthread[tid]&amp;goto=lastpost#lastpost\" title=\"論壇: $rthread[forumname]\r\n標題: $rthread[subject]\r\n作者: $rthread[author]\r\n發表時間: $rthread[date]\r\n瀏覽次數: $rthread[views] 次\r\n回覆: $rthread[replies] 次\r\n最後回覆: $rthread[lastreplytime]\r\n最後發表: $rthread[lastposter]\" $rthread[highlight]>$rthread[view_subject]</a><br />";
+				$data[] = array('content' => $new_reply_threadlist);
+			}
+			break;
+		case 'newtopic':
+			$hack_cut_str = 26;
+			$new_post_threadlist = array();
+			$nthread = array();
+			$colorarray = array('', '#EE1B2E', '#EE5023', '#996600', '#3C9D40', '#2897C5', '#2B65B7', '#8F2A90', '#EC1282');
+			while($nthread = $db->fetch_array($query)){
+				$nthread['forumname'] = $nthread['name'];
+				$nthread['view_subject'] = cutstr($nthread['subject'],$hack_cut_str);
+				$nthread['subject'] = cutstr($nthread['subject'],46);
+				$nthread['date']= gmdate('Y-n-j G:i', $nthread['dateline'] + 8 * 3600);
+				$nthread['lastreplytime']= gmdate('Y-n-j G:i', $nthread[lastpost] + 8 * 3600);
+				if($nthread['highlight']) {
+					$string = sprintf('%02d', $nthread['highlight']);
+					$stylestr = sprintf('%03b', $string[0]);
+					$nthread['highlight'] = 'style="';
+					$nthread['highlight'] .= $stylestr[0] ? 'font-weight: bold;' : '';
+					$nthread['highlight'] .= $stylestr[1] ? 'font-style: italic;' : '';
+					$nthread['highlight'] .= $stylestr[2] ? 'text-decoration: underline;' : '';
+					$nthread['highlight'] .= $string[1] ? 'color: '.$colorarray[$string[1]] : '';
+					$nthread['highlight'] .= '"';
+				} else {
+					$nthread['highlight'] = '';
+				}
+				$new_post_threadlist = "<a href=\"viewthread.php?tid=$nthread[tid]\" title=\"論壇: $nthread[forumname]\r\n標題: $nthread[subject]\r\n作者: $nthread[author]\r\n發表時間: $nthread[date]\r\n瀏覽次數: $nthread[views] 次 \r\n回覆: $nthread[replies] 次\r\n最後回覆: $nthread[lastreplytime]\r\n最後發表: $nthread[lastposter]\" $nthread[highlight] >$nthread[view_subject]</a><br />";
+				$data[] = array('content' => $new_post_threadlist);
 			}
 			break;
 		case 'birthdays_index':

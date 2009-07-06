@@ -53,6 +53,20 @@ if($qihoo['maxtopics']) {
 		$customtopics .= '<a href="topic.php?keyword='.rawurlencode($topic).'" target="_blank">'.$topic.'</a> &nbsp;';
 	}
 }
+//-----------hack AL8 Info
+if(!$statstatus && $discuz_uid){
+require_once DISCUZ_ROOT.'./include/counter.inc.php';
+$unreadpmnum = $db->result_first("SELECT COUNT(*) FROM ".UC_DBTABLEPRE."pms WHERE msgtoid='$discuz_uid' AND new=1");
+}
+require_once DISCUZ_ROOT.'./include/misc.func.php';
+$mem_home = convertip($onlineip, $datadir = "./");
+require_once DISCUZ_ROOT.'./forumdata/cache/cache_todayvisit.php';
+$todayvisit = $_DCACHE['todayvisit']['0']['COUNT(*)'];
+require_once DISCUZ_ROOT.'./forumdata/cache/cache_todaynewmems.php';
+$todaynewmems = $_DCACHE['todaynewmems']['0']['COUNT(*)'];
+@include './forumdata/cache/cache_newtopic.php';
+@include './forumdata/cache/cache_newreply.php';
+//-----------hack AL8 Info End
 
 $catlist = $forumlist = $sublist = $forumname = $collapseimg = $collapse = array();
 $threads = $posts = $todayposts = $fids = $announcepm = 0;

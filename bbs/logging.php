@@ -147,6 +147,8 @@ if($action == 'logout' && !empty($formhash)) {
 			dsetcookie('pmnum');
 
 			$sessionexists = 0;
+			require_once DISCUZ_ROOT.'./include/cache.func.php';
+			updatecache('todayvisit');
 
 			if($_DCACHE['settings']['frameon'] && $_DCOOKIE['frameon'] == 'yes') {
 				$extrahead .= '<script>if(top != self) {parent.leftmenu.location.reload();}</script>';

@@ -516,6 +516,8 @@ if(!submitcheck('topicsubmit', 0, $seccodecheck, $secqaacheck)) {
 			$db->query("UPDATE {$tablepre}forums SET lastpost='$lastpost' WHERE fid='$forum[fup]'", 'UNBUFFERED');
 		}
 
+		require DISCUZ_ROOT.'./include/cache.func.php';
+		updatecache('newtopic');
 		showmessage('post_newthread_succeed', "viewthread.php?tid=$tid&extra=$extra");
 
 	}

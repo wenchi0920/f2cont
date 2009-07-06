@@ -13,6 +13,7 @@ define('NOROBOT', TRUE);
 require_once './include/common.inc.php';
 require_once DISCUZ_ROOT.'./include/post.func.php';
 require_once DISCUZ_ROOT.'./include/misc.func.php';
+require_once DISCUZ_ROOT.'./include/cache.func.php';
 
 $discuz_action = 201;
 $modpostsnum = 0;
@@ -660,7 +661,7 @@ if($resultarray) {
 			sendreasonpm($resultarray['reasonpm']['var'], $resultarray['reasonpm']['item']);
 		}
 	}
-
+	updatecache(array('newreply','newtopic'));
 	showmessage((isset($resultarray['message']) ? $resultarray['message'] : 'admin_succeed'), $resultarray['redirect']);
 
 }

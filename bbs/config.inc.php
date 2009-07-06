@@ -12,9 +12,9 @@
 // [CH] 以下變量請根據空間商提供的賬號參數修改,如有疑問,請聯繫服務器提供商
 
 	$dbhost = 'localhost';			// 數據庫服務器
-	$dbuser = 'username';			// 數據庫用戶名
-	$dbpw = '';				// 數據庫密碼
-	$dbname = 'discuz';			// 數據庫名
+	$dbuser = 'f2cont_bbs';			// 數據庫用戶名
+	$dbpw = 'f8XH5UWE5Tep';				// 數據庫密碼
+	$dbname = 'f2cont_bbs';			// 數據庫名
 	$pconnect = 0;				// 數據庫持久連接 0=關閉, 1=打開
 
 // [CH] Mysql 輔助服務器設置，只有當您擁有多個 Mysql 服務器且協同工作時請進行設置
@@ -23,7 +23,7 @@
 	
 // [CH] 如您對 cookie 作用範圍有特殊要求, 或論壇登錄不正常, 請修改下面變量, 否則請保持默認
 
-	$cookiepre = 'cdb_';			// cookie 前綴
+	$cookiepre = '1CC_';			// cookie 前綴
 	$cookiedomain = ''; 			// cookie 作用域
 	$cookiepath = '/';			// cookie 作用路徑
 
@@ -43,12 +43,12 @@
 
 // [CH] 論壇安全設置, 調整以下設置，可以增強論壇的安全性能和防禦性能
 
-	$adminemail = 'admin@your.com';		// 系統管理員 Email
+	$adminemail = 'service@f2cont.com';		// 系統管理員 Email
 
-	$forumfounders = '';			// 論壇創始人 UID, 可以支持多個創始人，之間使用 「,」 分隔。[出於安全考慮，請務必設置一名管理員為創始人]
+	$forumfounders = '1';			// 論壇創始人 UID, 可以支持多個創始人，之間使用 「,」 分隔。[出於安全考慮，請務必設置一名管理員為創始人]
 						// 論壇創始人可對其他管理員進行設置。如果不設置論壇創始人，則論壇管理員之間權利平等。
 
-	$dbreport = 0;				// 論壇出現數據庫錯誤時，是否通過 email 發送錯誤報告給系統管理員
+	$dbreport = 1;				// 論壇出現數據庫錯誤時，是否通過 email 發送錯誤報告給系統管理員
 
 	$errorreport = 1;			// 是否屏蔽程序錯誤信息, 0=屏蔽所有錯誤(安全) 1=報告給管理員和版主(安全) 2=報告給任何人
 
@@ -67,4 +67,17 @@
 	$admincp['dbimport'] = 1;		// 是否允許後台恢復論壇數據  1=是 0=否[安全]
 
 // ============================================================================
-
+define('UC_CONNECT', 'mysql');
+define('UC_DBHOST', 'localhost');
+define('UC_DBUSER', 'f2cont_bbs');
+define('UC_DBPW', 'f8XH5UWE5Tep');
+define('UC_DBNAME', 'f2cont_bbs');
+define('UC_DBCHARSET', 'utf8');
+define('UC_DBTABLEPRE', '`f2cont_bbs`.cdb_uc_');
+define('UC_DBCONNECT', '0');
+define('UC_KEY', 'W4IaO4k0I3s4TdQ9DdW8F4Mf2e64qeb9qcZf71M0c7z8r604C4M9tbh8x8x6j1we');
+define('UC_API', 'http://bbs.f2cont.com/uc_server');
+define('UC_CHARSET', 'utf-8');
+define('UC_IP', '127.0.0.1');
+define('UC_APPID', '1');
+define('UC_PPP', '20');

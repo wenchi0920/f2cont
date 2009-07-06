@@ -17,6 +17,7 @@ if($special == 6) {
 }
 
 $discuz_action = 13;
+require_once DISCUZ_ROOT.'./include/cache.func.php';
 
 $orig = $db->fetch_first("SELECT m.adminid, p.first, p.authorid, p.author, p.dateline, p.anonymous, p.invisible, p.htmlon FROM {$tablepre}posts p
 	LEFT JOIN {$tablepre}members m ON m.uid=p.authorid
@@ -359,6 +360,7 @@ if(!submitcheck('editsubmit')) {
 					$polladd = ', special=\'0\'';
 					$db->query("DELETE FROM {$tablepre}polls WHERE tid='$tid'");
 					$db->query("DELETE FROM {$tablepre}polloptions WHERE tid='$tid'");
+					updatecache('newtopic');
 				}
 
 			} elseif($thread['special'] == 3 && $allowpostreward) {
@@ -839,7 +841,6 @@ if(!submitcheck('editsubmit')) {
 				$db->query("DELETE FROM {$tablepre}$table WHERE tid='$tid'", 'UNBUFFERED');
 			}
 			if($globalstick && in_array($thread['displayorder'], array(2, 3))) {
-				require_once DISCUZ_ROOT.'./include/cache.func.php';
 				updatecache('globalstick');
 			}
 		} else {
@@ -848,6 +849,7 @@ if(!submitcheck('editsubmit')) {
 			$lastpost = $db->fetch_array($query);
 			$lastpost['author'] = !$lastpost['anonymous'] ? addslashes($lastpost['author']) : '';
 			$db->query("UPDATE {$tablepre}threads SET replies=replies-'1', attachment='$thread_attachment', lastposter='$lastpost[author]', lastpost='$lastpost[dateline]' WHERE tid='$tid'", 'UNBUFFERED');
+			updatecache(array('newreply','newtopic'));
 		}
 
 		$forum['lastpost'] = explode("\t", $forum['lastpost']);

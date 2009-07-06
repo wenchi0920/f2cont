@@ -312,6 +312,8 @@ if(!submitcheck('regsubmit', 0, $seccodecheck, $secqaacheck)) {
 	}
 
 	require_once DISCUZ_ROOT.'./include/cache.func.php';
+	require_once DISCUZ_ROOT.'./include/cache.func.php';
+	updatecache('todaynewmems');
 	$_DCACHE['settings']['totalmembers']++;
 	updatesettings();
 

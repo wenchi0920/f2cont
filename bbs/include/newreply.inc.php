@@ -397,7 +397,8 @@ if(!submitcheck('replysubmit', 0, $seccodecheck, $secqaacheck)) {
 			}
 			postfeed($feed);
 		}
-
+		require DISCUZ_ROOT.'./include/cache.func.php';
+		updatecache(array('newreply','newtopic'));
 		showmessage($replymessage, "viewthread.php?tid=$tid&pid=$pid&page=".(@ceil(($thread['special'] ? $thread['replies'] + 1 : $thread['replies'] + 2) / $ppp))."&extra=$extra#pid$pid");
 	}
 
