@@ -46,7 +46,7 @@ require('admin_menu.php');
 			   <tr>
 				<td class="leftbox">&nbsp;</td>
 				<td nowrap class="rightbox">Ricky</td>
-				<td class="rightbox"><a href='http://ricky.f2blog.com/' target='_blank'>http://ricky.f2blog.com/</a></td>
+				<td class="rightbox"><a href="http://www.sfun.idv.tw" target="_blank">http://www.sfun.idv.tw</a> </td>
 			   </tr>
 			   <tr>
 				<td class="leftbox">&nbsp;</td>
