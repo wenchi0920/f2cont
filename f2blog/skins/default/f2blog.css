@@ -1,0 +1,61 @@
+/*---侧边栏每行链接的显示控制，如果该值为空，自动取link.css中的SideA样式---*/  
+/*---留言内容链接样式---*/  
+#GuestBook_Link:link,#GuestBook_Link:visited{background:url(arrow.gif) 2px 3px no-repeat;}
+#GuestBook_Link:hover{background:url(arrow.gif) no-repeat 2px -13px;}
+
+/*---评论内容链接样式---*/  
+#Comment_Link:link,#Comment_Link:visited{background:url(arrow1.gif) 2px 3px no-repeat;}
+#Comment_Link:hover{background:url(arrow1.gif) no-repeat 2px -13px;}
+
+/*---最新日志内容链接样式---*/  
+#NewLog_Link:link,#NewLog_Link:visited{background:url(arrow2.gif) 2px 3px no-repeat;}
+#NewLog_Link:hover{background:url(arrow2.gif) no-repeat 2px -13px;}
+
+/*---归档内容链接样式---*/  
+#Archive_Link:link,#Archive_Link:visited{background:url(arrow3.gif) 2px 3px no-repeat;}
+#Archive_Link:hover{background:url(arrow3.gif) no-repeat 2px -13px;}
+
+/*---友情链接内容链接样式---*/  
+#Link_Link:link,#Link_Link:visited{background:url(arrow4.gif) 2px 3px no-repeat;}
+#Link_Link:hover{background:url(arrow4.gif) no-repeat 2px -13px;}
+
+
+/*---侧边栏内容整体样式控制---*/  
+/*---日历，typography.css中也存在同样的标签，两个地方修改任何一处都可以---*/ 
+#Calendar_Body{}
+
+/*---最新评论，typography.css中存在一个class:commentTable，两个地方修改任何一处都可以---*/  
+#Comment_Body{}
+
+/*---链接，typography.css中也存在一个class:LinkTable，两个地方修改任何一处都可以---*/ 
+#Link_Body{}
+
+/*---标签显示---*/  
+#HotTags_Body{}
+
+/*---归档---*/  
+#Archive_Body{}
+
+/*---搜索---*/  
+#Search_Body{}
+
+/*---访问人数显示---*/  
+#BlogInfo_Body{}
+
+/*---最新留言---*/  
+#GuestBook_Body{}
+
+/*---日志说明信息---*/ 
+#Description_Body{}
+
+/*---Skin交换---*/ 
+#SkinSwitch_Body{}
+
+/*---日志类别---*/ 
+#Category_Body{}
+
+/*---最新日志---*/ 
+#NewLog_Body{}
+
+/*---其它侧边栏---*/ 
+#Other_Body{}
