@@ -1,0 +1,90 @@
+/*整体样式*/
+body { color: #6c6c6c; font-size: 9pt; font-family: tahoma, verdana, courier, geneva, helvetica; background-color: white; margin: 0; }
+table {font-size:9pt;}
+p {}
+a { text-decoration: none; }
+td {}
+img{border:0px}
+a:link { color: #6c6c6c ; text-decoration: none; }
+a:visited { color: #6c6c6c }
+a:hover { color: #FF0000 }
+a:active { color: #FF0000 }
+
+/*top.php头部*/
+#top { background-image: url(../main/bg_header-1.gif); background-repeat: repeat-x; width: 100%; height: 74px;}
+#top .logo { background-image: url(../main/logo.gif); background-repeat: no-repeat; width:180px; height: 43px; margin-top: 4px; margin-left:12px!important;margin-left: 6px; float: left; cursor:pointer;}
+#top .exit { font-size: 11px; background-image: url(../main/exit.gif); width: 120px; height: 41px; float: right; margin-top: 4px; margin-right:20px!important;margin-right:10px; cursor:pointer; }
+#top .info { color: #FFFFFF; font-size: 11px; text-align: center; width: 300px; height: 54px; float: right; margin-top: 4px; margin-right: 140px; }
+#top .info a{ color: #FFFFFF; }
+
+/*left.php左边菜单*/
+#left { background-image: url(../main/bg_header-2.gif); background-repeat: repeat-x; background-position: 0 top; text-align: center; width:186px; height:100%; }
+#left .top_img { height:15px; background-image: url(../left/bgtop-image.gif); background-repeat: no-repeat; width: 186px; }
+#left .middle { background-color: #f0e8db; text-align:center; width: 186px; height: 600px; }
+#left .middle a { border-style: none; border-width: 0; }
+#left .middle .submenu {background-image: url(../left/submenu_topimg.gif);height:5px;display:none;}
+.main_title {font-weight:bold;font-size:12px;color:#FFFFFF; background-repeat: no-repeat; width:100%;height:25px!important;height:32px;padding-left:52px;padding-top:10px;margin-top:0px!important;margin-top:3px;}
+.sub_title {font-weight:bold;font-size:12px;color:#a9a59a; background-repeat: no-repeat; width:100%;height:32px;padding-left:52px;padding-top:10px;margin-bottom:-11px!important;margin-bottom:-1px;margin-top:-5px!important;margin-top:0px;}
+.childmenu {margin-top:-10px!important;margin-top:0px;margin-bottom:5px!important;margin-bottom:-3px;}
+
+/*内容头部*/
+#content { font-size: 9pt; line-height: 160%; background-image: url(../main/bg_header-2.gif); background-repeat: repeat-x; width:100%!important; width:95%; }
+#content .box { margin: 0 20px 20px; }
+#content-left { font-size: 9pt; line-height: 160%; background-image: url(../main/bg_header-2.gif); background-repeat: repeat-x; background-position: 0 top; }
+
+/*主体底部*/
+.bottombar-onebtn { color: #0b0000; text-align: center; margin-right: 10px; margin-left: 10px; padding-top: 5px; border-top: 2px solid #00a6ed; border-right-color: #aaa; border-bottom-color: #aaa; border-left-color: #aaa; }
+.btn {	height: 20px;
+	border: 1px solid #B18F49;
+	border-top: 1px solid #CFB88C;
+	border-left: 4px solid #CFB88C;
+	color: #330000; 
+	background-color: #F7F3E8;
+	padding:3px;
+	font-size:9pt;
+}
+.style1 { color: #f00; font-size: 9pt; }
+.page { color: #00a6ed; font-size: 9pt; float: right; margin-top: -17px; }
+
+/*主体正文*/
+.contenttitle { color: #239; font-size: 14px; height: 20px!important;  height: 30px; margin-right: 10px; margin-left: 10px; padding-top: 5px; border-top: 2px solid #00a6ed; border-bottom: 2px solid #00a6ed; }
+.searchtool { font-size: 9pt; padding: 5px 10px; }	/*搜索框*/
+.searchbox { width:100px; }	/*搜索文本框*/
+.alertinfo { color: #f00; font-size: 9pt; }	/*出错提示信息*/
+
+/*新增内容用*/
+.input-title { color: #000; font-size: 9pt; padding-top: 10px; border-bottom-color: #888; border-bottom-width: 1px; }
+.input-titleblue { color: #239; font-size: 9pt; padding-top: 10px; border-bottom-color: #888; border-bottom-width: 1px; }
+.input-titlesub { font-size: 9pt; }
+.textbox { color: #6c6c6c; font-size: 9pt; height: 30px; padding-top: 10px; border-color: #aaa; border-style: dotted; border-width: 0 0 1px; }
+.filebox{ font-size:9pt; font-family: Arial; border-bottom: 1px solid #b2d9e8; border-top-width: 0; border-right-width: 0; border-left-width: 0; }
+.blogeditbox { font-size:9pt; font-family: Arial; background:#F6F6F6}
+
+/*列表内容用*/
+.subcontent { margin-right: 10px; margin-left: 10px;width:97%!important; width:100%; }
+.subcontent-title { color: #fff; font-size: 9pt; background-image: url(../content/blue_bar.gif); background-repeat: repeat-x;  height: 26px; }
+.subcontent-input { color: #6c6c6c; font-size: 9pt; height: 25px; border-color: #aaa; border-style: dotted; border-width: 0 0 1px; }
+.subcontent-td { color: #6c6c6c; font-size: 9pt; height: 25px; border-color: #aaa; border-style: dotted; border-width: 0 0 1px; }
+.subcontent-td2 { background:#E3F7E1;color: #0033FF; font-size: 9pt; height: 25px; border-color: #aaa; font-weight: bold;border-style: dotted; border-width: 0 0 1px; }
+.columntitle:link{color:#fff;}
+.columntitle:hover{color:#fff;}
+.columntitle:visited{color:#fff;}
+
+/*skin*/
+.skinbox { font-size: 9pt; border: solid 1px #aaa; }
+.skinboxfont { font-size: 9pt; }
+.selectskin{margin:5px;padding:6px;border:1px solid #4d3a22;background:#ffffce;height:100px}
+.unselectskin{margin:5px;padding:6px;border:1px solid #fff;height:100px}
+.skinimg{width:100px;height:100px;float:left;margin-right:6px;border:1px solid #ccc}
+.skinDes{line-height:150%;margin-bottom:9pt;}
+.cskin{position: absolute;margin-left:74px !important;margin-left:-34px;margin-top:-9pt !important;margin-top:-14px}
+
+/*info.php的样式*/
+#info {margin-left: 10px;margin-right: 10px;width:97%!important; width:100%;}
+#info .leftbox {height: 30px; color: #239; font-size: 9pt; border-bottom: 1px dotted #aaa; }
+#info .rightbox {color: #888; font-size: 9pt; border-bottom: 1px dotted #aaa;  }
+
+/*版权*/
+.copyright {text-align:center;font-size: 9pt;}
+
+.readonly {background-color:#CCCCCC;}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PluginSet>
+ <PluginName>f2blog</PluginName>
+ <PluginVersion>1.0</PluginVersion>
+ <FunctionName>f2_hide,f2_more,f2_page</FunctionName>
+ <FunctionImage>hide.gif,more.gif,page.gif</FunctionImage>
+ <FunctionDesc>隐藏,截止,分页</FunctionDesc>
+ <PluginAuthor>Joesen</PluginAuthor>
+ <pubDate>2006-7-7</pubDate>
+ <AuthorURL>http://joesen.f2blog.com</AuthorURL>
+ <AuthorMail>joesenhong@yahoo.com.cn</AuthorMail>
+</PluginSet>
