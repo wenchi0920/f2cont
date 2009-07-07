@@ -25,6 +25,7 @@ if (file_exists("./skins/".$blogSkins."/UBB")){
 <link rel="alternate" type="application/rss+xml" href="<?php echo $settingInfo['blogUrl']?>rss.php" title="<?php echo $settingInfo['name']?>(Rss2)" />
 <link rel="alternate" type="application/atom+xml" href="<?php echo $settingInfo['blogUrl']?>atom.php" title="<?php echo $settingInfo['name']?>(Atom)" />
 <?php }?>
+
 <?php if (!empty($base_rewrite)){?><base href="<?php echo $base_rewrite?>" /><?php }?>
 <link rel="stylesheet" rev="stylesheet" href="skins/<?php echo $blogSkins?>/global.css" type="text/css" media="all" /><!--全局样式表-->
 <link rel="stylesheet" rev="stylesheet" href="skins/<?php echo $blogSkins?>/layout.css" type="text/css" media="all" /><!--层次样式表-->
@@ -33,13 +34,22 @@ if (file_exists("./skins/".$blogSkins."/UBB")){
 <link rel="stylesheet" rev="stylesheet" href="<?php echo "skins/$blogSkins/f2blog.css"?>" type="text/css" media="all" /><!--F2blog特有CSS-->
 <link rel="stylesheet" rev="stylesheet" href="include/common.css" type="text/css" media="all" /><!--F2blog共用CSS-->
 <link rel="stylesheet" rev="stylesheet" href="<?php echo "$ubb_path/editor.css"?>" type="text/css" media="all" /><!--UBB样式-->
+
+
 <link rel="icon" href="<?php echo "attachments/".$settingInfo['favicon']?>" type="image/x-icon" />
 <link rel="shortcut icon" href="<?php echo "attachments/".$settingInfo['favicon']?>" type="image/x-icon" />
+
+
 <script type="text/javascript" src="include/common.js.php"></script>
 <?php if (!empty($settingInfo['showAlertStyle'])){?><script type="text/javascript" src="editor/ubb/nicetitle.js"></script><?php }?>
+
+
 <?php if ($settingInfo['ajaxstatus']!=""){?><script type="text/javascript" src="include/f2blog_ajax.js"></script><?php }?>
+
 <?php  do_action("f2_head"); ?>
+
 <?php if ($settingInfo['headcode']!="") echo str_replace("<br />","",dencode($settingInfo['headcode']));?>
+
 </head>
 <body>
 
