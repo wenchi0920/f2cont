@@ -47,12 +47,6 @@ require('admin_menu.php');
 			   
 			   <tr>
 				<td class="leftbox">&nbsp;</td>
-				<td nowrap class="rightbox">Kiyomi</td>
-				<td class="rightbox"><a href='http://kiyomi.idv.tw/' target='_blank'>http://kiyomi.idv.tw/</a></td>
-			   </tr>
-			   
-			   <tr>
-				<td class="leftbox">&nbsp;</td>
 				<td nowrap class="rightbox">korui</td>
 				<td class="rightbox"><a href='http://guorui.org/' target='_blank'>http://guorui.org/</a></td>
 			   </tr>
@@ -160,13 +154,16 @@ ljweb  http://ljweb.com.ru 、http://yalove.org/blog  090624 新增
 				<td nowrap class="rightbox">风之逸</td>
 				<td class="rightbox"><a href='http://www.rainboww.net/' target='_blank'>http://www.rainboww.net/</a></td>
 			   </tr>
+				   <tr>
+                       <td class="leftbox">&nbsp;</td>
+				       <td nowrap class="rightbox">Kiyomi</td>
+				       <td class="rightbox"><a href='http://kiyomi.idv.tw/' target='_blank'>http://kiyomi.idv.tw/</a></td>
+			        </tr>
 			   <tr>
 				<td class="leftbox">&nbsp;</td>
 				<td nowrap class="rightbox">puer</td>
 				<td class="rightbox"><a href='http://domiso.cn/' target='_blank'>http://domiso.cn/</a></td>
 			   </tr>
-			   
-			   
 			</table>
 		</td>
 		<td width="3%">
