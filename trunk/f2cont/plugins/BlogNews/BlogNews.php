@@ -54,9 +54,9 @@ function ShowBlogNews($mainname,$maintitle,$htmlcode){
 		<td width="95%" align="right" >
 		<div id="icefable1" valign="top">
 			<TABLE style="COLOR:#000" height="40" cellSpacing="0" cellPadding="0" width="100%" border="0">
-			<?php foreach($arrCode as $key=>$value) { ?>
+			<?php if (is_array($arrCode)){foreach($arrCode as $key=>$value) { ?>
 			<TR><TD align=left height=20>&nbsp;<?php echo dencode(trim($value))?></TD></TR>
-			<?php } ?>
+			<?php }} ?>
 			</TABLE>
 		</div>
 
