@@ -157,7 +157,7 @@ ljweb  http://ljweb.com.ru 、http://yalove.org/blog  090624 新增
 				   <tr>
                        <td class="leftbox">&nbsp;</td>
 				       <td nowrap class="rightbox">Kiyomi</td>
-				       <td class="rightbox"><a href='http://kiyo.tw/' target='_blank'>http://kiyo.tw/</a></td>
+				       <td class="rightbox"><a href='http://kiyomi.idv.tw/' target='_blank'>http://kiyomi.idv.tw/</a></td>
 			        </tr>
 			   <tr>
 				<td class="leftbox">&nbsp;</td>
