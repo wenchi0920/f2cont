@@ -8,7 +8,7 @@ header("Content-Type: text/html; charset=utf-8");
 升级方法：
 1. 把此文件移到上一层目录就可以了。
 */
-$update_time="20090628";
+$update_time="20090709";
 
 //禁止此文件在tools目录下运行
 if (strpos(";".$_SERVER['PHP_SELF'],"tools")>0){
@@ -185,6 +185,16 @@ function update_data($echo,$DMC){
 			$modify_sql[]="INSERT INTO `{$DBPrefix}filters` (`category`, `name`) VALUES (1, 'This site')";
 		}
 
+	}
+	
+	if (!in_array($update_logs,"20090709")) {
+		
+		$SQL="select count(`name`) from `{$DBPrefix}modules` where `name`='BlogNews'";
+		list($intNums)=$DMC->fetchArray($DMC->query($SQL),MYSQL_NUM);
+		if ($intNums==0) {
+			$modify_sql[]="INSERT INTO `{$DBPrefix}modules` (`name`, `modTitle`, `disType`, `isHidden`, `indexOnly`, `orderNo`, `isSystem`, `htmlCode`, `pluginPath`, `isInstall`, `installFolder`, `installDate`, `settingXml`, `cateId`, `configPath`) VALUES('BlogNews', '跑馬燈', 3, 0, 0, 2, 1, '', 'include/plung.blognews.php', 0, '', 0, '', 0, '')";
+		}
+		else $modify_sql[]="update `{$DBPrefix}modules` set isSystem='1',`pluginPath`='include/plung.blognews.php' where `name`='BlogNews'";
 	}
 
 	if (is_array($arr_setting)){
