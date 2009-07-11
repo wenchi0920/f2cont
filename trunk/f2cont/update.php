@@ -62,8 +62,7 @@ if ($check_update){
 		echo "<a href=index.php>Return Homepage</a>";
 		
 		//$SQL="update `{$DBPrefix}setting` set `settValue`='".$strCloseReason."' where `settName`='closeReason'";
-		//$DMC->query($SQL);
-		
+		//$DMC->query($SQL);		
 		//$SQL="update `{$DBPrefix}setting` set `settValue`='0' where `settName`='status'";
 		//$DMC->query($SQL);
 		
