@@ -52,7 +52,7 @@ function ShowBlogNews($mainname,$maintitle,$htmlcode){
 		<tr>
 		<td width="36" align="center"><img src="plugins/BlogNews/callBoard.gif" alt="公告板" /></td>
 		<td width="95%" align="right" >
-		<div id="icefable1" valign="top">
+		<div id="icefable1" valign="top" style="overflow:hidden; height:40px; float:left;">
 			<TABLE style="COLOR:#000" height="40" cellSpacing="0" cellPadding="0" width="100%" border="0">
 			<?php if (is_array($arrCode)){foreach($arrCode as $key=>$value) { ?>
 			<TR><TD align=left height=20>&nbsp;<?php echo dencode(trim($value))?></TD></TR>
@@ -61,38 +61,70 @@ function ShowBlogNews($mainname,$maintitle,$htmlcode){
 		</div>
 
 		<script language=javascript> 
-			if (navigator.product != 'Gecko'){
+			//if (navigator.product != 'Gecko'){
 				marqueesHeight=20//滚动的高度 
 				delaytime = 140 //停留时间 
 				scrollupRadio = 18 //每段显示中的文字向上滚动速度... 
 				stopscroll=false; 
-				document.getElementById('icefable1').scrollTop=0; 
+				document.getElementById('icefable1').scrollTop=0;
+				
+				var m = document.getElementById('icefable1');
+				m.style.width=330; 
+				m.style.height=40; 
+				m.noWrap= false //true; 
+				m.onmouseover = function(){
+				//	alert('test1');
+					scrollUp(true);
+				}
+				m.onmouseout = function(){
+				//	alert('test2');
+					scrollUp(false);
+				}
+				//m.setAttribute('onmouseover', 'scrollUp(true)'); 
+				//m.setAttribute('onmouseout', 'scrollUp(false)'); 
+				//m.onmouseover=new Function("stopscroll_=true"); 
+				//m.onmouseout=new Function("stopscroll_=false"); 
+				//	    a_upLink.setAttribute('onclick', 'fun2(document.getElementById("upLink"))'); 
+
+				
+				
 				//设置层的属性 
+				/*
 				with(document.getElementById('icefable1')){  
 					//宽度0 
 					//style.width=330; 
 					//高度为设定的滚动高度 
 					style.height=40; 
 					//溢出不显示.. 
-					style.overflowX="visible"; 
-					style.overflowY="hidden"; 
+					//style.overflowX="visible"; 
+					//style.overflow="hidden"; 
 					//不允许换行.. 
 					noWrap= false //true; 
 					onmouseover=new Function("stopscroll_=true"); 
 					onmouseout=new Function("stopscroll_=false"); 
+					
+					alert('test0');
+					
 				}
-
+				*/
 				//将层中的数据输出两次，由于限制了高度，所以不会显示出来； 
 				document.getElementById('icefable1').innerHTML+=document.getElementById('icefable1').innerHTML+=document.getElementById('icefable1').innerHTML+=document.getElementById('icefable1').innerHTML+=document.getElementById('icefable1').innerHTML+=document.getElementById('icefable1').innerHTML; 
 				function init_srolltext(){  
+					//alert('test1');
 					document.getElementById('icefable1').scrollTop= 0; 
-					setInterval("scrollUp()",scrollupRadio); //滚动速度...100 
+				//	alert('test2');
+					setInterval("scrollUp(false)",scrollupRadio); //滚动速度...100 
+					//alert('test3');
 				} 
 
 				init_srolltext(); 
 				preTop=0; currentTop=0; stoptime=0; 
-				function scrollUp(){  
-					if(stopscroll==true) return; 
+					//alert('test4');
+				function scrollUp(stopscroll){  
+					if (stopscroll==true) return ;
+				
+				//	if(stopscroll==true) return; 
+				//	alert('test5');
 					currentTop+=1; 
 					if(currentTop==21){  
 						stoptime+=1; 
@@ -110,7 +142,7 @@ function ShowBlogNews($mainname,$maintitle,$htmlcode){
 						} 
 					} 
 				} 
-			}
+			//}
 		</script> 				
 		</td>
 		</tr>

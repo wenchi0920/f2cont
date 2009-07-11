@@ -80,7 +80,7 @@ if (file_exists(F2BLOG_ROOT."./update.php")){
 	header( 'refresh: 5; url=./update.php' );
 	echo " 請先執行 update.php <br/>";
 	echo " 系統將會於 5 秒後自動 執行 update.php <br/>";
-	echo " 如果無法自動執行 <a href=\"update.php\" target=\"_self\">請按這裡 <br/> <br/> <br/>";
+	echo " 如果無法自動執行 <a href=\"update.php\" target=\"_self\">請按這裡 </a><br/> <br/> <br/>";
 
 	echo " Please run update.php <br/>";
 	echo " The system will be in 5 seconds after the self-executing update.php <br/>";
@@ -800,6 +800,7 @@ function do_filter($tag,$string) {
 	global $f2_filter;
 	$args = array_slice(func_get_args(), 2);
 	$stringBackup=$string;
+	//var_dump($f2_filterz);
 
 	if ( !isset($f2_filter[$tag]) || !is_array($f2_filter[$tag])) {
 		return $string;

@@ -320,7 +320,7 @@ function modules_recache() {
 			$sub_contents.= "\$arrSideModule = array(\r\n";
 			break;
 			case 2://主体栏
-			$out_fields=array("modTitle","installDate","indexOnly","htmlCode");
+			$out_fields=array("modTitle","installDate","indexOnly","htmlCode","pluginPath");
 			$sub_contents.= "\$arrMainModule = array(\r\n";
 			break;
 			case 3://功能栏
