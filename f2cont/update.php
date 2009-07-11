@@ -80,6 +80,8 @@ if ($check_update){
 	}
 }else{
 	if (preg_match("/update.php/",$_SERVER['PHP_SELF'])){
+		ob_start();
+		header( 'refresh: 5; url=./index.php' );
 		echo "F2Cont have already updated to $update_time, please delete this update.php <hr>";
 		echo "<a href=index.php>Return Homepage</a></br>";
 	
