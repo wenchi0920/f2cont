@@ -44,7 +44,7 @@ if ($check_update){
 		include_once("include/cache.php");
 
 		//连接mysql
-		//$DMC = new F2MysqlClass($DBHost, $DBUser, $DBPass, $DBName,$DBNewlink);
+		$DMC = new F2MysqlClass($DBHost, $DBUser, $DBPass, $DBName,$DBNewlink);
 		
 		//$SQL="select `settValue` from `{$DBPrefix}setting` where `settName`='closeReason' limit 0,1";
 		//list($strCloseReason)=$DMC->fetchArray($DMC->query($SQL),MYSQL_NUM);
