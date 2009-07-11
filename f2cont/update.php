@@ -187,8 +187,8 @@ function update_data($echo,$DMC){
 
 	}
 	
-	if (!in_array($update_logs,"20090709")) {
-		
+	/*
+	if (!in_array($update_logs,"20090709")) {		
 		$SQL="select count(`name`) from `{$DBPrefix}modules` where `name`='BlogNews'";
 		list($intNums)=$DMC->fetchArray($DMC->query($SQL),MYSQL_NUM);
 		if ($intNums==0) {
@@ -196,6 +196,7 @@ function update_data($echo,$DMC){
 		}
 		else $modify_sql[]="update `{$DBPrefix}modules` set isSystem='1',`pluginPath`='include/plung.blognews.php' where `name`='BlogNews'";
 	}
+	*/
 
 	if (is_array($arr_setting)){
 		foreach($arr_setting as $key=>$value){
