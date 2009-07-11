@@ -58,6 +58,7 @@ switch ($load){
 		}
 }
 
+
 //生成分類，標籤標題
 $job=(empty($_REQUEST['job']))?"":$_REQUEST['job'];
 $_POST['seekname']=(empty($_POST['seekname']))?"":$_POST['seekname'];
