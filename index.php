@@ -7,10 +7,6 @@ if ($settingInfo['status']) include_once("include/closelogs.inc.php");
 //装载主体项目
 include_once("include/loadbar.inc.php");
 
-
-
-exit;
-
 //装载头部文件
 include_once("header.php");
 
@@ -38,11 +34,11 @@ if (strpos($load_file,".big.php")>0){
         <div id="sidebar-topimg"><!--工具条顶部图象--></div>
 		<!--侧边栏显示内容-->
         <?php 
-        if ($load=="") {
-        	include_once("cache/cache_logs_sidebar.php");
-        } else {
-        	include_once("cache/cache_logs_readsidebar.php");
-        }
+			if ($load=="") {
+				include_once("cache/cache_logs_sidebar.php");
+			} else { 
+				include_once("cache/cache_logs_readsidebar.php");
+			}
 		?>
         <div id="sidebar-bottomimg"></div>
       </div>

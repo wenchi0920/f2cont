@@ -834,9 +834,9 @@ function addSettingValue($setType,$setName,$setField="",$setValue="",$setOption=
             </tr>
 HTMLCODE;
 		break;
-case 'ta': //textarea
-$setInfoResult[$setField]=str_replace("<br />","",dencode($setInfoResult[$setField]));
-$output=<<<HTMLCODE
+		case 'ta': //textarea
+		$setInfoResult[$setField]=str_replace("<br />","",dencode($setInfoResult[$setField]));
+		$output=<<<HTMLCODE
             <tr>
               <td width="25%" align="right" valign="top" class="input-titleblue">$setName</td>
               <td width="4" align="left" valign="top">&nbsp;</td>
@@ -845,9 +845,9 @@ $output=<<<HTMLCODE
               </td>
             </tr>
 HTMLCODE;
-break;
-case 'tn': //text input
-$output=<<<HTMLCODE
+		break;
+		case 'tn': //text input
+		$output=<<<HTMLCODE
             <tr>
               <td width="25%" align="right" valign="middle" class="input-titleblue">$setName</td>
               <td width="4" align="left" valign="middle">&nbsp;</td>
@@ -856,15 +856,15 @@ $output=<<<HTMLCODE
               </td>
             </tr>
 HTMLCODE;
-break;
-case 'f': //file input
-if ($setInfoResult[$setField]!="") {
-	$show_images = "&nbsp;&nbsp;<a href='../attachments/$setInfoResult[$setField]' target='_blank'>$strShow</a>";
-	$show_images .= "&nbsp;&nbsp;<a href='setting.php?delete=$setField'>$strDelete</a>";
-}else{
-	$show_images="";
-}
-$output=<<<HTMLCODE
+		break;
+		case 'f': //file input
+		if ($setInfoResult[$setField]!="") {
+			$show_images = "&nbsp;&nbsp;<a href='../attachments/$setInfoResult[$setField]' target='_blank'>$strShow</a>";
+			$show_images .= "&nbsp;&nbsp;<a href='setting.php?delete=$setField'>$strDelete</a>";
+		}else{
+			$show_images="";
+		}
+		$output=<<<HTMLCODE
             <tr>
               <td width="25%" align="right" valign="middle" class="input-titleblue">$setName</td>
               <td width="4" align="left" valign="middle">&nbsp;</td>
@@ -874,69 +874,69 @@ $output=<<<HTMLCODE
               </td>
             </tr>
 HTMLCODE;
-break;
-case 'r': //radio button
-$arr_radio="";
-$arrOption=explode("|",$setOption);
-for($i=0;$i<count($arrOption);$i++){
-	if (strpos($arrOption[$i],"=>")){
-		list($r_name,$r_value)=explode("=>",$arrOption[$i]);
-		$checked=($setInfoResult[$setField]==$r_value)?" checked=\"checked\"":"";
-		$arr_radio.="<input type=\"radio\" name=\"$setField\" value=\"$r_value\"$checked> $r_name \n";
-	}else{
-		$arr_radio.=$arrOption[$i];
-	}
-}
-$output=<<<HTMLCODE
+		break;
+		case 'r': //radio button
+		$arr_radio="";
+		$arrOption=explode("|",$setOption);
+		for($i=0;$i<count($arrOption);$i++){
+			if (strpos($arrOption[$i],"=>")){
+				list($r_name,$r_value)=explode("=>",$arrOption[$i]);
+				$checked=($setInfoResult[$setField]==$r_value)?" checked=\"checked\"":"";
+				$arr_radio.="<input type=\"radio\" name=\"$setField\" value=\"$r_value\"$checked> $r_name \n";
+			}else{
+				$arr_radio.=$arrOption[$i];
+			}
+		}
+		$output=<<<HTMLCODE
             <tr>
               <td width="25%" align="right" valign="middle" class="input-titleblue">$setName</td>
               <td width="4" align="left" valign="middle">&nbsp;</td>
               <td width="75%" align="left" valign="middle" style="padding-top:7px">$arr_radio</td>
             </tr>
 HTMLCODE;
-break;
-case 'c': //check button
-$arr_check="";
-$arrOption=explode("|",$setOption);
-for($i=0;$i<count($arrOption);$i++){
-	if (strpos($arrOption[$i],"=>")){
-		list($r_name,$r_value)=explode("=>",$arrOption[$i]);
-		$checked=(strpos(";$setInfoResult[$setField];",$r_value)>0)?" checked=\"checked\"":"";
-		$arr_check.="<input type=\"checkbox\" name=\"{$setField}[]\" value=\"$r_value\"$checked> $r_name \n";
-	}else{
-		$arr_radio.=$arrOption[$i];
-	}
-}
-$output=<<<HTMLCODE
+		break;
+		case 'c': //check button
+		$arr_check="";
+		$arrOption=explode("|",$setOption);
+		for($i=0;$i<count($arrOption);$i++){
+			if (strpos($arrOption[$i],"=>")){
+				list($r_name,$r_value)=explode("=>",$arrOption[$i]);
+				$checked=(strpos(";$setInfoResult[$setField];",$r_value)>0)?" checked=\"checked\"":"";
+				$arr_check.="<input type=\"checkbox\" name=\"{$setField}[]\" value=\"$r_value\"$checked> $r_name \n";
+			}else{
+				$arr_radio.=$arrOption[$i];
+			}
+		}
+		$output=<<<HTMLCODE
             <tr>
               <td width="25%" align="right" valign="middle" class="input-titleblue">$setName</td>
               <td width="4" align="left" valign="middle">&nbsp;</td>
               <td width="75%" align="left" valign="middle" style="padding-top:7px">$arr_check</td>
             </tr>
 HTMLCODE;
-break;
-case 'sel': //check button
-$arr_select="";
-$arrOption=explode("|",$setOption);
-for($i=0;$i<count($arrOption);$i++){
-	if (strpos($arrOption[$i],"=>")){
-		list($r_name,$r_value)=explode("=>",$arrOption[$i]);
-		if (strpos($r_name,",")>0){
-			$arr_name=explode(",",$r_name);
-			$arr_value=explode(",",$r_value);
-			for($j=0;$j<count($arr_name);$j++){
-				$selected=($setInfoResult[$setField]==$arr_value[$j])?" selected":"";
-				$arr_select.="<option value='{$arr_value[$j]}' $selected>{$arr_name[$j]}</option> \n";
+		break;
+		case 'sel': //check button
+		$arr_select="";
+		$arrOption=explode("|",$setOption);
+		for($i=0;$i<count($arrOption);$i++){
+			if (strpos($arrOption[$i],"=>")){
+				list($r_name,$r_value)=explode("=>",$arrOption[$i]);
+				if (strpos($r_name,",")>0){
+					$arr_name=explode(",",$r_name);
+					$arr_value=explode(",",$r_value);
+					for($j=0;$j<count($arr_name);$j++){
+						$selected=($setInfoResult[$setField]==$arr_value[$j])?" selected":"";
+						$arr_select.="<option value='{$arr_value[$j]}' $selected>{$arr_name[$j]}</option> \n";
+					}
+				}else{
+					$selected=($setInfoResult[$setField]==$r_value)?" selected":"";
+					$arr_select.="<option value='$r_value' $selected>$r_name</option> \n";
+				}
+			}else{
+				$arr_select.=$arrOption[$i];
 			}
-		}else{
-			$selected=($setInfoResult[$setField]==$r_value)?" selected":"";
-			$arr_select.="<option value='$r_value' $selected>$r_name</option> \n";
 		}
-	}else{
-		$arr_select.=$arrOption[$i];
-	}
-}
-$output=<<<HTMLCODE
+		$output=<<<HTMLCODE
             <tr>
               <td width="25%" align="right" valign="middle" class="input-titleblue">$setName</td>
               <td width="4" align="left" valign="middle">&nbsp;</td>
@@ -947,16 +947,16 @@ $output=<<<HTMLCODE
 			  </td>
             </tr>
 HTMLCODE;
-break;
-case 'sec': //A separator
-$output=<<<HTMLCODE
+		break;
+		case 'sec': //A separator
+		$output=<<<HTMLCODE
             <tr>
               <td width="100%" colspan="3">
 				<div class="settitle"> $setName </div>	
 			  </td>
             </tr>
 HTMLCODE;
-break;
+		break;
 	}
 	return $output;
 }

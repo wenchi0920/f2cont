@@ -175,8 +175,8 @@ closedir($handle);
 		    <?php echo $strTopNews?>  
 		  </td>  
 		  <td colspan="3">  
-		    <input type="radio" name="isTopNews" value="1" <?php echo ($isTopNews==1)?"checked="checked"":""?>>  <?php echo $strTopNewsAllow?>  
-		    <input type="radio" name="isTopNews" value="0" <?php echo ($isTopNews==0)?"checked="checked"":""?>>  <?php echo $strTopNewsDeny?>              
+		    <input type="radio" name="isTopNews" value="1" <?php echo ($isTopNews==1)?"checked=\"checked\"":"";?>>  <?php echo $strTopNewsAllow;?>  
+		    <input type="radio" name="isTopNews" value="0" <?php echo ($isTopNews==0)?"checked=\"checked\"":"";?>>  <?php echo $strTopNewsDeny;?>              
 		            
 		  </td>  
 		</tr>  
