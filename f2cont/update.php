@@ -44,16 +44,16 @@ if ($check_update){
 		include_once("include/cache.php");
 
 		//连接mysql
-		$DMC = new F2MysqlClass($DBHost, $DBUser, $DBPass, $DBName,$DBNewlink);
+		//$DMC = new F2MysqlClass($DBHost, $DBUser, $DBPass, $DBName,$DBNewlink);
 		
-		$SQL="select `settValue` from `{$DBPrefix}setting` where `settName`='closeReason' limit 0,1";
-		list($strCloseReason)=$DMC->fetchArray($DMC->query($SQL),MYSQL_NUM);
+		//$SQL="select `settValue` from `{$DBPrefix}setting` where `settName`='closeReason' limit 0,1";
+		//list($strCloseReason)=$DMC->fetchArray($DMC->query($SQL),MYSQL_NUM);
 		
-		$SQL="update `{$DBPrefix}setting` set `settValue`='blog is update system now,plesase wait..' where `settName`='closeReason' ";
-		$DMC->query($SQL);
+		//$SQL="update `{$DBPrefix}setting` set `settValue`='blog is update system now,plesase wait..' where `settName`='closeReason' ";
+		//$DMC->query($SQL);
 		
-		$SQL="update `{$DBPrefix}setting` set `settValue`='1' where `settName`='status' ";
-		$DMC->query($SQL);
+		//$SQL="update `{$DBPrefix}setting` set `settValue`='1' where `settName`='status' ";
+		//$DMC->query($SQL);
 
 		echo "Start update F2Cont, please wait ... <hr>";
 		update_data(true,$DMC);
@@ -61,11 +61,11 @@ if ($check_update){
 		echo "Update Success. please delete this update.php <br />\n";
 		echo "<a href=index.php>Return Homepage</a>";
 		
-		$SQL="update `{$DBPrefix}setting` set `settValue`='".$strCloseReason."' where `settName`='closeReason'";
-		$DMC->query($SQL);
+		//$SQL="update `{$DBPrefix}setting` set `settValue`='".$strCloseReason."' where `settName`='closeReason'";
+		//$DMC->query($SQL);
 		
-		$SQL="update `{$DBPrefix}setting` set `settValue`='0' where `settName`='status'";
-		$DMC->query($SQL);
+		//$SQL="update `{$DBPrefix}setting` set `settValue`='0' where `settName`='status'";
+		//$DMC->query($SQL);
 		
 		
 	}else{ //是在common.php中检测运行
