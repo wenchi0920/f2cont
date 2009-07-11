@@ -82,11 +82,12 @@ if ($check_update){
 }else{
 	if (preg_match("/update.php/",$_SERVER['PHP_SELF'])){
 		echo "F2Cont have already updated to $update_time, please delete this update.php <hr>";
-		echo "<a href=index.php>Return Homepage</a>";
+		echo "<a href=index.php>Return Homepage</a></br>";
 	
 		//删除update.php，不能删除将提示管理员删除。
 		if (!@unlink(F2BLOG_ROOT."./update.php")){
-			echo "please delete update.php";
+			echo "please delete update.php<br/>";
+			echo "請刪除檔案 update.php<br/>";
 			exit;
 		}
 	}
