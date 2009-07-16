@@ -7,6 +7,11 @@ if ($settingInfo['status']) include_once("include/closelogs.inc.php");
 //装载主体项目
 include_once("include/loadbar.inc.php");
 
+
+//装载在线人员  && 增加访问量
+include_once("include/online.inc.php");
+
+
 //装载头部文件
 include_once("header.php");
 
