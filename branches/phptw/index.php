@@ -11,6 +11,9 @@ include_once("include/loadbar.inc.php");
 //装载在线人员  && 增加访问量
 include_once("include/online.inc.php");
 
+include_once("skins/f2cont/layout.php");
+
+exit;
 
 //装载头部文件
 include_once("header.php");
