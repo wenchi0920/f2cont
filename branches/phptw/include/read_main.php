@@ -27,9 +27,9 @@ foreach($arrMainModule as $key=>$value){
 }
 
 #自定义模块内容
-function main_module($mainname,$maintitle,$htmlcode){
+/*function main_module($mainname,$maintitle,$htmlcode){
 	echo "<div id=\"Content_$mainname\" class=\"content-width\"> \n";
 	echo htmldecode($htmlcode);
 	echo "</div> \n";
-}
+}*/
 ?>
