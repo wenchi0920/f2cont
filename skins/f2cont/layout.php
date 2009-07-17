@@ -3,6 +3,16 @@ if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
 if (!defined(SKIN_ROOT)) define(SKIN_ROOT,dirname(__FILE__));
 
+/*
+參考資料
+http://robbin.cc/vb/showthread.php?t=170
+http://www.kdolphin.com/208	
+http://www.kdolphin.com/210	
+http://www.kdolphin.com/219	
+http://www.kdolphin.com/225	
+http://www.kdolphin.com/231	
+*/
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="UTF-8">
@@ -187,8 +197,7 @@ if (!defined(SKIN_ROOT)) define(SKIN_ROOT,dirname(__FILE__));
                 if ($load=="") {
                 	//include_once("cache/cache_logs_sidebar.php");
 
-
-                	ob_start();
+                	//ob_start();
                 	$arrReadModule=array();
 
                 	foreach($arrSideModule as $key=>$value){
@@ -199,16 +208,16 @@ if (!defined(SKIN_ROOT)) define(SKIN_ROOT,dirname(__FILE__));
                 		}
                 		echo createSideFunc($value,$key);
                 	}
-                	$contents=str_replace("\r\n","",ob_get_contents());
-                	ob_end_clean();
-                	writetocache('logs_sidebar',$contents,"html");
+                	//$contents=str_replace("\r\n","",ob_get_contents());
+                	//ob_end_clean();
+                	//writetocache('logs_sidebar',$contents,"html");
 
-                	ob_start();
+                	//ob_start();
                 	foreach($arrReadModule as $key=>$value){
                 		echo createSideFunc($value,$key);
                 	}
-                	$contents=str_replace("\r\n","",ob_get_contents());
-                	ob_end_clean();
+                	//$contents=str_replace("\r\n","",ob_get_contents());
+                	//ob_end_clean();
 
 
 
@@ -216,7 +225,7 @@ if (!defined(SKIN_ROOT)) define(SKIN_ROOT,dirname(__FILE__));
                 	//include_once("cache/cache_logs_readsidebar.php");
 
 
-                	ob_start();
+                	//ob_start();
                 	$arrReadModule=array();
 
                 	foreach($arrSideModule as $key=>$value){
@@ -227,16 +236,16 @@ if (!defined(SKIN_ROOT)) define(SKIN_ROOT,dirname(__FILE__));
                 		}
                 		echo createSideFunc($value,$key);
                 	}
-                	$contents=str_replace("\r\n","",ob_get_contents());
-                	ob_end_clean();
-                	writetocache('logs_sidebar',$contents,"html");
+                	//$contents=str_replace("\r\n","",ob_get_contents());
+                	//ob_end_clean();
+                	//writetocache('logs_sidebar',$contents,"html");
 
-                	ob_start();
+                	//ob_start();
                 	foreach($arrReadModule as $key=>$value){
                 		echo createSideFunc($value,$key);
                 	}
-                	$contents=str_replace("\r\n","",ob_get_contents());
-                	ob_end_clean();
+                	//$contents=str_replace("\r\n","",ob_get_contents());
+                	//ob_end_clean();
 
 
 

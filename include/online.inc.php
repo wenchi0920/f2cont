@@ -1,4 +1,5 @@
-<?php
+<?php 
+if (!defined('IN_F2BLOG')) die ('Access Denied.');
 //装载在线人员
 include_once(F2BLOG_ROOT."./cache/cache_online.php");
 
