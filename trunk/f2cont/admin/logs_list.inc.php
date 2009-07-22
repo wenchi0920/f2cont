@@ -1,7 +1,7 @@
 <?php 
 if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
-//���ͷ����Ϣ
+//锟斤拷锟酵凤拷锟斤拷锟较?
 dohead($title,$page_url);
 require('admin_menu.php');
 ?>
