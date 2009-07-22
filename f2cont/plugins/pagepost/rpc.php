@@ -20,10 +20,10 @@ function get_pagepost($post_id, $curpage, $id) {
         $content = join('', $pages);
     }
     if ($curpage > 0) {
-        $pagebar = "<a href=\"###pp=0\" onclick=\"pagepost($post_id, 0, $id);\">&#23436;&#25972;&#26174;&#31034;</a> &nbsp; ";
+        $pagebar = "<a href=\"###pp=0\" onclick=\"pagepost($post_id, 0, $id);\">完整显示</a> &nbsp; ";
     }
     else {
-        $pagebar = '<strong style="color: green">&#23436;&#25972;&#26174;&#31034;</strong> &nbsp; ';
+        $pagebar = '<strong style="color: green">完整显示</strong> &nbsp; ';
     }
     for ($i = 1; $i <= $totalpage; $i++) {
     	if ($i != $curpage) {

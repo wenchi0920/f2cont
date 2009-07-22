@@ -137,7 +137,7 @@ function open_setting(ss,tt,mm){
 	}
 }
 
-//ÅÅĞò
+//æ’åº
 var curRow=null;
 function SelectRow(event){
 	if (event == null){ event = window.event; }

@@ -1,28 +1,28 @@
 <?php 
 require_once("function.php");
 
-//±ØĞëÔÚ±¾Õ¾²Ù×÷
+//å¿…é¡»åœ¨æœ¬ç«™æ“ä½œ
 $server_session_id=md5("users".session_id());
 if (($_GET['action']=="save" || $_GET['action']=="operation") && $_POST['client_session_id']!=$server_session_id){
 	die ('Access Denied.');
 }
 
-// ÑéÖ¤ÓÃ»§ÊÇ·ñ´¦ÓÚµÇÂ½×´Ì¬
+// éªŒè¯ç”¨æˆ·æ˜¯å¦å¤„äºç™»é™†çŠ¶æ€
 check_login();
 $parentM=4;
 $mtitle=$strUserMang;
 
-//±£´æ²ÎÊı
+//ä¿å­˜å‚æ•°
 $action=$_GET['action'];
 $order=$_GET['order'];
 $page=$_GET['page'];
 $seekname=encode($_REQUEST['seekname']);
 $mark_id=$_GET['mark_id'];
 
-//±£´æÊı¾İ
+//ä¿å­˜æ•°æ®
 if ($action=="save"){
 	$check_info=1;
-	//¼ì²âÊäÈëÄÚÈİ
+	//æ£€æµ‹è¾“å…¥å†…å®¹
 	if ($mark_id=="") {
 		if (check_user($_POST['addusername'])==0) {
 			$ActionMessage=$strUserAlert;
@@ -39,7 +39,7 @@ if ($action=="save"){
 			$check_info=0;
 		}
 	}
-	//¼ì²éÁ½´ÎÃÜÂëÊÇ·ñÏàÍ¬
+	//æ£€æŸ¥ä¸¤æ¬¡å¯†ç æ˜¯å¦ç›¸åŒ
 	if ($check_info==1 && $_POST['addpassword']!=$_POST['password_con']) {
 		$ActionMessage=$strErrPassword;
 		$check_info=0;
@@ -50,7 +50,7 @@ if ($action=="save"){
 		$check_info=0;
 	}
 
-	//¼ì²âêÇ³Æ
+	//æ£€æµ‹æ˜µç§°
 	if ($check_info==1 && $_POST['nickname']!="" && check_nickname($_POST['nickname'])==0) {
 		$ActionMessage=$strNickLengMax;
 		$check_info=0;
@@ -60,8 +60,8 @@ if ($action=="save"){
 		$nickrsexits="";
 		$_POST['isHiddenEmail']=empty($_POST['isHiddenEmail'])?0:1;
 
-		if ($mark_id!=""){//±à¼­
-			//¼ì²âêÇ³Æ
+		if ($mark_id!=""){//ç¼–è¾‘
+			//æ£€æµ‹æ˜µç§°
 			if ($_POST['nickname']!=""){
 				$nickrsexits=getFieldValue($DBPrefix."members","username='".encode($_POST['nickname'])."' or nickname='".encode($_POST['nickname'])."'","id");
 				$check_info=($nickrsexits!="" && $nickrsexits!=$mark_id)?0:1;
@@ -79,13 +79,13 @@ if ($action=="save"){
 				$sql="update ".$DBPrefix."members set email='".encode($_POST['email'])."',nickname='".encode($_POST['nickname'])."',homePage='".encode($_POST['homePage'])."',isHiddenEmail='".encode($_POST['isHiddenEmail'])."',role='".encode($_POST['role'])."'".$passSql." where id='$mark_id'";
 				$DMC->query($sql);
 			}
-		}else{//ĞÂÔö
-			//¼ì²âêÇ³Æ
+		}else{//æ–°å¢
+			//æ£€æµ‹æ˜µç§°
 			if ($_POST['nickname']!=""){
 				$nickrsexits=getFieldValue($DBPrefix."members","username='".encode($_POST['nickname'])."' or nickname='".encode($_POST['nickname'])."'","id");
 				$check_info=($nickrsexits!="")?0:1;
 			}
-			//¼ì²âÓÃ»§Ãû
+			//æ£€æµ‹ç”¨æˆ·å
 			if ($check_info==1){
 				$userexits=getFieldValue($DBPrefix."members","username='".encode($_POST['addusername'])."' or nickname='".$_POST['addusername']."'","id");
 				$check_info=($userexits!="")?0:1;
@@ -109,7 +109,7 @@ if ($action=="save"){
 	}
 }
 
-//ÆäËü²Ù×÷ĞĞÎª£º±à¼­¡¢É¾³ıµÈ
+//å…¶å®ƒæ“ä½œè¡Œä¸ºï¼šç¼–è¾‘ã€åˆ é™¤ç­‰
 if ($action=="operation"){
 	$stritem="";
 	$itemlist=$_POST['itemlist'];
@@ -135,13 +135,13 @@ if ($action=="all"){
 	$seekname="";
 }
 
-$seek_url="$PHP_SELF?order=$order";	//²éÕÒÓÃÁ´½Ó
-$order_url="$PHP_SELF?seekname=$seekname";	//ÅÅĞòÀ¸ÓÃµÄÁ´½Ó
-$page_url="$PHP_SELF?seekname=$seekname&order=$order";	//Ò³Ãæµ¼º½Á´½Ó
-$edit_url="$PHP_SELF?seekname=$seekname&order=$order&page=$page";	//±à¼­»òĞÂÔöÁ´½Ó
+$seek_url="$PHP_SELF?order=$order";	//æŸ¥æ‰¾ç”¨é“¾æ¥
+$order_url="$PHP_SELF?seekname=$seekname";	//æ’åºæ ç”¨çš„é“¾æ¥
+$page_url="$PHP_SELF?seekname=$seekname&order=$order";	//é¡µé¢å¯¼èˆªé“¾æ¥
+$edit_url="$PHP_SELF?seekname=$seekname&order=$order&page=$page";	//ç¼–è¾‘æˆ–æ–°å¢é“¾æ¥
 
 if ($action=="add"){
-	//ĞÂÔöĞÅÏ¢Àà±ğ¡£
+	//æ–°å¢ä¿¡æ¯ç±»åˆ«ã€‚
 	$title="$strUserTitleAdd";
 	$mtitle=$strUserAdd;
 	
@@ -154,7 +154,7 @@ if ($action=="add"){
 
 	include("users_add.inc.php");
 }else if ($action=="edit" && $mark_id!=""){
-	//±à¼­ĞÅÏ¢Àà±ğ¡£
+	//ç¼–è¾‘ä¿¡æ¯ç±»åˆ«ã€‚
 	$title="$strUserTitleEdit - $strRecordID: $mark_id";
 
 	$dataInfo = $DMC->fetchArray($DMC->query("select * from ".$DBPrefix."members where id='$mark_id'"));
@@ -172,7 +172,7 @@ if ($action=="add"){
 		include("error_web.php");
 	}	
 }else{
-	//²éÕÒºÍä¯ÀÀ
+	//æŸ¥æ‰¾å’Œæµè§ˆ
 	$title="$strUser";
 	$find="";
 	if ($order==""){$order="lastVisitTime";}
