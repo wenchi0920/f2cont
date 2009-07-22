@@ -1,18 +1,18 @@
 <?php 
 require_once("function.php");
 
-//±ÿ–Î‘⁄±æ’æ≤Ÿ◊˜
+//ÂøÖÈ°ªÂú®Êú¨Á´ôÊìç‰Ωú
 $server_session_id=md5("guestbook".session_id());
 if (($_GET['action']=="save" || $_GET['action']=="operation") && $_POST['client_session_id']!=$server_session_id){
 	die ('Access Denied.');
 }
 
-// —È÷§”√ªß «∑Ò¥¶”⁄µ«¬Ω◊¥Ã¨
+// È™åËØÅÁî®Êà∑ÊòØÂê¶Â§Ñ‰∫éÁôªÈôÜÁä∂ÊÄÅ
 check_login();
 $parentM=2;
 $mtitle=$strGuestBookBrowse;
 
-//±£¥Ê≤Œ ˝
+//‰øùÂ≠òÂèÇÊï∞
 $action=$_GET['action'];
 $order=$_GET['order'];
 $page=$_GET['page'];
@@ -21,10 +21,10 @@ $mark_id=$_GET['mark_id'];
 $showmethod=($_GET['showmethod'])?$_GET['showmethod']:"parent";
 $showmode=($_GET['showmode'])?$_GET['showmode']:"open";
 
-//±£¥Ê ˝æ›
+//‰øùÂ≠òÊï∞ÊçÆ
 if ($action=="save"){
 	$check_info=1;
-	//ºÏ≤‚ ‰»Îƒ⁄»›
+	//Ê£ÄÊµãËæìÂÖ•ÂÜÖÂÆπ
 	if (trim($_POST['logContent'])==""){
 		$ActionMessage=$strErrNull;
 		$check_info=0;
@@ -43,10 +43,10 @@ if ($action=="save"){
 	}
 }
 
-//ªÿ∏¥◊ ¡œ
+//ÂõûÂ§çËµÑÊñô
 if ($action=="reply"){
 	$check_info=1;
-	//ºÏ≤‚ ‰»Îƒ⁄»›
+	//Ê£ÄÊµãËæìÂÖ•ÂÜÖÂÆπ
 	if (trim($_POST['logContent'])==""){
 		$ActionMessage=$strErrNull;
 		$check_info=0;
@@ -54,7 +54,7 @@ if ($action=="reply"){
 
 	if ($check_info==1){
 		$content=encode($_POST['logContent']);
-		//–¬‘ˆ
+		//Êñ∞Â¢û
 		$rsexits=getFieldValue($DBPrefix."guestbook","content='$content' and author='".$_SESSION['username']."' and parent='$mark_id'","id");
 		if ($rsexits!=""){
 			$logContent=str_replace("<br />","",dencode($content));
@@ -74,7 +74,7 @@ if ($action=="reply"){
 	}
 }
 
-//∆‰À¸≤Ÿ◊˜––Œ™£∫±‡º≠°¢…æ≥˝µ»
+//ÂÖ∂ÂÆÉÊìç‰ΩúË°å‰∏∫ÔºöÁºñËæë„ÄÅÂà†Èô§Á≠â
 if ($action=="operation"){
 	$stritem="";
 	$itemlist=$_POST['itemlist'];
@@ -86,7 +86,7 @@ if ($action=="operation"){
 		}else{
 			$stritem.="id='$itemlist[$i]'";
 		}
-		//…æ≥˝µƒ «÷˜¡Ù—‘£¨∆‰◊”¡Ù—‘“≤…æ≥˝
+		//Âà†Èô§ÁöÑÊòØ‰∏ªÁïôË®ÄÔºåÂÖ∂Â≠êÁïôË®Ä‰πüÂà†Èô§
 		if($_POST['operation']=="delete"){
 			$stritem.=" or parent='$itemlist[$i]'";
 		}
@@ -112,7 +112,7 @@ if ($action=="operation"){
 		$DMC->query($sql);
 	}
 
-	//∏¸–¬cache
+	//Êõ¥Êñ∞cache
 	settings_recount("guestbook");
 	settings_recache();
 	recentGbooks_recache();
@@ -125,15 +125,15 @@ if ($action=="all"){
 	$seekname="";
 }
 
-$seek_url="$PHP_SELF?showmethod=$showmethod&showmode=$showmode&order=$order";	//≤È’“”√¡¥Ω”
-$order_url="$PHP_SELF?showmethod=$showmethod&showmode=$showmode&seekname=$seekname";	//≈≈–Ú¿∏”√µƒ¡¥Ω”
-$page_url="$PHP_SELF?showmethod=$showmethod&showmode=$showmode&seekname=$seekname&order=$order";	//“≥√Êµº∫Ω¡¥Ω”
-$edit_url="$PHP_SELF?showmethod=$showmethod&showmode=$showmode&seekname=$seekname&order=$order&page=$page";	//±‡º≠ªÚ–¬‘ˆ¡¥Ω”
-$showmode_url="$PHP_SELF?showmethod=$showmethod&order=$order&page=$page";	//’πø™£Ø’€µ˛¡¥Ω”
-$showmethod_url="$PHP_SELF?showmode=$showmode&order=$order&page=$page";	//’πø™£Ø’€µ˛¡¥Ω”
+$seek_url="$PHP_SELF?showmethod=$showmethod&showmode=$showmode&order=$order";	//Êü•ÊâæÁî®ÈìæÊé•
+$order_url="$PHP_SELF?showmethod=$showmethod&showmode=$showmode&seekname=$seekname";	//ÊéíÂ∫èÊ†èÁî®ÁöÑÈìæÊé•
+$page_url="$PHP_SELF?showmethod=$showmethod&showmode=$showmode&seekname=$seekname&order=$order";	//È°µÈù¢ÂØºËà™ÈìæÊé•
+$edit_url="$PHP_SELF?showmethod=$showmethod&showmode=$showmode&seekname=$seekname&order=$order&page=$page";	//ÁºñËæëÊàñÊñ∞Â¢ûÈìæÊé•
+$showmode_url="$PHP_SELF?showmethod=$showmethod&order=$order&page=$page";	//Â±ïÂºÄÔºèÊäòÂè†ÈìæÊé•
+$showmethod_url="$PHP_SELF?showmode=$showmode&order=$order&page=$page";	//Â±ïÂºÄÔºèÊäòÂè†ÈìæÊé•
 
 if ($action=="add" && $mark_id!=""){
-	//–¬‘ˆ–≈œ¢¿‡±°£
+	//Êñ∞Â¢û‰ø°ÊÅØÁ±ªÂà´„ÄÇ
 	$title="$strGuestBookReplyTitle";
 
 	$dataInfo = $DMC->fetchArray($DMC->query("select * from ".$DBPrefix."guestbook where id='$mark_id'"));
@@ -145,14 +145,14 @@ if ($action=="add" && $mark_id!=""){
 
 	include("comments_add.inc.php");
 }else if ($action=="edit" && $mark_id!=""){
-	//±‡º≠–≈œ¢¿‡±°£
+	//ÁºñËæë‰ø°ÊÅØÁ±ªÂà´„ÄÇ
 	$title="$strGuestBookBrowse - $strRecordID: $mark_id";
 
 	$dataInfo = $DMC->fetchArray($DMC->query("select * from ".$DBPrefix."guestbook where id='$mark_id'"));
 	if ($dataInfo) {
 		$logContent=str_replace("<br />","",dencode($dataInfo['content']));
 
-		//‘≠ƒ⁄»›
+		//ÂéüÂÜÖÂÆπ
 		$dataInfo = $DMC->fetchArray($DMC->query("select * from ".$DBPrefix."guestbook where id='".$dataInfo['parent']."'"));
 		if ($dataInfo) {
 			$reply_content=$dataInfo['author']." $strSideBarGuestBook:<br /><br />".ubb($dataInfo['content']);
@@ -165,7 +165,7 @@ if ($action=="add" && $mark_id!=""){
 		$error_message=$strNoExits;
 		include("error_web.php");
 	}	
-}else{	//≤È’“∫Õ‰Ø¿¿
+}else{	//Êü•ÊâæÂíåÊµèËßà
 	$title="$strGuestBookBrowse";
 
 	if ($order==""){$order="postTime";}

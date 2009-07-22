@@ -4,7 +4,7 @@
  * Moxiecode DHTML Windows script.
  *
  * @author Moxiecode
- * @copyright Copyright © 2004, Moxiecode Systems AB, All rights reserved.
+ * @copyright Copyright ?2004, Moxiecode Systems AB, All rights reserved.
  */
 
 // Windows handler
@@ -168,7 +168,7 @@ MCWindows.prototype.open = function(url, name, features) {
 	html += '<html>';
 	html += '<head>';
 	html += '<title>Wrapper iframe</title>';
-	html += '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">';
+	html += '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 	html += '<link href="../jscripts/tiny_mce/themes/advanced/css/editor_ui.css" rel="stylesheet" type="text/css" />';
 	html += '</head>';
 	html += '<body onload="parent.mcWindows.onLoad(\'' + name + '\');">';

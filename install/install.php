@@ -288,7 +288,7 @@ $nextAccess=1;
 
 							break;
 						case 5:
-							//数据库参数
+							//鏁版嵁搴撳弬鏁?
 							$dbhost = trim($_POST['dbhost']);
 							$dbuser = trim($_POST['dbuser']);
 							$dbpassword = trim($_POST['dbpassword']);
@@ -307,13 +307,13 @@ $nextAccess=1;
 							
 							if ($nextAccess==1) {
 								include ('../include/db.php');
-								//连接数据库
+								//杩炴帴鏁版嵁搴?
 								$DMC = new F2MysqlClass($dbhost, $dbuser, $dbpassword, $dbname);
 								if ($DMC->error()){
 									if ($_POST[chkcreate]!="1") {
 										$msg .= "<SPAN class=err>$strNoConnDB</span><br />";
 										$nextAccess=0;
-									}else{//建立數據庫
+									}else{//寤虹珛鏁告摎搴?
 										$DMC->query("create database $dbname","T");
 										if ($DMC->error()){
 											$msg .= "<SPAN class=err>$strCreateDataBaseNo</span><br />";
@@ -345,7 +345,7 @@ $nextAccess=1;
 								}
 							}
 
-							//删除旧数据表
+							//鍒犻櫎鏃ф暟鎹〃
 							if ($nextAccess==1) {
 								$DMC->query("select id from ".$table_prefix."keywords`","T");
 								if ($DMC->errno()==0) {
@@ -380,7 +380,7 @@ $nextAccess=1;
 								}
 							}
 							
-							//新增模块值
+							//鏂板妯″潡鍊?
 							if ($nextAccess==1) {
 								//echo $sql;
 								runquery($sql);
@@ -412,19 +412,19 @@ $nextAccess=1;
 								$DMC->query("INSERT INTO `".$table_prefix."modules` VALUES (45, 'rss', '[var]strHomePageRss[/var]', 1, 0, 0, 8, 1, '', 'rss.php', 0, '', 0, '', 0, '')");
 								$DMC->query("INSERT INTO `".$table_prefix."modules` VALUES (88, 'Function', 'Function', '0', '0', '0', '4', '1', '', '', '0', '', '0', '', '0', '')");
 
-								//增加默认留言过滤器
+								//澧炲姞榛樿鐣欒█杩囨护鍣?
 								$DMC->query("INSERT INTO `".$table_prefix."filters` VALUES ('1', '1', '=http')");
 								$DMC->query("INSERT INTO `".$table_prefix."filters` VALUES ('2', '1', 'url=')");
 								$DMC->query("INSERT INTO `".$table_prefix."filters` VALUES ('3', '1', 'href=')");	
 															
-								//增加默认连接
+								//澧炲姞榛樿杩炴帴
 								$DMC->query("INSERT INTO `".$table_prefix."linkgroup` VALUES ('1', 'Links', '1', '1')");
 								$DMC->query("INSERT INTO `".$table_prefix."links` VALUES ('1', '1', 'F2Cont', 'http://www.f2cont.com/images/logo.gif', 'http://www.f2cont.com/', '1', '1', '1')");
 								
-								//增加默认类别  `id` int(3) NOT NULL auto_increment,
+								//澧炲姞榛樿绫诲埆  `id` int(3) NOT NULL auto_increment,
 								$DMC->query("INSERT INTO `".$table_prefix."categories` VALUES ('1', '0', '$strDefaultCategory', '1','$strDefaultCategory','','0','0','1')");
 
-								//	新增加強化 spam filter
+								//	鏂板鍔犲挤鍖?spam filter
 								$DMC->query("INSERT INTO `".$table_prefix."filters` (`category`, `name`) VALUES (1, '=http')");
 								$DMC->query("INSERT INTO `".$table_prefix."filters` (`category`, `name`) VALUES (1, '[url=')");
 								$DMC->query("INSERT INTO `".$table_prefix."filters` (`category`, `name`) VALUES (1, '[href=')");
@@ -526,7 +526,7 @@ $nextAccess=1;
 
 							break;
 						case 7:
-							//插入管理员
+							//鎻掑叆绠＄悊鍛?
 							$admin = encode($_POST['admin']);
 							$admin_pw = encode($_POST['admin_pw']);
 							$admin_pw2 = encode($_POST['admin_pw2']);
@@ -554,7 +554,7 @@ $nextAccess=1;
 							} else {
 								if (substr($blog_url,strlen($blog_url)-1,1)!="/"){$blog_url=$blog_url."/";}
 
-								//加载数据
+								//鍔犺浇鏁版嵁
 								define('IN_F2BLOG', TRUE);
 								define('F2BLOG_ROOT', substr(dirname(__FILE__), 0, -7));
 
