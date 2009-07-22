@@ -3,7 +3,7 @@ if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
 ?>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="Content-Language" content="UTF-8" />
 <meta name="robots" content="all" />
 <meta name="author" content="<?php echo $settingInfo['email']?>" />

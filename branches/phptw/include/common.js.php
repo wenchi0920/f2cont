@@ -199,7 +199,7 @@ function open_img(img_src) {
     '       }else{ \n'+
     '              ImgD.width=image.width; \n'+
     '              ImgD.height=image.height;} \n'+
-    '           ImgD.alt=image.width+"×"+image.height;} \n'+
+    '           ImgD.alt=image.width+"脳"+image.height;} \n'+
     '    else{ \n'+
     '           if(image.height>iheight){ \n'+
     '                   ImgD.height=iheight; \n'+
@@ -207,16 +207,16 @@ function open_img(img_src) {
     '            }else{ \n'+
     '                    ImgD.width=image.width; \n'+
     '                   ImgD.height=image.height;} \n'+
-    '            ImgD.alt=image.width+"×"+image.height;} \n'+
-　　'　　　ImgD.style.cursor= "pointer";  \n'+
-　　'　　if (navigator.userAgent.toLowerCase().indexOf("ie") > -1) {  \n'+
-　　'　　　　ImgD.title = "Scroll to ZoomIn and ZoomOut the Picture"; \n'+
-　　'　　　　ImgD.onmousewheel = function img_zoom()  \n'+
-　　'　　　 {var zoom = parseInt(this.style.zoom, 10) || 100; \n'+
-　　'　　　　　　　　zoom += event.wheelDelta / 12; \n'+
-　　'　　　　　　　　if (zoom> 0)　this.style.zoom = zoom + "%"; \n'+
-　　'　　　　　　　　return false;} \n'+　
-　　'　  } else { ImgD.title = "Click to Close the Window";}}} \n'+
+    '            ImgD.alt=image.width+"脳"+image.height;} \n'+
+銆€銆€'銆€銆€銆€ImgD.style.cursor= "pointer";  \n'+
+銆€銆€'銆€銆€if (navigator.userAgent.toLowerCase().indexOf("ie") > -1) {  \n'+
+銆€銆€'銆€銆€銆€銆€ImgD.title = "Scroll to ZoomIn and ZoomOut the Picture"; \n'+
+銆€銆€'銆€銆€銆€銆€ImgD.onmousewheel = function img_zoom()  \n'+
+銆€銆€'銆€銆€銆€ {var zoom = parseInt(this.style.zoom, 10) || 100; \n'+
+銆€銆€'銆€銆€銆€銆€銆€銆€銆€銆€zoom += event.wheelDelta / 12; \n'+
+銆€銆€'銆€銆€銆€銆€銆€銆€銆€銆€if (zoom> 0)銆€this.style.zoom = zoom + "%"; \n'+
+銆€銆€'銆€銆€銆€銆€銆€銆€銆€銆€return false;} \n'+銆€
+銆€銆€'銆€  } else { ImgD.title = "Click to Close the Window";}}} \n'+
 		
 	'function resizing(){\n'+
 	'		var winWidth=document.images.imazingimg.width+50\n'+
@@ -383,7 +383,7 @@ function readlogspassword(form,errmsg,logid,ajax) {
 	}
 }
 
-//显示隐藏主题
+//鏄剧ず闅愯棌涓婚
 function OpenClose(e,logid){
 	if (document.getElementById(logid).style.display=="none"){
 		e.className="BttnC";
@@ -394,7 +394,7 @@ function OpenClose(e,logid){
 	}
 }
 
-//头像功能
+//澶村儚鍔熻兘
 function selectFace(Face){
 	LastA=document.getElementById(document.forms["frm"].bookface.value);
 	LastA.className="LFace";
