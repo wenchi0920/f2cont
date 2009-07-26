@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PluginSet>
+ <PluginName>paste</PluginName>
+ <PluginVersion>1.38</PluginVersion>
+ <FunctionName>pastetext,pasteword,selectall</FunctionName>
+ <FunctionImage>pastetext.gif,pasteword.gif,selectall.gif</FunctionImage>
+ <FunctionDesc>作为纯文本粘贴,从Word粘贴,全选</FunctionDesc>
+ <PluginAuthor>Moxiecode</PluginAuthor>
+ <pubDate>2006-12-16</pubDate>
+ <AuthorURL>http://joesen.f2blog.com</AuthorURL>
+ <AuthorMail>joesenhong@yahoo.com.cn</AuthorMail>
+</PluginSet>
