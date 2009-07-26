@@ -6,11 +6,11 @@ if (!defined(SKIN_ROOT)) define(SKIN_ROOT,dirname(__FILE__));
 /*
 參考資料
 http://robbin.cc/vb/showthread.php?t=170
-http://www.kdolphin.com/208	
-http://www.kdolphin.com/210	
-http://www.kdolphin.com/219	
-http://www.kdolphin.com/225	
-http://www.kdolphin.com/231	
+http://www.kdolphin.com/208
+http://www.kdolphin.com/210
+http://www.kdolphin.com/219
+http://www.kdolphin.com/225
+http://www.kdolphin.com/231
 */
 
 ?>
@@ -76,15 +76,49 @@ http://www.kdolphin.com/231
                 <?
                 $sql="select * from ".$DBPrefix."modules where disType='1' and isHidden='0' order by orderNo";
                 $result=$DMC->query($sql);
+                //var_dump($result);
                 while ($aryDetail=$DMC->fetchArray($result)) {
-                	
-                	
                 	if (strpos($aryDetail['modTitle'],"[/var]")>0) {
+                		//	替换UBB-VAR字符
                 		$aryDetail['modTitle']=replace_string($aryDetail['modTitle']);
+                		//	var_dump($aryDetail);
+
+                		$topname=(is_int($key))?$aryDetail['name']:$key;
+                		$toptitle=$aryDetail['modTitle'];
+                		$htmlcode=$aryDetail['htmlCode'];
+                		$pluginPath=$aryDetail['pluginPath'];
+                		$installDate=empty($aryDetail['installDate'])?"":$aryDetail['installDate'];
+                		$indexOnly=$aryDetail['indexOnly'];
+
+
+
+                		if (in_array($topname,array("tags","guestbook","f2bababian","links","archives")) && $settingInfo['rewrite']>0){
+                			if ($settingInfo['rewrite']==1) $gourl="rewrite.php/".$topname.$settingInfo['stype'];
+                			if ($settingInfo['rewrite']==2) $gourl=$topname.$settingInfo['stype'];
+                		}else{
+                			$gourl="index.php?load=$topname";
+                		}
+
+
+                		if (strpos($pluginPath,".inc.php")>0 || strpos($pluginPath,".big.php")>0){
+                			print "<li><a class=\"menuA\" id=\"$topname\" title=\"$toptitle\" href=\"{$gourl}\">$toptitle</a></li> \n";
+                		}
+                		else {
+
+                			if ($installDate>0){//表示为插件
+                				/*echo '<?php do_filter("'.$topname.'","'.$topname.'","',$toptitle.'");'."?>\n";*/
+                				do_filter("'.$topname.'","'.$topname.'","',$toptitle.'");
+                			}
+                			else {
+                				$pluginPath=str_replace("&","&amp;",$pluginPath);
+                				$target=($indexOnly==1)?" target=\"_blank\"":"";
+                				print "<li><a class=\"menuA\" id=\"$topname\" title=\"$toptitle\" href=\"$pluginPath\"$target>$toptitle</a></li> \n";
+                			}
+                		}
                 	}
-                	
                 }
 				?>
+				<!--
                 <li><a class="menuA" id="home" title="首頁" href="index.php">首頁</a></li>
                 <li><a class="menuA" id="tags" title="標籤" href="tags.html">標籤</a></li>
                 <li><a class="menuA" id="作品集" title="作品集" href="category-23.html">作品集</a></li>
@@ -94,7 +128,9 @@ http://www.kdolphin.com/231
                 <li><a class="menuA" id="archives" title="歸檔" href="archives.html">歸檔</a></li>
                 <li><a class="menuA" id="rss" title="RSS" href="rss.php">RSS</a></li>
                 <li><a class="menuA" id="imagebox" title="相册" href="index.php?load=imagebox">相册</a></li>
+                -->
                 <li class="menuR"></li>
+                
             </ul>
         </div>
     </div>
@@ -104,7 +140,35 @@ http://www.kdolphin.com/231
         <div id="mainContent">
             <div id="innermainContent">
                 <div id="mainContent-topimg"></div>
-                <div id="Content_BlogNews" class="content-width"> </div>
+                
+                <?php
+
+                foreach($arrMainModule as $key=>$value){
+                	$mainname=$key;
+                	$maintitle=$value['modTitle'];
+                	$indexOnly=$value['indexOnly'];
+                	$installDate=empty($value['installDate'])?"":$value['installDate'];
+                	$htmlcode=$value['htmlCode'];
+
+                	//$strModuleContentShow=array("0所有内容头部","1所有内容尾部","2首页内容头部","3首页内容尾部","4首页日志尾部","5读取日志尾部");
+                	if ($indexOnly==0){//所有内容头部
+                		if ($installDate>0){//表示为插件
+                			do_filter($mainname,$mainname,$maintitle,$htmlcode);
+                		}else{
+                			main_module($mainname,$maintitle,$htmlcode);
+                		}
+                	}
+                	if ($indexOnly==2 && $load==""){//首页内容头部
+                		if ($installDate>0){//表示为插件
+                			do_filter($mainname,$mainname,$maintitle,$htmlcode);
+                		}else{
+                			main_module($mainname,$maintitle,$htmlcode);
+                		}
+                	}
+                }
+
+                ?>
+                
                 <!--主体部分-->
                 <!--工具栏-->
                 <div id="Content_ContentList" class="content-width">
@@ -406,7 +470,37 @@ http://www.kdolphin.com/231
                         </div>
                     </div>
                 </div>
-                <div id="Content_fsckvps" class="content-width"> <a href="https://secure.fsckvps.com/aff.php?aff=135"><img src=http://fsckvps.com/images/468x60_fsckvps.gif border="0"></a></div>
+                
+                
+                <?php
+
+
+                //读取內容插件或模組
+                foreach($arrMainModule as $key=>$value){
+                	$mainname=$key;
+                	$maintitle=$value['modTitle'];
+                	$indexOnly=$value['indexOnly'];
+                	$installDate=empty($value['installDate'])?"":$value['installDate'];
+                	$htmlcode=$value['htmlCode'];
+
+                	//$strModuleContentShow=array("0所有内容头部","1所有内容尾部","2首页内容头部","3首页内容尾部","4首页日志尾部","5读取日志尾部");
+                	if ($indexOnly==1){//所有内容尾部
+                		if ($installDate>0){//表示为插件
+                			do_filter($mainname,$mainname,$maintitle,$htmlcode);
+                		}else{
+                			main_module($mainname,$maintitle,$htmlcode);
+                		}
+                	}
+                	if ($indexOnly==3 && $load==""){//首页内容尾部
+                		if ($installDate>0){//表示为插件
+                			do_filter($mainname,$mainname,$maintitle,$htmlcode);
+                		}else{
+                			main_module($mainname,$maintitle,$htmlcode);
+                		}
+                	}
+                }
+                ?>
+                
                 <div id="mainContent-bottomimg"></div>
             </div>
         </div>
@@ -537,35 +631,35 @@ http://www.kdolphin.com/231
                     <div class="Pcontent" id="content_Category" style="display:">
                         <div class="CategoryTable" id="Category_Body">
                             <script type="text/javascript"> 
-	function openCategory(category) {
-		var oLevel1 = document.getElementById("category_" + category);
-		var oImg = oLevel1.getElementsByTagName("img")[0];
-		switch (oImg.src.substr(oImg.src.length - 10, 6)) {
-			case "isleaf":
-				return true;
-			case "closed":
-				oImg.src = "images/tree/folder_gray/tab_opened.gif";
-				showLayer("category_" + category + "_children");
-				expanded = true;
-				return true;
-			case "opened":
-				oImg.src = "images/tree/folder_gray/tab_closed.gif";
-				hideLayer("category_" + category + "_children");
-				expanded = false;
-				return true;
-		}
-		return false;
-	}
-	
-	function showLayer(id) {
-		document.getElementById(id).style.display = "block";
-		return true;
-	}
-	
-	function hideLayer(id) {
-		document.getElementById(id).style.display = "none";
-		return true;
-	}	
+                            function openCategory(category) {
+                            	var oLevel1 = document.getElementById("category_" + category);
+                            	var oImg = oLevel1.getElementsByTagName("img")[0];
+                            	switch (oImg.src.substr(oImg.src.length - 10, 6)) {
+                            		case "isleaf":
+                            		return true;
+                            		case "closed":
+                            		oImg.src = "images/tree/folder_gray/tab_opened.gif";
+                            		showLayer("category_" + category + "_children");
+                            		expanded = true;
+                            		return true;
+                            		case "opened":
+                            		oImg.src = "images/tree/folder_gray/tab_closed.gif";
+                            		hideLayer("category_" + category + "_children");
+                            		expanded = false;
+                            		return true;
+                            	}
+                            	return false;
+                            }
+
+                            function showLayer(id) {
+                            	document.getElementById(id).style.display = "block";
+                            	return true;
+                            }
+
+                            function hideLayer(id) {
+                            	document.getElementById(id).style.display = "none";
+                            	return true;
+                            }
 </script>
                             <div id="treeComponent">
                                 <div id="category_0" style="line-height: 100%">
