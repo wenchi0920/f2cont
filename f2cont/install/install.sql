@@ -61,10 +61,6 @@ CREATE TABLE `f2blog_filters` (
   PRIMARY KEY  (`id`)
 ) ;
 
-
-
-
-
 CREATE TABLE `f2blog_guestbook` (
   `id` int(8) NOT NULL auto_increment,
   `author` varchar(30) NOT NULL default '',
