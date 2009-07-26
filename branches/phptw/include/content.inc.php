@@ -6,7 +6,7 @@ if (!empty($_POST['logpassword'])){
 		$_SESSION['logpassword']=$_SESSION['logpassword'].";".md5(encode($_POST['logpassword']));
 	}else{
 		$_SESSION['logpassword']=md5(encode($_POST['logpassword']));
-	}		
+	}
 }
 
 $job=(empty($_REQUEST['job']))?"":$_REQUEST['job'];
@@ -28,7 +28,7 @@ if ($settingInfo['rewrite']==0) {
 	$distype_url0=(strpos($gourl,"?")>0)?$gourl."&disType=0":$gourl."?disType=0";
 	$distype_url1=(strpos($gourl,"?")>0)?$gourl."&disType=1":$gourl."?disType=1";
 }
-if ($settingInfo['rewrite']==1) {	
+if ($settingInfo['rewrite']==1) {
 	$gourl=($job!="")?"rewrite.php/$job-".@urlencode($seekname):"rewrite.php/";
 	$category_url="rewrite.php/category-";
 	$readlogs_url="rewrite.php/read-";
@@ -45,7 +45,7 @@ if ($settingInfo['rewrite']==2) {
 
 if ($page<1){$page=1;}
 $start_record=($page-1)*$per_page;
-	
+
 $sql_find=searchSQL($job,$seekname);
 $saveType=(!empty($_SESSION['rights']) && $_SESSION['rights']=="admin")?"(a.saveType=1 or a.saveType=3)":"a.saveType=1";
 
@@ -108,14 +108,14 @@ $query_result=$DMC->query($query_sql);
 								include(F2BLOG_ROOT."./cache/html/$html_path/".$fa['id'].".php");
 							}
 						}else{
-							$content=$fa['logContent'];							
+							$content=$fa['logContent'];
 							if (strpos($content,"<!--more-->")>0){
 								$content=htmlSubString($content,"<!--more-->");
 								$content=formatBlogContent($content,0,$fa['id']);
 								if ($fa['logsediter']=="ubb") $content=nl2br($content);
 								echo $content;
 								echo "<p><a class=\"more\" href=\"$readlogs_url".$fa['id'].$settingInfo['stype']."\">[$strContentAll]</a></p> \n";
-							}else{								
+							}else{
 								if ($fa['autoSplit']>0){
 									$textlength=getStringLength(strip_tags($content));
 									if ($textlength>$fa['autoSplit']){
@@ -137,7 +137,7 @@ $query_result=$DMC->query($query_sql);
 							}
 						}
 					}
-					
+
 					if ($fa['tags']!="" && $settingInfo['disTags']=="1"){
 						echo "<div style=\"clear:both;margin-top:10px;\"><strong>$strTag: </strong> ".tagList($fa['tags'])."</div>";
 					}
@@ -187,7 +187,7 @@ $query_result=$DMC->query($query_sql);
 					$indexOnly=$value['indexOnly'];
 					$installDate=empty($value['installDate'])?"":$value['installDate'];
 					$htmlcode=$value['htmlCode'];
-						
+
 					//$strModuleContentShow=array("0所有内容头部","1所有内容尾部","2首页内容头部","3首页内容尾部","4首页日志尾部","5读取日志尾部");
 					if ($indexOnly==4){//首页日志尾部
 						if ($installDate>0){//表示为插件
