@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PluginSet>
+ <PluginName>emotions</PluginName>
+ <PluginVersion>1.2</PluginVersion>
+ <FunctionName>emotions</FunctionName>
+ <FunctionImage>emotions.gif</FunctionImage>
+ <FunctionDesc>插入表情符号改良版</FunctionDesc>
+ <PluginAuthor>harry</PluginAuthor>
+ <pubDate>2006-11-27</pubDate>
+ <AuthorURL>http://joesen.f2blog.com</AuthorURL>
+ <AuthorMail>joesenhong@yahoo.com.cn</AuthorMail>
+</PluginSet>
