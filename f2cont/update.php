@@ -8,7 +8,7 @@ header("Content-Type: text/html; charset=utf-8");
 升级方法：
 1. 把此文件移到上一层目录就可以了。
 */
-$update_time="20090709";
+$update_time="20090726";
 
 //禁止此文件在tools目录下运行
 if (strpos(";".$_SERVER['PHP_SELF'],"tools")>0){
