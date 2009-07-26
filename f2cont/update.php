@@ -45,13 +45,13 @@ if ($check_update){
 
 		//连接mysql
 		$DMC = new F2MysqlClass($DBHost, $DBUser, $DBPass, $DBName,$DBNewlink);
-		
+
 		//$SQL="select `settValue` from `{$DBPrefix}setting` where `settName`='closeReason' limit 0,1";
 		//list($strCloseReason)=$DMC->fetchArray($DMC->query($SQL),MYSQL_NUM);
-		
+
 		//$SQL="update `{$DBPrefix}setting` set `settValue`='blog is update system now,plesase wait..' where `settName`='closeReason' ";
 		//$DMC->query($SQL);
-		
+
 		//$SQL="update `{$DBPrefix}setting` set `settValue`='1' where `settName`='status' ";
 		//$DMC->query($SQL);
 
@@ -60,31 +60,34 @@ if ($check_update){
 		echo "<hr>\n";
 		echo "Update Success. please delete this update.php <br />\n";
 		echo "<a href=index.php>Return Homepage</a>";
-		
+
 		//$SQL="update `{$DBPrefix}setting` set `settValue`='".$strCloseReason."' where `settName`='closeReason'";
-		//$DMC->query($SQL);		
+		//$DMC->query($SQL);
 		//$SQL="update `{$DBPrefix}setting` set `settValue`='0' where `settName`='status'";
 		//$DMC->query($SQL);
-		
-		
+
+
 	}else{ //是在common.php中检测运行
 		//运行更新文件,参数true显示更新内容。false不显示更新内容。
 		include_once("include/cache.php");
 		update_data(true,$DMC);
-	
-		//删除update.php，不能删除将提示管理员删除。
-		if (!@unlink(F2BLOG_ROOT."./update.php")){
-			echo "please delete update.php";
-			exit;
-		}
+
 	}
+
+
+	//删除update.php，不能删除将提示管理员删除。
+	if (!@unlink(F2BLOG_ROOT."./update.php")){
+		echo "please delete update.php";
+		exit;
+	}
+
 }else{
 	if (preg_match("/update.php/",$_SERVER['PHP_SELF'])){
 		ob_start();
 		header( 'refresh: 5; url=./index.php' );
 		echo "F2Cont have already updated to $update_time, please delete this update.php <hr>";
 		echo "<a href=index.php>Return Homepage</a></br>";
-	
+
 		//删除update.php，不能删除将提示管理员删除。
 		if (!@unlink(F2BLOG_ROOT."./update.php")){
 			echo "please delete update.php<br/>";
@@ -164,11 +167,11 @@ function update_data($echo,$DMC){
 
 		//	跟新設定檔
 		$arr_setting['spamfilter']='close';
-		
-	}	
-	
-	
-	
+
+	}
+
+
+
 	//	update 20090625
 	if (!in_array($update_logs,"20090625")){
 
@@ -188,15 +191,15 @@ function update_data($echo,$DMC){
 		}
 
 	}
-	
+
 	/*
-	if (!in_array($update_logs,"20090709")) {		
-		$SQL="select count(`name`) from `{$DBPrefix}modules` where `name`='BlogNews'";
-		list($intNums)=$DMC->fetchArray($DMC->query($SQL),MYSQL_NUM);
-		if ($intNums==0) {
-			$modify_sql[]="INSERT INTO `{$DBPrefix}modules` (`name`, `modTitle`, `disType`, `isHidden`, `indexOnly`, `orderNo`, `isSystem`, `htmlCode`, `pluginPath`, `isInstall`, `installFolder`, `installDate`, `settingXml`, `cateId`, `configPath`) VALUES('BlogNews', '跑馬燈', 3, 0, 0, 2, 1, '', 'include/plung.blognews.php', 0, '', 0, '', 0, '')";
-		}
-		else $modify_sql[]="update `{$DBPrefix}modules` set isSystem='1',`pluginPath`='include/plung.blognews.php' where `name`='BlogNews'";
+	if (!in_array($update_logs,"20090709")) {
+	$SQL="select count(`name`) from `{$DBPrefix}modules` where `name`='BlogNews'";
+	list($intNums)=$DMC->fetchArray($DMC->query($SQL),MYSQL_NUM);
+	if ($intNums==0) {
+	$modify_sql[]="INSERT INTO `{$DBPrefix}modules` (`name`, `modTitle`, `disType`, `isHidden`, `indexOnly`, `orderNo`, `isSystem`, `htmlCode`, `pluginPath`, `isInstall`, `installFolder`, `installDate`, `settingXml`, `cateId`, `configPath`) VALUES('BlogNews', '跑馬燈', 3, 0, 0, 2, 1, '', 'include/plung.blognews.php', 0, '', 0, '', 0, '')";
+	}
+	else $modify_sql[]="update `{$DBPrefix}modules` set isSystem='1',`pluginPath`='include/plung.blognews.php' where `name`='BlogNews'";
 	}
 	*/
 
@@ -241,20 +244,20 @@ function update_data($echo,$DMC){
 	links_recache();
 
 
-/*
+	/*
 	//清空缓存
 	if ($delete_setting==true){//0909升级需要重新建立setting文件。
-		if (!@unlink(F2BLOG_ROOT."./cache/cache_setting.php")){
-			echo "<script language=Javascript> \n";
-			echo "alert('Please update cache!');\n";
-			echo "</script>\n";
-		}
-	}else{
-		//更新缓存
-		settings_recache();
-		links_recache();
+	if (!@unlink(F2BLOG_ROOT."./cache/cache_setting.php")){
+	echo "<script language=Javascript> \n";
+	echo "alert('Please update cache!');\n";
+	echo "</script>\n";
 	}
-*/
+	}else{
+	//更新缓存
+	settings_recache();
+	links_recache();
+	}
+	*/
 
 	return false;
 
