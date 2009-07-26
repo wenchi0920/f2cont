@@ -288,7 +288,7 @@ $nextAccess=1;
 
 							break;
 						case 5:
-							//鏁版嵁搴撳弬鏁?
+							//?��?嵁搴?�弬??
 							$dbhost = trim($_POST['dbhost']);
 							$dbuser = trim($_POST['dbuser']);
 							$dbpassword = trim($_POST['dbpassword']);
@@ -307,13 +307,13 @@ $nextAccess=1;
 							
 							if ($nextAccess==1) {
 								include ('../include/db.php');
-								//杩炴帴鏁版嵁搴?
+								//?�炴帴�??��???
 								$DMC = new F2MysqlClass($dbhost, $dbuser, $dbpassword, $dbname);
 								if ($DMC->error()){
 									if ($_POST[chkcreate]!="1") {
 										$msg .= "<SPAN class=err>$strNoConnDB</span><br />";
 										$nextAccess=0;
-									}else{//寤虹珛鏁告摎搴?
+									}else{//寤虹?��??��???
 										$DMC->query("create database $dbname","T");
 										if ($DMC->error()){
 											$msg .= "<SPAN class=err>$strCreateDataBaseNo</span><br />";
@@ -345,7 +345,7 @@ $nextAccess=1;
 								}
 							}
 
-							//鍒犻櫎鏃ф暟鎹〃
+							//?�犻櫎�???�鎹?��?
 							if ($nextAccess==1) {
 								$DMC->query("select id from ".$table_prefix."keywords`","T");
 								if ($DMC->errno()==0) {
@@ -380,7 +380,7 @@ $nextAccess=1;
 								}
 							}
 							
-							//鏂板妯″潡鍊?
+							//?�板?�妯?�潡??
 							if ($nextAccess==1) {
 								//echo $sql;
 								runquery($sql);
@@ -412,22 +412,38 @@ $nextAccess=1;
 								$DMC->query("INSERT INTO `".$table_prefix."modules` VALUES (45, 'rss', '[var]strHomePageRss[/var]', 1, 0, 0, 8, 1, '', 'rss.php', 0, '', 0, '', 0, '')");
 								$DMC->query("INSERT INTO `".$table_prefix."modules` VALUES (88, 'Function', 'Function', '0', '0', '0', '4', '1', '', '', '0', '', '0', '', '0', '')");
 
-								//澧炲姞榛樿鐣欒█杩囨护鍣?
+								//澧炲姞�?樿????�杩?�护??
 								$DMC->query("INSERT INTO `".$table_prefix."filters` VALUES ('1', '1', '=http')");
 								$DMC->query("INSERT INTO `".$table_prefix."filters` VALUES ('2', '1', 'url=')");
 								$DMC->query("INSERT INTO `".$table_prefix."filters` VALUES ('3', '1', 'href=')");	
 															
-								//澧炲姞榛樿杩炴帴
+								//澧炲姞�?樿?�炴�?
 								$DMC->query("INSERT INTO `".$table_prefix."linkgroup` VALUES ('1', 'Links', '1', '1')");
 								$DMC->query("INSERT INTO `".$table_prefix."links` VALUES ('1', '1', 'F2Cont', 'http://www.f2cont.com/images/logo.gif', 'http://www.f2cont.com/', '1', '1', '1')");
 								
-								//澧炲姞榛樿绫诲埆  `id` int(3) NOT NULL auto_increment,
+								//澧炲姞�?樿绫诲?? `id` int(3) NOT NULL auto_increment,
 								$DMC->query("INSERT INTO `".$table_prefix."categories` VALUES ('1', '0', '$strDefaultCategory', '1','$strDefaultCategory','','0','0','1')");
 
-								//	鏂板鍔犲挤鍖?spam filter
+								//	?�板?��??�挤??spam filter
 								$DMC->query("INSERT INTO `".$table_prefix."filters` (`category`, `name`) VALUES (1, '=http')");
 								$DMC->query("INSERT INTO `".$table_prefix."filters` (`category`, `name`) VALUES (1, '[url=')");
 								$DMC->query("INSERT INTO `".$table_prefix."filters` (`category`, `name`) VALUES (1, '[href=')");
+								$DMC->query("INSERT INTO `".$table_prefix."filters` (`category`, `name`) VALUES (1, '[href=')");
+
+								$DMC->query("INSERT INTO `".$table_prefix."filters` (`category`, `name`) VALUES (1, 'This site");
+
+/*
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, '=http');
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, 'url=');
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, 'href=');
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, '=http');
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, '[url=');
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, '[href=');
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, '�� �� �� �H �� ¾');
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, '���M�R�R');
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, 'This site');
+*/
+
 
 								$msg .= "$strImpModInfo <br />";
 							}
@@ -526,7 +542,7 @@ $nextAccess=1;
 
 							break;
 						case 7:
-							//鎻掑叆绠＄悊鍛?
+							//?��??��?＄�???
 							$admin = encode($_POST['admin']);
 							$admin_pw = encode($_POST['admin_pw']);
 							$admin_pw2 = encode($_POST['admin_pw2']);
@@ -554,7 +570,7 @@ $nextAccess=1;
 							} else {
 								if (substr($blog_url,strlen($blog_url)-1,1)!="/"){$blog_url=$blog_url."/";}
 
-								//鍔犺浇鏁版嵁
+								//?�犺浇�??��?
 								define('IN_F2BLOG', TRUE);
 								define('F2BLOG_ROOT', substr(dirname(__FILE__), 0, -7));
 
