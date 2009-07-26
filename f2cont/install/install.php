@@ -430,7 +430,7 @@ $nextAccess=1;
 								$DMC->query("INSERT INTO `".$table_prefix."filters` (`category`, `name`) VALUES (1, '[href=')");
 								$DMC->query("INSERT INTO `".$table_prefix."filters` (`category`, `name`) VALUES (1, '[href=')");
 
-								$DMC->query("INSERT INTO `".$table_prefix."filters` (`category`, `name`) VALUES (1, 'This site");
+								$DMC->query("INSERT INTO `".$table_prefix."filters` (`category`, `name`) VALUES (1, 'This site')");
 
 /*
 INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, '=http');
