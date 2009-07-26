@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<editor>
+	<EditorName>fck</EditorName>
+	<EditorDecription>FCKeditor</EditorDecription>
+	<EditorPath>editor/fckeditor/editor.php</EditorPath>
+	<EditorCode>html</EditorCode>
+</editor>
