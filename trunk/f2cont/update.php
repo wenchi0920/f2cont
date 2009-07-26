@@ -242,6 +242,8 @@ function update_data($echo,$DMC){
 	//更新缓存
 	settings_recache();
 	links_recache();
+	filters_recache();
+
 
 
 	/*
