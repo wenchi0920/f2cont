@@ -41,6 +41,7 @@ CREATE TABLE `f2blog_comments` (
   `postTime` int(10) NOT NULL default '0',
   `ip` varchar(20) NOT NULL default '',
   `isSecret` tinyint(1) NOT NULL default '0',
+  `isSpam` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `logId` (`logId`,`parent`)
 ) ;
