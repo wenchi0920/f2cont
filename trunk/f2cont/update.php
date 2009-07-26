@@ -240,25 +240,8 @@ function update_data($echo,$DMC){
 		echo "</script>\n";
 	}
 	//更新缓存
-	categories_recount();
-	categories_recache();
-	calendar_recache();
-	statistics_recache();
-	hottags_recache();
-	archives_recache();
+	settings_recache();
 	links_recache();
-	filters_recache();
-	keywords_recache();
-	recentLogs_recache();
-	recentComments_recache();
-	recentGbooks_recache();
-	logsTitle_recache();
-	modulesSetting_recache();
-	download_recache();
-	attachments_recache();
-	members_recache();
-	skinlist_recache();
-	online_recache();
 
 
 	/*
