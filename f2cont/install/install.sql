@@ -61,6 +61,18 @@ CREATE TABLE `f2blog_filters` (
   PRIMARY KEY  (`id`)
 ) ;
 
+
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, '=http');
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, 'url=');
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, 'href=');
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, '=http');
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, '[url=');
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, '[href=');
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, '缺 錢 個 人 兼 職');
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, '全套愛愛');
+INSERT INTO `f2cont_filters` ( `category`, `name`) VALUES( 1, 'This site');
+
+
 CREATE TABLE `f2blog_guestbook` (
   `id` int(8) NOT NULL auto_increment,
   `author` varchar(30) NOT NULL default '',
