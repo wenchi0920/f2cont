@@ -642,20 +642,57 @@ function recentComments_recache() {
 
 	$i=0;
 	$maxlength=$settingInfo['sidecommentlength'];
-	$result = $DMC->query("select a.*,a.author as author,a.id as id,c.nickname from ".$DBPrefix."comments as a inner join ".$DBPrefix."logs as b on a.logId=b.id left join {$DBPrefix}members as c on a.author=c.username where b.saveType=1 order by a.postTime desc Limit 0,$settingInfo[commPage]");
+	//$result = $DMC->query("select a.*,a.author as author,a.id as id,c.nickname from ".$DBPrefix."comments as a inner join ".$DBPrefix."logs as b on a.logId=b.id left join {$DBPrefix}members as c on a.author=c.username where b.saveType=1 order by a.postTime desc Limit 0,$settingInfo[commPage]");
+
+	$sql="select a.*,a.author as author,a.id as id,c.nickname ";
+	$sql.=" from ".$DBPrefix."comments as a";
+	$sql.=" inner join ".$DBPrefix."logs as b on a.logId=b.id";
+	$sql.=" left join {$DBPrefix}members as c on a.author=c.username";
+	$sql.=" where b.saveType=1";
+	//	新增留言，但不顯示 加入 spam 記號
+	if (trim($settingInfo['spamfilter'])=="close") $sql.=" and a.isSpam='0'";
+	$sql.=" order by a.postTime desc Limit 0,$settingInfo[commPage]";
+	$result = $DMC->query($sql);
+
+
 	while ($my = $DMC->fetchArray($result)) {
-		$sql = "select s3.* from (select count(*),s1.logId,s1.id from (select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' order by postTime asc) s1,(select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' order by postTime asc) s2 where s1.id > s2.id group by s1.id) s3 where s3.id={$my['id']}";
+
+		//$sql = "select s3.* from (select count(*),s1.logId,s1.id from (select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' order by postTime asc) s1,(select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' order by postTime asc) s2 where s1.id > s2.id group by s1.id) s3 where s3.id={$my['id']}";
+
+		//$sql = "select s3.* from (select count(*),s1.logId,s1.id from (select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' and isSpam='0' order by postTime asc) s1,(select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' and isSpam='0' order by postTime asc) s2 where s1.id > s2.id group by s1.id) s3 ";
+
+
+		//	新增留言，但不顯示 加入 spam 記號
+		if (trim($settingInfo['spamfilter'])=="close") $sql = "select s3.* from (select count(*),s1.logId,s1.id from (select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' and isSpam='0' order by postTime asc) s1,(select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' and isSpam='0' order by postTime asc) s2 where s1.id > s2.id group by s1.id) s3 ";
+		else $sql = "select s3.* from (select count(*),s1.logId,s1.id from (select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' and isSpam='0' order by postTime asc) s1,(select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' and isSpam='0' order by postTime asc) s2 where s1.id > s2.id group by s1.id) s3 ";
+
+		$sql.="where s3.id={$my['id']}";
+
+
 		$n = $DMC->fetchArray($DMC->query($sql));
 		if ($n['count(*)']==0){
 			$sql = "select logId,id from {$DBPrefix}comments where parent={$my['id']}";
 			$n = $DMC->fetchArray($DMC->query($sql));
-			$sql = "select s3.* from (select count(*),s1.logId,s1.id from (select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' order by postTime asc) s1,(select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' order by postTime asc) s2 where s1.id > s2.id group by s1.id) s3 where s3.id={$my['parent']}";
+
+			//$sql = "select s3.* from (select count(*),s1.logId,s1.id from (select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' order by postTime asc) s1,(select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' order by postTime asc) s2 where s1.id > s2.id group by s1.id) s3 ";
+			//	新增留言，但不顯示 加入 spam 記號
+			if (trim($settingInfo['spamfilter'])=="close") $sql = "select s3.* from (select count(*),s1.logId,s1.id from (select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' and isSpam='0' order by postTime asc) s1,(select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' and isSpam='0' order by postTime asc) s2 where s1.id > s2.id group by s1.id) s3 ";
+			else $sql ="select s3.* from (select count(*),s1.logId,s1.id from (select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' order by postTime asc) s1,(select logId,id from {$DBPrefix}comments where logId={$my['logId']} and parent='0' order by postTime asc) s2 where s1.id > s2.id group by s1.id) s3 ";
+
+			$sql.="where s3.id={$my['parent']}";
+
+
 			$n = $DMC->fetchArray($DMC->query($sql));
 		}
 		$page = ($n['count(*)']-$n['count(*)']%$settingInfo['logscomment'])/$settingInfo['logscomment']+1;
 
 		if ($settingInfo['rewrite']==0) $page=($page==1)?"":"&page=".$page;
 		if ($settingInfo['rewrite']==2 || $settingInfo['rewrite']==1) $page=($page==1)?"":"-".$page;
+
+		
+		//	新增留言，顯示為隱藏 加入 spam 記號
+		if ($my['isSpam']==1 && ($settingInfo['spamfilter']=="hidden" || $settingInfo['spamfilter']=="default")) $my['isSecret']=1;
+
 		if ($my['isSecret']){
 			$content=$strGuestBookHidden;
 			$my['content']=$strGuestBookHidden;

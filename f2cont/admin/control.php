@@ -26,6 +26,29 @@ if ($arr_result=$DMC->fetchArray($DMC->query("select count(id) as total from ".$
 		$tb_count="<font color=\"red\">".$arr_result['total']."</font>";
 	}
 }
+
+//检测 SPAM 數量 
+//	$sub_sql="select * from ".$DBPrefix."comments where parent='".$arr_parent[$i]['id']."' order by postTime";
+$spam_coumt=array();
+$spam_coumt[2]=0;
+$spam_coumt[0]=0;
+if ($arr_result=$DMC->fetchArray($DMC->query("select count(isSpam) as total from ".$DBPrefix."comments where isSpam='1'"))) {
+	if ($arr_result['total']>0){
+		$spam_coumt[0]="<font color=\"red\">".$arr_result['total']."</font>";
+		$spam_coumt[2]+=$arr_result['total'];
+	}
+}
+
+$spam_coumt[1]=0;
+if ($arr_result=$DMC->fetchArray($DMC->query("select count(isSpam) as total from ".$DBPrefix."guestbook where isSpam='1'"))) {
+	if ($arr_result['total']>0){
+		$spam_coumt[1]="<font color=\"red\">".$arr_result['total']."</font>";
+		$spam_coumt[2]+=$arr_result['total'];
+	}
+}
+$spam_coumt[2]="<font color=\"red\">".$spam_coumt[2]."</font>";
+
+
 ?>
 <body>
 
@@ -57,7 +80,7 @@ if ($arr_result=$DMC->fetchArray($DMC->query("select count(id) as total from ".$
 			   
 			   <tr>
 				 <td class="leftbox" width="2%">&nbsp;</td>
-				<td class="rightbox"><?php echo $strSpamTrash?>&nbsp;<a href="comments.php">(<?php echo $strCommentBrowse;?>)</a> &nbsp;<a href="guestbooks.php">(<?php echo $strGuestBookBrowse;?>)</a>  </td>
+				<td class="rightbox"><?php echo $strSpamTrash,"&nbsp;(",$spam_coumt[2],")";?>&nbsp;<a href="comments.php">(<?php echo $strCommentBrowse,"&nbsp;",$spam_coumt[0];?>)</a> &nbsp;<a href="guestbooks.php">(<?php echo $strGuestBookBrowse,"&nbsp;",$spam_coumt[1];?>)</a>  </td>
 			   </tr>
 			   
 			   <tr>
