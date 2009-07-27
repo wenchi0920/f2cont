@@ -1,7 +1,7 @@
 <?php 
 if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
-//杈撳嚭澶撮儴淇℃伅
+//输出头部信息
 dohead($title,$page_url);
 require('admin_menu.php');
 ?>
@@ -99,7 +99,7 @@ require('admin_menu.php');
 		$imgHidden=($arr_parent[$i]['isSecret']==1)?"&nbsp;&nbsp;<img src='themes/{$settingInfo['adminstyle']}/lock.gif' title='$strTbAlrHidden'>":"&nbsp;";
 
 		if ($showmethod=="parent"){
-			//鍙栧緱鍥炲
+			//取得回复
 			$sub_sql="select * from ".$DBPrefix."comments where parent='".$arr_parent[$i]['id']."' order by postTime";
 			$query_result=$DMC->query($sub_sql);
 			$parent_num=$DMC->numRows($query_result);
@@ -113,20 +113,11 @@ require('admin_menu.php');
 			<img align="absMiddle" name="<?php echo "open_img$i"?>" src="<?php echo $image_path?>" onMouseUp="open_content('<?php echo $settingInfo['adminstyle']?>','<?php echo "open$i"?>',<?php echo "open_img$i"?>)" style="COLOR: #ccddff; cursor: pointer;margin-top:5px;">
 			<?php }else{echo "&nbsp;";}?>
 		  </td>
-		  <td nowrap align="left" class="subcontent-td">
-
+		  <td nowrap align="center" class="subcontent-td">
 			<INPUT type=checkbox value="<?php echo $arr_parent[$i]['id']?>" id="item" name="itemlist[]"  onclick="Javascript:this.form.opselect.value=1">
-			
 			<a href="<?php echo "$edit_url&mark_id=".$arr_parent[$i]['id']."&logId=".$arr_parent[$i]['logId']."&action=add"?>"><img src="themes/<?php echo $settingInfo['adminstyle']?>/icon_track.gif" width="16" height="16" alt="<?php echo "$strGuestBookReply"?>" border="0" align="absMiddle"> </a>
-
 			<a href="<?php echo "$edit_url&mark_id=".$arr_parent[$i]['id']."&action=edit"?>"><img src="themes/<?php echo $settingInfo['adminstyle']?>/icon_modif.gif" width="16" height="16" alt="<?php echo "$strEdit"?>" border="0" align="absMiddle"> </a> 
-			
 			<a href="<?php echo "../index.php?load=read&id=".$arr_parent[$i]['logId']?>" target="_blank"><img src="themes/<?php echo $settingInfo['adminstyle']?>/browse.gif" width="16" height="16" alt="<?php echo "$strLogTitle"?>" border="0" align="absMiddle"> </a> 
-
-			<?php if ($arr_parent[$i]['isSpam']==1) {?>
-			<img src="themes/<?php echo $settingInfo['adminstyle']?>/icon_spam.gif" width="16" height="16" alt="<?php echo "$strLogTitle"?>" border="0" align="absMiddle">
-			<?php } ?>
-
 		  </td>
 		  <td align="center" class="subcontent-td">
 			<?php echo $imgHidden?>
@@ -173,16 +164,7 @@ require('admin_menu.php');
 			  <tr onMouseOver="this.style.backgroundColor='<?php echo $settingInfo['mouseovercolor']?>'" onMouseOut="this.style.backgroundColor=''">
 				<td width="1%" nowrap class="subcontent-td" valign="top">
 				  <INPUT type=checkbox value="<?php echo $fa['id']?>" id="item" name="itemlist[]"  onclick="Javascript:this.form.opselect.value=1">
-
-
 				  <a href="<?php echo "$edit_url&mark_id=".$fa['id']."&action=edit"?>"><img src="themes/<?php echo $settingInfo['adminstyle']?>/icon_modif.gif" width="16" height="16" alt="<?php echo "$strEdit"?>" border="0" align="absMiddle"> </a> 
-
-					<?php if ($fa['isSpam']==1) {?>
-					<img src="themes/<?php echo $settingInfo['adminstyle']?>/icon_spam.gif" width="16" height="16" alt="<?php echo "$strLogTitle"?>" border="0" align="absMiddle">
-					<?php } ?>
-
-
-
 				</td>
 				<td nowrap align="center" class="subcontent-td" valign="top">
 				  <?php echo $imgHidden?>

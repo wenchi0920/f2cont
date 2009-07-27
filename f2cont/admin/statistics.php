@@ -1,19 +1,19 @@
 <?php 
 require_once("function.php");
 
-// éªŒè¯ç”¨æˆ·æ˜¯å¦å¤„äºç™»é™†çŠ¶æ€
+// ÑéÖ¤ÓÃ»§ÊÇ·ñ´¦ÓÚµÇÂ½×´Ì¬
 check_login();
 $parentM=6;
 $mtitle=$strStatistics;
 
-//ä¿å­˜å‚æ•°
+//±£´æ²ÎÊı
 $action=$_GET['action'];
 $order=$_GET['order'];
 $page=$_GET['page'];
 $seekname=encode($_REQUEST['seekname']);
 $visits=isset($_GET['visits'])?$_GET['visits']:"";
 
-//å…¶å®ƒæ“ä½œè¡Œä¸ºï¼šç¼–è¾‘ã€åˆ é™¤ç­‰
+//ÆäËü²Ù×÷ĞĞÎª£º±à¼­¡¢É¾³ıµÈ
 if ($action=="operation"){
 	$stritem="";
 	$itemlist=$_POST['itemlist'];
@@ -25,7 +25,7 @@ if ($action=="operation"){
 		}
 	}
 	
-	//åˆ é™¤
+	//É¾³ı
 	if($_POST['operation']=="delete" and $stritem!=""){
 		$result=$DMC->query("select sum(visits) as sum_total from ".$DBPrefix."dailystatistics where $stritem");
 		if ($arr_result=$DMC->fetchArray($result)){
@@ -43,13 +43,13 @@ if ($action=="all"){
 	$seekname="";
 }
 
-$seek_url="$PHP_SELF?order=$order&visits=$visits";	//æŸ¥æ‰¾ç”¨é“¾æ¥
-$order_url="$PHP_SELF?seekname=$seekname&visits=$visits";	//æ’åºæ ç”¨çš„é“¾æ¥
-$page_url="$PHP_SELF?seekname=$seekname&order=$order&visits=$visits";	//é¡µé¢å¯¼èˆªé“¾æ¥
-$edit_url="$PHP_SELF?seekname=$seekname&order=$order&page=$page&visits=$visits";	//ç¼–è¾‘æˆ–æ–°å¢é“¾æ¥
+$seek_url="$PHP_SELF?order=$order&visits=$visits";	//²éÕÒÓÃÁ´½Ó
+$order_url="$PHP_SELF?seekname=$seekname&visits=$visits";	//ÅÅĞòÀ¸ÓÃµÄÁ´½Ó
+$page_url="$PHP_SELF?seekname=$seekname&order=$order&visits=$visits";	//Ò³Ãæµ¼º½Á´½Ó
+$edit_url="$PHP_SELF?seekname=$seekname&order=$order&page=$page&visits=$visits";	//±à¼­»òĞÂÔöÁ´½Ó
 
 
-//æŸ¥æ‰¾å’Œæµè§ˆ
+//²éÕÒºÍä¯ÀÀ
 $title="$strStatisticsTitle";
 
 if ($order==""){$order="visitDate";}

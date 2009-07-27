@@ -1,12 +1,12 @@
 <?php 
 require_once("function.php");
 
-// éªŒè¯ç”¨æˆ·æ˜¯å¦å¤„äºŽç™»é™†çŠ¶æ€
+// ÑéÖ¤ÓÃ»§ÊÇ·ñ´¦ÓÚµÇÂ½×´Ì¬
 check_login();
 $parentM=2;
 $mtitle=$strTrackbackBrowse;
 
-//ä¿å­˜å‚æ•°
+//±£´æ²ÎÊý
 $action=$_GET['action'];
 $order=$_GET['order'];
 $page=$_GET['page'];
@@ -18,7 +18,7 @@ if ($action=="deltb"){
 	$logId=$my['logId'];
 	update_num($DBPrefix."logs","quoteNums"," id='$logId'","minus",1);
 
-	//åŠ å…¥åˆªé™¤çš„å¼•ç”¨ç¶²å€åˆ°éŽæ¿¾åˆ—è¡¨
+	//¼ÓÈë„h³ýµÄÒýÓÃ¾WÖ·µ½ß^žVÁÐ±í
 	addFilterUrl($my['blogUrl']);
 	filters_recache();
 
@@ -32,7 +32,7 @@ if ($action=="deltb"){
 	exit;
 }
 
-//å…¶å®ƒæ“ä½œè¡Œä¸ºï¼šç¼–è¾‘ã€åˆ é™¤ç­‰
+//ÆäËü²Ù×÷ÐÐÎª£º±à¼­¡¢É¾³ýµÈ
 if ($action=="operation"){
 	$stritem="";
 	$itemlist=$_POST['itemlist'];
@@ -55,7 +55,7 @@ if ($action=="operation"){
 			}
 
 			if ($_POST['operation']=="delete"){
-				//åŠ å…¥åˆªé™¤çš„å¼•ç”¨ç¶²å€åˆ°éŽæ¿¾åˆ—è¡¨
+				//¼ÓÈë„h³ýµÄÒýÓÃ¾WÖ·µ½ß^žVÁÐ±í
 				addFilterUrl($my['blogUrl']);
 				filters_recache();
 			}
@@ -86,14 +86,14 @@ if ($action=="all"){
 	$seekname="";
 }
 
-$seek_url="$PHP_SELF?order=$order";	//æŸ¥æ‰¾ç”¨é“¾æŽ¥
-$order_url="$PHP_SELF?seekname=$seekname";	//æŽ’åºæ ç”¨çš„é“¾æŽ¥
-$page_url="$PHP_SELF?seekname=$seekname&order=$order";	//é¡µé¢å¯¼èˆªé“¾æŽ¥
-$edit_url="$PHP_SELF?seekname=$seekname&order=$order&page=$page";	//ç¼–è¾‘æˆ–æ–°å¢žé“¾æŽ¥
-$showmode_url="$PHP_SELF?order=$order&page=$page";	//å±•å¼€ï¼æŠ˜å é“¾æŽ¥
+$seek_url="$PHP_SELF?order=$order";	//²éÕÒÓÃÁ´½Ó
+$order_url="$PHP_SELF?seekname=$seekname";	//ÅÅÐòÀ¸ÓÃµÄÁ´½Ó
+$page_url="$PHP_SELF?seekname=$seekname&order=$order";	//Ò³Ãæµ¼º½Á´½Ó
+$edit_url="$PHP_SELF?seekname=$seekname&order=$order&page=$page";	//±à¼­»òÐÂÔöÁ´½Ó
+$showmode_url="$PHP_SELF?order=$order&page=$page";	//Õ¹¿ª£¯ÕÛµþÁ´½Ó
 
 if ($action=="" or $action=="find" or $action=="all"){
-	//æŸ¥æ‰¾å’Œæµè§ˆ
+	//²éÕÒºÍä¯ÀÀ
 	$title="$strTrackbacksTitle";
 
 	if ($order==""){$order="a.postTime";}

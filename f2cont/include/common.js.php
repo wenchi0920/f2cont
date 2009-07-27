@@ -183,14 +183,44 @@ function open_img(img_src) {
 	blog_url="<?php echo (!empty($settingInfo['rewrite']) && $settingInfo['rewrite']==1)?$settingInfo['blogUrl']:""?>";
 	if (img_src.indexOf("http://")) img_src=blog_url+img_src;
 	img_src=img_src.replace('_f2s','');
-	img_view = window.open('','img_popup','width=0,height=0,left=0,top=0,scrollbars=auto,resizable=yes');
+	img_view = window.open('','img_popup','left=0,top=0,scrollbars=yes,resizable=yes');
 	img_view.document.write(
 	'<html>\n'+ 
 	'<head>\n'+
 	'<script language=\"javascript\">\n'+
+	'	function resizeimg(ImgD,iwidth,iheight) { \n'+
+    ' var image=new Image(); \n'+
+    ' image.src=ImgD.src; \n'+
+    ' if(image.width>0 && image.height>0){ \n'+
+    '    if(image.width/image.height>= iwidth/iheight){ \n'+
+    '       if(image.width>iwidth){  \n'+
+    '           ImgD.width=iwidth; \n'+
+    '           ImgD.height=(image.height*iwidth)/image.width; \n'+
+    '       }else{ \n'+
+    '              ImgD.width=image.width; \n'+
+    '              ImgD.height=image.height;} \n'+
+    '           ImgD.alt=image.width+"×"+image.height;} \n'+
+    '    else{ \n'+
+    '           if(image.height>iheight){ \n'+
+    '                   ImgD.height=iheight; \n'+
+    '                   ImgD.width=(image.width*iheight)/image.height; \n'+
+    '            }else{ \n'+
+    '                    ImgD.width=image.width; \n'+
+    '                   ImgD.height=image.height;} \n'+
+    '            ImgD.alt=image.width+"×"+image.height;} \n'+
+　　'　　　ImgD.style.cursor= "pointer";  \n'+
+　　'　　if (navigator.userAgent.toLowerCase().indexOf("ie") > -1) {  \n'+
+　　'　　　　ImgD.title = "Scroll to ZoomIn and ZoomOut the Picture"; \n'+
+　　'　　　　ImgD.onmousewheel = function img_zoom()  \n'+
+　　'　　　 {var zoom = parseInt(this.style.zoom, 10) || 100; \n'+
+　　'　　　　　　　　zoom += event.wheelDelta / 12; \n'+
+　　'　　　　　　　　if (zoom> 0)　this.style.zoom = zoom + "%"; \n'+
+　　'　　　　　　　　return false;} \n'+　
+　　'　  } else { ImgD.title = "Click to Close the Window";}}} \n'+
+		
 	'function resizing(){\n'+
-	'		var winWidth=document.images.imazingimg.width+100\n'+
-	'		var winHeight=document.images.imazingimg.height+100\n'+		
+	'		var winWidth=document.images.imazingimg.width+50\n'+
+	'		var winHeight=document.images.imazingimg.height+110\n'+		
 	'		window.resizeTo(winWidth,winHeight)\n'+
 	'		window.moveTo(screen.width/2-winWidth/2,screen.height/2-winHeight/2)\n'+					
 	'}\n'+
@@ -206,7 +236,7 @@ function open_img(img_src) {
 	'	<tr>\n'+
 	'		<td style="text-align: center" valign="middle">\n'+
 	'			<a href="#" onclick="window.close()" onfocus="this.blur()">\n'+
-	'				<img src="'+img_src+'" galleryimg="no" border="0" name="imazingimg" onload="resizing()" alt="">\n'+
+	'				<img src="'+img_src+'" galleryimg="no" border="0" name="imazingimg" onload="javascript:resizeimg(this,800,600);resizing()" alt="">\n'+
 	'			<\/a>\n'+
 	'		<\/td>\n'+
 	'	<\/tr>\n'+
@@ -381,4 +411,21 @@ function trim(str) {
 function strlen(str){
 	var str=trim(str);
 	return str.replace(/[^\x00-\xff]/g, "**").length;
+}
+
+function comfirm_manager(act,acturl){
+	if (acturl!="" && act!=""){
+		if (act=="delete" || act=="ctempty" || act=="tbempty"){
+			choise=confirm("confirm operation?");
+			if (choise==true) {
+				window.location=acturl + act;
+			}else{
+				return false;
+			}
+		}else{
+			window.location=acturl + act;
+		}
+	}else{
+		return false;
+	}
 }

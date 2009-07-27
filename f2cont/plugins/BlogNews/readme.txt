@@ -2,7 +2,7 @@
 /*
 Plugin Name: BlogNews
 Plugin URI: http://blog.phptw.idv.tw/read-100.html
-Description: ç¦²çš‘ç¸Š
+Description: ¶]°¨¿O
 Author: wenchi
 Version: 1.0
 Author URI: http://blog.phptw.idv.tw
@@ -12,40 +12,40 @@ INSTALL
 
 
 1.
-ç£…ï¸½î“†æˆˆî†ç•ç²‚çŒ­
+°õ¦æ¡@¸ê®Æ®w»yªk
 ALTER TABLE `f2blog_logs` ADD `isTopNews` TINYINT( 1 ) NOT NULL DEFAULT '0' AFTER `isTop` ;
 
 
 2.
-ç§¨å¸ admin/log.php
+¶}±Ò admin/log.php
 
-Ñ‚îŸ
+§ä¨ì
 $sql="update ".$DBPrefix."logs set cateId='$cateId',logTitle='$logTitle',logContent='$logContent',isComment='$isComment',isTrackback='$isTrackback',isTop='$isTop',weather='$weather',saveType='$saveType',tags='$tags',logsediter='$logsediter',password='$addpassword',autoSplit='$autoSplit'$edit_sql where id='$mark_id'";
-ç›¢î™’îŸî™”Î˜
+±N¥L¨ú¥N¦¨
 $sql="update ".$DBPrefix."logs set cateId='$cateId',logTitle='$logTitle',logContent='$logContent',isComment='$isComment',isTrackback='$isTrackback',isTop='$isTop',isTopNews='$isTopNews',weather='$weather',saveType='$saveType',tags='$tags',logsediter='$logsediter',password='$addpassword',autoSplit='$autoSplit'$edit_sql where id='$mark_id'";
 
 
 3.
-ç§¨å¸ admin/log.php
+¶}±Ò admin/log.php
 
-Ñ‚îŸ
+§ä¨ì
 $sql="INSERT INTO ".$DBPrefix."logs(cateId,logTitle,logContent,author,quoteUrl,postTime,isComment,isTrackback,isTop,weather,saveType,tags,password,logsediter,autoSplit) VALUES ('$cateId','$logTitle','$logContent','$author','$quoteUrl','$postTime','$isComment','$isTrackback','$isTop','$weather','$saveType','$tags','$addpassword','$logsediter','$autoSplit')";
-ç›¢î™’îŸî™”Î˜
+±N¥L¨ú¥N¦¨
 $sql="INSERT INTO ".$DBPrefix."logs(cateId,logTitle,logContent,author,quoteUrl,postTime,isComment,isTrackback,isTop,isTopNews,weather,saveType,tags,password,logsediter,autoSplit) VALUES ('$cateId','$logTitle','$logContent','$author','$quoteUrl','$postTime','$isComment','$isTrackback','$isTop','$isTopNews','$weather','$saveType','$tags','$addpassword','$logsediter','$autoSplit')";
 
 
 
 4.
-ç§¨å¸ admin/log.php
+¶}±Ò admin/log.php
 
-Ñ‚îŸ
-	//çª½ã‚ã¾ãƒ
+§ä¨ì
+	//¸T¤î¤Ş¥Î
 	if($_POST['operation']=="tbhidden" and $stritem!=""){
 		$sql="update ".$DBPrefix."logs set isTrackback='0' where $stritem";
 		$DMC->query($sql);
 	}
-ç›¢î™’îŸî™”Î˜
-	//çª½ã‚ã¾ãƒ
+±N¥L¨ú¥N¦¨
+	//¸T¤î¤Ş¥Î
 	if($_POST['operation']=="tbhidden" and $stritem!=""){
 		$sql="update ".$DBPrefix."logs set isTrackback='0' where $stritem";
 		$DMC->query($sql);
@@ -60,9 +60,9 @@ $sql="INSERT INTO ".$DBPrefix."logs(cateId,logTitle,logContent,author,quoteUrl,p
 
 
 5.
-ç§¨å¸ admin/log.php
+¶}±Ò admin/log.php
 
-Ñ‚îŸ
+§ä¨ì
 	if ($dataInfo) {
 		$cateId=$dataInfo['cateId'];
 		$oldCateId=$dataInfo['cateId'];
@@ -80,7 +80,7 @@ $sql="INSERT INTO ".$DBPrefix."logs(cateId,logTitle,logContent,author,quoteUrl,p
 		$addpassword=$dataInfo['password'];
 		$autoSplit=$dataInfo['autoSplit'];
 
-ç›¢î™’îŸî™”Î˜
+±N¥L¨ú¥N¦¨
 	if ($dataInfo) {
 		$cateId=$dataInfo['cateId'];
 		$oldCateId=$dataInfo['cateId'];
@@ -104,9 +104,9 @@ $sql="INSERT INTO ".$DBPrefix."logs(cateId,logTitle,logContent,author,quoteUrl,p
 
 
 6.
-ç§¨å¸ admin/logs_add.inc.php
+¶}±Ò admin/logs_add.inc.php
 
-Ñ‚îŸ
+§ä¨ì
 		<tr>
 		  <td nowrap>
 			<?php echo $strPareams?>
@@ -128,7 +128,7 @@ $sql="INSERT INTO ".$DBPrefix."logs(cateId,logTitle,logContent,author,quoteUrl,p
 		  </td>
 		</tr>
 
-ç›¢î™’îŸî™”Î˜
+±N¥L¨ú¥N¦¨
 
 		<tr>
 		  <td nowrap>
@@ -165,9 +165,9 @@ $sql="INSERT INTO ".$DBPrefix."logs(cateId,logTitle,logContent,author,quoteUrl,p
 
 
 7.
-ç§¨å¸ admin/logs_list.inc.php
+¶}±Ò admin/logs_list.inc.php
 
-Ñ‚îŸ
+§ä¨ì
 
 		  <td width="5%" align="center" nowrap class="whitefont">
 			<?php 
@@ -176,7 +176,7 @@ $sql="INSERT INTO ".$DBPrefix."logs(cateId,logTitle,logContent,author,quoteUrl,p
 			?>
 		  </td>
 
-ç›¢î™’îŸî™”Î˜
+±N¥L¨ú¥N¦¨
 
 		  <td width="5%" align="center" nowrap class="whitefont">
 			<?php 
@@ -195,9 +195,9 @@ $sql="INSERT INTO ".$DBPrefix."logs(cateId,logTitle,logContent,author,quoteUrl,p
 
 
 8.
-ç§¨å¸ admin/logs_list.inc.php
+¶}±Ò admin/logs_list.inc.php
 
-Ñ‚îŸ
+§ä¨ì
 		if ($fa['saveType']==0){
 			$imgHidden="<img src='themes/{$settingInfo['adminstyle']}/draft.gif' alt='$strDraftLog' title='$strDraftLog'>";
 		}elseif($fa['saveType']==3){
@@ -206,7 +206,7 @@ $sql="INSERT INTO ".$DBPrefix."logs(cateId,logTitle,logContent,author,quoteUrl,p
 			$imgHidden="&nbsp;";
 		}
 
-ç›¢î™’îŸî™”Î˜
+±N¥L¨ú¥N¦¨
 
 		if ($fa['saveType']==0){
 			$imgHidden="<img src='themes/{$settingInfo['adminstyle']}/draft.gif' alt='$strDraftLog' title='$strDraftLog'>";
@@ -226,14 +226,14 @@ $sql="INSERT INTO ".$DBPrefix."logs(cateId,logTitle,logContent,author,quoteUrl,p
 
 		
 9.
-ç§¨å¸ admin/logs_list.inc.php
+¶}±Ò admin/logs_list.inc.php
 
-Ñ‚îŸ
+§ä¨ì
 		  <td nowrap align="center" class="subcontent-td">
 			<?php echo $imgHidden?>
 		  </td>
 
-ç›¢î™’îŸî™”Î˜
+±N¥L¨ú¥N¦¨
 
 		  <td nowrap align="center" class="subcontent-td">
 			<?php echo $imgHidden?>
@@ -245,16 +245,16 @@ $sql="INSERT INTO ".$DBPrefix."logs(cateId,logTitle,logContent,author,quoteUrl,p
 		  <!-- END ADD From WenChi -->
 
 10.
-ç§¨å¸ admin/logs_list.inc.php
+¶}±Ò admin/logs_list.inc.php
 
-Ñ‚îŸ
+§ä¨ì
 	  <?php if ($settingInfo['isHtmlPage']==1){?>
 	  <input type="radio" name="operation" value="create_html" onclick="Javascript:this.form.opmethod.value=1">
 	  <?php echo $strLogsCreateHtmlFoot?>
 	  |
 	  <?php }?>
 
-ç›¢î™’îŸî™”Î˜
+±N¥L¨ú¥N¦¨
 	  <?php if ($settingInfo['isHtmlPage']==1){?>
 	  <input type="radio" name="operation" value="create_html" onclick="Javascript:this.form.opmethod.value=1">
 	  <?php echo $strLogsCreateHtmlFoot?>
@@ -274,16 +274,16 @@ $sql="INSERT INTO ".$DBPrefix."logs(cateId,logTitle,logContent,author,quoteUrl,p
 	  <!-- END ADD Frm WenChi @plugins BlogNews -->
 
 11.
-ç§¨å¸ language/admin/zh_tw.php
-ã   language/admin/zh_cn.php
+¶}±Ò language/admin/zh_tw.php
+©M   language/admin/zh_cn.php
 
-î™¡î—°
+¥[¤J
 //	START ADD from WenChi  @plugins BlogNews
-$strTopNews="ç¦²çš‘ç¸Šî‡î…¾";
-$strTopNewsDisable="ç¦²çš‘ç¸Šî€‹ç¯ˆ";
-$strTopNewsAllow="å¸ãƒ";
-$strTopNewsDeny="æ°¨ãƒ";
+$strTopNews="¶]°¨¿O®ø®§";
+$strTopNewsDisable="¶]°¨¿Oª¬ºA";
+$strTopNewsAllow="±Ò¥Î";
+$strTopNewsDeny="°±¥Î";
 
-$strTopNewsTitle="ç¦²çš‘ç¸Š";
-$strTopNewsLog="ç¦²çš‘ç¸Š";
+$strTopNewsTitle="¶]°¨¿O";
+$strTopNewsLog="¶]°¨¿O";
 

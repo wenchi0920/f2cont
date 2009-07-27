@@ -1,28 +1,28 @@
 <?php 
 require_once("function.php");
 
-//å¿…é¡»åœ¨æœ¬ç«™æ“ä½œ
+//±ØĞëÔÚ±¾Õ¾²Ù×÷
 $server_session_id=md5("keywords".session_id());
 if (($_GET['action']=="save" || $_GET['action']=="operation") && $_POST['client_session_id']!=$server_session_id){
 	die ('Access Denied.');
 }
 
-// éªŒè¯ç”¨æˆ·æ˜¯å¦å¤„äºç™»é™†çŠ¶æ€
+// ÑéÖ¤ÓÃ»§ÊÇ·ñ´¦ÓÚµÇÂ½×´Ì¬
 check_login();
 $parentM=6;
 $mtitle=$strKeyword;
 
-//ä¿å­˜å‚æ•°
+//±£´æ²ÎÊı
 $action=$_GET['action'];
 $order=$_GET['order'];
 $page=$_GET['page'];
 $seekname=encode($_REQUEST['seekname']);
 $mark_id=$_GET['mark_id'];
 
-//ä¿å­˜æ•°æ®
+//±£´æÊı¾İ
 if ($action=="save"){
 	$check_info=1;
-	//æ£€æµ‹è¾“å…¥å†…å®¹
+	//¼ì²âÊäÈëÄÚÈİ
 	if (trim($_POST['name'])==""){
 		$ActionMessage=$strErrNull;
 		$check_info=0;
@@ -35,7 +35,7 @@ if ($action=="save"){
 		$action=($mark_id!="")?"edit":"add";
 	}
 
-	//æ£€æµ‹é“¾æ¥å›¾ç‰‡çš„å°ºå¯¸
+	//¼ì²âÁ´½ÓÍ¼Æ¬µÄ³ß´ç
 	if ($check_info==1 && !check_image_type($_FILES["linkImage"]["name"])) {
 		$check_info=0;
 		$action=($mark_id!="")?"edit":"add";
@@ -49,7 +49,7 @@ if ($action=="save"){
 			$ActionMessage=$strCategoryImageError;
 			$action=($mark_id!="")?"edit":"add";
 		}else{
-			//ä¸Šä¼ å›¾ç‰‡
+			//ÉÏ´«Í¼Æ¬
 			$linkImage=upload_file($_FILES["linkImage"]["tmp_name"],$_FILES["linkImage"]["name"],"../attachments");
 		}
 	}else{
@@ -58,7 +58,7 @@ if ($action=="save"){
 
 
 	if ($check_info==1){
-		if ($mark_id!=""){//ç¼–è¾‘
+		if ($mark_id!=""){//±à¼­
 			$rsexits=getFieldValue($DBPrefix."keywords","keyword='".encode($_POST['name'])."'","id");
 			if ($rsexits!=$mark_id && $rsexits!=""){
 				$ActionMessage="$strDataExists";
@@ -72,7 +72,7 @@ if ($action=="save"){
 				$DMC->query($sql);
 				$action="";
 			}
-		}else{//æ–°å¢
+		}else{//ĞÂÔö
 			$rsexits=getFieldValue($DBPrefix."keywords","keyword='".encode($_POST['name'])."'","id");
 			if ($rsexits!=""){
 				$ActionMessage="$strDataExists";
@@ -90,12 +90,12 @@ if ($action=="save"){
 	}
 }
 
-//å…¶å®ƒæ“ä½œè¡Œä¸ºï¼šç¼–è¾‘ã€åˆ é™¤ç­‰
+//ÆäËü²Ù×÷ĞĞÎª£º±à¼­¡¢É¾³ıµÈ
 if ($action=="operation"){
 	$stritem="";
 	$itemlist=$_POST['itemlist'];
 	for ($i=0;$i<count($itemlist);$i++){
-		//åˆªé™¤æ–‡ä»¶
+		//„h³ıÎÄ¼ş
 		delAttachments($DBPrefix."keywords",$itemlist[$i],"linkImage");
 
 		if ($stritem!=""){
@@ -117,18 +117,18 @@ if ($action=="all"){
 }
 
 
-$seek_url="$PHP_SELF?order=$order";	//æŸ¥æ‰¾ç”¨é“¾æ¥
-$order_url="$PHP_SELF?seekname=$seekname";	//æ’åºæ ç”¨çš„é“¾æ¥
-$page_url="$PHP_SELF?seekname=$seekname&order=$order";	//é¡µé¢å¯¼èˆªé“¾æ¥
-$edit_url="$PHP_SELF?seekname=$seekname&order=$order&page=$page";	//ç¼–è¾‘æˆ–æ–°å¢é“¾æ¥
+$seek_url="$PHP_SELF?order=$order";	//²éÕÒÓÃÁ´½Ó
+$order_url="$PHP_SELF?seekname=$seekname";	//ÅÅĞòÀ¸ÓÃµÄÁ´½Ó
+$page_url="$PHP_SELF?seekname=$seekname&order=$order";	//Ò³Ãæµ¼º½Á´½Ó
+$edit_url="$PHP_SELF?seekname=$seekname&order=$order&page=$page";	//±à¼­»òĞÂÔöÁ´½Ó
 
 if ($action=="add"){
-	//æ–°å¢ä¿¡æ¯ç±»åˆ«ã€‚
+	//ĞÂÔöĞÅÏ¢Àà±ğ¡£
 	$title="$strKeywordsTitleAdd";
 
 	include("keywords_add.inc.php");
 }else if ($action=="edit" && $mark_id!=""){
-	//ç¼–è¾‘ä¿¡æ¯ç±»åˆ«ã€‚
+	//±à¼­ĞÅÏ¢Àà±ğ¡£
 	$title="$strKeywordsTitleEdit - $strRecordID: $mark_id";
 
 	$dataInfo = $DMC->fetchArray($DMC->query("select * from ".$DBPrefix."keywords where id='$mark_id'"));
@@ -143,7 +143,7 @@ if ($action=="add"){
 		include("error_web.php");
 	}	
 }else{
-	//æŸ¥æ‰¾å’Œæµè§ˆ
+	//²éÕÒºÍä¯ÀÀ
 	$title="$strKeywordsTitle";
 
 	if ($order==""){$order="id";}

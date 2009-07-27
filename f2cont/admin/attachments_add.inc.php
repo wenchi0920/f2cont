@@ -1,7 +1,7 @@
 <?php 
 if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
-//杈撳嚭澶撮儴淇℃伅
+//输出头部信息
 dohead($title,"");
 if (empty($editorcode)) require('admin_menu.php');
 ?>

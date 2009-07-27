@@ -1,28 +1,28 @@
 <?php 
 require_once("function.php");
 
-//å¿…é¡»åœ¨æœ¬ç«™æ“ä½œ
+//±ØĞëÔÚ±¾Õ¾²Ù×÷
 $server_session_id=md5("linkgroup".session_id());
 if (($_GET['action']=="save" || $_GET['action']=="operation") && $_POST['client_session_id']!=$server_session_id){
 	die ('Access Denied.');
 }
 
-// éªŒè¯ç”¨æˆ·æ˜¯å¦å¤„äºç™»é™†çŠ¶æ€
+// ÑéÖ¤ÓÃ»§ÊÇ·ñ´¦ÓÚµÇÂ½×´Ì¬
 check_login();
 $parentM=3;
 $mtitle=$strlinkgroupTitle;
 
-//ä¿å­˜å‚æ•°
+//±£´æ²ÎÊı
 $action=$_GET['action'];
 $order=$_GET['order'];
 $page=$_GET['page'];
 $seekname=encode($_REQUEST['seekname']);
 $mark_id=$_GET['mark_id'];
 
-//ä¿å­˜æ•°æ®
+//±£´æÊı¾İ
 if ($action=="save"){
 	$check_info=1;
-	//æ£€æµ‹è¾“å…¥å†…å®¹
+	//¼ì²âÊäÈëÄÚÈİ
 	if (trim($_POST['name'])==""){
 		$ActionMessage=$strErrNull;
 		$check_info=0;
@@ -30,19 +30,19 @@ if ($action=="save"){
 	}
 
 	if ($check_info==1){
-		if ($mark_id!=""){//ç¼–è¾‘
+		if ($mark_id!=""){//±à¼­
 			$rsexits=getFieldValue($DBPrefix."linkgroup","name='".encode($_POST['name'])."'","id");
 			if ($rsexits!=$mark_id && $rsexits!=""){
 				$ActionMessage="$strDataExists";
 				$action="edit";
 			}else{
-				//æ›´æ–°äº†æ¨™ç±¤
+				//¸üĞÂÁË˜Ë»`
 				$isupdate=getFieldValue($DBPrefix."linkgroup","id='$mark_id'","isSidebar");
 
 				$sql="update ".$DBPrefix."linkgroup set name='".encode($_POST['name'])."',isSidebar='".$_POST['isSidebar']."' where id='$mark_id'";
 				$DMC->query($sql);
 			}
-		}else{//æ–°å¢
+		}else{//ĞÂÔö
 			$rsexits=getFieldValue($DBPrefix."linkgroup","name='".encode($_POST['name'])."'","id");
 			if ($rsexits!=""){
 				$ActionMessage="$strDataExists";
@@ -59,7 +59,7 @@ if ($action=="save"){
 	}
 }
 
-//ä¿å­˜æ’åº
+//±£´æÅÅĞò
 if ($action=="saveorder"){
 	for ($i=0;$i<count($_POST['arrid']);$i++){
 		$sql="update ".$DBPrefix."linkgroup set orderNo='".($i+1)."' where id='".$_POST['arrid'][$i]."'";
@@ -69,7 +69,7 @@ if ($action=="saveorder"){
 	logs_sidebar_recache($arrSideModule);
 }
 
-//å…¶å®ƒæ“ä½œè¡Œä¸ºï¼šç¼–è¾‘ã€åˆ é™¤ç­‰
+//ÆäËü²Ù×÷ĞĞÎª£º±à¼­¡¢É¾³ıµÈ
 if ($action=="operation"){
 	$stritem="";
 	$stritem2="";
@@ -88,24 +88,24 @@ if ($action=="operation"){
 		$sql="delete from ".$DBPrefix."linkgroup where $stritem";
 		$DMC->query($sql);
 
-		//åˆ é™¤æ­¤ç»„å†…çš„æ‰€æœ‰é“¾æ¥
+		//É¾³ı´Ë×éÄÚµÄËùÓĞÁ´½Ó
 		$sql="delete from ".$DBPrefix."links where $stritem2";
 		$DMC->query($sql);
 	}
 
-	//ä¾§è¾¹æ éšè—
+	//²à±ßÀ¸Òş²Ø
 	if($_POST['operation']=="ishidden" and $stritem!=""){
 		$sql="update ".$DBPrefix."linkgroup set isSidebar='0' where $stritem";
 		$DMC->query($sql);
 	}
 
-	//ä¾§è¾¹æ æ˜¾ç¤º
+	//²à±ßÀ¸ÏÔÊ¾
 	if($_POST['operation']=="isshow" and $stritem!=""){
 		$sql="update ".$DBPrefix."linkgroup set isSidebar='1' where $stritem";
 		$DMC->query($sql);
 	}
 
-	//æ›´æ–°Cache
+	//¸üĞÂCache
 	links_recache();
 	logs_sidebar_recache($arrSideModule);
 }
@@ -114,18 +114,18 @@ if ($action=="all"){
 	$seekname="";
 }
 
-$seek_url="$PHP_SELF?order=$order";	//æŸ¥æ‰¾ç”¨é“¾æ¥
-$page_url="$PHP_SELF?seekname=$seekname&order=$order";	//é¡µé¢å¯¼èˆªé“¾æ¥
-$edit_url="$PHP_SELF?seekname=$seekname&order=$order&page=$page";	//ç¼–è¾‘æˆ–æ–°å¢é“¾æ¥
-$order_url="$PHP_SELF?seekname=$seekname";	//æ’åºæ ç”¨çš„é“¾æ¥
+$seek_url="$PHP_SELF?order=$order";	//²éÕÒÓÃÁ´½Ó
+$page_url="$PHP_SELF?seekname=$seekname&order=$order";	//Ò³Ãæµ¼º½Á´½Ó
+$edit_url="$PHP_SELF?seekname=$seekname&order=$order&page=$page";	//±à¼­»òĞÂÔöÁ´½Ó
+$order_url="$PHP_SELF?seekname=$seekname";	//ÅÅĞòÀ¸ÓÃµÄÁ´½Ó
 
 if ($action=="add"){
-	//æ–°å¢ä¿¡æ¯ç±»åˆ«ã€‚
+	//ĞÂÔöĞÅÏ¢Àà±ğ¡£
 	$title="$strlinkgroupTitleAdd";
 
 	include("linkgroup_add.inc.php");
 }else if ($action=="edit" && $mark_id!=""){
-	//ç¼–è¾‘ä¿¡æ¯ç±»åˆ«ã€‚
+	//±à¼­ĞÅÏ¢Àà±ğ¡£
 	$title="$strlinkgroupTitleEdit - $strRecordID: $mark_id";
 
 	$dataInfo = $DMC->fetchArray($DMC->query("select * from ".$DBPrefix."linkgroup where id='$mark_id'"));
@@ -139,7 +139,7 @@ if ($action=="add"){
 		include("error_web.php");
 	}
 }else if ($action=="order"){
-	//è°ƒæ•´ç±»åˆ«é¡ºåº
+	//µ÷ÕûÀà±ğË³Ğò
 	$title="$strLinksExchage";
 
 	$arr_parent = $DMC->fetchQueryAll($DMC->query("select * from ".$DBPrefix."linkgroup order by orderNo"));
@@ -150,7 +150,7 @@ if ($action=="add"){
 		include("error_web.php");
 	}
 }else{
-	//æŸ¥æ‰¾å’Œæµè§ˆ
+	//²éÕÒºÍä¯ÀÀ
 	$title="$strlinkgroupTitle";
 
 	//Find condition
