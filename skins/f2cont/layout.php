@@ -105,7 +105,7 @@ http://www.kdolphin.com/231
                 $sql="select * from ".$DBPrefix."modules where disType='3' and (indexOnly='0' or indexOnly='2') and isHidden='0' order by orderNo";
                 $result=$DMC->query($sql);
                 while ($aryDetail=$DMC->fetchArray($result)) {
-
+                	
                 	$mainname=$key;
                 	$maintitle=$aryDetail['modTitle'];
                 	$indexOnly=$aryDetail['indexOnly'];
