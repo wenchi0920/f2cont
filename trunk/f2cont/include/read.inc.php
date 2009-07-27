@@ -145,7 +145,7 @@ if ($borwseTitle==$strErrorNoExistsLog) {
 				include(F2BLOG_ROOT."./cache/cache_download.php");
 				include(F2BLOG_ROOT."./cache/html/$html_path/".$fa['id'].".php");
 			}else{
-				$content=formatBlogContent($fa['logContent'],1,$fa['id']);
+				$content=formatBlogContent($fa['logContent'],0,$fa['id']);
 				if ($fa['logsediter']=="ubb" && strpos(";$content","<textarea name=\"code\"")<1) $content=nl2br($content);
 				echo $content;
 			}
@@ -262,5 +262,6 @@ if ($borwseTitle==$strErrorNoExistsLog) {
 		}?>
 	</div>
 	<a name="comm_top" href="comm_top" accesskey="C"></a>
+	<?php // 回覆評論 ?>
 	<?php include("replylogs.inc.php")?>
 <?php  } ?>
