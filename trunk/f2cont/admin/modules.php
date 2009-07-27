@@ -1,29 +1,29 @@
 <?php 
 require_once("function.php");
 
-//å¿…é¡»åœ¨æœ¬ç«™æ“ä½œ
+//±ØĞëÔÚ±¾Õ¾²Ù×÷
 $server_session_id=md5("modules".session_id());
 if (($_GET['action']=="save" || $_GET['action']=="operation") && $_POST['client_session_id']!=$server_session_id){
 	die ('Access Denied.');
 }
 
-// éªŒè¯ç”¨æˆ·æ˜¯å¦å¤„äºç™»é™†çŠ¶æ€
+// ÑéÖ¤ÓÃ»§ÊÇ·ñ´¦ÓÚµÇÂ½×´Ì¬
 check_login();
 $parentM=5;
 $mtitle=$strModuleSetting;
 
-//ä¿å­˜å‚æ•°
+//±£´æ²ÎÊı
 $action=$_GET['action'];
 $order=$_GET['order'];
 $page=$_GET['page'];
 $seekname=encode($_REQUEST['seekname']);
 $mark_id=$_GET['mark_id'];
 
-//ä¿å­˜æ•°æ®
+//±£´æÊı¾İ
 if ($action=="save"){
 	$check_info=1;
 
-	//å–å¾—Formçš„Value
+	//È¡µÃFormµÄValue
 	$name=$_POST['name'];
 	$modTitle=encode($_POST['modTitle']);
 	$disType=trim($_POST['disType']);
@@ -46,13 +46,13 @@ if ($action=="save"){
 			break;
 	}
 
-	//æ£€æµ‹è¾“å…¥å†…å®¹ä¸ºç©º
+	//¼ì²âÊäÈëÄÚÈİÎª¿Õ
 	if ($name=="" or $modTitle==""){
 		$ActionMessage=$strErrNull;
 		$check_info=0;
 	}
 
-	//æ£€æŸ¥è¾“å…¥çš„æ¨¡å—åç§°æ˜¯å¦åˆæ³•
+	//¼ì²éÊäÈëµÄÄ£¿éÃû³ÆÊÇ·ñºÏ·¨
 	if ($check_info==1 && check_user($name)==0) {
 		$ActionMessage=$strUserInVail;
 		$check_info=0;
@@ -64,7 +64,7 @@ if ($action=="save"){
 	}
 
 	if ($check_info==1){
-		if ($mark_id!=""){//ç¼–è¾‘
+		if ($mark_id!=""){//±à¼­
 			$rsexits=getFieldValue($DBPrefix."modules","name='$name' and disType='$disType'","id");
 			if ($rsexits!=$mark_id && $rsexits!=""){
 				$ActionMessage="$strDataExists";
@@ -87,7 +87,7 @@ if ($action=="save"){
 				$ActionMessage=$strSaveSuccess;
 				$action="";
 			}
-		}else{//æ–°å¢
+		}else{//ĞÂÔö
 			$rsexits=getFieldValue($DBPrefix."modules","name='$name' and disType='$disType'","id");
 			if ($rsexits!=""){
 				$ActionMessage="$strDataExists";
@@ -115,7 +115,7 @@ if ($action=="save"){
 	}
 }
 
-//ä¿å­˜æ’åº
+//±£´æÅÅĞò
 if ($action=="saveorder"){
 	for ($i=0;$i<count($_POST['arrid']);$i++){
 		$sql="update ".$DBPrefix."modules set orderNo='".($i+1)."' where id='".$_POST['arrid'][$i]."'";
@@ -126,7 +126,7 @@ if ($action=="saveorder"){
 	modules_recache();
 }
 
-//åˆ é™¤
+//É¾³ı
 if ($action=="delete"){
 	$sql="delete from ".$DBPrefix."modules where id='".$mark_id."'";
 	$DMC->query($sql);
@@ -135,7 +135,7 @@ if ($action=="delete"){
 	modules_recache();
 }
 
-//å…¶å®ƒæ“ä½œè¡Œä¸ºï¼šéšè—ï¼æ˜¾ç¤ºã€åˆ é™¤ç­‰
+//ÆäËü²Ù×÷ĞĞÎª£ºÒş²Ø£¯ÏÔÊ¾¡¢É¾³ıµÈ
 if ($action=="operation"){
 	$stritem="";
 	$itemlist=$_POST['itemlist'];
@@ -158,37 +158,37 @@ if ($action=="operation"){
 		}
 	}
 
-	//æ¨¡å—éšè—
+	//Ä£¿éÒş²Ø
 	if($_POST['operation']=="ishidden" and $stritem!=""){
 		$sql="update ".$DBPrefix."modules set isHidden='1' where $stritem";
 		$DMC->query($sql);
 	}
 
-	//æ¨¡å—æ˜¾ç¤º
+	//Ä£¿éÏÔÊ¾
 	if($_POST['operation']=="isshow" and $stritem!=""){
 		$sql="update ".$DBPrefix."modules set isHidden='0' where $stritem";
 		$DMC->query($sql);
 	}
 
-	//ä¾§è¾¹æ æ˜¾ç¤º
+	//²à±ßÀ¸ÏÔÊ¾
 	if($_POST['operation']=="isInstallshow" and $stritem!=""){
 		$sql="update ".$DBPrefix."modules set isInstall='0' where ($stritem) and disType='2'";
 		$DMC->query($sql);
 	}
 
-	//ä¾§è¾¹æ éšè—
+	//²à±ßÀ¸Òş²Ø
 	if($_POST['operation']=="isinstallhidden" and $stritem!=""){
 		$sql="update ".$DBPrefix."modules set isInstall='1' where ($stritem) and disType='2'";
 		$DMC->query($sql);
 	}
 
-	//ä¾§è¾¹æ ä»…æ˜¾ç¤ºåœ¨é¦–é¡µ
+	//²à±ßÀ¸½öÏÔÊ¾ÔÚÊ×Ò³
 	if($_POST['operation']=="isIndexOnly" and $stritem!=""){
 		$sql="update ".$DBPrefix."modules set indexOnly='1' where ($stritem) and disType='2'";
 		$DMC->query($sql);
 	}
 
-	//ä¾§è¾¹æ æ˜¾ç¤ºåœ¨é¦–é¡µåŠé˜…è¯»é¡µé¢ã€‚
+	//²à±ßÀ¸ÏÔÊ¾ÔÚÊ×Ò³¼°ÔÄ¶ÁÒ³Ãæ¡£
 	if($_POST['operation']=="isIndexNo" and $stritem!=""){
 		$sql="update ".$DBPrefix."modules set indexOnly='0' where ($stritem) and disType='2'";
 		$DMC->query($sql);
@@ -203,14 +203,14 @@ if ($action=="all"){
 }
 
 
-$seek_url="$PHP_SELF?showmode=".$_GET['showmode']."&order=$order";	//æŸ¥æ‰¾ç”¨é“¾æ¥
-$order_url="$PHP_SELF?showmode=".$_GET['showmode']."&seekname=$seekname";	//æ’åºæ ç”¨çš„é“¾æ¥
-$page_url="$PHP_SELF?showmode=".$_GET['showmode']."&seekname=$seekname&order=$order";	//é¡µé¢å¯¼èˆªé“¾æ¥
-$edit_url="$PHP_SELF?showmode=".$_GET['showmode']."&seekname=$seekname&order=$order&page=$page";	//ç¼–è¾‘æˆ–æ–°å¢é“¾æ¥
-$showmode_url="$PHP_SELF?order=$order&page=$page";	//å±•å¼€ï¼æŠ˜å é“¾æ¥
+$seek_url="$PHP_SELF?showmode=".$_GET['showmode']."&order=$order";	//²éÕÒÓÃÁ´½Ó
+$order_url="$PHP_SELF?showmode=".$_GET['showmode']."&seekname=$seekname";	//ÅÅĞòÀ¸ÓÃµÄÁ´½Ó
+$page_url="$PHP_SELF?showmode=".$_GET['showmode']."&seekname=$seekname&order=$order";	//Ò³Ãæµ¼º½Á´½Ó
+$edit_url="$PHP_SELF?showmode=".$_GET['showmode']."&seekname=$seekname&order=$order&page=$page";	//±à¼­»òĞÂÔöÁ´½Ó
+$showmode_url="$PHP_SELF?order=$order&page=$page";	//Õ¹¿ª£¯ÕÛµşÁ´½Ó
 
 if ($action=="add"){
-	//æ–°å¢ä¿¡æ¯ç±»åˆ«ã€‚
+	//ĞÂÔöĞÅÏ¢Àà±ğ¡£
 	$title="$strModuleTitleAdd";
 	if (empty($disType)) $disType=1;
 	if (!isset($isHidden)) $isHidden=0;
@@ -221,7 +221,7 @@ if ($action=="add"){
 
 	include("modules_add.inc.php");
 }else if ($action=="edit" && $mark_id!=""){
-	//ç¼–è¾‘ä¿¡æ¯ç±»åˆ«ã€‚
+	//±à¼­ĞÅÏ¢Àà±ğ¡£
 	$title="$strModuleTitleEdit - $strRecordID: $mark_id";
 
 	$dataInfo = $DMC->fetchArray($DMC->query("select * from ".$DBPrefix."modules where id='$mark_id'"));
@@ -253,7 +253,7 @@ if ($action=="add"){
 		include("error_web.php");
 	}	
 }else if ($action=="order"){
-	//è°ƒæ•´ç±»åˆ«é¡ºåº
+	//µ÷ÕûÀà±ğË³Ğò
 	$title="$strCategoryExchage";
 
 	$arr_parent = $DMC->fetchQueryAll($DMC->query("select * from ".$DBPrefix."modules where disType='$mark_id' and isHidden=0 order by orderNo"));
@@ -264,7 +264,7 @@ if ($action=="add"){
 		include("error_web.php");
 	}
 }else{
-	//æŸ¥æ‰¾å’Œæµè§ˆ
+	//²éÕÒºÍä¯ÀÀ
 	$title="$strModuleTitle";
 
 	if ($order==""){$order="orderNo";}

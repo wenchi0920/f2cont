@@ -1,23 +1,23 @@
 <?php 
 require_once("function.php");
 
-// éªŒè¯ç”¨æˆ·æ˜¯å¦å¤„äºŽç™»é™†çŠ¶æ€
+// ÑéÖ¤ÓÃ»§ÊÇ·ñ´¦ÓÚµÇÂ½×´Ì¬
 check_login();
 $parentM=6;
 $mtitle=$strEditorPlugins;
 
-//è¾“å‡ºå¤´éƒ¨ä¿¡æ¯
+//Êä³öÍ·²¿ÐÅÏ¢
 $title=$strEditorPluginSetting;
 $action=$_GET['action'];
 
-//ä¿å­˜
+//±£´æ
 $err=0;
 if ($action=="operation" and $_POST['operation']=="save"){
 	$plugins=implode(",", $_POST['itemlist']);
 	$sql="update ".$DBPrefix."setting set settValue='".encode($plugins)."' where settName='editPluginName'";
 	$DMC->query($sql);
 		
-	//è¾“å‡ºCache
+	//Êä³öCache
 	settings_recache();
 	$settingInfo['editPluginName']=$plugins;
 	$ActionMessage=$strSaveSuccess;
@@ -32,7 +32,7 @@ if($action=="operation" and $_POST['operation']=="savebutton") {
 	$sql="update ".$DBPrefix."setting set settValue='".encode($_POST['button3'])."' where settName='editPluginButton3'";
 	$DMC->query($sql);
 			
-	//è¾“å‡ºCache
+	//Êä³öCache
 	settings_recache();	
 	$settingInfo['editPluginButton1']=encode($_POST['button1']);
 	$settingInfo['editPluginButton2']=encode($_POST['button2']);
@@ -42,7 +42,7 @@ if($action=="operation" and $_POST['operation']=="savebutton") {
 	$action="setbutton";
 }
 
-//åˆ—å‡ºeditor pluginsç›®å½•
+//ÁÐ³öeditor pluginsÄ¿Â¼
 if ($action=="") {
     $handle=opendir(F2BLOG_ROOT."./editor/plugins/"); 
     while ($file = readdir($handle)){ 
@@ -177,7 +177,7 @@ require('admin_menu.php');
 		}
 	}
 		
-		#æ£€æŸ¥æµè§ˆå™¨ç±»åž‹
+		#¼ì²éä¯ÀÀÆ÷ÀàÐÍ
 		$browse=$_SERVER["HTTP_USER_AGENT"]; 
 		if (strpos($browse, "MSIE")>0) {
 			$browvr="IE";

@@ -1,10 +1,10 @@
 <?php 
 require_once("function.php");
 
-// éªŒè¯ç”¨æˆ·æ˜¯å¦å¤„äºŽç™»é™†çŠ¶æ€
+// ÑéÖ¤ÓÃ»§ÊÇ·ñ´¦ÓÚµÇÂ½×´Ì¬
 check_login();
 
-//éªŒè¯æƒé™,åªæœ‰ç®¡ç†å‘˜å’Œç¼–è¾‘è€…èƒ½è¿›å…¥
+//ÑéÖ¤È¨ÏÞ,Ö»ÓÐ¹ÜÀíÔ±ºÍ±à¼­ÕßÄÜ½øÈë
 if ($_SESSION['rights']!=""){
 	if ($_SESSION['rights']!="admin" and $_SESSION['rights']!="editor") {
 		header("Location: ../index.php");
@@ -18,10 +18,10 @@ if ($_SESSION['rights']!=""){
 $parentM=5;
 $mtitle=$strPluginSetting;
 
-//ä¿å­˜å‚æ•°
+//±£´æ²ÎÊý
 $action=$_GET['action'];
 
-//ä¿å­˜æ•°æ®
+//±£´æÊý¾Ý
 if ($action=="save"){
 	$operation=$_GET['operation'];
 	$plugin=basename($_GET['plugin']);
@@ -96,11 +96,11 @@ if ($action=="advset"){
 }
 
 if ($action==""){
-	//æŸ¥æ‰¾å’Œæµè§ˆ
+	//²éÕÒºÍä¯ÀÀ
 	$title=($action=="install_list")?$strPluginSetting:$strPluginInstall;
     $plugins = get_plugins("../plugins/");
 
-	//å–å¾—å·²å®‰è£…çš„æ’ä»¶
+	//È¡µÃÒÑ°²×°µÄ²å¼þ
 	include("../cache/cache_modules.php");
 
 	$actPlugins=",".implode(",",$arrPluginName).",";

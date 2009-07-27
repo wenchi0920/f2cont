@@ -262,6 +262,5 @@ if ($borwseTitle==$strErrorNoExistsLog) {
 		}?>
 	</div>
 	<a name="comm_top" href="comm_top" accesskey="C"></a>
-	<?php // 回覆評論 ?>
 	<?php include("replylogs.inc.php")?>
 <?php  } ?>

@@ -1,8 +1,8 @@
 <?php 
-# ç¦æ­¢ç›´æŽ¥è®¿é—®è¯¥é¡µé¢
+# ½ûÖ¹Ö±½Ó·ÃÎÊ¸ÃÒ³Ãæ
 if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
-//è¾“å‡ºå¤´éƒ¨ä¿¡æ¯
+//Êä³öÍ·²¿ÐÅÏ¢
 dohead($title,"");
 require('admin_menu.php');
 ?>

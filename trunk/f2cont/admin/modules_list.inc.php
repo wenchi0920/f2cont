@@ -1,7 +1,7 @@
 <?php 
 if (!defined('IN_F2BLOG')) die ('Access Denied.');
 
-//è¾“å‡ºå¤´éƒ¨ä¿¡æ¯
+//Êä³öÍ·²¿ĞÅÏ¢
 dohead($title,$page_url);
 require('admin_menu.php');
 ?>
@@ -127,7 +127,7 @@ require('admin_menu.php');
 				  </td>
 				</tr>
 				<?php 
-				//å–å¾—å­èœå•
+				//È¡µÃ×Ó²Ëµ¥
 				$sub_sql="select * from ".$DBPrefix."modules where disType='".$arr_parent[$i]['id']."' order by $order";
 				$query_result=$DMC->query($sub_sql);
 
@@ -151,7 +151,7 @@ require('admin_menu.php');
 						$isClass="table_color3";
 					}
 					
-					//æ˜¾ç¤ºæ–¹å¼
+					//ÏÔÊ¾·½Ê½
 					if ($parent==1){
 						$imgIndexOnly=($fa['indexOnly']==1)?$strYes:$strNo;
 					}else if ($parent==2){

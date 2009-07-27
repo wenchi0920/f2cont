@@ -1,18 +1,18 @@
 <?php 
 require_once("function.php");
 
-// éªŒè¯ç”¨æˆ·æ˜¯å¦å¤„äºç™»é™†çŠ¶æ€
+// ÑéÖ¤ÓÃ»§ÊÇ·ñ´¦ÓÚµÇÂ½×´Ì¬
 check_login();
 $parentM=3;
 $mtitle=$strLinksApp;
 
-//ä¿å­˜å‚æ•°
+//±£´æ²ÎÊı
 $action=$_GET['action'];
 $order=$_GET['order'];
 $page=$_GET['page'];
 $seekname=encode($_REQUEST['seekname']);
 
-//å…¶å®ƒæ“ä½œè¡Œä¸ºï¼šç¼–è¾‘ã€åˆ é™¤ç­‰
+//ÆäËü²Ù×÷ĞĞÎª£º±à¼­¡¢É¾³ıµÈ
 if ($action=="operation"){
 	$stritem="";
 	$itemlist=$_POST['itemlist'];
@@ -24,13 +24,13 @@ if ($action=="operation"){
 		}
 	}
 	
-	//æ‹’ç»ç”³è¯·ï¼ˆåˆ é™¤ï¼‰
+	//¾Ü¾øÉêÇë£¨É¾³ı£©
 	if($_POST['operation']=="delete" and $stritem!=""){
 		$sql="delete from ".$DBPrefix."links where $stritem";
 		$DMC->query($sql);
 	}
 
-	//æ·»åŠ åˆ°æŸç»„
+	//Ìí¼Óµ½Ä³×é
 	if($_POST['operation']=="move" and $stritem!=""){
 		$orderno=getFieldValue($DBPrefix."links"," lnkGrpId='".$_POST['move_group']."' order by orderNo desc","orderNo");
 		if ($orderno<1){
@@ -43,7 +43,7 @@ if ($action=="operation"){
 		$DMC->query($sql);
 	}
 
-	//æ·»åŠ åˆ°æŸç»„å¹¶ä¸ºæ–‡æœ¬é“¾æ¥
+	//Ìí¼Óµ½Ä³×é²¢ÎªÎÄ±¾Á´½Ó
 	if($_POST['operation']=="movetext" and $stritem!=""){
 		$orderno=getFieldValue($DBPrefix."links"," lnkGrpId='".$_POST['move_group2']."' order by orderNo desc","orderNo");
 		if ($orderno<1){
@@ -63,11 +63,11 @@ if ($action=="operation"){
 	}
 }
 
-$page_url="$PHP_SELF?seekname=$seekname&order=$order";	//é¡µé¢å¯¼èˆªé“¾æ¥
-$edit_url="$PHP_SELF?seekname=$seekname&order=$order&page=$page";	//ç¼–è¾‘æˆ–æ–°å¢é“¾æ¥
-$order_url="$PHP_SELF?seekname=$seekname";	//æ’åºæ ç”¨çš„é“¾æ¥
+$page_url="$PHP_SELF?seekname=$seekname&order=$order";	//Ò³Ãæµ¼º½Á´½Ó
+$edit_url="$PHP_SELF?seekname=$seekname&order=$order&page=$page";	//±à¼­»òĞÂÔöÁ´½Ó
+$order_url="$PHP_SELF?seekname=$seekname";	//ÅÅĞòÀ¸ÓÃµÄÁ´½Ó
 
-//æŸ¥æ‰¾å’Œæµè§ˆ
+//²éÕÒºÍä¯ÀÀ
 $title="$strLinksApp";
 
 if ($order==""){$order="id desc";}

@@ -87,7 +87,7 @@ if ($action=="save" && $allow_reply){
 			}
 		}
 	}
-
+	
 	/*
 	$style_list[]="預設=>default";
 	$style_list[]="刪除留言=>delete";
@@ -95,16 +95,16 @@ if ($action=="save" && $allow_reply){
 	$style_list[]="隱藏留言=>hidden";
 	$settingInfo['spamfilter']	//	預設
 	*/
-	/* spam 過濾器強化	*/
+	/* spam 過濾器強化	*/	
 	//include(F2BLOG_ROOT."./include/guestbook.lib.php");
 	switch (trim($settingInfo['spamfilter'])){
 		//	不新增留言
 		case "delete":
 			//$intSpamFiler=0;
 			if ($check_info && !$isSpam) guestBookPost($id,0,0,$settingInfo,$gourl);
-			break;
-
-			//	新增留言，但不顯示 加入 spam 記號
+		break;
+		
+		//	新增留言，但不顯示 加入 spam 記號
 		case "close":
 			if ($isSpam==1) {
 				guestBookPost($id,1,0,$settingInfo,$gourl);
@@ -113,13 +113,13 @@ if ($action=="save" && $allow_reply){
 			elseif ($check_info){
 				guestBookPost($id,0,0,$settingInfo,$gourl);
 			}
-			break;
-
-			//	新增留言，顯示為隱藏 加入 spam 記號
+		break;
+		
+		//	新增留言，顯示為隱藏 加入 spam 記號
 		case "hidden":
 		case "default":
 		default:
-
+			
 			if ($isSpam==1) {
 				guestBookPost($id,1,0,$settingInfo,$gourl);
 				$ActionMessage="";
@@ -127,133 +127,106 @@ if ($action=="save" && $allow_reply){
 			elseif ($check_info){
 				guestBookPost($id,0,0,$settingInfo,$gourl);
 			}
-
-			break;
+			
+		break;
 	}
 
-	/*
+/*	
 	if ($check_info || intval($intSpamFiler)==1){
-	$parent=0;
-	$_POST['isSecret']=($_POST['isSecret'])?$_POST['isSecret']:0;
-	$author=($_POST['username'])?$_POST['username']:$_SESSION['username'];
-	$replypassword=($_POST['replypassword'])?md5($_POST['replypassword']):"";
-	$_POST['bookface']=!empty($_POST['bookface'])?$_POST['bookface']:"face1";
-	if (isset($_POST['homepage'])) {
-	if (strpos(";".$_POST['homepage'],"http://")<1) {
-	$_POST['homepage']="http://".$_POST['homepage'];
-	}
-	} else {
-	$_POST['homepage']="";
-	}
+		$parent=0;
+		$_POST['isSecret']=($_POST['isSecret'])?$_POST['isSecret']:0;
+		$author=($_POST['username'])?$_POST['username']:$_SESSION['username'];
+		$replypassword=($_POST['replypassword'])?md5($_POST['replypassword']):"";
+		$_POST['bookface']=!empty($_POST['bookface'])?$_POST['bookface']:"face1";
+		if (isset($_POST['homepage'])) {
+			if (strpos(";".$_POST['homepage'],"http://")<1) {
+				$_POST['homepage']="http://".$_POST['homepage'];
+			}
+		} else {
+			$_POST['homepage']="";
+		}
 
-	$_POST['email']=(!empty($_POST['email']))?$_POST['email']:"";
-
-
-	$sql="insert into ".$DBPrefix."comments(author,password,logId,homepage,email,face,ip,content,postTime,isSecret,parent) values('$author','$replypassword','".$id."','".encode($_POST['homepage'])."','".encode($_POST['email'])."','".substr(encode($_POST['bookface']),4)."','".getip()."','".encode($_POST['message'])."','".time()."','".max(intval($intIsSecret),intval($_POST['isSecret']))."','$parent')";
-	//echo $sql;
-	$DMC->query($sql);
-
-	//更新LOGS评论数量
-	settings_recount("comments");
-	settings_recache();
-	$DMC->query("UPDATE ".$DBPrefix."logs SET commNums=commNums+1 WHERE id='$id'");
-
-	//更新cache
-	recentComments_recache();
-	logs_sidebar_recache($arrSideModule);
-
-	//保存时间
-	$_SESSION['replytime']=time();
-
-	//清空内容
-	$_POST['message']="";
+		$_POST['email']=(!empty($_POST['email']))?$_POST['email']:"";
 
 
-	header("location:".str_replace("&amp;","&",$gourl)."$settingInfo[stype]");
-	//echo "<script language=\"javascript\">window.location.href='$gourl';</script>";
-	//echo "<script language=\"javascript\">window.reload</script>";
+		$sql="insert into ".$DBPrefix."comments(author,password,logId,homepage,email,face,ip,content,postTime,isSecret,parent) values('$author','$replypassword','".$id."','".encode($_POST['homepage'])."','".encode($_POST['email'])."','".substr(encode($_POST['bookface']),4)."','".getip()."','".encode($_POST['message'])."','".time()."','".max(intval($intIsSecret),intval($_POST['isSecret']))."','$parent')";
+		//echo $sql;
+		$DMC->query($sql);
+
+		//更新LOGS评论数量
+		settings_recount("comments");
+		settings_recache();
+		$DMC->query("UPDATE ".$DBPrefix."logs SET commNums=commNums+1 WHERE id='$id'");
+
+		//更新cache
+		recentComments_recache();
+		logs_sidebar_recache($arrSideModule);
+
+		//保存时间
+		$_SESSION['replytime']=time();
+
+		//清空内容
+		$_POST['message']="";
+
+
+		header("location:".str_replace("&amp;","&",$gourl)."$settingInfo[stype]");
+		//echo "<script language=\"javascript\">window.location.href='$gourl';</script>";
+		//echo "<script language=\"javascript\">window.reload</script>";
 	}
 	*/
-
+	
 }
 
 //	$gourl)."$settingInfo[stype]");
 function guestBookPost($id,$intSpamFiler,$intIsSecret,$settingInfo,$gourl){
-
+	
 	global $DMC,$DBPrefix,$arrSideModule;
-
-	$parent=0;
-	$_POST['isSecret']=($_POST['isSecret'])?$_POST['isSecret']:0;
-	$author=($_POST['username'])?$_POST['username']:$_SESSION['username'];
-	$replypassword=($_POST['replypassword'])?md5($_POST['replypassword']):"";
-	$_POST['bookface']=!empty($_POST['bookface'])?$_POST['bookface']:"face1";
-	if (isset($_POST['homepage'])) {
-		if (strpos(";".$_POST['homepage'],"http://")<1) {
-			$_POST['homepage']="http://".$_POST['homepage'];
+	
+		$parent=0;
+		$_POST['isSecret']=($_POST['isSecret'])?$_POST['isSecret']:0;
+		$author=($_POST['username'])?$_POST['username']:$_SESSION['username'];
+		$replypassword=($_POST['replypassword'])?md5($_POST['replypassword']):"";
+		$_POST['bookface']=!empty($_POST['bookface'])?$_POST['bookface']:"face1";
+		if (isset($_POST['homepage'])) {
+			if (strpos(";".$_POST['homepage'],"http://")<1) {
+				$_POST['homepage']="http://".$_POST['homepage'];
+			}
+		} else {
+			$_POST['homepage']="";
 		}
-	} else {
-		$_POST['homepage']="";
-	}
 
-	$_POST['email']=(!empty($_POST['email']))?$_POST['email']:"";
+		$_POST['email']=(!empty($_POST['email']))?$_POST['email']:"";
 
 
-	$sql="insert into ".$DBPrefix."comments(author,password,logId,homepage,email,face,ip,content,postTime,isSecret,parent) values('$author','$replypassword','".$id."','".encode($_POST['homepage'])."','".encode($_POST['email'])."','".substr(encode($_POST['bookface']),4)."','".getip()."','".encode($_POST['message'])."','".time()."','".max(intval($intIsSecret),intval($_POST['isSecret']))."','$parent')";
-	//echo $sql;
-	$DMC->query($sql);
+		$sql="insert into ".$DBPrefix."comments(author,password,logId,homepage,email,face,ip,content,postTime,isSecret,parent) values('$author','$replypassword','".$id."','".encode($_POST['homepage'])."','".encode($_POST['email'])."','".substr(encode($_POST['bookface']),4)."','".getip()."','".encode($_POST['message'])."','".time()."','".max(intval($intIsSecret),intval($_POST['isSecret']))."','$parent')";
+		//echo $sql;
+		$DMC->query($sql);
 
-	//更新LOGS评论数量
-	settings_recount("comments");
-	settings_recache();
-	$DMC->query("UPDATE ".$DBPrefix."logs SET commNums=commNums+1 WHERE id='$id'");
+		//更新LOGS评论数量
+		settings_recount("comments");
+		settings_recache();
+		$DMC->query("UPDATE ".$DBPrefix."logs SET commNums=commNums+1 WHERE id='$id'");
 
-	//更新cache
-	recentComments_recache();
-	logs_sidebar_recache($arrSideModule);
+		//更新cache
+		recentComments_recache();
+		logs_sidebar_recache($arrSideModule);
 
-	//保存时间
-	$_SESSION['replytime']=time();
+		//保存时间
+		$_SESSION['replytime']=time();
 
-	//清空内容
-	$_POST['message']="";
+		//清空内容
+		$_POST['message']="";
 
-	header("location:".str_replace("&amp;","&",$gourl)."$settingInfo[stype]");
-	exit;
-
+		header("location:".str_replace("&amp;","&",$gourl)."$settingInfo[stype]");
+		exit;
+	
 }
 
 //评论
 if ($commNums>0) {
 	$start_record=($page-1)*$per_page;
-
-	$sql="select distinct a.*,b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage ";
-	$sql.=" from ".$DBPrefix."comments as a ";
-	$sql.=" left join ".$DBPrefix."members as b on a.author=b.username ";
-	$sql.=" where a.logId='".$id."' and a.parent='0' ";
-
-	$nums_sql="select count(id) as numRows ";
-	$nums_sql.=" from ".$DBPrefix."comments ";
-	$nums_sql.=" where logId='".$id."' and parent='0'";
-
-	/* spam 過濾器強化	*/
-	switch (trim($settingInfo['spamfilter'])){
-		//	新增留言，但不顯示 加入 spam 記號
-		case "close":
-			$sql.=" and a.isSpam='0' ";
-			$nums_sql.=" and isSpam='0' ";
-
-			break;
-
-			//	新增留言，顯示為隱藏 加入 spam 記號
-		case "hidden":
-		case "default":
-		default:
-
-			break;
-	}
-	$sql.=" order by postTime {$settingInfo['commentOrder']}";
-
-
+	$sql="select distinct a.*,b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage from ".$DBPrefix."comments as a left join ".$DBPrefix."members as b on a.author=b.username where a.logId='".$id."' and a.parent='0' order by postTime {$settingInfo['commentOrder']}";
+	$nums_sql="select count(id) as numRows from ".$DBPrefix."comments where logId='".$id."' and parent='0'";
 	$total_num=getNumRows($nums_sql);
 	$query_sql=$sql." Limit $start_record,$per_page";
 	$query_result = $DMC->query($query_sql);
@@ -319,29 +292,7 @@ if ($commNums>0) {
 			</div>
 			<?php
 			//取得回复
-			$sub_sql="select distinct a.*,b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage ";
-			$sub_sql.=" from ".$DBPrefix."comments as a ";
-			$sub_sql.= "left join ".$DBPrefix."members as b on a.author=b.username ";
-			$sub_sql.= "where a.logId='".$id."' and a.parent='".$value['id']."'";
-
-			/* spam 過濾器強化	*/
-			switch (trim($settingInfo['spamfilter'])){
-				//	新增留言，但不顯示 加入 spam 記號
-				case "close":
-					$sub_sql.=" and a.isSpam='0' ";
-
-					break;
-
-					//	新增留言，顯示為隱藏 加入 spam 記號
-				case "hidden":
-				case "default":
-				default:
-
-					break;
-			}
-			$sub_sql.=" order by postTime";
-
-
+			$sub_sql="select distinct a.*,b.id as member_id,b.nickname,b.isHiddenEmail,b.email as member_email,b.homePage as member_homepage from ".$DBPrefix."comments as a left join ".$DBPrefix."members as b on a.author=b.username where a.logId='".$id."' and a.parent='".$value['id']."' order by postTime";
 			$query_result=$DMC->query($sub_sql);
 			$arr_sub = $DMC->fetchQueryAll($query_result);
 
@@ -454,43 +405,43 @@ function isNull(field,message) {
 <?php
 //使用Ajax技术
 if (strpos(";$settingInfo[ajaxstatus];","G")>0){
+?>
+function onclick_update(form) {
+	<?php if (empty($_SESSION['rights']) or $_SESSION['rights']=="member"){
+		if (empty($_SESSION['rights'])) {
 	?>
-	function onclick_update(form) {
-		<?php if (empty($_SESSION['rights']) or $_SESSION['rights']=="member"){
-			if (empty($_SESSION['rights'])) {
-				?>
-				if (strlen(form.username.value)<3){
-					alert('<?php echo $strNickLengMax?>');
-					form.username.focus();
-					return false;
-				}
-				if (/[\'\"\\]/.test(form.username.value)){
-				alert('<?php echo $strNickNameAlert?>');
-				form.username.focus();
+		if (strlen(form.username.value)<3){
+			alert('<?php echo $strNickLengMax?>');
+			form.username.focus();
+			return false;
+		}
+		if (/[\'\"\\]/.test(form.username.value)){
+			alert('<?php echo $strNickNameAlert?>');
+			form.username.focus();
+			return false;
+		}
+		<?php  }
+		if ($settingInfo['isValidateCode']==1){?>
+			if (!(/[A-Za-z0-9]{1,2}/.test(form.validate.value))){
+				alert('<?php echo $strGuestBookInputValid?>');
+				form.validate.focus();
 				return false;
-}
-<?php  }
-if ($settingInfo['isValidateCode']==1){?>
-if (!(/[A-Za-z0-9]{1,2}/.test(form.validate.value))){
-	alert('<?php echo $strGuestBookInputValid?>');
-	form.validate.focus();
-	return false;
-}
-<?php }
-}?>
-if (isNull(form.message, '<?php echo $strGuestBookInputContent?>')) return false;
+			}
+		<?php }
+	}?>
+	if (isNull(form.message, '<?php echo $strGuestBookInputContent?>')) return false;
 
-form.save.disabled = true;
-form.reback.disabled = true;
+	form.save.disabled = true;
+	form.reback.disabled = true;
 
-var postData="ajax_display=comment_post&id=<?php echo $id?>";
-postData+="&message="+f2_ajax_encode(form.message.value);
-<?php if ($settingInfo['gbface']==1){?>
-postData+="&bookface="+form.bookface.value;
-<?php }?>
-<?php if (empty($_SESSION['rights']) or $_SESSION['rights']=="member"){
-	if (empty($_SESSION['rights'])) {
-		?>
+	var postData="ajax_display=comment_post&id=<?php echo $id?>";
+	postData+="&message="+f2_ajax_encode(form.message.value);
+	<?php if ($settingInfo['gbface']==1){?>
+		postData+="&bookface="+form.bookface.value;
+	<?php }?>
+	<?php if (empty($_SESSION['rights']) or $_SESSION['rights']=="member"){
+		if (empty($_SESSION['rights'])) {
+	?>
 		postData+="&username="+f2_ajax_encode(form.username.value);
 		postData+="&replypassword="+f2_ajax_encode(form.replypassword.value);
 		postData+="&homepage="+f2_ajax_encode(form.homepage.value);
@@ -502,67 +453,67 @@ postData+="&bookface="+form.bookface.value;
 			postData+="&isSecret=0";
 		}
 		<?php if ($settingInfo['isValidateCode']==1){?>
-		postData+="&validate="+form.validate.value;
+			postData+="&validate="+form.validate.value;
 		<?php }?>
-		<?php }?>
-		f2_ajax_post(postData);
+	<?php }?>
+	f2_ajax_post(postData);
 }
 
 function f2_ajax_response(returnvalue) {
 	<?php
 	$total_page=ceil($total_num/$per_page);
 	if ((empty($_SESSION['rights']) or $_SESSION['rights']=="member") && $settingInfo['isValidateCode']==1){
-		if (function_exists('imagecreate')){
-			?>
-			document.getElementById("valid_image").src="<?php echo $validate_image?>";
-			<?php }?>
-			document.frm.validate.value = "";
-			<?php }?>
-			if (trim(returnvalue)=="") {//处理正常
-				document.frm.message.value = "";
-				document.getElementById("commNums").innerHTML = parseInt(document.getElementById("commNums").innerHTML)+1;
-				f2_ajax_page("f2blog_ajax.php?ajax_display=comment_page<?php echo "&load=$load&id=$id"?>&page=<?php echo $total_page?>");
-			}else{
-				alert(returnvalue);
-			}
-			document.frm.save.disabled = false;
-			document.frm.reback.disabled = false;
+	   if (function_exists('imagecreate')){
+	?>
+		document.getElementById("valid_image").src="<?php echo $validate_image?>";
+	   <?php }?>
+		document.frm.validate.value = "";
+	<?php }?>
+	if (trim(returnvalue)=="") {//处理正常
+		document.frm.message.value = "";
+		document.getElementById("commNums").innerHTML = parseInt(document.getElementById("commNums").innerHTML)+1;
+		f2_ajax_page("f2blog_ajax.php?ajax_display=comment_page<?php echo "&load=$load&id=$id"?>&page=<?php echo $total_page?>");
+	}else{
+		alert(returnvalue);
+	}
+	document.frm.save.disabled = false;
+	document.frm.reback.disabled = false;
 }
 <?php }?>
 
 <?php
 //不使用Ajax技术
 if (strpos(";$settingInfo[ajaxstatus];","G")<1){
+?>
+function onclick_update(form) {
+	<?php if (empty($_SESSION['rights']) or $_SESSION['rights']=="member"){
+		if (empty($_SESSION['rights'])) {
 	?>
-	function onclick_update(form) {
-		<?php if (empty($_SESSION['rights']) or $_SESSION['rights']=="member"){
-			if (empty($_SESSION['rights'])) {
-				?>
-				if (strlen(form.username.value)<3){
-					alert('<?php echo $strNickLengMax?>');
-					form.username.focus();
-					return false;
-				}
-				if (/[\'\"\\]/.test(form.username.value)){
-				alert('<?php echo $strNickNameAlert?>');
-				form.username.focus();
+		if (strlen(form.username.value)<3){
+			alert('<?php echo $strNickLengMax?>');
+			form.username.focus();
+			return false;
+		}
+		if (/[\'\"\\]/.test(form.username.value)){
+			alert('<?php echo $strNickNameAlert?>');
+			form.username.focus();
+			return false;
+		}
+		<?php  }
+		if ($settingInfo['isValidateCode']==1){?>
+			if (!(/[A-Za-z0-9]{1,2}/.test(form.validate.value))){
+				alert('<?php echo $strGuestBookInputValid?>');
+				form.validate.focus();
 				return false;
-}
-<?php  }
-if ($settingInfo['isValidateCode']==1){?>
-if (!(/[A-Za-z0-9]{1,2}/.test(form.validate.value))){
-	alert('<?php echo $strGuestBookInputValid?>');
-	form.validate.focus();
-	return false;
-}
-<?php }?>
-<?php }?>
-if (isNull(form.message, '<?php echo $strGuestBookInputContent?>')) return false;
+			}
+		<?php }?>
+	<?php }?>
+	if (isNull(form.message, '<?php echo $strGuestBookInputContent?>')) return false;
 
-form.save.disabled = true;
-form.reback.disabled = true;
-form.action = "<?php echo "$posturl&action=save"?>";
-form.submit();
+	form.save.disabled = true;
+	form.reback.disabled = true;
+	form.action = "<?php echo "$posturl&action=save"?>";
+	form.submit();
 }
 <?php }?>
 
@@ -620,8 +571,8 @@ if (!empty($ActionMessage)){
 				   <?php if (function_exists('imagecreate')){?>
 						<img id="valid_image" src="<?php echo $validate_image?>" alt="<?php echo $strGuestBookValidImage?>" align="middle"/>
 				   <?php }else{
-				   	$_SESSION['backValidate']=validCode(6);
-				   	echo "<span id=\"valid_image\">{$_SESSION['backValidate']}</span>";
+						$_SESSION['backValidate']=validCode(6);
+						echo "<span id=\"valid_image\">{$_SESSION['backValidate']}</span>";
 					}?>
 			  </td>
 			  <td width="18%" align="right" style="font-weight:bold"><?php echo $strGuestBookOption?></td>
