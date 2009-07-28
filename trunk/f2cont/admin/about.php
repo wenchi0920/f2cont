@@ -48,7 +48,7 @@ require('admin_menu.php');
 			   <tr>
 				<td class="leftbox">&nbsp;</td>
 				<td nowrap class="rightbox">korui</td>
-				<td class="rightbox"><a href='http://guorui.org/' target='_blank'>http://guorui.org/</a></td>
+				<td class="rightbox"><a href='http://kiyo.tw/' target='_blank'>http://kiyo.tw/</a></td>
 			   </tr>
 			   
 			   
@@ -139,7 +139,7 @@ ljweb  http://ljweb.com.ru 、http://yalove.org/blog  090624 新增
 				   <tr>
 				<td class="leftbox">&nbsp;</td>
 				<td nowrap class="rightbox">white</td>
-				<td class="rightbox"><a href='http://white.sytes.net/' target='_blank'>http://white.sytes.net/</a></td>
+				<td class="rightbox"><a href='http://white.twgg.org/' target='_blank'>http://white.twgg.org/</a></td>
 			   </tr>
 			   <tr>
 				<td class="leftbox">&nbsp;</td>
@@ -216,5 +216,6 @@ ljweb  http://ljweb.com.ru 、http://yalove.org/blog  090624 新增
 		</td>
 		</table>
 </div>
+
 
 <?php  dofoot(); ?>
