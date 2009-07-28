@@ -182,6 +182,8 @@ http://www.kdolphin.com/231
                     <!--工具条顶部图象-->
                 </div>
                 <!--侧边栏显示内容-->
+                
+                
                 <!--日曆-->
                 <div class="sidepanel" id="Side_Calendar">
                     <h4 class="Ptitle" style="cursor: pointer;" onclick="sidebarTools('content_Calendar')">日曆</h4>
@@ -296,6 +298,8 @@ http://www.kdolphin.com/231
                     </div>
                     <div class="Pfoot"></div>
                 </div>
+                
+                
                 <!--類別-->
                 <div class="sidepanel" id="Side_Category">
                     <h4 class="Ptitle" style="cursor: pointer;" onclick="sidebarTools('content_Category')">類別</h4>
@@ -450,6 +454,9 @@ http://www.kdolphin.com/231
                     </div>
                     <div class="Pfoot"></div>
                 </div>
+                
+                
+                
                 <!--最新網誌-->
                 <div class="sidepanel" id="Side_NewLogForPJBlog">
                     <h4 class="Ptitle" style="cursor: pointer;" onclick="sidebarTools('content_NewLogForPJBlog')">最新網誌</h4>
@@ -458,6 +465,8 @@ http://www.kdolphin.com/231
                     </div>
                     <div class="Pfoot"></div>
                 </div>
+                
+                
                 <!-- SATRT BloggerAds -->
                 <div class="sidepanel" id="BloggerAds">
                     <h4 class="Ptitle" style="cursor: pointer;">BloggerAds</h4>
@@ -467,6 +476,8 @@ http://www.kdolphin.com/231
                     <a href="http://author.bloggerads.net/01_join_read.aspx?refid=10001&amp;id=20080109000081" target="_blank">用 BloggerAds 替自已賺油錢</a></div>
             </div>
             <!-- END BloggerAds -->
+            
+            
             <!--最新留言-->
             <div class="sidepanel" id="Side_GuestBookForPJBlogSubItem1">
                 <h4 class="Ptitle" style="cursor: pointer;" onclick="sidebarTools('content_GuestBookForPJBlogSubItem1')">最新留言</h4>
@@ -475,6 +486,8 @@ http://www.kdolphin.com/231
                 </div>
                 <div class="Pfoot"></div>
             </div>
+            
+            
             <!--最新評論-->
             <div class="sidepanel" id="Side_Comment">
                 <h4 class="Ptitle" style="cursor: pointer;" onclick="sidebarTools('content_Comment')">最新評論</h4>
@@ -483,6 +496,8 @@ http://www.kdolphin.com/231
                 </div>
                 <div class="Pfoot"></div>
             </div>
+            
+            
             <!--連結-->
             <div class="sidepanel" id="Side_Links">
                 <h4 class="Ptitle" style="cursor: pointer;" onclick="sidebarTools('content_Links')">連結</h4>
@@ -499,6 +514,8 @@ http://www.kdolphin.com/231
                 </div>
                 <div class="Pfoot"></div>
             </div>
+            
+            
             <!--統計-->
             <div class="sidepanel" id="Side_BlogInfo">
                 <h4 class="Ptitle" style="cursor: pointer;" onclick="sidebarTools('content_BlogInfo')">統計</h4>
@@ -511,6 +528,7 @@ http://www.kdolphin.com/231
                 </div>
                 <div class="Pfoot"></div>
             </div>
+            
             <!--FlashDailyStatistics-->
             <div id="Side_flashDailyStatistics" class="sidepanel">
                 <h4 class="Ptitle" style="cursor: pointer;" onclick="sidebarTools('content_flashDaily')">Flash Daily Statistics</h4>
@@ -524,7 +542,10 @@ http://www.kdolphin.com/231
                 </div>
                 <div class="Pfoot"></div>
             </div>
+            
+            
             <div id="sidebar-bottomimg"></div>
+            
         </div>
     </div>
     <div style="clear: both;height:1px;overflow:hidden;margin-top:-1px;"></div>
