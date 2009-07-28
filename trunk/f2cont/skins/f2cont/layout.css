@@ -114,6 +114,7 @@
   /*---日志内容框--*/
   .Content-body{margin:0px 10px 10px 8px; padding:0px; width:646px;line-height:180%;word-wrap:break-word;word-break:normal;overflow:hidden;text-align:justify;}
   .Content-body  p {padding-bottom:10px;}  
+  .Content-body ul , .Content-body ol { margin-left:4em; }
   /*---日志内容底部--*/
   .Content-bottom{text-align:right;height:30px; margin-bottom: 5px;padding:1px 10px 1px 10px;}
   .Content-bottom .ContentBLeft{width:0px;float:left;}
