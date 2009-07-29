@@ -429,3 +429,4 @@ function comfirm_manager(act,acturl){
 		return false;
 	}
 }
+
