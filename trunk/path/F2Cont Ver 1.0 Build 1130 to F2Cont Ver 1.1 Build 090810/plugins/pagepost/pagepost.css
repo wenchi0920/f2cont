@@ -1,0 +1,15 @@
+.pagebar {
+    text-indent: 0;
+    background-color: #F9FBFC;
+    border: 1px solid #C3CED9;
+    display: block;
+    margin: 12px 0;
+    padding: 4px 12px;
+}
+
+.pagepost {
+    text-indent: 0;
+    display: block;
+    margin: 0;
+    padding: 0;
+}

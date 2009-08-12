@@ -1,0 +1,161 @@
+  /*---主体样式---*/
+  #container{background-color: #fff; background-image:url('img/mbg.jpg'); background-repeat: repeat-y; width:960px; margin:0px auto; padding:10px 0px 0px 0px;}
+  
+  /*---顶部样式---*/
+  #container #header{
+  background-image: url('img/header_bg.jpg');
+  background-repeat: no-repeat;
+  height:130px;
+  width:940px;
+  margin:0px auto 0;
+  list-style-image: none;
+  }
+  #container #header #blogname{ padding:10px 0 15px 10px; margin: 0;  font-size:16px; color:#178C93; font-weight: bold; text-align:left; background-image: none; background-repeat: no-repeat;}
+  #container #header #blogname #blogTitle{ font-size:12px; margin:3px 3px 3px 0; font-weight: normal; height:16px; }
+  #container #header #menu{
+  font-size: 12px;
+  height:28px;
+  text-align:right; margin-top:30px;
+  }
+  #container #header #menu #Left{
+  width:0px;
+  float:left;
+  }
+  #container #header #menu #Right{
+  width:0px;
+  float:right;
+  }  
+  #container #header #menu ul{
+  list-style:none;
+  margin:0px 3px 0px 0px;
+  padding:0;
+  height:28px;
+  float:right;
+  } 
+  #container #header #menu ul li{
+  float:left;
+  height:28px;
+  }  
+   .menuL{
+   color: white;
+   background-image: none;
+   background-repeat: no-repeat;
+   background-attachment: scroll;
+   width:5px;
+   padding:0;
+   }
+   .menuR{
+   color: white;
+   background-image: none;
+   background-repeat: no-repeat;
+   background-attachment: scroll;
+   width:8px;
+   padding:0;
+   }  
+   .menuDiv{
+   color: white;
+   background-image:none;
+   background-repeat: no-repeat;
+   background-attachment: scroll;
+   background-position: 0 0;
+   width:4px;
+   padding:0;
+   }
+
+
+   /*---内容样式---*/
+  #container #Tbody{
+  width:940px;
+  margin:0px auto;
+  text-align:left;
+  padding:0px;
+  }
+  /*---工具条--*/
+  #sidebar{ color: #666; width:233px; background-color: #F7F7F7; margin:10px 0px 0px 0px; padding:0px; text-align:center; border-top: 1px solid #f3f3f3; border-left: 1px solid #f3f3f3; border-right: 1px solid #f3f3f3;border-bottom: 2px solid #f3f3e3; float:left;}
+  #innersidebar{  }
+  #sidebar-topimg{  }
+  #sidebar-bottomimg{height:2px;width:233px;background:#f3f3e3 no-repeat;overflow:hidden;}
+  /*---工具箱样式--*/
+  .sidepanel{ width:230px; margin:0px; padding: 0px; text-align: center; }
+  .Ptitle{ font: bold 12px Tahoma; color:white; background: url('img/corner_top.gif') top left no-repeat;text-align: left;padding: 5px;margin:3px; width:210px; height:15px;}
+  .Pcontent{text-align:left;padding-left:8px;padding-top:0;line-height:170%}  
+  .Pfoot{margin:0px 0px 5px 0px;}  
+
+  /*---主内容--*/   
+  #mainContent{ background-image: none; background-repeat: repeat-y; background-position: 0 0; float:right; margin:10px 2px 0px 0px; padding:0px; width:700px; text-align:center; overflow:hidden;}
+
+  #innermainContent{ width:690px; float:right; overflow:visible; border: solid 1px #f3f3f3; }
+  #mainContent-topimg{ background-image: none; background-repeat: no-repeat; background-attachment: scroll; background-position: 0 0; height:10px; overflow:hidden; }
+  #mainContent-bottomimg{ background-image: none; background-repeat: no-repeat; background-attachment: scroll; background-position: 0 0; height:10px; overflow:hidden; }
+  .content-width{ width:666px; margin:auto; }/*--主内容元素的全局宽度--*/
+  /*---主内容页数--*/
+  .pageContent{margin:0 auto;padding:3px;text-align:left;height:18px;} 
+  .NavTitle{float:left;}
+  .page{padding-right:5px;height:18px;}
+  .page ul{list-style:none;margin:0px;padding:0px} 
+  .page ul li{float:left;padding:0px 3px 0px 3px;} 
+  .page ul li.PageL {width:9px;height:16px;}
+  .page ul li.PageR {width:9px;height:16px;}
+  .PageLbutton{background:transparent;width:9px;height:16px;display:block;}
+  .PageRbutton{background:transparent;width:9px;height:16px;display:block;}
+  /*---内容框--*/
+  .Content{margin:0 auto;font-family:"Verdana", "Georgia", "Courier New","微软雅黑","宋体";}    
+
+
+  /*---日志标题框--*/
+  .Content-top{	background:url('img/title_bg.gif') no-repeat;
+    background-position: top left;
+	padding:1px 4px 3px 4px;text-align:left;margin-bottom:6px;}
+  .Content-top .ContentLeft{width:0px;float:left;}
+  .Content-top .ContentRight{width:0px;float:right;}
+  .Content-top .ContentTitle{background:url('img/article.gif') no-repeat left;font-color:#666666;font-size:16px;padding:5px 3px 3px 25px;margin:0px;height:24px;vertical-align:middle;}
+  .Content-top .ContentAuthor{color:green;font-size:11px;padding-top:6px;padding-left:25px;margin:0px; font-weight:normal;} 
+
+  /*---日志内容框--*/
+  .Content-body{margin:0px 10px 10px 8px; padding:0px; width:646px;line-height:180%;word-wrap:break-word;word-break:normal;overflow:hidden;text-align:justify;}
+  .Content-body  p {padding-bottom:10px;}  
+  .Content-body ul , .Content-body ol { margin-left:4em; }
+  /*---日志内容底部--*/
+  .Content-bottom{text-align:right;height:30px; margin-bottom: 5px;padding:1px 10px 1px 10px;}
+  .Content-bottom .ContentBLeft{width:0px;float:left;}
+  .Content-bottom .ContentBRight{width:0px;float:right;}
+
+  /*---日志其他信息--*/
+  .Content-Info {margin:0px 4px 6px 4px;padding:0px;}
+  .Content-Info .InfoAuthor{text-align:left;}
+  .Content-Info .InfoOther{text-align:right;}
+  /*--评论框--*/
+  .comment{text-align:left;margin:6px 12px 3px 12px;}
+  .commentinfo{font-size:12px;color:#999;}
+  .commenttop{ font: 12px Tahoma; border-bottom:1px dotted #cccccc; padding:4px; background:#fff  }
+  .commentcontent{padding:10px;line-height:140%;overflow:hidden;width:94%}
+  /*---UBB框--*/ 
+  .UBBPanel{border:1px dotted #C2E5EF;}
+  .UBBTitle{font-weight:bold;padding:4px;}
+  .UBBContent{padding:6px;line-height:160%;}
+  .UBBContent TEXTAREA {width:550px;margin-bottom:2px;border:1px solid #C2E5EF;}
+  :link.UBBLink,:visited.UBBLink{font-size:11px;font-family:verdana;}
+  /*---信息框--*/
+  #MsgContent{border:1px solid #78C3C6;width:80%;padding:1px; background:#fff;margin:auto;}
+  #MsgContent #MsgHead{background:#78C3C6;color:#fff;padding:4px;text-align:center;font-weight:bold;}
+  #MsgContent #MsgBody{padding:4px;line-height:180%;}
+  .LDialog{border:solid 1px #cccccc;margin:3px auto;padding:1px;}
+  .LDialog .LHead{background:gray;padding:1px;color:#fff;text-align:center;}
+  .LDialog .LBody{padding:4px;line-height:180%;}
+
+/*信息框图标以及文字*/
+   .MessageText{height:50px;margin-right:38px;}
+   .MessageIcon{background:url('../../images/Message.jpg') no-repeat;width:48px;height:48px;float:left;}
+   .ErrorIcon{background:url('../../images/Error.jpg') no-repeat;width:48px;height:48px;float:left;}
+   .WarningIcon{background:url('../../images/Warning.jpg') no-repeat;width:48px;height:48px;float:left;}   
+   .QuestionIcon{background:url('../../images/Question.jpg') no-repeat;width:48px;height:48px;float:left;}
+  /*---底部样式---*/
+  #container #foot{
+  background:url('img/bottom.gif') no-repeat; 
+  background-position: bottom left; line-height:160%; margin-left:180px; font-family:"Verdana","Georgia";color:#97afb3;font-size:11px;text-align:left;padding-left:73px;padding-top:10px; height:58px;}
+  #container #foot A:link,#container #foot A:visited{text-decoration:none;color:#99a182;}
+  #container #foot A:hover{text-decoration:none;color:#009193;}  
+  /*---文件上传框样式---*/
+  .attachmentBody{
+  margin:0;font-size:12px;background:#f1f1f1
+  }
