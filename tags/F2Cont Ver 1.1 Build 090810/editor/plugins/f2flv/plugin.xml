@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PluginSet>
+ <PluginName>f2flv</PluginName>
+ <PluginVersion>1.1</PluginVersion>
+ <FunctionName>f2_flv</FunctionName>
+ <FunctionImage>flv.gif</FunctionImage>
+ <FunctionDesc>插入FLV文件</FunctionDesc>
+ <PluginAuthor>Joesen</PluginAuthor>
+ <pubDate>2006-8-3</pubDate>
+ <AuthorURL>http://joesen.f2blog.com</AuthorURL>
+ <AuthorMail>joesenhong@yahoo.com.cn</AuthorMail>
+</PluginSet>

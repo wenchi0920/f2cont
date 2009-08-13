@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PluginSet>
+ <PluginName>f2music</PluginName>
+ <PluginVersion>1.0</PluginVersion>
+ <FunctionName>f2_music</FunctionName>
+ <FunctionImage>Music.gif</FunctionImage>
+ <FunctionDesc>插入外部音乐文件</FunctionDesc>
+ <PluginAuthor>Joesen</PluginAuthor>
+ <pubDate>2006-7-7</pubDate>
+ <AuthorURL>http://joesen.f2blog.com</AuthorURL>
+ <AuthorMail>joesenhong@yahoo.com.cn</AuthorMail>
+</PluginSet>
