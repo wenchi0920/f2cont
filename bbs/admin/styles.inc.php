@@ -4,7 +4,7 @@
 	[Discuz!] (C)2001-2009 Comsenz Inc.
 	This is NOT a freeware, use is subject to license terms
 
-	$Id: styles.inc.php 17229 2008-12-11 01:13:46Z monkey $
+	$Id: styles.inc.php 19190 2009-08-17 02:38:44Z cnteacher $
 */
 
 if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
@@ -733,7 +733,7 @@ for(i = 0;i < inps.length;i++) {
 		if($newcvar && $newcsubst) {
 			if($db->result_first("SELECT COUNT(*) FROM {$tablepre}stylevars WHERE variable='$newcvar' AND styleid='$id'")) {
 				cpmsg('styles_edit_variable_duplicate', '', 'error');
-			} elseif(!preg_match("/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/", $newcvar)) {
+			} elseif(!preg_match("/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/", $newcvar)) {
 				cpmsg('styles_edit_variable_illegal', '', 'error');
 			}
 			$newcvar = strtolower($newcvar);
