@@ -4,7 +4,7 @@
 	[Discuz!] (C)2001-2009 Comsenz Inc.
 	This is NOT a freeware, use is subject to license terms
 
-	$Id: cache.func.php 17540 2009-01-21 01:20:42Z cnteacher $
+	$Id: cache.func.php 19191 2009-08-17 02:42:55Z cnteacher $
 */
 
 define('DISCUZ_KERNEL_VERSION', '7.0.0');
@@ -1471,7 +1471,7 @@ function getcachearray($cachename, $script = '') {
 				} else {
 					$rthread['highlight'] = '';
 				}
-				$new_reply_threadlist = "<a href=\"redirect.php?tid=$rthread[tid]&amp;goto=lastpost#lastpost\" title=\"論壇: $rthread[forumname]\r\n標題: $rthread[subject]\r\n作者: $rthread[author]\r\n發表時間: $rthread[date]\r\n瀏覽次數: $rthread[views] 次\r\n回覆: $rthread[replies] 次\r\n最後回覆: $rthread[lastreplytime]\r\n最後發表: $rthread[lastposter]\" $rthread[highlight]>$rthread[view_subject]</a><br />";
+				$new_reply_threadlist = "<a href=\"redirect.php?tid=$rthread[tid]&amp;goto=lastpost#lastpost\" title=\"論�?: $rthread[forumname]\r\n標�?: $rthread[subject]\r\n作�? $rthread[author]\r\n?�表?��?: $rthread[date]\r\n?�覽次數: $rthread[views] 次\r\n?��?: $rthread[replies] 次\r\n?�後�?�? $rthread[lastreplytime]\r\n?�後發�? $rthread[lastposter]\" $rthread[highlight]>$rthread[view_subject]</a><br />";
 				$data[] = array('content' => $new_reply_threadlist);
 			}
 			break;
@@ -1498,7 +1498,7 @@ function getcachearray($cachename, $script = '') {
 				} else {
 					$nthread['highlight'] = '';
 				}
-				$new_post_threadlist = "<a href=\"viewthread.php?tid=$nthread[tid]\" title=\"論壇: $nthread[forumname]\r\n標題: $nthread[subject]\r\n作者: $nthread[author]\r\n發表時間: $nthread[date]\r\n瀏覽次數: $nthread[views] 次 \r\n回覆: $nthread[replies] 次\r\n最後回覆: $nthread[lastreplytime]\r\n最後發表: $nthread[lastposter]\" $nthread[highlight] >$nthread[view_subject]</a><br />";
+				$new_post_threadlist = "<a href=\"viewthread.php?tid=$nthread[tid]\" title=\"論�?: $nthread[forumname]\r\n標�?: $nthread[subject]\r\n作�? $nthread[author]\r\n?�表?��?: $nthread[date]\r\n?�覽次數: $nthread[views] �?\r\n?��?: $nthread[replies] 次\r\n?�後�?�? $nthread[lastreplytime]\r\n?�後發�? $nthread[lastposter]\" $nthread[highlight] >$nthread[view_subject]</a><br />";
 				$data[] = array('content' => $new_post_threadlist);
 			}
 			break;
@@ -1580,6 +1580,9 @@ function getcachearray($cachename, $script = '') {
 function getcachevars($data, $type = 'VAR') {
 	$evaluate = '';
 	foreach($data as $key => $val) {
+		if(!preg_match("/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/", $key)) {
+			continue;
+		}
 		if(is_array($val)) {
 			$evaluate .= "\$$key = ".arrayeval($val).";\n";
 		} else {
